@@ -13,15 +13,15 @@
     <meta name="description" content="private learning">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Learning">
-<meta property="og:url" content="http://yoursite.com/page/22/index.html">
+<meta property="og:url" content="/blog/page/22/index.html">
 <meta property="og:site_name" content="Learning">
 <meta property="og:description" content="private learning">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:image" content="/images/og_image.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Learning">
 <meta name="twitter:description" content="private learning">
-<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+<meta name="twitter:image" content="/images/og_image.png">
 
 
 
@@ -215,51 +215,6 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 read (About 36 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/06/22/3000-libs/">SQLAlert 库函数</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="RDL-库函数"><a href="#RDL-库函数" class="headerlink" title="RDL 库函数"></a>RDL 库函数</h1><p>本章节将描述 SQLAlert 为 RDL 语言提供的库函数, 后续子章节将分类对其进行描述。</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-06-21T23:17:00.000Z">2019-06-21</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/IT/">IT</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
                     4 分钟 read (About 661 words)
                 </span>
                 
@@ -318,7 +273,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    6 分钟 read (About 968 words)
+                    几秒 read (About 36 words)
                 </span>
                 
                 
@@ -327,111 +282,11 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/06/22/3030-strings/">SQLAlert 字符串函数</a>
+                <a class="has-link-black-ter" href="/2019/06/22/3000-libs/">SQLAlert 库函数</a>
             
         </h1>
         <div class="content">
-            <h2 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h2><p>本小节介绍 RDL 中字符串相关函数。</p>
-<h3 id="str-v"><a href="#str-v" class="headerlink" title="str(v)"></a>str(v)</h3><p>本函数将指定的参数转化成字符串类型，返回转化后的字符串。该函数接收 1 个参数：</p>
-<ul>
-<li>v: 任意类型，需要转化值或变量。</li>
-</ul>
-<p>该函数代码示例如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(str(1));</span><br><span class="line">&gt; print(str([1, 2, 3]));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>示例代码的输出内容如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 1</span><br><span class="line">&gt; [1,2,3]</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h3 id="split-str-sep"><a href="#split-str-sep" class="headerlink" title="split(str, sep)"></a>split(str, sep)</h3><p>本函数将指定的字符串分割成一个字符串数组，该函数接收 2 个参数：</p>
-<ul>
-<li>str: 字符串类型，需要分割的字符串。</li>
-<li>sep: 字符串类型「可选」，字符串分割符。如果该参数不指定，则以所有空白为分隔符，即将字符串分割为若干个“域”。</li>
-</ul>
-<p>该函数代码示例如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(split(&quot;zhang Wang  li han&quot;));</span><br><span class="line">&gt; print(split(&quot;zhang Wang  li han&quot;, &quot; &quot;));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>示例代码的输出内容如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; [&quot;zhang&quot;,&quot;Wang&quot;,&quot;li&quot;,&quot;han&quot;]</span><br><span class="line">&gt; [&quot;zhang&quot;,&quot;Wang&quot;,&quot;&quot;,&quot;li&quot;,&quot;han&quot;]</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>请读者自行研究该示例两处 split() 函数用法的差异。</p>
-<h3 id="trim-str-sep"><a href="#trim-str-sep" class="headerlink" title="trim(str, sep)"></a>trim(str, sep)</h3><p>本函数去除指定字符串左右两边的空白，返回新字符串，原字符串保持不变。该函数接收 1 个参数：</p>
-<ul>
-<li>str: 字符串类型，需要去除空白的字符串。</li>
-</ul>
-<p>该函数代码示例如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(trim(&quot;      zhang      &quot;));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>示例代码的输出内容如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; zhang</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h3 id="fmt-int-num"><a href="#fmt-int-num" class="headerlink" title="fmt_int(num)"></a>fmt_int(num)</h3><p>本函数将指定的数值格按照整型进行格式化成字符串，在格式化浮点数时，将舍去所有小数部分。该函数接收 1 个参数：</p>
-<ul>
-<li>num: 整型或浮点型，需要格式化的数值。</li>
-</ul>
-<p>该函数代码示例如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(fmt_int(10));</span><br><span class="line">&gt; print(fmt_int(123.567));</span><br><span class="line">&gt; print(fmt_int(123.456));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>示例代码的输出内容如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; 10</span><br><span class="line">&gt; 123</span><br><span class="line">&gt; 123</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h3 id="fmt-float-float-n"><a href="#fmt-float-float-n" class="headerlink" title="fmt_float(float, n)"></a>fmt_float(float, n)</h3><p>本函数将指定的浮点数格式成字符串，保留指定位数的小数。舍去多余的小数位数时，按“四舍五入”进行进位操作。该函数接收 1 个参数：</p>
-<ul>
-<li>float: 浮点数，需要格式化的浮点数；</li>
-<li>n:     需要保留的小位个数。</li>
-</ul>
-<p>该函数代码示例如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(fmt_float(123.567898, 0));</span><br><span class="line">&gt; print(fmt_float(123.456253, 2));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>示例代码的输出内容如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 124</span><br><span class="line">&gt; 123.46</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h3 id="fmt-bytes-int-fmt-bits-int"><a href="#fmt-bytes-int-fmt-bits-int" class="headerlink" title="fmt_bytes(int) || fmt_bits(int)"></a>fmt_bytes(int) || fmt_bits(int)</h3><p>本函数将指定的整数格式化成带字节（B）或比特单位（b）的字符串，格式化时按 1024 进行取余操作，并保留小数点后面 1 位。该函数接收 1 个参数：</p>
-<ul>
-<li>int: 整数，需要格式化的整数。</li>
-</ul>
-<p>该函数代码示例如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(fmt_bytes(1234859));</span><br><span class="line">&gt; print(fmt_bits(190933388));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>示例代码的输出内容如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 1.2 MB</span><br><span class="line">&gt; 182.1 Mb</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h3 id="fmt-pct-num-fmt-percentage-num"><a href="#fmt-pct-num-fmt-percentage-num" class="headerlink" title="fmt_pct(num) || fmt_percentage(num)"></a>fmt_pct(num) || fmt_percentage(num)</h3><p>本函数将指定的整数或浮点数据格式化成百分比字符串，并保留小数点后 2 位。该函数接收 1 个参数：</p>
-<ul>
-<li>num: 整数或浮点数，需要格式化的整数。</li>
-</ul>
-<p>该函数代码示例如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(fmt_pct(0.12303));</span><br><span class="line">&gt; print(fmt_pct(0.12344));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>示例代码的输出内容如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 12.30%</span><br><span class="line">&gt; 12.34%</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h3 id="fmt-time-int-type"><a href="#fmt-time-int-type" class="headerlink" title="fmt_time(int, type)"></a>fmt_time(int, type)</h3><p>本函数将指定的整数格式化带单位的时间间隔，并保留秒后面小数点 3 位，来表示毫秒。该函数接收 2 个参数：</p>
-<ul>
-<li>int:  整数，需要格式化的时间间隔。</li>
-<li>type: 字符串类型「可选」，时间间隔类型 ms（毫秒） 或 us （微秒），如果不指定，则默认为 ms。 </li>
-</ul>
-<p>该函数代码示例如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(fmt_time(1234567));</span><br><span class="line">&gt; print(fmt_time(1234567, &quot;ms&quot;));</span><br><span class="line">&gt; print(fmt_time(1234567, &quot;us&quot;));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>示例代码的输出内容如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; 20m 34.567s</span><br><span class="line">&gt; 20m 34.567s</span><br><span class="line">&gt; 1.234s</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
+            <h1 id="RDL-库函数"><a href="#RDL-库函数" class="headerlink" title="RDL 库函数"></a>RDL 库函数</h1><p>本章节将描述 SQLAlert 为 RDL 语言提供的库函数, 后续子章节将分类对其进行描述。</p>
 
         </div>
         
@@ -646,116 +501,6 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 read (About 738 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/06/22/3050-dict/">SQLAlert 字典函数</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="字典函数"><a href="#字典函数" class="headerlink" title="字典函数"></a>字典函数</h2><p>本小节介绍 RDL 中字典相关的操作函数。</p>
-<h3 id="keys-dict"><a href="#keys-dict" class="headerlink" title="keys(dict)"></a>keys(dict)</h3><p>本函数返回指定字典的所有 KEY 的值，该函数返回一个数组，包含所有的 KEY。由于字典是基于动态 hash 表实现的，所以每次获取的 KEY 数组元素的顺序是不一致的，但 KEY 数组的最量是一样的。函数接收 1 个参数：</p>
-<ul>
-<li>dict: 字典类型，指定的字典。</li>
-</ul>
-<p>该函数代码示例如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; dict = &#123; &quot;name&quot;: &quot;zhang&quot;, &quot;age&quot;: 18, &quot;desc&quot;: &quot;a good man&quot; &#125;;</span><br><span class="line">&gt; print(keys(dict));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>示例代码的输出内容如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; [&quot;name&quot;,&quot;age&quot;,&quot;desc&quot;]</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h3 id="values-dict"><a href="#values-dict" class="headerlink" title="values(dict)"></a>values(dict)</h3><p>本函数返回指定字典的所有 VALUE 的值，该函数返回一个数组，包含所有的 VALUE。由于字典是基于动态 hash 表实现的，所以每次获取的 VALUE 数组元素的顺序是不一致的，但 VALUE 数组的最量是一样的。函数接收 1 个参数：</p>
-<ul>
-<li>dict: 字典类型，指定的字典。</li>
-</ul>
-<p>该函数代码示例如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; dict = &#123; &quot;name&quot;: &quot;zhang&quot;, &quot;age&quot;: 18, &quot;desc&quot;: &quot;a good man&quot; &#125;;</span><br><span class="line">&gt; print(values(dict));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>示例代码的输出内容如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; [&quot;a good man&quot;,&quot;zhang&quot;,18]</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h3 id="delete-dict-key"><a href="#delete-dict-key" class="headerlink" title="delete(dict, key)"></a>delete(dict, key)</h3><p>本函数从指定的字典中删除指定的 KEY，该函数不返回任何值。函数接收 2 个参数：</p>
-<ul>
-<li>dict: 字典类型，需要删除元素的字典；</li>
-<li>key:  字符串类型，需要删除的元素的 KEY。</li>
-</ul>
-<p>该函数代码示例如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; dict = &#123; &quot;name&quot;: &quot;zhang&quot;, &quot;age&quot;: 18, &quot;desc&quot;: &quot;a good man&quot; &#125;;</span><br><span class="line">&gt; delete(dict, &quot;name&quot;);</span><br><span class="line">&gt; print(dict); </span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>示例代码的输出内容如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; &#123;&quot;age&quot;:18,&quot;desc&quot;:&quot;a good man&quot;&#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h3 id="dict-get-dict-key-def"><a href="#dict-get-dict-key-def" class="headerlink" title="dict_get(dict, key, def)"></a>dict_get(dict, key, def)</h3><p>本函数从指定的字典中读取指定 KEY 的值，如果 KEY 不存在则返回指定的默认值 def。函数接收 3 个参数：</p>
-<ul>
-<li>dict: 字典类型，指定的字典；</li>
-<li>key:  字符串类型，需要获取的元素的 KEY；</li>
-<li>def:  任意类型「可选」，KEY 不存在时返回的默认值，如果不指定，则默认值为 null。</li>
-</ul>
-<p>该函数代码示例如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; dict = &#123; &quot;name&quot;: &quot;zhang&quot;, &quot;age&quot;: 18, &quot;desc&quot;: &quot;a good man&quot; &#125;;</span><br><span class="line">&gt; print(dict_get(dict, &quot;name&quot;));</span><br><span class="line">&gt; print(dict_get(dict, &quot;dummy&quot;));</span><br><span class="line">&gt; print(dict_get(dict, &quot;dummy&quot;, &quot;hello&quot;));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>示例代码的输出内容如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; zhang</span><br><span class="line">&gt; null</span><br><span class="line">&gt; hello</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h3 id="join-values-dict-keys-sep"><a href="#join-values-dict-keys-sep" class="headerlink" title="join_values(dict, keys, sep)"></a>join_values(dict, keys, sep)</h3><p>本函数将字典中指定的 KEY 对应的值连接起来，生成一个字符串并返回。函数接收 3 个参数：</p>
-<ul>
-<li>dict: 字典类型，指定的字典；</li>
-<li>keys: 数组类型，数组的元素必需为字符串，需连接的 KEY 列表；</li>
-<li>sep:  字符串类型，连接时元素之间的分隔符。</li>
-</ul>
-<p>该函数代码示例如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; dict = &#123; &quot;name&quot;: &quot;zhang&quot;, &quot;age&quot;: 18, &quot;desc&quot;: &quot;a good man&quot; &#125;;</span><br><span class="line">&gt; print(join_values(dict, [&quot;name&quot;, &quot;desc&quot;], &quot; = &quot;));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>示例代码的输出内容如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; zhang = a good man</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-06-21T23:17:00.000Z">2019-06-21</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/IT/">IT</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
                     7 分钟 read (About 1081 words)
                 </span>
                 
@@ -897,7 +642,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 read (About 975 words)
+                    6 分钟 read (About 968 words)
                 </span>
                 
                 
@@ -906,79 +651,111 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/06/22/3060-time/">SQLAlert 时间函数</a>
+                <a class="has-link-black-ter" href="/2019/06/22/3030-strings/">SQLAlert 字符串函数</a>
             
         </h1>
         <div class="content">
-            <h2 id="时间函数"><a href="#时间函数" class="headerlink" title="时间函数"></a>时间函数</h2><p>本小节介绍 RDL 中字典相关的操作函数。</p>
-<h3 id="time-sep"><a href="#time-sep" class="headerlink" title="time(sep)"></a>time(sep)</h3><p>本函数获取当前时间戳，并格式化成字符串。如果脚本中配置了全局变量 _<em>now_<em>，则该函数返回 __now\</em></em> 所表示的时间戳。函数接收 1 个参数：</p>
+            <h2 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h2><p>本小节介绍 RDL 中字符串相关函数。</p>
+<h3 id="str-v"><a href="#str-v" class="headerlink" title="str(v)"></a>str(v)</h3><p>本函数将指定的参数转化成字符串类型，返回转化后的字符串。该函数接收 1 个参数：</p>
 <ul>
-<li>sep: 字符串类型，日期与时间之间的分隔符。</li>
+<li>v: 任意类型，需要转化值或变量。</li>
 </ul>
 <p>该函数代码示例如下：</p>
 <blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(time());</span><br><span class="line">&gt; print(time(&quot;T&quot;));</span><br><span class="line">&gt; </span><br><span class="line">&gt; __now__ = &quot;2015-03-02 08:10:00.234&quot;;</span><br><span class="line">&gt; print(time());</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(str(1));</span><br><span class="line">&gt; print(str([1, 2, 3]));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
 <p>示例代码的输出内容如下：</p>
 <blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; 2018-02-07 11:04:25.824+08:00</span><br><span class="line">&gt; 2018-02-07T11:04:25.824+08:00</span><br><span class="line">&gt; 2015-03-02 08:10:00.234+08:00</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 1</span><br><span class="line">&gt; [1,2,3]</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
-<h3 id="sys-time-sep"><a href="#sys-time-sep" class="headerlink" title="sys_time(sep)"></a>sys_time(sep)</h3><p>本函数获取当前时间戳，并格式化成字符串。函数返回的数值不受全局变量 _<em>now_</em> 的影响。函数接收 1 个参数：</p>
+<h3 id="split-str-sep"><a href="#split-str-sep" class="headerlink" title="split(str, sep)"></a>split(str, sep)</h3><p>本函数将指定的字符串分割成一个字符串数组，该函数接收 2 个参数：</p>
 <ul>
-<li>sep: 字符串类型，日期与时间之间的分隔符。</li>
+<li>str: 字符串类型，需要分割的字符串。</li>
+<li>sep: 字符串类型「可选」，字符串分割符。如果该参数不指定，则以所有空白为分隔符，即将字符串分割为若干个“域”。</li>
 </ul>
 <p>该函数代码示例如下：</p>
 <blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(time());</span><br><span class="line">&gt; print(sys_time());</span><br><span class="line">&gt; </span><br><span class="line">&gt; __now__ = &quot;2015-03-02 08:10:00.234&quot;;</span><br><span class="line">&gt; print(time());</span><br><span class="line">&gt; print(sys_time());</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(split(&quot;zhang Wang  li han&quot;));</span><br><span class="line">&gt; print(split(&quot;zhang Wang  li han&quot;, &quot; &quot;));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
 <p>示例代码的输出内容如下：</p>
 <blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; 2018-02-07 11:08:27.865+08:00</span><br><span class="line">&gt; 2018-02-07 11:08:27.865+08:00</span><br><span class="line">&gt; 2015-03-02 08:10:00.234+08:00</span><br><span class="line">&gt; 2018-02-07 11:08:27.865+08:00</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; [&quot;zhang&quot;,&quot;Wang&quot;,&quot;li&quot;,&quot;han&quot;]</span><br><span class="line">&gt; [&quot;zhang&quot;,&quot;Wang&quot;,&quot;&quot;,&quot;li&quot;,&quot;han&quot;]</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
-<h3 id="now-sep"><a href="#now-sep" class="headerlink" title="now(sep)"></a>now(sep)</h3><p>本函数获取当前时间戳整数值，精确到毫秒。如果脚本中配置了全局变量 _<em>now_<em>，则该函数返回 __now\</em></em> 所表示的时间戳，函数不接收任何个参数。</p>
-<p>该函数代码示例如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(now());</span><br><span class="line">&gt; </span><br><span class="line">&gt; __now__ = &quot;2015-03-02 08:10:00.234&quot;;</span><br><span class="line">&gt; print(now());</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>示例代码的输出内容如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 1517972720018</span><br><span class="line">&gt; 1425255000234</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h3 id="sys-now-sep"><a href="#sys-now-sep" class="headerlink" title="sys_now(sep)"></a>sys_now(sep)</h3><p>本函数获取当前时间戳整数值，精确到毫秒。函数返回的数值不受全局变量 _<em>now_</em> 的影响，函数不接收任何个参数。</p>
-<p>该函数代码示例如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(now());</span><br><span class="line">&gt; print(sys_now());</span><br><span class="line">&gt; </span><br><span class="line">&gt; __now__ = &quot;2015-03-02 08:10:00.234&quot;;</span><br><span class="line">&gt; print(now());</span><br><span class="line">&gt; print(sys_now());</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>示例代码的输出内容如下：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; 1517972986212</span><br><span class="line">&gt; 1517972986213</span><br><span class="line">&gt; 1425255000234</span><br><span class="line">&gt; 1517972986213</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h3 id="check-datetime-list"><a href="#check-datetime-list" class="headerlink" title="check_datetime(list)"></a>check_datetime(list)</h3><p>本函数检测当前日期和时间是否被配置成 on 状态，如果是则返回 true，否则返回 false。如果日期及时间未配置，则返回 true 表示默认为 on 状态。与 on 状态相反的状态为 off 状态，可以通过如下格式对日期和时间进行配置：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; [</span><br><span class="line">&gt;     &#123; &quot;type&quot;: &quot;on&quot;,  &quot;months&quot;: &quot;1 TO 12&quot;, &quot;week_days&quot;: &quot;1 to 5&quot;, &quot;hours&quot;: &quot;9 to 18&quot; &#125;,</span><br><span class="line">&gt;     &#123; &quot;type&quot;: &quot;off&quot;, &quot;months&quot;: 10,        &quot;month_days&quot;: 1 &#125;,</span><br><span class="line">&gt;     &#123; &quot;type&quot;: &quot;off&quot;, &quot;datetime&quot;: &quot;2017-11-02 09&quot; &#125;</span><br><span class="line">&gt; ]</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>日期和时间配置说明：</p>
+<p>请读者自行研究该示例两处 split() 函数用法的差异。</p>
+<h3 id="trim-str-sep"><a href="#trim-str-sep" class="headerlink" title="trim(str, sep)"></a>trim(str, sep)</h3><p>本函数去除指定字符串左右两边的空白，返回新字符串，原字符串保持不变。该函数接收 1 个参数：</p>
 <ul>
-<li>数组中每一项为一个配置，通过 type 域指定功能 on 或者 off；</li>
-<li>支持对 months, month_days, week_days, hours, minutes 进行配置，如果不配置则不进行检测；</li>
-<li>支持使用 datetime 来配置具体的时间段；</li>
-<li>所有配置支持三种格式：（1）单个整数；（2）整数的数组；（3）字符串 “m to n” 的格式，其中 m 和 n 为整数，mounths 的范围为 1 到 12，month_days 的范围为 1 到 31，week_days 的范围为 1 到 7， hours 的范围从 0 到 23， minutes 的范围从 0 到 59；</li>
-<li>对于第一个配置项，如果 type 为 on 则其中不在当前配置项中的其他时间段均被置成 off，后续所有配置只影响对应的配置时间段，不会影响到其他时间段；</li>
-<li>可以重复地 on 或者 off 某时间段，以最后一个配置项作为最终结果。</li>
-</ul>
-<p>函数接收 1 个参数：</p>
-<ul>
-<li>list: 数组类型，list 内的元素必需为上述日期和时间配置格式。如果不指定配置，默认搜索全局变量 _<em>workdays_</em> 作为配置。</li>
+<li>str: 字符串类型，需要去除空白的字符串。</li>
 </ul>
 <p>该函数代码示例如下：</p>
 <blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt; list = [</span><br><span class="line">&gt;     &#123; &quot;type&quot;: &quot;on&quot;,  &quot;months&quot;: &quot;1 TO 12&quot;, &quot;week_days&quot;: &quot;1 to 5&quot;, &quot;hours&quot;: &quot;9 to 18&quot; &#125;,</span><br><span class="line">&gt;     &#123; &quot;type&quot;: &quot;off&quot;, &quot;months&quot;: 10,        &quot;month_days&quot;: 1 &#125;,</span><br><span class="line">&gt;     &#123; &quot;type&quot;: &quot;off&quot;, &quot;datetime&quot;: &quot;2017-11-02 09&quot; &#125;</span><br><span class="line">&gt; ];</span><br><span class="line">&gt; print(time(), &quot;is on ?&quot;, check_datetime(list));</span><br><span class="line">&gt; </span><br><span class="line">&gt; __now__ = &quot;2017-11-02 09:00:00&quot;;</span><br><span class="line">&gt; print(time(), &quot;is on ?&quot;, check_datetime(list));</span><br><span class="line">&gt; </span><br><span class="line">&gt; __now__ = &quot;2017-10-01 08:00:00&quot;;</span><br><span class="line">&gt; print(time(), &quot;is on ?&quot;, check_datetime(list));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(trim(&quot;      zhang      &quot;));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
 <p>示例代码的输出内容如下：</p>
 <blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; 2018-02-07 11:40:21.919+08:00 is on ? true</span><br><span class="line">&gt; 2017-11-02 09:00:00+08:00 is on ? false</span><br><span class="line">&gt; 2017-10-01 08:00:00+08:00 is on ? false</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; zhang</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
-<p>需要注意，如果没有配置日期与时间或者配置的时期与时间非法，则该函数返回 true 表示默认为 on 状态。</p>
+<h3 id="fmt-int-num"><a href="#fmt-int-num" class="headerlink" title="fmt_int(num)"></a>fmt_int(num)</h3><p>本函数将指定的数值格按照整型进行格式化成字符串，在格式化浮点数时，将舍去所有小数部分。该函数接收 1 个参数：</p>
+<ul>
+<li>num: 整型或浮点型，需要格式化的数值。</li>
+</ul>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(fmt_int(10));</span><br><span class="line">&gt; print(fmt_int(123.567));</span><br><span class="line">&gt; print(fmt_int(123.456));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例代码的输出内容如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; 10</span><br><span class="line">&gt; 123</span><br><span class="line">&gt; 123</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="fmt-float-float-n"><a href="#fmt-float-float-n" class="headerlink" title="fmt_float(float, n)"></a>fmt_float(float, n)</h3><p>本函数将指定的浮点数格式成字符串，保留指定位数的小数。舍去多余的小数位数时，按“四舍五入”进行进位操作。该函数接收 1 个参数：</p>
+<ul>
+<li>float: 浮点数，需要格式化的浮点数；</li>
+<li>n:     需要保留的小位个数。</li>
+</ul>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(fmt_float(123.567898, 0));</span><br><span class="line">&gt; print(fmt_float(123.456253, 2));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例代码的输出内容如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 124</span><br><span class="line">&gt; 123.46</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="fmt-bytes-int-fmt-bits-int"><a href="#fmt-bytes-int-fmt-bits-int" class="headerlink" title="fmt_bytes(int) || fmt_bits(int)"></a>fmt_bytes(int) || fmt_bits(int)</h3><p>本函数将指定的整数格式化成带字节（B）或比特单位（b）的字符串，格式化时按 1024 进行取余操作，并保留小数点后面 1 位。该函数接收 1 个参数：</p>
+<ul>
+<li>int: 整数，需要格式化的整数。</li>
+</ul>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(fmt_bytes(1234859));</span><br><span class="line">&gt; print(fmt_bits(190933388));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例代码的输出内容如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 1.2 MB</span><br><span class="line">&gt; 182.1 Mb</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="fmt-pct-num-fmt-percentage-num"><a href="#fmt-pct-num-fmt-percentage-num" class="headerlink" title="fmt_pct(num) || fmt_percentage(num)"></a>fmt_pct(num) || fmt_percentage(num)</h3><p>本函数将指定的整数或浮点数据格式化成百分比字符串，并保留小数点后 2 位。该函数接收 1 个参数：</p>
+<ul>
+<li>num: 整数或浮点数，需要格式化的整数。</li>
+</ul>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(fmt_pct(0.12303));</span><br><span class="line">&gt; print(fmt_pct(0.12344));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例代码的输出内容如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 12.30%</span><br><span class="line">&gt; 12.34%</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="fmt-time-int-type"><a href="#fmt-time-int-type" class="headerlink" title="fmt_time(int, type)"></a>fmt_time(int, type)</h3><p>本函数将指定的整数格式化带单位的时间间隔，并保留秒后面小数点 3 位，来表示毫秒。该函数接收 2 个参数：</p>
+<ul>
+<li>int:  整数，需要格式化的时间间隔。</li>
+<li>type: 字符串类型「可选」，时间间隔类型 ms（毫秒） 或 us （微秒），如果不指定，则默认为 ms。 </li>
+</ul>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(fmt_time(1234567));</span><br><span class="line">&gt; print(fmt_time(1234567, &quot;ms&quot;));</span><br><span class="line">&gt; print(fmt_time(1234567, &quot;us&quot;));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例代码的输出内容如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; 20m 34.567s</span><br><span class="line">&gt; 20m 34.567s</span><br><span class="line">&gt; 1.234s</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
 
         </div>
         
@@ -1010,7 +787,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    6 分钟 read (About 848 words)
+                    5 分钟 read (About 738 words)
                 </span>
                 
                 
@@ -1019,62 +796,76 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/06/22/3070-exec/">SQLAlert 脚本执行函数</a>
+                <a class="has-link-black-ter" href="/2019/06/22/3050-dict/">SQLAlert 字典函数</a>
             
         </h1>
         <div class="content">
-            <h2 id="脚本执行函数"><a href="#脚本执行函数" class="headerlink" title="脚本执行函数"></a>脚本执行函数</h2><p>本小节介绍 RDL 中脚本执行相关函数。</p>
-<h3 id="call-name-args-…"><a href="#call-name-args-…" class="headerlink" title="call(name, args, …)"></a>call(name, args, …)</h3><p>本函数使用指定的参数来调用指定的函数，并返回被调函数的返回值。函数接收 n（n &gt;= 1）个参数：</p>
+            <h2 id="字典函数"><a href="#字典函数" class="headerlink" title="字典函数"></a>字典函数</h2><p>本小节介绍 RDL 中字典相关的操作函数。</p>
+<h3 id="keys-dict"><a href="#keys-dict" class="headerlink" title="keys(dict)"></a>keys(dict)</h3><p>本函数返回指定字典的所有 KEY 的值，该函数返回一个数组，包含所有的 KEY。由于字典是基于动态 hash 表实现的，所以每次获取的 KEY 数组元素的顺序是不一致的，但 KEY 数组的最量是一样的。函数接收 1 个参数：</p>
 <ul>
-<li>name:      字符串类型，被调用函数名。</li>
-<li>args, …: 任意类型，name 后面的所有参数都将被直接传递给被调函数。</li>
+<li>dict: 字典类型，指定的字典。</li>
 </ul>
 <p>该函数代码示例如下：</p>
 <blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; def myPrint(value) &#123;</span><br><span class="line">&gt;     print(&quot;value =&quot;, value);</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt; </span><br><span class="line">&gt; call(&quot;myPrint&quot;, &quot;hello world&quot;);</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; dict = &#123; &quot;name&quot;: &quot;zhang&quot;, &quot;age&quot;: 18, &quot;desc&quot;: &quot;a good man&quot; &#125;;</span><br><span class="line">&gt; print(keys(dict));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
 <p>示例代码的输出内容如下：</p>
 <blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; value = hello world</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; [&quot;name&quot;,&quot;age&quot;,&quot;desc&quot;]</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
-<h3 id="call-builtin-name-args-…"><a href="#call-builtin-name-args-…" class="headerlink" title="call_builtin(name, args, …)"></a>call_builtin(name, args, …)</h3><p>本函数使用指定的参数来调用指定的函数，并返回被调函数的返回值。该函数只搜索 RDL 库提供的函数，而不调用用户自定义的函数。函数接收 n（n &gt;= 1）个参数：</p>
+<h3 id="values-dict"><a href="#values-dict" class="headerlink" title="values(dict)"></a>values(dict)</h3><p>本函数返回指定字典的所有 VALUE 的值，该函数返回一个数组，包含所有的 VALUE。由于字典是基于动态 hash 表实现的，所以每次获取的 VALUE 数组元素的顺序是不一致的，但 VALUE 数组的最量是一样的。函数接收 1 个参数：</p>
 <ul>
-<li>name:      字符串类型，被调用函数名。</li>
-<li>args, …: 任意类型，name 后面的所有参数都将被直接传递给被调函数。</li>
+<li>dict: 字典类型，指定的字典。</li>
 </ul>
 <p>该函数代码示例如下：</p>
 <blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; def myPrint(value) &#123;</span><br><span class="line">&gt;     print(&quot;value =&quot;, value);</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt; </span><br><span class="line">&gt; call_builtin(&quot;myPrint&quot;, &quot;hello world&quot;);</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; dict = &#123; &quot;name&quot;: &quot;zhang&quot;, &quot;age&quot;: 18, &quot;desc&quot;: &quot;a good man&quot; &#125;;</span><br><span class="line">&gt; print(values(dict));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
 <p>示例代码的输出内容如下：</p>
 <blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 2018-02-07 12:04:20 SQLAlert: [ERR] builtin &apos;myPrint&apos; not found</span><br><span class="line">&gt; in call_builtin(), in line 9 in file test.rule in task &apos;test&apos;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; [&quot;a good man&quot;,&quot;zhang&quot;,18]</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
-<h3 id="call-list-list"><a href="#call-list-list" class="headerlink" title="call_list(list)"></a>call_list(list)</h3><p>本函数按顺序调用指定的函数列表，将函数的返回值传递给下一个函数，并返回最后一个函数的返回值。函数列表的配置如下所示：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; __funclist__ = [ </span><br><span class="line">&gt;     &#123; &quot;name&quot;: &quot;func1&quot;, &quot;args&quot;: &#123; &quot;arg1&quot;: &quot;value1&quot; &#125; &#125;,</span><br><span class="line">&gt;     &#123; &quot;name&quot;: &quot;func2&quot;, &quot;args&quot;: &#123; &quot;arg2&quot;: &quot;value2&quot; &#125; &#125; </span><br><span class="line">&gt; ];</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>上述函数列表配置中，name 为函数名，args 为函数的参数，参数可以是任意类型，如果多个参数的话，一般使用字典来传递。被调用的函数必需定义为如下格式：</p>
-<blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; def name(result, args); // 第一个参数为上一函数的返回值；第二个参数为配置的参数。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>函数 call_list() 接收 1 个参数：</p>
+<h3 id="delete-dict-key"><a href="#delete-dict-key" class="headerlink" title="delete(dict, key)"></a>delete(dict, key)</h3><p>本函数从指定的字典中删除指定的 KEY，该函数不返回任何值。函数接收 2 个参数：</p>
 <ul>
-<li>list: 数组类型，其元素必需为上述配置格式。</li>
+<li>dict: 字典类型，需要删除元素的字典；</li>
+<li>key:  字符串类型，需要删除的元素的 KEY。</li>
 </ul>
 <p>该函数代码示例如下：</p>
 <blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&gt; def print_zhang(result, args) &#123;</span><br><span class="line">&gt;     print(&quot;zhang result =&quot;, result);</span><br><span class="line">&gt;     print(&quot;zhang args   =&quot;, args);</span><br><span class="line">&gt;     return &quot;zhang&quot;;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt; def print_wang(result, args) &#123;</span><br><span class="line">&gt;     print(&quot;wang result =&quot;, result);</span><br><span class="line">&gt;     print(&quot;wang args   =&quot;, args);</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt; def print_liang(result, args) &#123;</span><br><span class="line">&gt;     print(&quot;liang result =&quot;, result);</span><br><span class="line">&gt;     print(&quot;liang args   =&quot;, args);</span><br><span class="line">&gt;     return &quot;liang&quot;;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt; funclist = [</span><br><span class="line">&gt;     &#123; &quot;name&quot;: &quot;print_zhang&quot;, args: &#123; &quot;value&quot;: &quot;hello&quot; &#125; &#125;,</span><br><span class="line">&gt;     &#123; &quot;name&quot;: &quot;print_wang&quot;,  args: &#123; &quot;value&quot;: &quot;world&quot; &#125; &#125;,</span><br><span class="line">&gt;     &#123; &quot;name&quot;: &quot;print_liang&quot; &#125;</span><br><span class="line">&gt; ];</span><br><span class="line">&gt; print(call_list(funclist));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; dict = &#123; &quot;name&quot;: &quot;zhang&quot;, &quot;age&quot;: 18, &quot;desc&quot;: &quot;a good man&quot; &#125;;</span><br><span class="line">&gt; delete(dict, &quot;name&quot;);</span><br><span class="line">&gt; print(dict); </span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
 <p>示例代码的输出内容如下：</p>
 <blockquote>
-<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; zhang result = null</span><br><span class="line">&gt; zhang args   = &#123;&quot;value&quot;:&quot;hello&quot;&#125;</span><br><span class="line">&gt; wang result = zhang</span><br><span class="line">&gt; wang args   = &#123;&quot;value&quot;:&quot;world&quot;&#125;</span><br><span class="line">&gt; liang result = null</span><br><span class="line">&gt; liang args   = null</span><br><span class="line">&gt; liang</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; &#123;&quot;age&quot;:18,&quot;desc&quot;:&quot;a good man&quot;&#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
-<h3 id="run-name"><a href="#run-name" class="headerlink" title="run(name)"></a>run(name)</h3><p>本函数执行指定的函数，并将返回值保存到执行上下文中，如果上下文中设置了全局变量 _<em>sub_rules_</em> 则断续执行该变量所配置的子脚本。变量 _<em>sub_rules_</em> 必需是一个数组，数组内的元素是字符串格式，每一个元素为一个脚本文件名。<br>通过该函数可以实现脚本关联执行或者分级执行的功能。函数接收 1 个参数：</p>
+<h3 id="dict-get-dict-key-def"><a href="#dict-get-dict-key-def" class="headerlink" title="dict_get(dict, key, def)"></a>dict_get(dict, key, def)</h3><p>本函数从指定的字典中读取指定 KEY 的值，如果 KEY 不存在则返回指定的默认值 def。函数接收 3 个参数：</p>
 <ul>
-<li>name:      字符串类型，被调用函数名。</li>
+<li>dict: 字典类型，指定的字典；</li>
+<li>key:  字符串类型，需要获取的元素的 KEY；</li>
+<li>def:  任意类型「可选」，KEY 不存在时返回的默认值，如果不指定，则默认值为 null。</li>
 </ul>
-<p>该函数在执行子脚本时，为每个脚本执行分配一个线程，即对所配置的子脚本并行执行，并等待所有脚本的返回。<br>限于篇幅，该函数暂不列出代码示例。</p>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; dict = &#123; &quot;name&quot;: &quot;zhang&quot;, &quot;age&quot;: 18, &quot;desc&quot;: &quot;a good man&quot; &#125;;</span><br><span class="line">&gt; print(dict_get(dict, &quot;name&quot;));</span><br><span class="line">&gt; print(dict_get(dict, &quot;dummy&quot;));</span><br><span class="line">&gt; print(dict_get(dict, &quot;dummy&quot;, &quot;hello&quot;));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例代码的输出内容如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; zhang</span><br><span class="line">&gt; null</span><br><span class="line">&gt; hello</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="join-values-dict-keys-sep"><a href="#join-values-dict-keys-sep" class="headerlink" title="join_values(dict, keys, sep)"></a>join_values(dict, keys, sep)</h3><p>本函数将字典中指定的 KEY 对应的值连接起来，生成一个字符串并返回。函数接收 3 个参数：</p>
+<ul>
+<li>dict: 字典类型，指定的字典；</li>
+<li>keys: 数组类型，数组的元素必需为字符串，需连接的 KEY 列表；</li>
+<li>sep:  字符串类型，连接时元素之间的分隔符。</li>
+</ul>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; dict = &#123; &quot;name&quot;: &quot;zhang&quot;, &quot;age&quot;: 18, &quot;desc&quot;: &quot;a good man&quot; &#125;;</span><br><span class="line">&gt; print(join_values(dict, [&quot;name&quot;, &quot;desc&quot;], &quot; = &quot;));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例代码的输出内容如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; zhang = a good man</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
 
         </div>
         
@@ -1277,6 +1068,215 @@
 
 
 
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-21T23:17:00.000Z">2019-06-21</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/IT/">IT</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 分钟 read (About 848 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/06/22/3070-exec/">SQLAlert 脚本执行函数</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="脚本执行函数"><a href="#脚本执行函数" class="headerlink" title="脚本执行函数"></a>脚本执行函数</h2><p>本小节介绍 RDL 中脚本执行相关函数。</p>
+<h3 id="call-name-args-…"><a href="#call-name-args-…" class="headerlink" title="call(name, args, …)"></a>call(name, args, …)</h3><p>本函数使用指定的参数来调用指定的函数，并返回被调函数的返回值。函数接收 n（n &gt;= 1）个参数：</p>
+<ul>
+<li>name:      字符串类型，被调用函数名。</li>
+<li>args, …: 任意类型，name 后面的所有参数都将被直接传递给被调函数。</li>
+</ul>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; def myPrint(value) &#123;</span><br><span class="line">&gt;     print(&quot;value =&quot;, value);</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt; </span><br><span class="line">&gt; call(&quot;myPrint&quot;, &quot;hello world&quot;);</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例代码的输出内容如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; value = hello world</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="call-builtin-name-args-…"><a href="#call-builtin-name-args-…" class="headerlink" title="call_builtin(name, args, …)"></a>call_builtin(name, args, …)</h3><p>本函数使用指定的参数来调用指定的函数，并返回被调函数的返回值。该函数只搜索 RDL 库提供的函数，而不调用用户自定义的函数。函数接收 n（n &gt;= 1）个参数：</p>
+<ul>
+<li>name:      字符串类型，被调用函数名。</li>
+<li>args, …: 任意类型，name 后面的所有参数都将被直接传递给被调函数。</li>
+</ul>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; def myPrint(value) &#123;</span><br><span class="line">&gt;     print(&quot;value =&quot;, value);</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt; </span><br><span class="line">&gt; call_builtin(&quot;myPrint&quot;, &quot;hello world&quot;);</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例代码的输出内容如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 2018-02-07 12:04:20 SQLAlert: [ERR] builtin &apos;myPrint&apos; not found</span><br><span class="line">&gt; in call_builtin(), in line 9 in file test.rule in task &apos;test&apos;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="call-list-list"><a href="#call-list-list" class="headerlink" title="call_list(list)"></a>call_list(list)</h3><p>本函数按顺序调用指定的函数列表，将函数的返回值传递给下一个函数，并返回最后一个函数的返回值。函数列表的配置如下所示：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; __funclist__ = [ </span><br><span class="line">&gt;     &#123; &quot;name&quot;: &quot;func1&quot;, &quot;args&quot;: &#123; &quot;arg1&quot;: &quot;value1&quot; &#125; &#125;,</span><br><span class="line">&gt;     &#123; &quot;name&quot;: &quot;func2&quot;, &quot;args&quot;: &#123; &quot;arg2&quot;: &quot;value2&quot; &#125; &#125; </span><br><span class="line">&gt; ];</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>上述函数列表配置中，name 为函数名，args 为函数的参数，参数可以是任意类型，如果多个参数的话，一般使用字典来传递。被调用的函数必需定义为如下格式：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; def name(result, args); // 第一个参数为上一函数的返回值；第二个参数为配置的参数。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>函数 call_list() 接收 1 个参数：</p>
+<ul>
+<li>list: 数组类型，其元素必需为上述配置格式。</li>
+</ul>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&gt; def print_zhang(result, args) &#123;</span><br><span class="line">&gt;     print(&quot;zhang result =&quot;, result);</span><br><span class="line">&gt;     print(&quot;zhang args   =&quot;, args);</span><br><span class="line">&gt;     return &quot;zhang&quot;;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt; def print_wang(result, args) &#123;</span><br><span class="line">&gt;     print(&quot;wang result =&quot;, result);</span><br><span class="line">&gt;     print(&quot;wang args   =&quot;, args);</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt; def print_liang(result, args) &#123;</span><br><span class="line">&gt;     print(&quot;liang result =&quot;, result);</span><br><span class="line">&gt;     print(&quot;liang args   =&quot;, args);</span><br><span class="line">&gt;     return &quot;liang&quot;;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt; funclist = [</span><br><span class="line">&gt;     &#123; &quot;name&quot;: &quot;print_zhang&quot;, args: &#123; &quot;value&quot;: &quot;hello&quot; &#125; &#125;,</span><br><span class="line">&gt;     &#123; &quot;name&quot;: &quot;print_wang&quot;,  args: &#123; &quot;value&quot;: &quot;world&quot; &#125; &#125;,</span><br><span class="line">&gt;     &#123; &quot;name&quot;: &quot;print_liang&quot; &#125;</span><br><span class="line">&gt; ];</span><br><span class="line">&gt; print(call_list(funclist));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例代码的输出内容如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; zhang result = null</span><br><span class="line">&gt; zhang args   = &#123;&quot;value&quot;:&quot;hello&quot;&#125;</span><br><span class="line">&gt; wang result = zhang</span><br><span class="line">&gt; wang args   = &#123;&quot;value&quot;:&quot;world&quot;&#125;</span><br><span class="line">&gt; liang result = null</span><br><span class="line">&gt; liang args   = null</span><br><span class="line">&gt; liang</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="run-name"><a href="#run-name" class="headerlink" title="run(name)"></a>run(name)</h3><p>本函数执行指定的函数，并将返回值保存到执行上下文中，如果上下文中设置了全局变量 _<em>sub_rules_</em> 则断续执行该变量所配置的子脚本。变量 _<em>sub_rules_</em> 必需是一个数组，数组内的元素是字符串格式，每一个元素为一个脚本文件名。<br>通过该函数可以实现脚本关联执行或者分级执行的功能。函数接收 1 个参数：</p>
+<ul>
+<li>name:      字符串类型，被调用函数名。</li>
+</ul>
+<p>该函数在执行子脚本时，为每个脚本执行分配一个线程，即对所配置的子脚本并行执行，并等待所有脚本的返回。<br>限于篇幅，该函数暂不列出代码示例。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-21T23:17:00.000Z">2019-06-21</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/IT/">IT</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 read (About 975 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/06/22/3060-time/">SQLAlert 时间函数</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="时间函数"><a href="#时间函数" class="headerlink" title="时间函数"></a>时间函数</h2><p>本小节介绍 RDL 中字典相关的操作函数。</p>
+<h3 id="time-sep"><a href="#time-sep" class="headerlink" title="time(sep)"></a>time(sep)</h3><p>本函数获取当前时间戳，并格式化成字符串。如果脚本中配置了全局变量 _<em>now_<em>，则该函数返回 __now\</em></em> 所表示的时间戳。函数接收 1 个参数：</p>
+<ul>
+<li>sep: 字符串类型，日期与时间之间的分隔符。</li>
+</ul>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(time());</span><br><span class="line">&gt; print(time(&quot;T&quot;));</span><br><span class="line">&gt; </span><br><span class="line">&gt; __now__ = &quot;2015-03-02 08:10:00.234&quot;;</span><br><span class="line">&gt; print(time());</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例代码的输出内容如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; 2018-02-07 11:04:25.824+08:00</span><br><span class="line">&gt; 2018-02-07T11:04:25.824+08:00</span><br><span class="line">&gt; 2015-03-02 08:10:00.234+08:00</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="sys-time-sep"><a href="#sys-time-sep" class="headerlink" title="sys_time(sep)"></a>sys_time(sep)</h3><p>本函数获取当前时间戳，并格式化成字符串。函数返回的数值不受全局变量 _<em>now_</em> 的影响。函数接收 1 个参数：</p>
+<ul>
+<li>sep: 字符串类型，日期与时间之间的分隔符。</li>
+</ul>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(time());</span><br><span class="line">&gt; print(sys_time());</span><br><span class="line">&gt; </span><br><span class="line">&gt; __now__ = &quot;2015-03-02 08:10:00.234&quot;;</span><br><span class="line">&gt; print(time());</span><br><span class="line">&gt; print(sys_time());</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例代码的输出内容如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; 2018-02-07 11:08:27.865+08:00</span><br><span class="line">&gt; 2018-02-07 11:08:27.865+08:00</span><br><span class="line">&gt; 2015-03-02 08:10:00.234+08:00</span><br><span class="line">&gt; 2018-02-07 11:08:27.865+08:00</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="now-sep"><a href="#now-sep" class="headerlink" title="now(sep)"></a>now(sep)</h3><p>本函数获取当前时间戳整数值，精确到毫秒。如果脚本中配置了全局变量 _<em>now_<em>，则该函数返回 __now\</em></em> 所表示的时间戳，函数不接收任何个参数。</p>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(now());</span><br><span class="line">&gt; </span><br><span class="line">&gt; __now__ = &quot;2015-03-02 08:10:00.234&quot;;</span><br><span class="line">&gt; print(now());</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例代码的输出内容如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 1517972720018</span><br><span class="line">&gt; 1425255000234</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="sys-now-sep"><a href="#sys-now-sep" class="headerlink" title="sys_now(sep)"></a>sys_now(sep)</h3><p>本函数获取当前时间戳整数值，精确到毫秒。函数返回的数值不受全局变量 _<em>now_</em> 的影响，函数不接收任何个参数。</p>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(now());</span><br><span class="line">&gt; print(sys_now());</span><br><span class="line">&gt; </span><br><span class="line">&gt; __now__ = &quot;2015-03-02 08:10:00.234&quot;;</span><br><span class="line">&gt; print(now());</span><br><span class="line">&gt; print(sys_now());</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例代码的输出内容如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; 1517972986212</span><br><span class="line">&gt; 1517972986213</span><br><span class="line">&gt; 1425255000234</span><br><span class="line">&gt; 1517972986213</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="check-datetime-list"><a href="#check-datetime-list" class="headerlink" title="check_datetime(list)"></a>check_datetime(list)</h3><p>本函数检测当前日期和时间是否被配置成 on 状态，如果是则返回 true，否则返回 false。如果日期及时间未配置，则返回 true 表示默认为 on 状态。与 on 状态相反的状态为 off 状态，可以通过如下格式对日期和时间进行配置：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; [</span><br><span class="line">&gt;     &#123; &quot;type&quot;: &quot;on&quot;,  &quot;months&quot;: &quot;1 TO 12&quot;, &quot;week_days&quot;: &quot;1 to 5&quot;, &quot;hours&quot;: &quot;9 to 18&quot; &#125;,</span><br><span class="line">&gt;     &#123; &quot;type&quot;: &quot;off&quot;, &quot;months&quot;: 10,        &quot;month_days&quot;: 1 &#125;,</span><br><span class="line">&gt;     &#123; &quot;type&quot;: &quot;off&quot;, &quot;datetime&quot;: &quot;2017-11-02 09&quot; &#125;</span><br><span class="line">&gt; ]</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>日期和时间配置说明：</p>
+<ul>
+<li>数组中每一项为一个配置，通过 type 域指定功能 on 或者 off；</li>
+<li>支持对 months, month_days, week_days, hours, minutes 进行配置，如果不配置则不进行检测；</li>
+<li>支持使用 datetime 来配置具体的时间段；</li>
+<li>所有配置支持三种格式：（1）单个整数；（2）整数的数组；（3）字符串 “m to n” 的格式，其中 m 和 n 为整数，mounths 的范围为 1 到 12，month_days 的范围为 1 到 31，week_days 的范围为 1 到 7， hours 的范围从 0 到 23， minutes 的范围从 0 到 59；</li>
+<li>对于第一个配置项，如果 type 为 on 则其中不在当前配置项中的其他时间段均被置成 off，后续所有配置只影响对应的配置时间段，不会影响到其他时间段；</li>
+<li>可以重复地 on 或者 off 某时间段，以最后一个配置项作为最终结果。</li>
+</ul>
+<p>函数接收 1 个参数：</p>
+<ul>
+<li>list: 数组类型，list 内的元素必需为上述日期和时间配置格式。如果不指定配置，默认搜索全局变量 _<em>workdays_</em> 作为配置。</li>
+</ul>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt; list = [</span><br><span class="line">&gt;     &#123; &quot;type&quot;: &quot;on&quot;,  &quot;months&quot;: &quot;1 TO 12&quot;, &quot;week_days&quot;: &quot;1 to 5&quot;, &quot;hours&quot;: &quot;9 to 18&quot; &#125;,</span><br><span class="line">&gt;     &#123; &quot;type&quot;: &quot;off&quot;, &quot;months&quot;: 10,        &quot;month_days&quot;: 1 &#125;,</span><br><span class="line">&gt;     &#123; &quot;type&quot;: &quot;off&quot;, &quot;datetime&quot;: &quot;2017-11-02 09&quot; &#125;</span><br><span class="line">&gt; ];</span><br><span class="line">&gt; print(time(), &quot;is on ?&quot;, check_datetime(list));</span><br><span class="line">&gt; </span><br><span class="line">&gt; __now__ = &quot;2017-11-02 09:00:00&quot;;</span><br><span class="line">&gt; print(time(), &quot;is on ?&quot;, check_datetime(list));</span><br><span class="line">&gt; </span><br><span class="line">&gt; __now__ = &quot;2017-10-01 08:00:00&quot;;</span><br><span class="line">&gt; print(time(), &quot;is on ?&quot;, check_datetime(list));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例代码的输出内容如下：</p>
+<blockquote>
+<figure class="highlight plain hljs"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; 2018-02-07 11:40:21.919+08:00 is on ? true</span><br><span class="line">&gt; 2017-11-02 09:00:00+08:00 is on ? false</span><br><span class="line">&gt; 2017-10-01 08:00:00+08:00 is on ? false</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>需要注意，如果没有配置日期与时间或者配置的时期与时间非法，则该函数返回 true 表示默认为 on 状态。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
 
     
 <div class="card card-transparent">
@@ -1317,45 +1317,7 @@
         
         <article class="media">
             
-            <a href="/2020/05/29/@Select注解时使用in/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="文档标题">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T15:53:20.000Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/@Select注解时使用in/" class="title has-link-black-ter is-size-6 has-text-weight-normal">文档标题</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/JAVAEE/">JAVAEE</a> / <a class="has-link-grey -link" href="/categories/JAVAEE/MYBATIS/">MYBATIS</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/05/29/mysql共享锁和排它锁/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="mysql共享锁和排它锁">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T15:35:53.000Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/mysql共享锁和排它锁/" class="title has-link-black-ter is-size-6 has-text-weight-normal">mysql共享锁和排它锁</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/JAVAEE/">JAVAEE</a> / <a class="has-link-grey -link" href="/categories/JAVAEE/MYSQL/">MYSQL</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/05/29/邮箱找回密码与二次认证/" class="media-left">
+            <a href="/2020/05/30/邮箱找回密码与二次认证/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="">
                 </p>
@@ -1363,8 +1325,8 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T14:40:15.741Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/邮箱找回密码与二次认证/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-30T01:55:28.835Z">2020-05-30</time></div>
+                    <a href="/2020/05/30/邮箱找回密码与二次认证/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1374,7 +1336,7 @@
         
         <article class="media">
             
-            <a href="/2020/05/29/可视化面板/" class="media-left">
+            <a href="/2020/05/30/可视化面板/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="">
                 </p>
@@ -1382,8 +1344,8 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T14:40:15.601Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/可视化面板/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-30T01:55:28.755Z">2020-05-30</time></div>
+                    <a href="/2020/05/30/可视化面板/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1393,7 +1355,7 @@
         
         <article class="media">
             
-            <a href="/2020/05/29/CS应用配置/" class="media-left">
+            <a href="/2020/05/30/CS应用配置/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="">
                 </p>
@@ -1401,10 +1363,48 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T14:40:15.581Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/CS应用配置/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-30T01:55:28.745Z">2020-05-30</time></div>
+                    <a href="/2020/05/30/CS应用配置/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
                     <p class="is-size-7 is-uppercase">
                         
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/05/30/特权用户访问策略控制/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-30T01:55:28.745Z">2020-05-30</time></div>
+                    <a href="/2020/05/30/特权用户访问策略控制/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/05/30/md列表/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="markdown任务列表语法checkbox">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-30T01:55:28.735Z">2020-05-30</time></div>
+                    <a href="/2020/05/30/md列表/" class="title has-link-black-ter is-size-6 has-text-weight-normal">markdown任务列表语法checkbox</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/IT/">IT</a>
                     </p>
                 </div>
             </div>
@@ -1463,7 +1463,7 @@
                         Categories
                     </p>
                     <p class="title has-text-weight-normal">
-                        15
+                        14
                     </p>
                 </div>
             </div>
@@ -1558,7 +1558,7 @@
                 <span class="level-item">IT</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">194</span>
+                <span class="level-item tag">195</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/JAVAEE/">
@@ -1625,14 +1625,6 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/WORK/">
-            <span class="level-start">
-                <span class="level-item">WORK</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/office/">
             <span class="level-start">
                 <span class="level-item">office</span>
@@ -1668,7 +1660,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/ELASTICSEARCH/" style="font-size: 10px;">ELASTICSEARCH</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10.91px;">Eureka</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/IDEA/" style="font-size: 10.91px;">IDEA</a> <a href="/tags/IT/" style="font-size: 14.55px;">IT</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.82px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.91px;">JAVASE</a> <a href="/tags/LINUX/" style="font-size: 10px;">LINUX</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MQ/" style="font-size: 11.82px;">MQ</a> <a href="/tags/ONOS/" style="font-size: 15.45px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 14.55px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PROTOCAL/" style="font-size: 10px;">PROTOCAL</a> <a href="/tags/PYTHON/" style="font-size: 10.91px;">PYTHON</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/Ribbon/" style="font-size: 10px;">Ribbon</a> <a href="/tags/SECURITY/" style="font-size: 10px;">SECURITY</a> <a href="/tags/SPRING-BOOT/" style="font-size: 10px;">SPRING-BOOT</a> <a href="/tags/SQL/" style="font-size: 12.73px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.18px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/StringRedisTemplate/" style="font-size: 10px;">StringRedisTemplate</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/annotation/" style="font-size: 15.45px;">annotation</a> <a href="/tags/bazel/" style="font-size: 10px;">bazel</a> <a href="/tags/beanutils/" style="font-size: 10px;">beanutils</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/classloader/" style="font-size: 10px;">classloader</a> <a href="/tags/computer/" style="font-size: 10px;">computer</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/docker/" style="font-size: 12.73px;">docker</a> <a href="/tags/druid/" style="font-size: 10px;">druid</a> <a href="/tags/elasticsearch/" style="font-size: 13.64px;">elasticsearch</a> <a href="/tags/enlink/" style="font-size: 10.91px;">enlink</a> <a href="/tags/fastjson/" style="font-size: 10px;">fastjson</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/hexo/" style="font-size: 12.73px;">hexo</a> <a href="/tags/idea/" style="font-size: 10.91px;">idea</a> <a href="/tags/interceptor/" style="font-size: 11.82px;">interceptor</a> <a href="/tags/jetty/" style="font-size: 10px;">jetty</a> <a href="/tags/jpa/" style="font-size: 10.91px;">jpa</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/karaf/" style="font-size: 11.82px;">karaf</a> <a href="/tags/keepalived/" style="font-size: 10px;">keepalived</a> <a href="/tags/linux-shell/" style="font-size: 15.45px;">linux-shell</a> <a href="/tags/listener/" style="font-size: 10px;">listener</a> <a href="/tags/loadbalanced/" style="font-size: 10px;">loadbalanced</a> <a href="/tags/logback/" style="font-size: 10px;">logback</a> <a href="/tags/login/" style="font-size: 10.91px;">login</a> <a href="/tags/lombok/" style="font-size: 11.82px;">lombok</a> <a href="/tags/mac/" style="font-size: 15.45px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.82px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 17.27px;">mybatis</a> <a href="/tags/mycat/" style="font-size: 10.91px;">mycat</a> <a href="/tags/mysql/" style="font-size: 16.36px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/oauth2/" style="font-size: 10px;">oauth2</a> <a href="/tags/pagehelper/" style="font-size: 10px;">pagehelper</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/rabbitMq/" style="font-size: 11.82px;">rabbitMq</a> <a href="/tags/redis/" style="font-size: 11.82px;">redis</a> <a href="/tags/redisTemplate/" style="font-size: 10px;">redisTemplate</a> <a href="/tags/reflection/" style="font-size: 11.82px;">reflection</a> <a href="/tags/registry-center/" style="font-size: 10px;">registry center</a> <a href="/tags/restTemplate/" style="font-size: 10px;">restTemplate</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/serialVersionUID/" style="font-size: 10px;">serialVersionUID</a> <a href="/tags/servlet/" style="font-size: 10.91px;">servlet</a> <a href="/tags/session/" style="font-size: 10.91px;">session</a> <a href="/tags/spring/" style="font-size: 15.45px;">spring</a> <a href="/tags/spring-task/" style="font-size: 12.73px;">spring task</a> <a href="/tags/springboot/" style="font-size: 19.09px;">springboot</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/webClient/" style="font-size: 10px;">webClient</a> <a href="/tags/yaml/" style="font-size: 10.91px;">yaml</a> <a href="/tags/事物/" style="font-size: 10px;">事物</a> <a href="/tags/全局异常/" style="font-size: 10px;">全局异常</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.91px;">文件服务器</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/ELASTICSEARCH/" style="font-size: 10px;">ELASTICSEARCH</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10.91px;">Eureka</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/IDEA/" style="font-size: 10.91px;">IDEA</a> <a href="/tags/IT/" style="font-size: 14.55px;">IT</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.82px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.91px;">JAVASE</a> <a href="/tags/LINUX/" style="font-size: 10px;">LINUX</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MQ/" style="font-size: 11.82px;">MQ</a> <a href="/tags/ONOS/" style="font-size: 15.45px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 14.55px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PROTOCAL/" style="font-size: 10px;">PROTOCAL</a> <a href="/tags/PYTHON/" style="font-size: 10.91px;">PYTHON</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/Ribbon/" style="font-size: 10px;">Ribbon</a> <a href="/tags/SECURITY/" style="font-size: 10px;">SECURITY</a> <a href="/tags/SPRING-BOOT/" style="font-size: 10px;">SPRING-BOOT</a> <a href="/tags/SQL/" style="font-size: 12.73px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.18px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/StringRedisTemplate/" style="font-size: 10px;">StringRedisTemplate</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/annotation/" style="font-size: 15.45px;">annotation</a> <a href="/tags/bazel/" style="font-size: 10px;">bazel</a> <a href="/tags/beanutils/" style="font-size: 10px;">beanutils</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/classloader/" style="font-size: 10px;">classloader</a> <a href="/tags/computer/" style="font-size: 10px;">computer</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/docker/" style="font-size: 12.73px;">docker</a> <a href="/tags/druid/" style="font-size: 10px;">druid</a> <a href="/tags/elasticsearch/" style="font-size: 13.64px;">elasticsearch</a> <a href="/tags/enlink/" style="font-size: 10px;">enlink</a> <a href="/tags/fastjson/" style="font-size: 10px;">fastjson</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/hexo/" style="font-size: 12.73px;">hexo</a> <a href="/tags/idea/" style="font-size: 10.91px;">idea</a> <a href="/tags/interceptor/" style="font-size: 11.82px;">interceptor</a> <a href="/tags/jetty/" style="font-size: 10px;">jetty</a> <a href="/tags/jpa/" style="font-size: 10.91px;">jpa</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/karaf/" style="font-size: 11.82px;">karaf</a> <a href="/tags/keepalived/" style="font-size: 10px;">keepalived</a> <a href="/tags/linux-shell/" style="font-size: 15.45px;">linux-shell</a> <a href="/tags/listener/" style="font-size: 10px;">listener</a> <a href="/tags/loadbalanced/" style="font-size: 10px;">loadbalanced</a> <a href="/tags/logback/" style="font-size: 10px;">logback</a> <a href="/tags/login/" style="font-size: 10.91px;">login</a> <a href="/tags/lombok/" style="font-size: 11.82px;">lombok</a> <a href="/tags/mac/" style="font-size: 15.45px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.82px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 17.27px;">mybatis</a> <a href="/tags/mycat/" style="font-size: 10.91px;">mycat</a> <a href="/tags/mysql/" style="font-size: 16.36px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/oauth2/" style="font-size: 10px;">oauth2</a> <a href="/tags/pagehelper/" style="font-size: 10px;">pagehelper</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/rabbitMq/" style="font-size: 11.82px;">rabbitMq</a> <a href="/tags/redis/" style="font-size: 11.82px;">redis</a> <a href="/tags/redisTemplate/" style="font-size: 10px;">redisTemplate</a> <a href="/tags/reflection/" style="font-size: 11.82px;">reflection</a> <a href="/tags/registry-center/" style="font-size: 10px;">registry center</a> <a href="/tags/restTemplate/" style="font-size: 10px;">restTemplate</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/serialVersionUID/" style="font-size: 10px;">serialVersionUID</a> <a href="/tags/servlet/" style="font-size: 10.91px;">servlet</a> <a href="/tags/session/" style="font-size: 10.91px;">session</a> <a href="/tags/spring/" style="font-size: 15.45px;">spring</a> <a href="/tags/spring-task/" style="font-size: 12.73px;">spring task</a> <a href="/tags/springboot/" style="font-size: 19.09px;">springboot</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/webClient/" style="font-size: 10px;">webClient</a> <a href="/tags/yaml/" style="font-size: 10.91px;">yaml</a> <a href="/tags/事物/" style="font-size: 10px;">事物</a> <a href="/tags/全局异常/" style="font-size: 10px;">全局异常</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.91px;">文件服务器</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
     </div>
 </div>
 
@@ -1698,7 +1690,7 @@
                     <span class="level-item">四月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1753,7 +1745,7 @@
                     <span class="level-item">十一月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -1885,7 +1877,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/JAVAEE/">
                         <span class="tag">JAVAEE</span>
-                        <span class="tag is-grey">130</span>
+                        <span class="tag is-grey">131</span>
                     </a>
                 </div>
                 
@@ -2130,7 +2122,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/enlink/">
                         <span class="tag">enlink</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2588,7 +2580,7 @@
                         Categories
                     </p>
                     <p class="title has-text-weight-normal">
-                        15
+                        14
                     </p>
                 </div>
             </div>
@@ -2683,7 +2675,7 @@
                 <span class="level-item">IT</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">194</span>
+                <span class="level-item tag">195</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/JAVAEE/">
@@ -2750,14 +2742,6 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/WORK/">
-            <span class="level-start">
-                <span class="level-item">WORK</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/office/">
             <span class="level-start">
                 <span class="level-item">office</span>
@@ -2793,7 +2777,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/ELASTICSEARCH/" style="font-size: 10px;">ELASTICSEARCH</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10.91px;">Eureka</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/IDEA/" style="font-size: 10.91px;">IDEA</a> <a href="/tags/IT/" style="font-size: 14.55px;">IT</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.82px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.91px;">JAVASE</a> <a href="/tags/LINUX/" style="font-size: 10px;">LINUX</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MQ/" style="font-size: 11.82px;">MQ</a> <a href="/tags/ONOS/" style="font-size: 15.45px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 14.55px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PROTOCAL/" style="font-size: 10px;">PROTOCAL</a> <a href="/tags/PYTHON/" style="font-size: 10.91px;">PYTHON</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/Ribbon/" style="font-size: 10px;">Ribbon</a> <a href="/tags/SECURITY/" style="font-size: 10px;">SECURITY</a> <a href="/tags/SPRING-BOOT/" style="font-size: 10px;">SPRING-BOOT</a> <a href="/tags/SQL/" style="font-size: 12.73px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.18px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/StringRedisTemplate/" style="font-size: 10px;">StringRedisTemplate</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/annotation/" style="font-size: 15.45px;">annotation</a> <a href="/tags/bazel/" style="font-size: 10px;">bazel</a> <a href="/tags/beanutils/" style="font-size: 10px;">beanutils</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/classloader/" style="font-size: 10px;">classloader</a> <a href="/tags/computer/" style="font-size: 10px;">computer</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/docker/" style="font-size: 12.73px;">docker</a> <a href="/tags/druid/" style="font-size: 10px;">druid</a> <a href="/tags/elasticsearch/" style="font-size: 13.64px;">elasticsearch</a> <a href="/tags/enlink/" style="font-size: 10.91px;">enlink</a> <a href="/tags/fastjson/" style="font-size: 10px;">fastjson</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/hexo/" style="font-size: 12.73px;">hexo</a> <a href="/tags/idea/" style="font-size: 10.91px;">idea</a> <a href="/tags/interceptor/" style="font-size: 11.82px;">interceptor</a> <a href="/tags/jetty/" style="font-size: 10px;">jetty</a> <a href="/tags/jpa/" style="font-size: 10.91px;">jpa</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/karaf/" style="font-size: 11.82px;">karaf</a> <a href="/tags/keepalived/" style="font-size: 10px;">keepalived</a> <a href="/tags/linux-shell/" style="font-size: 15.45px;">linux-shell</a> <a href="/tags/listener/" style="font-size: 10px;">listener</a> <a href="/tags/loadbalanced/" style="font-size: 10px;">loadbalanced</a> <a href="/tags/logback/" style="font-size: 10px;">logback</a> <a href="/tags/login/" style="font-size: 10.91px;">login</a> <a href="/tags/lombok/" style="font-size: 11.82px;">lombok</a> <a href="/tags/mac/" style="font-size: 15.45px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.82px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 17.27px;">mybatis</a> <a href="/tags/mycat/" style="font-size: 10.91px;">mycat</a> <a href="/tags/mysql/" style="font-size: 16.36px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/oauth2/" style="font-size: 10px;">oauth2</a> <a href="/tags/pagehelper/" style="font-size: 10px;">pagehelper</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/rabbitMq/" style="font-size: 11.82px;">rabbitMq</a> <a href="/tags/redis/" style="font-size: 11.82px;">redis</a> <a href="/tags/redisTemplate/" style="font-size: 10px;">redisTemplate</a> <a href="/tags/reflection/" style="font-size: 11.82px;">reflection</a> <a href="/tags/registry-center/" style="font-size: 10px;">registry center</a> <a href="/tags/restTemplate/" style="font-size: 10px;">restTemplate</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/serialVersionUID/" style="font-size: 10px;">serialVersionUID</a> <a href="/tags/servlet/" style="font-size: 10.91px;">servlet</a> <a href="/tags/session/" style="font-size: 10.91px;">session</a> <a href="/tags/spring/" style="font-size: 15.45px;">spring</a> <a href="/tags/spring-task/" style="font-size: 12.73px;">spring task</a> <a href="/tags/springboot/" style="font-size: 19.09px;">springboot</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/webClient/" style="font-size: 10px;">webClient</a> <a href="/tags/yaml/" style="font-size: 10.91px;">yaml</a> <a href="/tags/事物/" style="font-size: 10px;">事物</a> <a href="/tags/全局异常/" style="font-size: 10px;">全局异常</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.91px;">文件服务器</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/ELASTICSEARCH/" style="font-size: 10px;">ELASTICSEARCH</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10.91px;">Eureka</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/IDEA/" style="font-size: 10.91px;">IDEA</a> <a href="/tags/IT/" style="font-size: 14.55px;">IT</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.82px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.91px;">JAVASE</a> <a href="/tags/LINUX/" style="font-size: 10px;">LINUX</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MQ/" style="font-size: 11.82px;">MQ</a> <a href="/tags/ONOS/" style="font-size: 15.45px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 14.55px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PROTOCAL/" style="font-size: 10px;">PROTOCAL</a> <a href="/tags/PYTHON/" style="font-size: 10.91px;">PYTHON</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/Ribbon/" style="font-size: 10px;">Ribbon</a> <a href="/tags/SECURITY/" style="font-size: 10px;">SECURITY</a> <a href="/tags/SPRING-BOOT/" style="font-size: 10px;">SPRING-BOOT</a> <a href="/tags/SQL/" style="font-size: 12.73px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.18px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/StringRedisTemplate/" style="font-size: 10px;">StringRedisTemplate</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/annotation/" style="font-size: 15.45px;">annotation</a> <a href="/tags/bazel/" style="font-size: 10px;">bazel</a> <a href="/tags/beanutils/" style="font-size: 10px;">beanutils</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/classloader/" style="font-size: 10px;">classloader</a> <a href="/tags/computer/" style="font-size: 10px;">computer</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/docker/" style="font-size: 12.73px;">docker</a> <a href="/tags/druid/" style="font-size: 10px;">druid</a> <a href="/tags/elasticsearch/" style="font-size: 13.64px;">elasticsearch</a> <a href="/tags/enlink/" style="font-size: 10px;">enlink</a> <a href="/tags/fastjson/" style="font-size: 10px;">fastjson</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/hexo/" style="font-size: 12.73px;">hexo</a> <a href="/tags/idea/" style="font-size: 10.91px;">idea</a> <a href="/tags/interceptor/" style="font-size: 11.82px;">interceptor</a> <a href="/tags/jetty/" style="font-size: 10px;">jetty</a> <a href="/tags/jpa/" style="font-size: 10.91px;">jpa</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/karaf/" style="font-size: 11.82px;">karaf</a> <a href="/tags/keepalived/" style="font-size: 10px;">keepalived</a> <a href="/tags/linux-shell/" style="font-size: 15.45px;">linux-shell</a> <a href="/tags/listener/" style="font-size: 10px;">listener</a> <a href="/tags/loadbalanced/" style="font-size: 10px;">loadbalanced</a> <a href="/tags/logback/" style="font-size: 10px;">logback</a> <a href="/tags/login/" style="font-size: 10.91px;">login</a> <a href="/tags/lombok/" style="font-size: 11.82px;">lombok</a> <a href="/tags/mac/" style="font-size: 15.45px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.82px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 17.27px;">mybatis</a> <a href="/tags/mycat/" style="font-size: 10.91px;">mycat</a> <a href="/tags/mysql/" style="font-size: 16.36px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/oauth2/" style="font-size: 10px;">oauth2</a> <a href="/tags/pagehelper/" style="font-size: 10px;">pagehelper</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/rabbitMq/" style="font-size: 11.82px;">rabbitMq</a> <a href="/tags/redis/" style="font-size: 11.82px;">redis</a> <a href="/tags/redisTemplate/" style="font-size: 10px;">redisTemplate</a> <a href="/tags/reflection/" style="font-size: 11.82px;">reflection</a> <a href="/tags/registry-center/" style="font-size: 10px;">registry center</a> <a href="/tags/restTemplate/" style="font-size: 10px;">restTemplate</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/serialVersionUID/" style="font-size: 10px;">serialVersionUID</a> <a href="/tags/servlet/" style="font-size: 10.91px;">servlet</a> <a href="/tags/session/" style="font-size: 10.91px;">session</a> <a href="/tags/spring/" style="font-size: 15.45px;">spring</a> <a href="/tags/spring-task/" style="font-size: 12.73px;">spring task</a> <a href="/tags/springboot/" style="font-size: 19.09px;">springboot</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/webClient/" style="font-size: 10px;">webClient</a> <a href="/tags/yaml/" style="font-size: 10.91px;">yaml</a> <a href="/tags/事物/" style="font-size: 10px;">事物</a> <a href="/tags/全局异常/" style="font-size: 10px;">全局异常</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.91px;">文件服务器</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
     </div>
 </div>
 
@@ -2823,7 +2807,7 @@
                     <span class="level-item">四月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -2878,7 +2862,7 @@
                     <span class="level-item">十一月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -3010,7 +2994,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/JAVAEE/">
                         <span class="tag">JAVAEE</span>
-                        <span class="tag is-grey">130</span>
+                        <span class="tag is-grey">131</span>
                     </a>
                 </div>
                 
@@ -3255,7 +3239,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/enlink/">
                         <span class="tag">enlink</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

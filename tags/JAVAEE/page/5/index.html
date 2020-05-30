@@ -13,15 +13,15 @@
     <meta name="description" content="private learning">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Learning">
-<meta property="og:url" content="http://yoursite.com/tags/JAVAEE/page/5/index.html">
+<meta property="og:url" content="/blog/tags/JAVAEE/page/5/index.html">
 <meta property="og:site_name" content="Learning">
 <meta property="og:description" content="private learning">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:image" content="/images/og_image.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Learning">
 <meta name="twitter:description" content="private learning">
-<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+<meta name="twitter:image" content="/images/og_image.png">
 
 
 
@@ -151,6 +151,70 @@
         </nav>
     </div>
 </div>
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-08-10T09:30:00.000Z">2019-08-10</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/IT/">IT</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 分钟 read (About 836 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/08/10/springboot整合redis/">SpringBoot整合Redis</a>
+            
+        </h1>
+        <div class="content">
+            <p>SpringBoot整合Redis</p>
+<p>首先做好准备工作，在本地安装一个redis，然后启动redis。出现下图页面就启动成功了。<br>然后新建项目，加入redis依赖，pom文件如下：</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">project</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://maven.apache.org/POM/4.0.0"</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="hljs-tag">	<span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">modelVersion</span>&gt;</span>4.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.dalaoyang<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>springboot_redis<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">packaging</span>&gt;</span>jar<span class="hljs-tag">&lt;/<span class="hljs-name">packaging</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>springboot_redis<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">description</span>&gt;</span>springboot_redis<span class="hljs-tag">&lt;/<span class="hljs-name">description</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">parent</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.5.9.RELEASE<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">relativePath</span>/&gt;</span> <span class="hljs-comment">&lt;!-- lookup parent from repository --&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;/<span class="hljs-name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">properties</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="hljs-tag">&lt;/<span class="hljs-name">project.build.sourceEncoding</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">project.reporting.outputEncoding</span>&gt;</span>UTF-8<span class="hljs-tag">&lt;/<span class="hljs-name">project.reporting.outputEncoding</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">java.version</span>&gt;</span>1.8<span class="hljs-tag">&lt;/<span class="hljs-name">java.version</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;/<span class="hljs-name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-devtools<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>runtime<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>test<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-tag">&lt;<span class="hljs-name">build</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;<span class="hljs-name">plugins</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span></span><br><span class="line">				<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">				<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span></span><br><span class="line">		<span class="hljs-tag">&lt;/<span class="hljs-name">plugins</span>&gt;</span></span><br><span class="line">	<span class="hljs-tag">&lt;/<span class="hljs-name">build</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后在application.properties加入redis配置：</p>
+<figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="hljs-comment">##端口号</span></span><br><span class="line"><span class="hljs-attr">server.port</span>=<span class="hljs-number">8888</span></span><br><span class="line"><span class="hljs-comment"># Redis数据库索引（默认为0）</span></span><br><span class="line"><span class="hljs-attr">spring.redis.database</span>=<span class="hljs-number">0</span> </span><br><span class="line"><span class="hljs-comment"># Redis服务器地址</span></span><br><span class="line"><span class="hljs-attr">spring.redis.host</span>=localhost</span><br><span class="line"><span class="hljs-comment"># Redis服务器连接端口</span></span><br><span class="line"><span class="hljs-attr">spring.redis.port</span>=<span class="hljs-number">6379</span> </span><br><span class="line"><span class="hljs-comment"># Redis服务器连接密码（默认为空）</span></span><br><span class="line"><span class="hljs-attr">spring.redis.password</span>=</span><br><span class="line"><span class="hljs-comment">#连接池最大连接数（使用负值表示没有限制）</span></span><br><span class="line"><span class="hljs-attr">spring.redis.pool.max-active</span>=<span class="hljs-number">8</span> </span><br><span class="line"><span class="hljs-comment"># 连接池最大阻塞等待时间（使用负值表示没有限制）</span></span><br><span class="line"><span class="hljs-attr">spring.redis.pool.max-wait</span>=-<span class="hljs-number">1</span> </span><br><span class="line"><span class="hljs-comment"># 连接池中的最大空闲连接</span></span><br><span class="line"><span class="hljs-attr">spring.redis.pool.max-idle</span>=<span class="hljs-number">8</span> </span><br><span class="line"><span class="hljs-comment"># 连接池中的最小空闲连接</span></span><br><span class="line"><span class="hljs-attr">spring.redis.pool.min-idle</span>=<span class="hljs-number">0</span> </span><br><span class="line"><span class="hljs-comment"># 连接超时时间（毫秒）</span></span><br><span class="line"><span class="hljs-attr">spring.redis.timeout</span>=<span class="hljs-number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>RedisConfig配置类，其中@EnableCaching开启注解</p>
+<figure class="highlight kotlin hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.dalaoyang.config;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.cache.CacheManager;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.cache.<span class="hljs-keyword">annotation</span>.CachingConfigurerSupport;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.cache.<span class="hljs-keyword">annotation</span>.EnableCaching;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.context.<span class="hljs-keyword">annotation</span>.Bean;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.context.<span class="hljs-keyword">annotation</span>.Configuration;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.<span class="hljs-keyword">data</span>.redis.cache.RedisCacheManager;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.<span class="hljs-keyword">data</span>.redis.connection.RedisConnectionFactory;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.<span class="hljs-keyword">data</span>.redis.core.RedisTemplate;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> dalaoyang</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@Description</span></span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@project</span> springboot_learn</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@package</span> com.dalaoyang.config</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@email</span> yangyang<span class="hljs-doctag">@dalaoyang</span>.cn</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 2018/4/18</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-meta">@Configuration</span></span><br><span class="line"><span class="hljs-meta">@EnableCaching</span><span class="hljs-comment">//开启缓存</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RedisConfig</span> <span class="hljs-title">extends</span> <span class="hljs-title">CachingConfigurerSupport</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Bean</span></span><br><span class="line">    <span class="hljs-keyword">public</span> CacheManager cacheManager(RedisTemplate&lt;?,?&gt; redisTemplate) &#123;</span><br><span class="line">        CacheManager cacheManager = new RedisCacheManager(redisTemplate);</span><br><span class="line">        <span class="hljs-keyword">return</span> cacheManager;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Bean</span></span><br><span class="line">    <span class="hljs-keyword">public</span> RedisTemplate&lt;String, String&gt; redisTemplate(RedisConnectionFactory factory) &#123;</span><br><span class="line">        RedisTemplate&lt;String, String&gt; redisTemplate = new RedisTemplate&lt;String, String&gt;();</span><br><span class="line">        redisTemplate.setConnectionFactory(factory);</span><br><span class="line">        <span class="hljs-keyword">return</span> redisTemplate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于只是简单整合，我只创建了一个RedisService来用来存取缓存数据，实际项目中可以根据需求创建interface，impl等等，代码如下：</p>
+<figure class="highlight dart hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">package com.dalaoyang.service;</span><br><span class="line"><span class="hljs-keyword">import</span> javax.annotation.Resource;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.data.redis.core.RedisTemplate;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.data.redis.core.ValueOperations;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.data.redis.serializer.RedisSerializer;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.data.redis.serializer.StringRedisSerializer;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"><span class="hljs-markdown">/**</span></span></span><br><span class="line"><span class="hljs-comment"><span class="hljs-markdown"><span class="hljs-bullet"> * </span>@author dalaoyang</span></span></span><br><span class="line"><span class="hljs-comment"><span class="hljs-markdown"><span class="hljs-bullet"> * </span>@Description</span></span></span><br><span class="line"><span class="hljs-comment"><span class="hljs-markdown"><span class="hljs-bullet"> * </span>@project springboot_learn</span></span></span><br><span class="line"><span class="hljs-comment"><span class="hljs-markdown"><span class="hljs-bullet"> * </span>@package com.dalaoyang.service</span></span></span><br><span class="line"><span class="hljs-comment"><span class="hljs-markdown"><span class="hljs-bullet"> * </span>@email yangyang@dalaoyang.cn</span></span></span><br><span class="line"><span class="hljs-comment"><span class="hljs-markdown"><span class="hljs-bullet"> * </span>@date 2018/4/18</span></span></span><br><span class="line"><span class="hljs-comment"><span class="hljs-markdown"> */</span></span></span><br><span class="line"><span class="hljs-meta">@Service</span></span><br><span class="line">public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RedisService</span> </span>&#123;</span><br><span class="line">    <span class="hljs-meta">@Resource</span></span><br><span class="line">    private RedisTemplate&lt;<span class="hljs-built_in">String</span>,<span class="hljs-built_in">Object</span>&gt; redisTemplate;</span><br><span class="line"></span><br><span class="line">    public <span class="hljs-keyword">void</span> <span class="hljs-keyword">set</span>(<span class="hljs-built_in">String</span> key, <span class="hljs-built_in">Object</span> value) &#123;</span><br><span class="line">        <span class="hljs-comment">//更改在redis里面查看key编码问题</span></span><br><span class="line">        RedisSerializer redisSerializer =<span class="hljs-keyword">new</span> StringRedisSerializer();</span><br><span class="line">        redisTemplate.setKeySerializer(redisSerializer);</span><br><span class="line">        ValueOperations&lt;<span class="hljs-built_in">String</span>,<span class="hljs-built_in">Object</span>&gt; vo = redisTemplate.opsForValue();</span><br><span class="line">        vo.<span class="hljs-keyword">set</span>(key, value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public <span class="hljs-built_in">Object</span> <span class="hljs-keyword">get</span>(<span class="hljs-built_in">String</span> key) &#123;</span><br><span class="line">        ValueOperations&lt;<span class="hljs-built_in">String</span>,<span class="hljs-built_in">Object</span>&gt; vo = redisTemplate.opsForValue();</span><br><span class="line">        <span class="hljs-keyword">return</span> vo.<span class="hljs-keyword">get</span>(key);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实体类City：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.dalaoyang.entity;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> dalaoyang</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@Description</span></span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@project</span> springboot_learn</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@package</span> com.dalaoyang.Entity</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@email</span> 397600342@qq.com</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 2018/4/7</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">City</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> cityId;</span><br><span class="line">    <span class="hljs-keyword">private</span> String cityName;</span><br><span class="line">    <span class="hljs-keyword">private</span> String cityIntroduce;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">City</span><span class="hljs-params">(<span class="hljs-keyword">int</span> cityId, String cityName, String cityIntroduce)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.cityId = cityId;</span><br><span class="line">        <span class="hljs-keyword">this</span>.cityName = cityName;</span><br><span class="line">        <span class="hljs-keyword">this</span>.cityIntroduce = cityIntroduce;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">City</span><span class="hljs-params">(String cityName, String cityIntroduce)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.cityName = cityName;</span><br><span class="line">        <span class="hljs-keyword">this</span>.cityIntroduce = cityIntroduce;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">City</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getCityId</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> cityId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setCityId</span><span class="hljs-params">(<span class="hljs-keyword">int</span> cityId)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.cityId = cityId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getCityName</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> cityName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setCityName</span><span class="hljs-params">(String cityName)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.cityName = cityName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getCityIntroduce</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> cityIntroduce;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setCityIntroduce</span><span class="hljs-params">(String cityIntroduce)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.cityIntroduce = cityIntroduce;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试类CityController</p>
+<figure class="highlight kotlin hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.dalaoyang.controller;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> com.dalaoyang.entity.City;</span><br><span class="line"><span class="hljs-keyword">import</span> com.dalaoyang.service.RedisService;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.beans.factory.<span class="hljs-keyword">annotation</span>.Autowired;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.web.bind.<span class="hljs-keyword">annotation</span>.GetMapping;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.web.bind.<span class="hljs-keyword">annotation</span>.RestController;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> dalaoyang</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@Description</span></span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@project</span> springboot_learn</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@package</span> com.dalaoyang.controller</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@email</span> 397600342<span class="hljs-doctag">@qq</span>.com</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 2018/4/7</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-meta">@RestController</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CityController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Autowired</span></span><br><span class="line">    <span class="hljs-keyword">private</span> RedisService redisService;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">//http://localhost:8888/saveCity?cityName=北京&amp;cityIntroduce=中国首都&amp;cityId=1</span></span><br><span class="line">    <span class="hljs-meta">@GetMapping(value = <span class="hljs-meta-string">"saveCity"</span>)</span></span><br><span class="line">    <span class="hljs-keyword">public</span> String saveCity(int cityId,String cityName,String cityIntroduce)&#123;</span><br><span class="line">        City city = new City(cityId,cityName,cityIntroduce);</span><br><span class="line">        redisService.<span class="hljs-keyword">set</span>(cityId+<span class="hljs-string">""</span>,city);</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-string">"success"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">//http://localhost:8888/getCityById?cityId=1</span></span><br><span class="line">    <span class="hljs-meta">@GetMapping(value = <span class="hljs-meta-string">"getCityById"</span>)</span></span><br><span class="line">    <span class="hljs-keyword">public</span> City getCity(int cityId)&#123;</span><br><span class="line">        City city = (City) redisService.<span class="hljs-keyword">get</span>(cityId+<span class="hljs-string">""</span>);</span><br><span class="line">        <span class="hljs-keyword">return</span> city;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>到这里配置基本上都完成了，然后启动项目访问<br><a href="http://localhost:8888/saveCity?cityName=北京&amp;cityIntroduce=中国首都&amp;cityId=18" target="_blank" rel="noopener">http://localhost:8888/saveCity?cityName=北京&amp;cityIntroduce=中国首都&amp;cityId=18</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
 
     <div class="card">
     
@@ -2686,80 +2750,6 @@ System.out.println(response.getBody());</code></pre><p>}
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-07-17T21:12:00.000Z">2019-07-17</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/IT/">IT</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    10 分钟 read (About 1556 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/07/18/registry/">registry center compare Eureka or ZooKeeper</a>
-            
-        </h1>
-        <div class="content">
-            <p>Eureka的工作原理以及它与ZooKeeper的区别<br>1、Eureka 简介：  </p>
-<p>Eureka 是 Netflix 出品的用于实现服务注册和发现的工具。 Spring Cloud 集成了 Eureka，并提供了开箱即用的支持。其中， Eureka 又可细分为 Eureka Server 和 Eureka Client。  </p>
-<p>1.基本原理<br>上图是来自eureka的官方架构图，这是基于集群配置的eureka；   </p>
-<ul>
-<li>处于不同节点的eureka通过Replicate进行数据同步   </li>
-<li>Application Service为服务提供者   </li>
-<li>Application Client为服务消费者   </li>
-<li>Make Remote Call完成一次服务调用  </li>
-</ul>
-<p>服务启动后向Eureka注册，Eureka Server会将注册信息向其他Eureka Server进行同步，当服务消费者要调用服务提供者，则向服务注册中心获取服务提供者地址，然后会将服务提供者地址缓存在本地，下次再调用时，则直接从本地缓存中取，完成一次调用。  </p>
-<p>当服务注册中心Eureka Server检测到服务提供者因为宕机、网络原因不可用时，则在服务注册中心将服务置为DOWN状态，并把当前服务提供者状态向订阅者发布，订阅过的服务消费者更新本地缓存。  </p>
-<p>服务提供者在启动后，周期性（默认30秒）向Eureka Server发送心跳，以证明当前服务是可用状态。Eureka Server在一定的时间（默认90秒）未收到客户端的心跳，则认为服务宕机，注销该实例。  </p>
-<p>2.Eureka的自我保护机制<br>在默认配置中，Eureka Server在默认90s没有得到客户端的心跳，则注销该实例，但是往往因为微服务跨进程调用，网络通信往往会面临着各种问题，比如微服务状态正常，但是因为网络分区故障时，Eureka Server注销服务实例则会让大部分微服务不可用，这很危险，因为服务明明没有问题。  </p>
-<p>为了解决这个问题，Eureka 有自我保护机制，通过在Eureka Server配置如下参数，可启动保护机制  </p>
-<p>eureka.server.enable-self-preservation=true<br>它的原理是，当Eureka Server节点在短时间内丢失过多的客户端时（可能发送了网络故障），那么这个节点将进入自我保护模式，不再注销任何微服务，当网络故障回复后，该节点会自动退出自我保护模式。  </p>
-<p>自我保护模式的架构哲学是宁可放过一个，决不可错杀一千  </p>
-<ol start="3">
-<li>作为服务注册中心，Eureka比Zookeeper好在哪里<br>著名的CAP理论指出，一个分布式系统不可能同时满足C(一致性)、A(可用性)和P(分区容错性)。由于分区容错性在是分布式系统中必须要保证的，因此我们只能在A和C之间进行权衡。在此Zookeeper保证的是CP, 而Eureka则是AP。  </li>
-</ol>
-<p>3.1 Zookeeper保证CP<br>当向注册中心查询服务列表时，我们可以容忍注册中心返回的是几分钟以前的注册信息，但不能接受服务直接down掉不可用。也就是说，服务注册功能对可用性的要求要高于一致性。但是zk会出现这样一种情况，当master节点因为网络故障与其他节点失去联系时，剩余节点会重新进行leader选举。问题在于，选举leader的时间太长，30 ~ 120s, 且选举期间整个zk集群都是不可用的，这就导致在选举期间注册服务瘫痪。在云部署的环境下，因网络问题使得zk集群失去master节点是较大概率会发生的事，虽然服务能够最终恢复，但是漫长的选举时间导致的注册长期不可用是不能容忍的。  </p>
-<p>3.2 Eureka保证AP<br>Eureka看明白了这一点，因此在设计时就优先保证可用性。Eureka各个节点都是平等的，几个节点挂掉不会影响正常节点的工作，剩余的节点依然可以提供注册和查询服务。而Eureka的客户端在向某个Eureka注册或时如果发现连接失败，则会自动切换至其它节点，只要有一台Eureka还在，就能保证注册服务可用(保证可用性)，只不过查到的信息可能不是最新的(不保证强一致性)。除此之外，Eureka还有一种自我保护机制，如果在15分钟内超过85%的节点都没有正常的心跳，那么Eureka就认为客户端与注册中心出现了网络故障，此时会出现以下几种情况：   </p>
-<ol>
-<li>Eureka不再从注册列表中移除因为长时间没收到心跳而应该过期的服务   </li>
-<li>Eureka仍然能够接受新服务的注册和查询请求，但是不会被同步到其它节点上(即保证当前节点依然可用)   </li>
-<li>当网络稳定时，当前实例新的注册信息会被同步到其它节点中  </li>
-</ol>
-<p>因此， Eureka可以很好的应对因网络故障导致部分节点失去联系的情况，而不会像zookeeper那样使整个注册服务瘫痪。  </p>
-<ol start="4">
-<li>总结<br>Eureka作为单纯的服务注册中心来说要比zookeeper更加“专业”，因为注册服务更重要的是可用性，我们可以接受短期内达不到一致性的状况。不过Eureka目前1.X版本的实现是基于servlet的Java web应用，它的极限性能肯定会受到影响。期待正在开发之中的2.X版本能够从servlet中独立出来成为单独可部署执行的服务。  </li>
-</ol>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -2804,45 +2794,7 @@ System.out.println(response.getBody());</code></pre><p>}
         
         <article class="media">
             
-            <a href="/2020/05/29/@Select注解时使用in/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="文档标题">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T15:53:20.000Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/@Select注解时使用in/" class="title has-link-black-ter is-size-6 has-text-weight-normal">文档标题</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/JAVAEE/">JAVAEE</a> / <a class="has-link-grey -link" href="/categories/JAVAEE/MYBATIS/">MYBATIS</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/05/29/mysql共享锁和排它锁/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="mysql共享锁和排它锁">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T15:35:53.000Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/mysql共享锁和排它锁/" class="title has-link-black-ter is-size-6 has-text-weight-normal">mysql共享锁和排它锁</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/JAVAEE/">JAVAEE</a> / <a class="has-link-grey -link" href="/categories/JAVAEE/MYSQL/">MYSQL</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/05/29/邮箱找回密码与二次认证/" class="media-left">
+            <a href="/2020/05/30/邮箱找回密码与二次认证/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="">
                 </p>
@@ -2850,8 +2802,8 @@ System.out.println(response.getBody());</code></pre><p>}
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T14:40:15.741Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/邮箱找回密码与二次认证/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-30T01:55:28.835Z">2020-05-30</time></div>
+                    <a href="/2020/05/30/邮箱找回密码与二次认证/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -2861,7 +2813,7 @@ System.out.println(response.getBody());</code></pre><p>}
         
         <article class="media">
             
-            <a href="/2020/05/29/可视化面板/" class="media-left">
+            <a href="/2020/05/30/可视化面板/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="">
                 </p>
@@ -2869,8 +2821,8 @@ System.out.println(response.getBody());</code></pre><p>}
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T14:40:15.601Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/可视化面板/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-30T01:55:28.755Z">2020-05-30</time></div>
+                    <a href="/2020/05/30/可视化面板/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -2880,7 +2832,7 @@ System.out.println(response.getBody());</code></pre><p>}
         
         <article class="media">
             
-            <a href="/2020/05/29/CS应用配置/" class="media-left">
+            <a href="/2020/05/30/CS应用配置/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="">
                 </p>
@@ -2888,10 +2840,48 @@ System.out.println(response.getBody());</code></pre><p>}
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T14:40:15.581Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/CS应用配置/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-30T01:55:28.745Z">2020-05-30</time></div>
+                    <a href="/2020/05/30/CS应用配置/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
                     <p class="is-size-7 is-uppercase">
                         
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/05/30/特权用户访问策略控制/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-30T01:55:28.745Z">2020-05-30</time></div>
+                    <a href="/2020/05/30/特权用户访问策略控制/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/05/30/md列表/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="markdown任务列表语法checkbox">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-30T01:55:28.735Z">2020-05-30</time></div>
+                    <a href="/2020/05/30/md列表/" class="title has-link-black-ter is-size-6 has-text-weight-normal">markdown任务列表语法checkbox</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/IT/">IT</a>
                     </p>
                 </div>
             </div>
@@ -2950,7 +2940,7 @@ System.out.println(response.getBody());</code></pre><p>}
                         Categories
                     </p>
                     <p class="title has-text-weight-normal">
-                        15
+                        14
                     </p>
                 </div>
             </div>
@@ -3045,7 +3035,7 @@ System.out.println(response.getBody());</code></pre><p>}
                 <span class="level-item">IT</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">194</span>
+                <span class="level-item tag">195</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/JAVAEE/">
@@ -3112,14 +3102,6 @@ System.out.println(response.getBody());</code></pre><p>}
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/WORK/">
-            <span class="level-start">
-                <span class="level-item">WORK</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/office/">
             <span class="level-start">
                 <span class="level-item">office</span>
@@ -3155,7 +3137,7 @@ System.out.println(response.getBody());</code></pre><p>}
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/ELASTICSEARCH/" style="font-size: 10px;">ELASTICSEARCH</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10.91px;">Eureka</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/IDEA/" style="font-size: 10.91px;">IDEA</a> <a href="/tags/IT/" style="font-size: 14.55px;">IT</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.82px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.91px;">JAVASE</a> <a href="/tags/LINUX/" style="font-size: 10px;">LINUX</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MQ/" style="font-size: 11.82px;">MQ</a> <a href="/tags/ONOS/" style="font-size: 15.45px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 14.55px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PROTOCAL/" style="font-size: 10px;">PROTOCAL</a> <a href="/tags/PYTHON/" style="font-size: 10.91px;">PYTHON</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/Ribbon/" style="font-size: 10px;">Ribbon</a> <a href="/tags/SECURITY/" style="font-size: 10px;">SECURITY</a> <a href="/tags/SPRING-BOOT/" style="font-size: 10px;">SPRING-BOOT</a> <a href="/tags/SQL/" style="font-size: 12.73px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.18px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/StringRedisTemplate/" style="font-size: 10px;">StringRedisTemplate</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/annotation/" style="font-size: 15.45px;">annotation</a> <a href="/tags/bazel/" style="font-size: 10px;">bazel</a> <a href="/tags/beanutils/" style="font-size: 10px;">beanutils</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/classloader/" style="font-size: 10px;">classloader</a> <a href="/tags/computer/" style="font-size: 10px;">computer</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/docker/" style="font-size: 12.73px;">docker</a> <a href="/tags/druid/" style="font-size: 10px;">druid</a> <a href="/tags/elasticsearch/" style="font-size: 13.64px;">elasticsearch</a> <a href="/tags/enlink/" style="font-size: 10.91px;">enlink</a> <a href="/tags/fastjson/" style="font-size: 10px;">fastjson</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/hexo/" style="font-size: 12.73px;">hexo</a> <a href="/tags/idea/" style="font-size: 10.91px;">idea</a> <a href="/tags/interceptor/" style="font-size: 11.82px;">interceptor</a> <a href="/tags/jetty/" style="font-size: 10px;">jetty</a> <a href="/tags/jpa/" style="font-size: 10.91px;">jpa</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/karaf/" style="font-size: 11.82px;">karaf</a> <a href="/tags/keepalived/" style="font-size: 10px;">keepalived</a> <a href="/tags/linux-shell/" style="font-size: 15.45px;">linux-shell</a> <a href="/tags/listener/" style="font-size: 10px;">listener</a> <a href="/tags/loadbalanced/" style="font-size: 10px;">loadbalanced</a> <a href="/tags/logback/" style="font-size: 10px;">logback</a> <a href="/tags/login/" style="font-size: 10.91px;">login</a> <a href="/tags/lombok/" style="font-size: 11.82px;">lombok</a> <a href="/tags/mac/" style="font-size: 15.45px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.82px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 17.27px;">mybatis</a> <a href="/tags/mycat/" style="font-size: 10.91px;">mycat</a> <a href="/tags/mysql/" style="font-size: 16.36px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/oauth2/" style="font-size: 10px;">oauth2</a> <a href="/tags/pagehelper/" style="font-size: 10px;">pagehelper</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/rabbitMq/" style="font-size: 11.82px;">rabbitMq</a> <a href="/tags/redis/" style="font-size: 11.82px;">redis</a> <a href="/tags/redisTemplate/" style="font-size: 10px;">redisTemplate</a> <a href="/tags/reflection/" style="font-size: 11.82px;">reflection</a> <a href="/tags/registry-center/" style="font-size: 10px;">registry center</a> <a href="/tags/restTemplate/" style="font-size: 10px;">restTemplate</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/serialVersionUID/" style="font-size: 10px;">serialVersionUID</a> <a href="/tags/servlet/" style="font-size: 10.91px;">servlet</a> <a href="/tags/session/" style="font-size: 10.91px;">session</a> <a href="/tags/spring/" style="font-size: 15.45px;">spring</a> <a href="/tags/spring-task/" style="font-size: 12.73px;">spring task</a> <a href="/tags/springboot/" style="font-size: 19.09px;">springboot</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/webClient/" style="font-size: 10px;">webClient</a> <a href="/tags/yaml/" style="font-size: 10.91px;">yaml</a> <a href="/tags/事物/" style="font-size: 10px;">事物</a> <a href="/tags/全局异常/" style="font-size: 10px;">全局异常</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.91px;">文件服务器</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/ELASTICSEARCH/" style="font-size: 10px;">ELASTICSEARCH</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10.91px;">Eureka</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/IDEA/" style="font-size: 10.91px;">IDEA</a> <a href="/tags/IT/" style="font-size: 14.55px;">IT</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.82px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.91px;">JAVASE</a> <a href="/tags/LINUX/" style="font-size: 10px;">LINUX</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MQ/" style="font-size: 11.82px;">MQ</a> <a href="/tags/ONOS/" style="font-size: 15.45px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 14.55px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PROTOCAL/" style="font-size: 10px;">PROTOCAL</a> <a href="/tags/PYTHON/" style="font-size: 10.91px;">PYTHON</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/Ribbon/" style="font-size: 10px;">Ribbon</a> <a href="/tags/SECURITY/" style="font-size: 10px;">SECURITY</a> <a href="/tags/SPRING-BOOT/" style="font-size: 10px;">SPRING-BOOT</a> <a href="/tags/SQL/" style="font-size: 12.73px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.18px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/StringRedisTemplate/" style="font-size: 10px;">StringRedisTemplate</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/annotation/" style="font-size: 15.45px;">annotation</a> <a href="/tags/bazel/" style="font-size: 10px;">bazel</a> <a href="/tags/beanutils/" style="font-size: 10px;">beanutils</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/classloader/" style="font-size: 10px;">classloader</a> <a href="/tags/computer/" style="font-size: 10px;">computer</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/docker/" style="font-size: 12.73px;">docker</a> <a href="/tags/druid/" style="font-size: 10px;">druid</a> <a href="/tags/elasticsearch/" style="font-size: 13.64px;">elasticsearch</a> <a href="/tags/enlink/" style="font-size: 10px;">enlink</a> <a href="/tags/fastjson/" style="font-size: 10px;">fastjson</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/hexo/" style="font-size: 12.73px;">hexo</a> <a href="/tags/idea/" style="font-size: 10.91px;">idea</a> <a href="/tags/interceptor/" style="font-size: 11.82px;">interceptor</a> <a href="/tags/jetty/" style="font-size: 10px;">jetty</a> <a href="/tags/jpa/" style="font-size: 10.91px;">jpa</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/karaf/" style="font-size: 11.82px;">karaf</a> <a href="/tags/keepalived/" style="font-size: 10px;">keepalived</a> <a href="/tags/linux-shell/" style="font-size: 15.45px;">linux-shell</a> <a href="/tags/listener/" style="font-size: 10px;">listener</a> <a href="/tags/loadbalanced/" style="font-size: 10px;">loadbalanced</a> <a href="/tags/logback/" style="font-size: 10px;">logback</a> <a href="/tags/login/" style="font-size: 10.91px;">login</a> <a href="/tags/lombok/" style="font-size: 11.82px;">lombok</a> <a href="/tags/mac/" style="font-size: 15.45px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.82px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 17.27px;">mybatis</a> <a href="/tags/mycat/" style="font-size: 10.91px;">mycat</a> <a href="/tags/mysql/" style="font-size: 16.36px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/oauth2/" style="font-size: 10px;">oauth2</a> <a href="/tags/pagehelper/" style="font-size: 10px;">pagehelper</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/rabbitMq/" style="font-size: 11.82px;">rabbitMq</a> <a href="/tags/redis/" style="font-size: 11.82px;">redis</a> <a href="/tags/redisTemplate/" style="font-size: 10px;">redisTemplate</a> <a href="/tags/reflection/" style="font-size: 11.82px;">reflection</a> <a href="/tags/registry-center/" style="font-size: 10px;">registry center</a> <a href="/tags/restTemplate/" style="font-size: 10px;">restTemplate</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/serialVersionUID/" style="font-size: 10px;">serialVersionUID</a> <a href="/tags/servlet/" style="font-size: 10.91px;">servlet</a> <a href="/tags/session/" style="font-size: 10.91px;">session</a> <a href="/tags/spring/" style="font-size: 15.45px;">spring</a> <a href="/tags/spring-task/" style="font-size: 12.73px;">spring task</a> <a href="/tags/springboot/" style="font-size: 19.09px;">springboot</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/webClient/" style="font-size: 10px;">webClient</a> <a href="/tags/yaml/" style="font-size: 10.91px;">yaml</a> <a href="/tags/事物/" style="font-size: 10px;">事物</a> <a href="/tags/全局异常/" style="font-size: 10px;">全局异常</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.91px;">文件服务器</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
     </div>
 </div>
 
@@ -3185,7 +3167,7 @@ System.out.println(response.getBody());</code></pre><p>}
                     <span class="level-item">四月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -3240,7 +3222,7 @@ System.out.println(response.getBody());</code></pre><p>}
                     <span class="level-item">十一月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -3372,7 +3354,7 @@ System.out.println(response.getBody());</code></pre><p>}
                 <div class="control">
                     <a class="tags has-addons" href="/tags/JAVAEE/">
                         <span class="tag">JAVAEE</span>
-                        <span class="tag is-grey">130</span>
+                        <span class="tag is-grey">131</span>
                     </a>
                 </div>
                 
@@ -3617,7 +3599,7 @@ System.out.println(response.getBody());</code></pre><p>}
                 <div class="control">
                     <a class="tags has-addons" href="/tags/enlink/">
                         <span class="tag">enlink</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -4075,7 +4057,7 @@ System.out.println(response.getBody());</code></pre><p>}
                         Categories
                     </p>
                     <p class="title has-text-weight-normal">
-                        15
+                        14
                     </p>
                 </div>
             </div>
@@ -4170,7 +4152,7 @@ System.out.println(response.getBody());</code></pre><p>}
                 <span class="level-item">IT</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">194</span>
+                <span class="level-item tag">195</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/JAVAEE/">
@@ -4237,14 +4219,6 @@ System.out.println(response.getBody());</code></pre><p>}
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/WORK/">
-            <span class="level-start">
-                <span class="level-item">WORK</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/office/">
             <span class="level-start">
                 <span class="level-item">office</span>
@@ -4280,7 +4254,7 @@ System.out.println(response.getBody());</code></pre><p>}
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/ELASTICSEARCH/" style="font-size: 10px;">ELASTICSEARCH</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10.91px;">Eureka</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/IDEA/" style="font-size: 10.91px;">IDEA</a> <a href="/tags/IT/" style="font-size: 14.55px;">IT</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.82px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.91px;">JAVASE</a> <a href="/tags/LINUX/" style="font-size: 10px;">LINUX</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MQ/" style="font-size: 11.82px;">MQ</a> <a href="/tags/ONOS/" style="font-size: 15.45px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 14.55px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PROTOCAL/" style="font-size: 10px;">PROTOCAL</a> <a href="/tags/PYTHON/" style="font-size: 10.91px;">PYTHON</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/Ribbon/" style="font-size: 10px;">Ribbon</a> <a href="/tags/SECURITY/" style="font-size: 10px;">SECURITY</a> <a href="/tags/SPRING-BOOT/" style="font-size: 10px;">SPRING-BOOT</a> <a href="/tags/SQL/" style="font-size: 12.73px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.18px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/StringRedisTemplate/" style="font-size: 10px;">StringRedisTemplate</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/annotation/" style="font-size: 15.45px;">annotation</a> <a href="/tags/bazel/" style="font-size: 10px;">bazel</a> <a href="/tags/beanutils/" style="font-size: 10px;">beanutils</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/classloader/" style="font-size: 10px;">classloader</a> <a href="/tags/computer/" style="font-size: 10px;">computer</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/docker/" style="font-size: 12.73px;">docker</a> <a href="/tags/druid/" style="font-size: 10px;">druid</a> <a href="/tags/elasticsearch/" style="font-size: 13.64px;">elasticsearch</a> <a href="/tags/enlink/" style="font-size: 10.91px;">enlink</a> <a href="/tags/fastjson/" style="font-size: 10px;">fastjson</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/hexo/" style="font-size: 12.73px;">hexo</a> <a href="/tags/idea/" style="font-size: 10.91px;">idea</a> <a href="/tags/interceptor/" style="font-size: 11.82px;">interceptor</a> <a href="/tags/jetty/" style="font-size: 10px;">jetty</a> <a href="/tags/jpa/" style="font-size: 10.91px;">jpa</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/karaf/" style="font-size: 11.82px;">karaf</a> <a href="/tags/keepalived/" style="font-size: 10px;">keepalived</a> <a href="/tags/linux-shell/" style="font-size: 15.45px;">linux-shell</a> <a href="/tags/listener/" style="font-size: 10px;">listener</a> <a href="/tags/loadbalanced/" style="font-size: 10px;">loadbalanced</a> <a href="/tags/logback/" style="font-size: 10px;">logback</a> <a href="/tags/login/" style="font-size: 10.91px;">login</a> <a href="/tags/lombok/" style="font-size: 11.82px;">lombok</a> <a href="/tags/mac/" style="font-size: 15.45px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.82px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 17.27px;">mybatis</a> <a href="/tags/mycat/" style="font-size: 10.91px;">mycat</a> <a href="/tags/mysql/" style="font-size: 16.36px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/oauth2/" style="font-size: 10px;">oauth2</a> <a href="/tags/pagehelper/" style="font-size: 10px;">pagehelper</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/rabbitMq/" style="font-size: 11.82px;">rabbitMq</a> <a href="/tags/redis/" style="font-size: 11.82px;">redis</a> <a href="/tags/redisTemplate/" style="font-size: 10px;">redisTemplate</a> <a href="/tags/reflection/" style="font-size: 11.82px;">reflection</a> <a href="/tags/registry-center/" style="font-size: 10px;">registry center</a> <a href="/tags/restTemplate/" style="font-size: 10px;">restTemplate</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/serialVersionUID/" style="font-size: 10px;">serialVersionUID</a> <a href="/tags/servlet/" style="font-size: 10.91px;">servlet</a> <a href="/tags/session/" style="font-size: 10.91px;">session</a> <a href="/tags/spring/" style="font-size: 15.45px;">spring</a> <a href="/tags/spring-task/" style="font-size: 12.73px;">spring task</a> <a href="/tags/springboot/" style="font-size: 19.09px;">springboot</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/webClient/" style="font-size: 10px;">webClient</a> <a href="/tags/yaml/" style="font-size: 10.91px;">yaml</a> <a href="/tags/事物/" style="font-size: 10px;">事物</a> <a href="/tags/全局异常/" style="font-size: 10px;">全局异常</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.91px;">文件服务器</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/ELASTICSEARCH/" style="font-size: 10px;">ELASTICSEARCH</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10.91px;">Eureka</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/IDEA/" style="font-size: 10.91px;">IDEA</a> <a href="/tags/IT/" style="font-size: 14.55px;">IT</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.82px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.91px;">JAVASE</a> <a href="/tags/LINUX/" style="font-size: 10px;">LINUX</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MQ/" style="font-size: 11.82px;">MQ</a> <a href="/tags/ONOS/" style="font-size: 15.45px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 14.55px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PROTOCAL/" style="font-size: 10px;">PROTOCAL</a> <a href="/tags/PYTHON/" style="font-size: 10.91px;">PYTHON</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/Ribbon/" style="font-size: 10px;">Ribbon</a> <a href="/tags/SECURITY/" style="font-size: 10px;">SECURITY</a> <a href="/tags/SPRING-BOOT/" style="font-size: 10px;">SPRING-BOOT</a> <a href="/tags/SQL/" style="font-size: 12.73px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.18px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/StringRedisTemplate/" style="font-size: 10px;">StringRedisTemplate</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/annotation/" style="font-size: 15.45px;">annotation</a> <a href="/tags/bazel/" style="font-size: 10px;">bazel</a> <a href="/tags/beanutils/" style="font-size: 10px;">beanutils</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/classloader/" style="font-size: 10px;">classloader</a> <a href="/tags/computer/" style="font-size: 10px;">computer</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/docker/" style="font-size: 12.73px;">docker</a> <a href="/tags/druid/" style="font-size: 10px;">druid</a> <a href="/tags/elasticsearch/" style="font-size: 13.64px;">elasticsearch</a> <a href="/tags/enlink/" style="font-size: 10px;">enlink</a> <a href="/tags/fastjson/" style="font-size: 10px;">fastjson</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/hexo/" style="font-size: 12.73px;">hexo</a> <a href="/tags/idea/" style="font-size: 10.91px;">idea</a> <a href="/tags/interceptor/" style="font-size: 11.82px;">interceptor</a> <a href="/tags/jetty/" style="font-size: 10px;">jetty</a> <a href="/tags/jpa/" style="font-size: 10.91px;">jpa</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/karaf/" style="font-size: 11.82px;">karaf</a> <a href="/tags/keepalived/" style="font-size: 10px;">keepalived</a> <a href="/tags/linux-shell/" style="font-size: 15.45px;">linux-shell</a> <a href="/tags/listener/" style="font-size: 10px;">listener</a> <a href="/tags/loadbalanced/" style="font-size: 10px;">loadbalanced</a> <a href="/tags/logback/" style="font-size: 10px;">logback</a> <a href="/tags/login/" style="font-size: 10.91px;">login</a> <a href="/tags/lombok/" style="font-size: 11.82px;">lombok</a> <a href="/tags/mac/" style="font-size: 15.45px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.82px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 17.27px;">mybatis</a> <a href="/tags/mycat/" style="font-size: 10.91px;">mycat</a> <a href="/tags/mysql/" style="font-size: 16.36px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/oauth2/" style="font-size: 10px;">oauth2</a> <a href="/tags/pagehelper/" style="font-size: 10px;">pagehelper</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/rabbitMq/" style="font-size: 11.82px;">rabbitMq</a> <a href="/tags/redis/" style="font-size: 11.82px;">redis</a> <a href="/tags/redisTemplate/" style="font-size: 10px;">redisTemplate</a> <a href="/tags/reflection/" style="font-size: 11.82px;">reflection</a> <a href="/tags/registry-center/" style="font-size: 10px;">registry center</a> <a href="/tags/restTemplate/" style="font-size: 10px;">restTemplate</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/serialVersionUID/" style="font-size: 10px;">serialVersionUID</a> <a href="/tags/servlet/" style="font-size: 10.91px;">servlet</a> <a href="/tags/session/" style="font-size: 10.91px;">session</a> <a href="/tags/spring/" style="font-size: 15.45px;">spring</a> <a href="/tags/spring-task/" style="font-size: 12.73px;">spring task</a> <a href="/tags/springboot/" style="font-size: 19.09px;">springboot</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/webClient/" style="font-size: 10px;">webClient</a> <a href="/tags/yaml/" style="font-size: 10.91px;">yaml</a> <a href="/tags/事物/" style="font-size: 10px;">事物</a> <a href="/tags/全局异常/" style="font-size: 10px;">全局异常</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.91px;">文件服务器</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
     </div>
 </div>
 
@@ -4310,7 +4284,7 @@ System.out.println(response.getBody());</code></pre><p>}
                     <span class="level-item">四月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -4365,7 +4339,7 @@ System.out.println(response.getBody());</code></pre><p>}
                     <span class="level-item">十一月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -4497,7 +4471,7 @@ System.out.println(response.getBody());</code></pre><p>}
                 <div class="control">
                     <a class="tags has-addons" href="/tags/JAVAEE/">
                         <span class="tag">JAVAEE</span>
-                        <span class="tag is-grey">130</span>
+                        <span class="tag is-grey">131</span>
                     </a>
                 </div>
                 
@@ -4742,7 +4716,7 @@ System.out.println(response.getBody());</code></pre><p>}
                 <div class="control">
                     <a class="tags has-addons" href="/tags/enlink/">
                         <span class="tag">enlink</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

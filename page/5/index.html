@@ -13,15 +13,15 @@
     <meta name="description" content="private learning">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Learning">
-<meta property="og:url" content="http://yoursite.com/page/5/index.html">
+<meta property="og:url" content="/blog/page/5/index.html">
 <meta property="og:site_name" content="Learning">
 <meta property="og:description" content="private learning">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:image" content="/images/og_image.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Learning">
 <meta name="twitter:description" content="private learning">
-<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+<meta name="twitter:image" content="/images/og_image.png">
 
 
 
@@ -142,6 +142,51 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-02T15:42:35.000Z">2019-12-02</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/SYSTEM/">SYSTEM</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    几秒 read (About 41 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/12/02/Mac安装任何来源/">Mac 安装任何来源</a>
+            
+        </h1>
+        <div class="content">
+            <p>Mac安装来源：若没有“任何来源”这个选项<br>打开终端（Terminal.app），拷贝粘贴<br><code>sudo spctl --master-disable</code>，按回车键</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
     <div class="card">
     
     <div class="card-content article ">
@@ -499,191 +544,6 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-14T09:39:20.000Z">2019-11-14</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/WORK/">WORK</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    10 分钟 read (About 1494 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/11/14/管理员功能2/">管理员功能</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">st=&gt;start: 开始</span><br><span class="line">op=&gt;operation: 管理员登录</span><br><span class="line">cond=&gt;condition: 是有效的管理员么？</span><br><span class="line">op2=&gt;operation: 根据id获取角色权限列表</span><br><span class="line">e=&gt;end: 操作</span><br><span class="line"></span><br><span class="line">st-&gt;op-&gt;cond</span><br><span class="line">cond(yes)-&gt;op2-&gt;e</span><br><span class="line">cond(no)-&gt;op</span><br></pre></td></tr></table></figure>
-
-<h2 id="数据库表"><a href="#数据库表" class="headerlink" title="数据库表"></a>数据库表</h2><h4 id="role-角色表"><a href="#role-角色表" class="headerlink" title="role   角色表"></a>role   角色表</h4><p>表名： TB_APPS_ADMINUSER_INFO<br>SQL: </p>
-<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">-- TB_APPS_ADMINUSER_INFO用户与角色关系表;</span></span><br><span class="line"><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">EXISTS</span> TB_APPS_ADMINUSER_INFO;</span><br><span class="line"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> TB_APPS_ADMINUSER_INFO</span><br><span class="line">(</span><br><span class="line">    <span class="hljs-keyword">id</span>  <span class="hljs-built_in">CHAR</span>(<span class="hljs-number">36</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> PRIMARY <span class="hljs-keyword">KEY</span> <span class="hljs-keyword">UNIQUE</span>,</span><br><span class="line">    uid  <span class="hljs-built_in">CHAR</span>(<span class="hljs-number">36</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">UNIQUE</span>,</span><br><span class="line">    <span class="hljs-keyword">role</span> <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">200</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'角色名'</span>,</span><br><span class="line">    enable_status <span class="hljs-built_in">CHAR</span>(<span class="hljs-number">1</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">0</span>  <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'启用停用'</span>,</span><br><span class="line">    creator <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">36</span>),</span><br><span class="line">    create_time <span class="hljs-built_in">TIMESTAMP</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">CURRENT_TIMESTAMP</span></span><br><span class="line">)<span class="hljs-keyword">engine</span>=<span class="hljs-keyword">innodb</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">charset</span>=utf8 <span class="hljs-keyword">comment</span>=<span class="hljs-string">'管理员角色表'</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> <span class="hljs-string">`TB_APPS_ADMINUSER_INFO`</span> (<span class="hljs-string">`id`</span>, <span class="hljs-string">`uid`</span>, <span class="hljs-string">`role`</span>, <span class="hljs-string">`enable_status`</span>, <span class="hljs-string">`creator`</span>, <span class="hljs-string">`create_time`</span>) <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">'c39ed39444ab43e39189fc00fe2e50be'</span>,<span class="hljs-string">'c39ed39444ab43e39189fc00fe2e50be'</span>,<span class="hljs-string">'admin'</span>,<span class="hljs-string">'0'</span>,<span class="hljs-string">'system'</span>,<span class="hljs-keyword">NOW</span>());</span><br></pre></td></tr></table></figure>
-
-<p>TB_APPS_ADMINUSER_INFO：</p>
-<table>
-<thead>
-<tr>
-<th align="left">id</th>
-<th align="left">uid</th>
-<th align="left">role</th>
-<th align="left">enable_status</th>
-<th align="left">creator</th>
-<th align="left">create_time</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">0</td>
-<td align="left">c39ed39444ab43e39189fc00fe2e50be</td>
-<td align="left">admin</td>
-<td align="left">0</td>
-<td align="left">system</td>
-<td align="left">2019-10-23 17:56:49</td>
-</tr>
-</tbody></table>
-<h4 id="right-权限表"><a href="#right-权限表" class="headerlink" title="right  权限表"></a>right  权限表</h4><p>表名： TB_APPS_ADMINROLERIGHT_INFO<br>SQL:</p>
-<figure class="highlight autohotkey hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE IF EXISTS TB_APPS_ADMINROLERIGHT_INFO<span class="hljs-comment">;</span></span><br><span class="line">CREATE TABLE TB_APPS_ADMINROLERIGHT_INFO</span><br><span class="line">(</span><br><span class="line">  id  VARCHAR(<span class="hljs-number">36</span>) <span class="hljs-literal">NOT</span> NULL PRIMARY KEY UNIQUE ,</span><br><span class="line">	role VARCHAR(<span class="hljs-number">200</span>) <span class="hljs-literal">NOT</span> NULL UNIQUE COMMENT '角色名',</span><br><span class="line">	rights VARCHAR(<span class="hljs-number">600</span>)  <span class="hljs-literal">NOT</span> NULL COMMENT '对应权限',</span><br><span class="line">	enable_status CHAR(<span class="hljs-number">1</span>) <span class="hljs-literal">NOT</span> NULL DEFAULT <span class="hljs-number">0</span>  COMMENT '启用停用',</span><br><span class="line">	creator VARCHAR(<span class="hljs-number">36</span>),</span><br><span class="line">	create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP</span><br><span class="line">)engine=innodb default charset=utf8 comment='管理员权限表'<span class="hljs-comment">;</span></span><br><span class="line">INSERT INTO `TB_APPS_ADMINROLERIGHT_INFO` (`id`, `role`, `rights`, `enable_status`, `creator`, `create_time`) VALUES ('<span class="hljs-number">0</span>','admin','&#123;<span class="hljs-string">"网络拓扑"</span>: [&#123;<span class="hljs-string">"网络拓扑"</span>: <span class="hljs-number">2</span>&#125;],<span class="hljs-string">"用户管理"</span>: [&#123;<span class="hljs-string">"用户配置"</span>: <span class="hljs-number">2</span>&#125;,&#123;<span class="hljs-string">"在线用户"</span>: <span class="hljs-number">2</span>&#125;,&#123;<span class="hljs-string">"认证对接"</span>: <span class="hljs-number">2</span>&#125;],<span class="hljs-string">"应用管理"</span>: [&#123;<span class="hljs-string">"应用发布"</span>: <span class="hljs-number">2</span>&#125;],<span class="hljs-string">"设备管理"</span>: [&#123;<span class="hljs-string">"在线客户端"</span>: <span class="hljs-number">2</span>&#125;,&#123;<span class="hljs-string">"客户端域名"</span>: <span class="hljs-number">2</span>&#125;],<span class="hljs-string">"网关管理"</span>: [&#123;<span class="hljs-string">"网关配置"</span>: <span class="hljs-number">2</span>&#125;,&#123;<span class="hljs-string">"网络配置"</span>: <span class="hljs-number">2</span>&#125;],<span class="hljs-string">"系统管理"</span>: [&#123;<span class="hljs-string">"管理员账户"</span>: <span class="hljs-number">2</span>&#125;,&#123;<span class="hljs-string">"配置中心"</span>: <span class="hljs-number">2</span>&#125;,&#123;<span class="hljs-string">"NTP服务"</span>: <span class="hljs-number">2</span>&#125;],<span class="hljs-string">"安全策略"</span>: [&#123;<span class="hljs-string">"单包授权"</span>: <span class="hljs-number">2</span>&#125;,&#123;<span class="hljs-string">"策略规则"</span>: <span class="hljs-number">2</span>&#125;],<span class="hljs-string">"日志中心"</span>: [&#123;<span class="hljs-string">"用户日志"</span>: <span class="hljs-number">2</span>&#125;,&#123;<span class="hljs-string">"管理日志"</span>: <span class="hljs-number">2</span>&#125;],	<span class="hljs-string">"监控中心"</span>: [&#123;<span class="hljs-string">"网关监控"</span>: <span class="hljs-number">2</span>&#125;]&#125;','<span class="hljs-number">0</span>','system',NOW())<span class="hljs-comment">;</span></span><br><span class="line">INSERT INTO `TB_APPS_ADMINROLERIGHT_INFO` (`id`, `role`, `rights`, `enable_status`, `creator`, `create_time`) VALUES ('<span class="hljs-number">1</span>','primaryAdmin','&#123;<span class="hljs-string">"网络拓扑"</span>: [&#123;<span class="hljs-string">"网络拓扑"</span>: <span class="hljs-number">1</span>&#125;],<span class="hljs-string">"用户管理"</span>: [&#123;<span class="hljs-string">"用户配置"</span>: <span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-string">"在线用户"</span>: <span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-string">"认证对接"</span>: <span class="hljs-number">1</span>&#125;],<span class="hljs-string">"应用管理"</span>: [&#123;<span class="hljs-string">"应用发布"</span>: <span class="hljs-number">1</span>&#125;],<span class="hljs-string">"设备管理"</span>: [&#123;<span class="hljs-string">"在线客户端"</span>: <span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-string">"客户端域名"</span>: <span class="hljs-number">1</span>&#125;],<span class="hljs-string">"网关管理"</span>: [&#123;<span class="hljs-string">"网关配置"</span>: <span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-string">"网络配置"</span>: <span class="hljs-number">1</span>&#125;],<span class="hljs-string">"系统管理"</span>: [&#123;<span class="hljs-string">"管理员账户"</span>: <span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-string">"配置中心"</span>: <span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-string">"NTP服务"</span>: <span class="hljs-number">1</span>&#125;],<span class="hljs-string">"安全策略"</span>: [&#123;<span class="hljs-string">"单包授权"</span>: <span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-string">"策略规则"</span>: <span class="hljs-number">1</span>&#125;],<span class="hljs-string">"日志中心"</span>: [&#123;<span class="hljs-string">"用户日志"</span>: <span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-string">"管理日志"</span>: <span class="hljs-number">1</span>&#125;],	<span class="hljs-string">"监控中心"</span>: [&#123;<span class="hljs-string">"网关监控"</span>: <span class="hljs-number">1</span>&#125;]&#125;','<span class="hljs-number">0</span>','system',NOW())<span class="hljs-comment">;</span></span><br></pre></td></tr></table></figure>
-
-<p>TB_APPS_ADMINROLERIGHT_INFO:</p>
-<table>
-<thead>
-<tr>
-<th align="left">id</th>
-<th align="left">role</th>
-<th align="left">rights</th>
-<th align="left">enable_status</th>
-<th align="left">creator</th>
-<th align="left">create_time</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">0</td>
-<td align="left">admin</td>
-<td align="left">{“网络拓扑”: [{“网络拓扑”: 2}],    “用户管理”: [{“用户配置”: 2},{“在线用户”: 2},{“认证对接”: 2}],”应用管理”: [{“应用发布”: 2}],”设备管理”: [{“在线客户端”: 2},{“客户端域名”: 2}],”网关管理”: [{“网关配置”: 2},{“网络配置”: 2}],”系统管理”: [{“管理员账户”: 2},{“配置中心”: 2},{“NTP服务”: 2}],”安全策略”: [{“单包授权”: 2},{“策略规则”: 2}],”日志中心”: [{“用户日志”: 2},{“管理日志”: 2}],    “监控中心”: [{“网关监控”: 2}]}</td>
-<td align="left">0</td>
-<td align="left">system</td>
-<td align="left">2019-10-23 17:56:49</td>
-</tr>
-<tr>
-<td align="left">1</td>
-<td align="left">primaryAdmin</td>
-<td align="left">{“网络拓扑”: [{“网络拓扑”: 1}],    “用户管理”: [{“用户配置”: 1},{“在线用户”: 1},{“认证对接”: 1}],”应用管理”: [{“应用发布”: 1}],”设备管理”: [{“在线客户端”: 1},{“客户端域名”: 1}],”网关管理”: [{“网关配置”: 1},{“网络配置”: 1}],”系统管理”: [{“管理员账户”: 1},{“配置中心”: 1},{“NTP服务”: 1}],”安全策略”: [{“单包授权”: 1},{“策略规则”: 1}],”日志中心”: [{“用户日志”: 1},{“管理日志”: 1}],    “监控中心”: [{“网关监控”: 1}]}</td>
-<td align="left">0</td>
-<td align="left">system</td>
-<td align="left">2019-10-23 17:56:49</td>
-</tr>
-</tbody></table>
-<h2 id="页面"><a href="#页面" class="headerlink" title="页面"></a>页面</h2><h4 id="1-管理员与角色"><a href="#1-管理员与角色" class="headerlink" title="1.管理员与角色"></a>1.管理员与角色</h4><p><code>+新建</code>  <code>-删除</code> </p>
-<table>
-<thead>
-<tr>
-<th align="left">- [ ]</th>
-<th align="left">角色名</th>
-<th align="left">描述</th>
-<th align="left">状态</th>
-<th align="left">操作</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">- [ ]</td>
-<td align="left">admin</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">查看</td>
-</tr>
-<tr>
-<td align="left">- [ ]</td>
-<td align="left">primaryAdmin</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">查看</td>
-</tr>
-<tr>
-<td align="left">- [ ]</td>
-<td align="left">other</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">编辑   查看权限  禁用</td>
-</tr>
-</tbody></table>
-<h4 id="2-管理员账户"><a href="#2-管理员账户" class="headerlink" title="2.管理员账户"></a>2.管理员账户</h4><p><code>刷新</code> </p>
-<table>
-<thead>
-<tr>
-<th align="left">- [ ]</th>
-<th align="left">登录名</th>
-<th align="left">显示名</th>
-<th align="left">电话</th>
-<th align="left">邮箱</th>
-<th align="left">角色</th>
-<th align="left">状态</th>
-<th align="left">操作</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"></td>
-<td align="left">admin</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">重置密码</td>
-</tr>
-<tr>
-<td align="left"></td>
-<td align="left">xhh</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">重置密码 禁用 删除</td>
-</tr>
-</tbody></table>
-<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><h3 id="管理员与角色页面"><a href="#管理员与角色页面" class="headerlink" title="管理员与角色页面"></a>管理员与角色页面</h3><h5 id="1-获取所有的管理员角色展示"><a href="#1-获取所有的管理员角色展示" class="headerlink" title="1.获取所有的管理员角色展示"></a>1.获取所有的管理员角色展示</h5><p>需要一个查询所有接口<br>method: GET<br>apiurl: <code>http://ip:port/admin/role/all</code></p>
-<h5 id="2-所有权限写在配置文件中点击新增的时候返回给前端"><a href="#2-所有权限写在配置文件中点击新增的时候返回给前端" class="headerlink" title="2.所有权限写在配置文件中点击新增的时候返回给前端"></a>2.所有权限写在配置文件中点击新增的时候返回给前端</h5><p>提供一个所有权限的接口<br>method: GET<br>apiurl: <code>http://ip:port/admin/role/right</code></p>
-<h5 id="3-新建完成后保存到数据库"><a href="#3-新建完成后保存到数据库" class="headerlink" title="3.新建完成后保存到数据库"></a>3.新建完成后保存到数据库</h5><p>需要一个保存接口<br>method: POST<br>body: {}<br>apiurl: <code>http://ip:port/admin/role/save</code><br>保存完后再返回一个查询所有</p>
-<h5 id="4-查看新增后此角色的权限"><a href="#4-查看新增后此角色的权限" class="headerlink" title="4.查看新增后此角色的权限"></a>4.查看新增后此角色的权限</h5><p>需要一个根据角色名查询权限的接口<br>method: POST<br>body: {“id”: “”}<br>apiurl: <code>http://ip:port/admin/role/searchById</code></p>
-<h5 id="5-更新角色名或角色权限upadte"><a href="#5-更新角色名或角色权限upadte" class="headerlink" title="5.更新角色名或角色权限upadte"></a>5.更新角色名或角色权限upadte</h5><p>method: POST<br>body: {“id”: “”}<br>apiurl: <code>http://ip:port/admin/role/update</code><br>delete</p>
-<h5 id="6-删除角色"><a href="#6-删除角色" class="headerlink" title="6.删除角色"></a>6.删除角色</h5><p>method: POST<br>body: {“id”: “”}<br>apiurl: <code>http://ip:port/admin/role/delete</code></p>
-<h5 id="7-启用-禁用此角色"><a href="#7-启用-禁用此角色" class="headerlink" title="7.启用/禁用此角色"></a>7.启用/禁用此角色</h5><p>method: POST<br>body: {“id”: “”,”enableStatus”: “ “}<br>aoiurl: <code>http://ip:port/admin/role/enable</code></p>
-<h3 id="管理员账户页"><a href="#管理员账户页" class="headerlink" title="管理员账户页"></a>管理员账户页</h3><h5 id="8-禁用此管理员-启用该管理员"><a href="#8-禁用此管理员-启用该管理员" class="headerlink" title="8.禁用此管理员/启用该管理员"></a>8.禁用此管理员/启用该管理员</h5><p>需要一个禁用/启用的接口<br>method: POST<br>body: {uid:””,enableStatus”: “0”}<br>apiurl: <code>http://ip:port/admin/user/enable</code></p>
-<h5 id="9-删除管理员"><a href="#9-删除管理员" class="headerlink" title="9.删除管理员"></a>9.删除管理员</h5><p>需要一个删除管理员接口<br>method: POST<br>body: {“uid”: “”}<br>apiurl: <code>http://ip:port/admin/user/delete</code></p>
-<h3 id="左侧菜单栏"><a href="#左侧菜单栏" class="headerlink" title="左侧菜单栏"></a>左侧菜单栏</h3><h5 id="10-角色权限菜单"><a href="#10-角色权限菜单" class="headerlink" title="10.角色权限菜单"></a>10.角色权限菜单</h5><p>需要一个根据id 返回角色菜单的接口<br>method: POST<br>body: {“uid”: “”}<br>apiurl: <code>http://ip:port/admin/role/menu</code></p>
-<hr>
-<h2 id="代码流程分析"><a href="#代码流程分析" class="headerlink" title="代码流程分析"></a>代码流程分析</h2><h3 id="管理员与角色页面-1"><a href="#管理员与角色页面-1" class="headerlink" title="管理员与角色页面"></a>管理员与角色页面</h3><h5 id="1-新增角色"><a href="#1-新增角色" class="headerlink" title="1.新增角色"></a>1.新增角色</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">st=&gt;start: 管理员与角色页面</span><br><span class="line">op=&gt;operation:  前端调用查询所有管理员角色接口</span><br><span class="line">op2=&gt;operation:  后端查询所有管理员角色返回给前端</span><br><span class="line">op3=&gt;operation: 展示页面</span><br><span class="line">op4=&gt;operation: 点击新增 调用后端获取权限列表接口展示权限</span><br><span class="line">op5=&gt;operation: 输入角色名 选取权限</span><br><span class="line">op6=&gt;operation: 保存新建</span><br><span class="line">op7=&gt;operation: 后端接收角色名和权限</span><br><span class="line">op8=&gt;operation: 后端校验是否已存在相同角色</span><br><span class="line">op9=&gt;operation: 保存到TB_APPS_ADMINROLERIGHT_INFO数据表中</span><br><span class="line">op10=&gt;operation: 后端查询所有管理员角色返回给前端</span><br><span class="line">cond=&gt;condition: 不存在</span><br><span class="line">st-&gt;op-&gt;op2-&gt;op3-&gt;op4-&gt;op5-&gt;op6-&gt;op7-&gt;op8-&gt;cond</span><br><span class="line">cond(no)-&gt;op4</span><br><span class="line">cond(yes)-&gt;op9-&gt;op10</span><br></pre></td></tr></table></figure>
-
-<h5 id="2-删除角色"><a href="#2-删除角色" class="headerlink" title="2.删除角色"></a>2.删除角色</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">st=&gt;start: 管理员与角色页面</span><br><span class="line">op=&gt;operation:  前端调用查询所有管理员角色接口</span><br><span class="line">op2=&gt;operation:  后端查询所有管理员角色返回给前端</span><br><span class="line">op3=&gt;operation: 展示页面</span><br><span class="line">op4=&gt;operation: 选中角色点击删除 调用后端删除角色接口</span><br><span class="line">op5=&gt;operation: 后台根据id删除TB_APPS_ADMINROLERIGHT_INFO中该角色并同时删除TB_APPS_ADMINUSER_INFO中与该角色关联的所有用户</span><br><span class="line">op9=&gt;operation: 后端查询所有管理员角色返回给前端</span><br><span class="line">st-&gt;op-&gt;op2-&gt;op3-&gt;op4-&gt;op5-&gt;op9</span><br></pre></td></tr></table></figure>
-
-<h5 id="3-角色权限菜单"><a href="#3-角色权限菜单" class="headerlink" title="3. 角色权限菜单"></a>3. 角色权限菜单</h5>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-11-08T12:49:49.000Z">2019-11-08</time>
                 
                 <div class="level-item">
@@ -967,45 +827,7 @@
         
         <article class="media">
             
-            <a href="/2020/05/29/@Select注解时使用in/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="文档标题">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T15:53:20.000Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/@Select注解时使用in/" class="title has-link-black-ter is-size-6 has-text-weight-normal">文档标题</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/JAVAEE/">JAVAEE</a> / <a class="has-link-grey -link" href="/categories/JAVAEE/MYBATIS/">MYBATIS</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/05/29/mysql共享锁和排它锁/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="mysql共享锁和排它锁">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T15:35:53.000Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/mysql共享锁和排它锁/" class="title has-link-black-ter is-size-6 has-text-weight-normal">mysql共享锁和排它锁</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/JAVAEE/">JAVAEE</a> / <a class="has-link-grey -link" href="/categories/JAVAEE/MYSQL/">MYSQL</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/05/29/邮箱找回密码与二次认证/" class="media-left">
+            <a href="/2020/05/30/邮箱找回密码与二次认证/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="">
                 </p>
@@ -1013,8 +835,8 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T14:40:15.741Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/邮箱找回密码与二次认证/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-30T01:55:28.835Z">2020-05-30</time></div>
+                    <a href="/2020/05/30/邮箱找回密码与二次认证/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1024,7 +846,7 @@
         
         <article class="media">
             
-            <a href="/2020/05/29/可视化面板/" class="media-left">
+            <a href="/2020/05/30/可视化面板/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="">
                 </p>
@@ -1032,8 +854,8 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T14:40:15.601Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/可视化面板/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-30T01:55:28.755Z">2020-05-30</time></div>
+                    <a href="/2020/05/30/可视化面板/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1043,7 +865,7 @@
         
         <article class="media">
             
-            <a href="/2020/05/29/CS应用配置/" class="media-left">
+            <a href="/2020/05/30/CS应用配置/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="">
                 </p>
@@ -1051,10 +873,48 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T14:40:15.581Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/CS应用配置/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-30T01:55:28.745Z">2020-05-30</time></div>
+                    <a href="/2020/05/30/CS应用配置/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
                     <p class="is-size-7 is-uppercase">
                         
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/05/30/特权用户访问策略控制/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-30T01:55:28.745Z">2020-05-30</time></div>
+                    <a href="/2020/05/30/特权用户访问策略控制/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/05/30/md列表/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="markdown任务列表语法checkbox">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-30T01:55:28.735Z">2020-05-30</time></div>
+                    <a href="/2020/05/30/md列表/" class="title has-link-black-ter is-size-6 has-text-weight-normal">markdown任务列表语法checkbox</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/IT/">IT</a>
                     </p>
                 </div>
             </div>
@@ -1113,7 +973,7 @@
                         Categories
                     </p>
                     <p class="title has-text-weight-normal">
-                        15
+                        14
                     </p>
                 </div>
             </div>
@@ -1208,7 +1068,7 @@
                 <span class="level-item">IT</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">194</span>
+                <span class="level-item tag">195</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/JAVAEE/">
@@ -1275,14 +1135,6 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/WORK/">
-            <span class="level-start">
-                <span class="level-item">WORK</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/office/">
             <span class="level-start">
                 <span class="level-item">office</span>
@@ -1318,7 +1170,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/ELASTICSEARCH/" style="font-size: 10px;">ELASTICSEARCH</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10.91px;">Eureka</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/IDEA/" style="font-size: 10.91px;">IDEA</a> <a href="/tags/IT/" style="font-size: 14.55px;">IT</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.82px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.91px;">JAVASE</a> <a href="/tags/LINUX/" style="font-size: 10px;">LINUX</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MQ/" style="font-size: 11.82px;">MQ</a> <a href="/tags/ONOS/" style="font-size: 15.45px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 14.55px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PROTOCAL/" style="font-size: 10px;">PROTOCAL</a> <a href="/tags/PYTHON/" style="font-size: 10.91px;">PYTHON</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/Ribbon/" style="font-size: 10px;">Ribbon</a> <a href="/tags/SECURITY/" style="font-size: 10px;">SECURITY</a> <a href="/tags/SPRING-BOOT/" style="font-size: 10px;">SPRING-BOOT</a> <a href="/tags/SQL/" style="font-size: 12.73px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.18px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/StringRedisTemplate/" style="font-size: 10px;">StringRedisTemplate</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/annotation/" style="font-size: 15.45px;">annotation</a> <a href="/tags/bazel/" style="font-size: 10px;">bazel</a> <a href="/tags/beanutils/" style="font-size: 10px;">beanutils</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/classloader/" style="font-size: 10px;">classloader</a> <a href="/tags/computer/" style="font-size: 10px;">computer</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/docker/" style="font-size: 12.73px;">docker</a> <a href="/tags/druid/" style="font-size: 10px;">druid</a> <a href="/tags/elasticsearch/" style="font-size: 13.64px;">elasticsearch</a> <a href="/tags/enlink/" style="font-size: 10.91px;">enlink</a> <a href="/tags/fastjson/" style="font-size: 10px;">fastjson</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/hexo/" style="font-size: 12.73px;">hexo</a> <a href="/tags/idea/" style="font-size: 10.91px;">idea</a> <a href="/tags/interceptor/" style="font-size: 11.82px;">interceptor</a> <a href="/tags/jetty/" style="font-size: 10px;">jetty</a> <a href="/tags/jpa/" style="font-size: 10.91px;">jpa</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/karaf/" style="font-size: 11.82px;">karaf</a> <a href="/tags/keepalived/" style="font-size: 10px;">keepalived</a> <a href="/tags/linux-shell/" style="font-size: 15.45px;">linux-shell</a> <a href="/tags/listener/" style="font-size: 10px;">listener</a> <a href="/tags/loadbalanced/" style="font-size: 10px;">loadbalanced</a> <a href="/tags/logback/" style="font-size: 10px;">logback</a> <a href="/tags/login/" style="font-size: 10.91px;">login</a> <a href="/tags/lombok/" style="font-size: 11.82px;">lombok</a> <a href="/tags/mac/" style="font-size: 15.45px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.82px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 17.27px;">mybatis</a> <a href="/tags/mycat/" style="font-size: 10.91px;">mycat</a> <a href="/tags/mysql/" style="font-size: 16.36px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/oauth2/" style="font-size: 10px;">oauth2</a> <a href="/tags/pagehelper/" style="font-size: 10px;">pagehelper</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/rabbitMq/" style="font-size: 11.82px;">rabbitMq</a> <a href="/tags/redis/" style="font-size: 11.82px;">redis</a> <a href="/tags/redisTemplate/" style="font-size: 10px;">redisTemplate</a> <a href="/tags/reflection/" style="font-size: 11.82px;">reflection</a> <a href="/tags/registry-center/" style="font-size: 10px;">registry center</a> <a href="/tags/restTemplate/" style="font-size: 10px;">restTemplate</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/serialVersionUID/" style="font-size: 10px;">serialVersionUID</a> <a href="/tags/servlet/" style="font-size: 10.91px;">servlet</a> <a href="/tags/session/" style="font-size: 10.91px;">session</a> <a href="/tags/spring/" style="font-size: 15.45px;">spring</a> <a href="/tags/spring-task/" style="font-size: 12.73px;">spring task</a> <a href="/tags/springboot/" style="font-size: 19.09px;">springboot</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/webClient/" style="font-size: 10px;">webClient</a> <a href="/tags/yaml/" style="font-size: 10.91px;">yaml</a> <a href="/tags/事物/" style="font-size: 10px;">事物</a> <a href="/tags/全局异常/" style="font-size: 10px;">全局异常</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.91px;">文件服务器</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/ELASTICSEARCH/" style="font-size: 10px;">ELASTICSEARCH</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10.91px;">Eureka</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/IDEA/" style="font-size: 10.91px;">IDEA</a> <a href="/tags/IT/" style="font-size: 14.55px;">IT</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.82px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.91px;">JAVASE</a> <a href="/tags/LINUX/" style="font-size: 10px;">LINUX</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MQ/" style="font-size: 11.82px;">MQ</a> <a href="/tags/ONOS/" style="font-size: 15.45px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 14.55px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PROTOCAL/" style="font-size: 10px;">PROTOCAL</a> <a href="/tags/PYTHON/" style="font-size: 10.91px;">PYTHON</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/Ribbon/" style="font-size: 10px;">Ribbon</a> <a href="/tags/SECURITY/" style="font-size: 10px;">SECURITY</a> <a href="/tags/SPRING-BOOT/" style="font-size: 10px;">SPRING-BOOT</a> <a href="/tags/SQL/" style="font-size: 12.73px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.18px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/StringRedisTemplate/" style="font-size: 10px;">StringRedisTemplate</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/annotation/" style="font-size: 15.45px;">annotation</a> <a href="/tags/bazel/" style="font-size: 10px;">bazel</a> <a href="/tags/beanutils/" style="font-size: 10px;">beanutils</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/classloader/" style="font-size: 10px;">classloader</a> <a href="/tags/computer/" style="font-size: 10px;">computer</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/docker/" style="font-size: 12.73px;">docker</a> <a href="/tags/druid/" style="font-size: 10px;">druid</a> <a href="/tags/elasticsearch/" style="font-size: 13.64px;">elasticsearch</a> <a href="/tags/enlink/" style="font-size: 10px;">enlink</a> <a href="/tags/fastjson/" style="font-size: 10px;">fastjson</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/hexo/" style="font-size: 12.73px;">hexo</a> <a href="/tags/idea/" style="font-size: 10.91px;">idea</a> <a href="/tags/interceptor/" style="font-size: 11.82px;">interceptor</a> <a href="/tags/jetty/" style="font-size: 10px;">jetty</a> <a href="/tags/jpa/" style="font-size: 10.91px;">jpa</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/karaf/" style="font-size: 11.82px;">karaf</a> <a href="/tags/keepalived/" style="font-size: 10px;">keepalived</a> <a href="/tags/linux-shell/" style="font-size: 15.45px;">linux-shell</a> <a href="/tags/listener/" style="font-size: 10px;">listener</a> <a href="/tags/loadbalanced/" style="font-size: 10px;">loadbalanced</a> <a href="/tags/logback/" style="font-size: 10px;">logback</a> <a href="/tags/login/" style="font-size: 10.91px;">login</a> <a href="/tags/lombok/" style="font-size: 11.82px;">lombok</a> <a href="/tags/mac/" style="font-size: 15.45px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.82px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 17.27px;">mybatis</a> <a href="/tags/mycat/" style="font-size: 10.91px;">mycat</a> <a href="/tags/mysql/" style="font-size: 16.36px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/oauth2/" style="font-size: 10px;">oauth2</a> <a href="/tags/pagehelper/" style="font-size: 10px;">pagehelper</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/rabbitMq/" style="font-size: 11.82px;">rabbitMq</a> <a href="/tags/redis/" style="font-size: 11.82px;">redis</a> <a href="/tags/redisTemplate/" style="font-size: 10px;">redisTemplate</a> <a href="/tags/reflection/" style="font-size: 11.82px;">reflection</a> <a href="/tags/registry-center/" style="font-size: 10px;">registry center</a> <a href="/tags/restTemplate/" style="font-size: 10px;">restTemplate</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/serialVersionUID/" style="font-size: 10px;">serialVersionUID</a> <a href="/tags/servlet/" style="font-size: 10.91px;">servlet</a> <a href="/tags/session/" style="font-size: 10.91px;">session</a> <a href="/tags/spring/" style="font-size: 15.45px;">spring</a> <a href="/tags/spring-task/" style="font-size: 12.73px;">spring task</a> <a href="/tags/springboot/" style="font-size: 19.09px;">springboot</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/webClient/" style="font-size: 10px;">webClient</a> <a href="/tags/yaml/" style="font-size: 10.91px;">yaml</a> <a href="/tags/事物/" style="font-size: 10px;">事物</a> <a href="/tags/全局异常/" style="font-size: 10px;">全局异常</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.91px;">文件服务器</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
     </div>
 </div>
 
@@ -1348,7 +1200,7 @@
                     <span class="level-item">四月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1403,7 +1255,7 @@
                     <span class="level-item">十一月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -1535,7 +1387,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/JAVAEE/">
                         <span class="tag">JAVAEE</span>
-                        <span class="tag is-grey">130</span>
+                        <span class="tag is-grey">131</span>
                     </a>
                 </div>
                 
@@ -1780,7 +1632,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/enlink/">
                         <span class="tag">enlink</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2238,7 +2090,7 @@
                         Categories
                     </p>
                     <p class="title has-text-weight-normal">
-                        15
+                        14
                     </p>
                 </div>
             </div>
@@ -2333,7 +2185,7 @@
                 <span class="level-item">IT</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">194</span>
+                <span class="level-item tag">195</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/JAVAEE/">
@@ -2400,14 +2252,6 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/WORK/">
-            <span class="level-start">
-                <span class="level-item">WORK</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/office/">
             <span class="level-start">
                 <span class="level-item">office</span>
@@ -2443,7 +2287,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/ELASTICSEARCH/" style="font-size: 10px;">ELASTICSEARCH</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10.91px;">Eureka</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/IDEA/" style="font-size: 10.91px;">IDEA</a> <a href="/tags/IT/" style="font-size: 14.55px;">IT</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.82px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.91px;">JAVASE</a> <a href="/tags/LINUX/" style="font-size: 10px;">LINUX</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MQ/" style="font-size: 11.82px;">MQ</a> <a href="/tags/ONOS/" style="font-size: 15.45px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 14.55px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PROTOCAL/" style="font-size: 10px;">PROTOCAL</a> <a href="/tags/PYTHON/" style="font-size: 10.91px;">PYTHON</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/Ribbon/" style="font-size: 10px;">Ribbon</a> <a href="/tags/SECURITY/" style="font-size: 10px;">SECURITY</a> <a href="/tags/SPRING-BOOT/" style="font-size: 10px;">SPRING-BOOT</a> <a href="/tags/SQL/" style="font-size: 12.73px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.18px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/StringRedisTemplate/" style="font-size: 10px;">StringRedisTemplate</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/annotation/" style="font-size: 15.45px;">annotation</a> <a href="/tags/bazel/" style="font-size: 10px;">bazel</a> <a href="/tags/beanutils/" style="font-size: 10px;">beanutils</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/classloader/" style="font-size: 10px;">classloader</a> <a href="/tags/computer/" style="font-size: 10px;">computer</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/docker/" style="font-size: 12.73px;">docker</a> <a href="/tags/druid/" style="font-size: 10px;">druid</a> <a href="/tags/elasticsearch/" style="font-size: 13.64px;">elasticsearch</a> <a href="/tags/enlink/" style="font-size: 10.91px;">enlink</a> <a href="/tags/fastjson/" style="font-size: 10px;">fastjson</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/hexo/" style="font-size: 12.73px;">hexo</a> <a href="/tags/idea/" style="font-size: 10.91px;">idea</a> <a href="/tags/interceptor/" style="font-size: 11.82px;">interceptor</a> <a href="/tags/jetty/" style="font-size: 10px;">jetty</a> <a href="/tags/jpa/" style="font-size: 10.91px;">jpa</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/karaf/" style="font-size: 11.82px;">karaf</a> <a href="/tags/keepalived/" style="font-size: 10px;">keepalived</a> <a href="/tags/linux-shell/" style="font-size: 15.45px;">linux-shell</a> <a href="/tags/listener/" style="font-size: 10px;">listener</a> <a href="/tags/loadbalanced/" style="font-size: 10px;">loadbalanced</a> <a href="/tags/logback/" style="font-size: 10px;">logback</a> <a href="/tags/login/" style="font-size: 10.91px;">login</a> <a href="/tags/lombok/" style="font-size: 11.82px;">lombok</a> <a href="/tags/mac/" style="font-size: 15.45px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.82px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 17.27px;">mybatis</a> <a href="/tags/mycat/" style="font-size: 10.91px;">mycat</a> <a href="/tags/mysql/" style="font-size: 16.36px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/oauth2/" style="font-size: 10px;">oauth2</a> <a href="/tags/pagehelper/" style="font-size: 10px;">pagehelper</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/rabbitMq/" style="font-size: 11.82px;">rabbitMq</a> <a href="/tags/redis/" style="font-size: 11.82px;">redis</a> <a href="/tags/redisTemplate/" style="font-size: 10px;">redisTemplate</a> <a href="/tags/reflection/" style="font-size: 11.82px;">reflection</a> <a href="/tags/registry-center/" style="font-size: 10px;">registry center</a> <a href="/tags/restTemplate/" style="font-size: 10px;">restTemplate</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/serialVersionUID/" style="font-size: 10px;">serialVersionUID</a> <a href="/tags/servlet/" style="font-size: 10.91px;">servlet</a> <a href="/tags/session/" style="font-size: 10.91px;">session</a> <a href="/tags/spring/" style="font-size: 15.45px;">spring</a> <a href="/tags/spring-task/" style="font-size: 12.73px;">spring task</a> <a href="/tags/springboot/" style="font-size: 19.09px;">springboot</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/webClient/" style="font-size: 10px;">webClient</a> <a href="/tags/yaml/" style="font-size: 10.91px;">yaml</a> <a href="/tags/事物/" style="font-size: 10px;">事物</a> <a href="/tags/全局异常/" style="font-size: 10px;">全局异常</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.91px;">文件服务器</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/ELASTICSEARCH/" style="font-size: 10px;">ELASTICSEARCH</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10.91px;">Eureka</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/IDEA/" style="font-size: 10.91px;">IDEA</a> <a href="/tags/IT/" style="font-size: 14.55px;">IT</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.82px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.91px;">JAVASE</a> <a href="/tags/LINUX/" style="font-size: 10px;">LINUX</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MQ/" style="font-size: 11.82px;">MQ</a> <a href="/tags/ONOS/" style="font-size: 15.45px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 14.55px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PROTOCAL/" style="font-size: 10px;">PROTOCAL</a> <a href="/tags/PYTHON/" style="font-size: 10.91px;">PYTHON</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/Ribbon/" style="font-size: 10px;">Ribbon</a> <a href="/tags/SECURITY/" style="font-size: 10px;">SECURITY</a> <a href="/tags/SPRING-BOOT/" style="font-size: 10px;">SPRING-BOOT</a> <a href="/tags/SQL/" style="font-size: 12.73px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.18px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/StringRedisTemplate/" style="font-size: 10px;">StringRedisTemplate</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/annotation/" style="font-size: 15.45px;">annotation</a> <a href="/tags/bazel/" style="font-size: 10px;">bazel</a> <a href="/tags/beanutils/" style="font-size: 10px;">beanutils</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/classloader/" style="font-size: 10px;">classloader</a> <a href="/tags/computer/" style="font-size: 10px;">computer</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/docker/" style="font-size: 12.73px;">docker</a> <a href="/tags/druid/" style="font-size: 10px;">druid</a> <a href="/tags/elasticsearch/" style="font-size: 13.64px;">elasticsearch</a> <a href="/tags/enlink/" style="font-size: 10px;">enlink</a> <a href="/tags/fastjson/" style="font-size: 10px;">fastjson</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/hexo/" style="font-size: 12.73px;">hexo</a> <a href="/tags/idea/" style="font-size: 10.91px;">idea</a> <a href="/tags/interceptor/" style="font-size: 11.82px;">interceptor</a> <a href="/tags/jetty/" style="font-size: 10px;">jetty</a> <a href="/tags/jpa/" style="font-size: 10.91px;">jpa</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/karaf/" style="font-size: 11.82px;">karaf</a> <a href="/tags/keepalived/" style="font-size: 10px;">keepalived</a> <a href="/tags/linux-shell/" style="font-size: 15.45px;">linux-shell</a> <a href="/tags/listener/" style="font-size: 10px;">listener</a> <a href="/tags/loadbalanced/" style="font-size: 10px;">loadbalanced</a> <a href="/tags/logback/" style="font-size: 10px;">logback</a> <a href="/tags/login/" style="font-size: 10.91px;">login</a> <a href="/tags/lombok/" style="font-size: 11.82px;">lombok</a> <a href="/tags/mac/" style="font-size: 15.45px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.82px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 17.27px;">mybatis</a> <a href="/tags/mycat/" style="font-size: 10.91px;">mycat</a> <a href="/tags/mysql/" style="font-size: 16.36px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/oauth2/" style="font-size: 10px;">oauth2</a> <a href="/tags/pagehelper/" style="font-size: 10px;">pagehelper</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/rabbitMq/" style="font-size: 11.82px;">rabbitMq</a> <a href="/tags/redis/" style="font-size: 11.82px;">redis</a> <a href="/tags/redisTemplate/" style="font-size: 10px;">redisTemplate</a> <a href="/tags/reflection/" style="font-size: 11.82px;">reflection</a> <a href="/tags/registry-center/" style="font-size: 10px;">registry center</a> <a href="/tags/restTemplate/" style="font-size: 10px;">restTemplate</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/serialVersionUID/" style="font-size: 10px;">serialVersionUID</a> <a href="/tags/servlet/" style="font-size: 10.91px;">servlet</a> <a href="/tags/session/" style="font-size: 10.91px;">session</a> <a href="/tags/spring/" style="font-size: 15.45px;">spring</a> <a href="/tags/spring-task/" style="font-size: 12.73px;">spring task</a> <a href="/tags/springboot/" style="font-size: 19.09px;">springboot</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/webClient/" style="font-size: 10px;">webClient</a> <a href="/tags/yaml/" style="font-size: 10.91px;">yaml</a> <a href="/tags/事物/" style="font-size: 10px;">事物</a> <a href="/tags/全局异常/" style="font-size: 10px;">全局异常</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.91px;">文件服务器</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
     </div>
 </div>
 
@@ -2473,7 +2317,7 @@
                     <span class="level-item">四月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -2528,7 +2372,7 @@
                     <span class="level-item">十一月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -2660,7 +2504,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/JAVAEE/">
                         <span class="tag">JAVAEE</span>
-                        <span class="tag is-grey">130</span>
+                        <span class="tag is-grey">131</span>
                     </a>
                 </div>
                 
@@ -2905,7 +2749,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/enlink/">
                         <span class="tag">enlink</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

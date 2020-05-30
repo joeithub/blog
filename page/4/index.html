@@ -13,15 +13,15 @@
     <meta name="description" content="private learning">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Learning">
-<meta property="og:url" content="http://yoursite.com/page/4/index.html">
+<meta property="og:url" content="/blog/page/4/index.html">
 <meta property="og:site_name" content="Learning">
 <meta property="og:description" content="private learning">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:image" content="/images/og_image.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Learning">
 <meta name="twitter:description" content="private learning">
-<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+<meta name="twitter:image" content="/images/og_image.png">
 
 
 
@@ -142,6 +142,133 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-26T19:12:18.000Z">2019-12-26</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/IT/">IT</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    11 分钟 read (About 1640 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/12/27/更换yum源/">更换yum源rpmbuild包制作</a>
+            
+        </h1>
+        <div class="content">
+            <p>更换yum源<br>163yum源：<br>1）备份当前yum源防止出现意外还可以还原回来</p>
+<p>cd /etc/yum.repos.d/<br>cp /CentOS-Base.repo /CentOS-Base-repo.bak<br>2）使用wget下载163yum源repo文件</p>
+<p>wget <a href="http://mirrors.163.com/.help/CentOS7-Base-163.repo" target="_blank" rel="noopener">http://mirrors.163.com/.help/CentOS7-Base-163.repo</a><br>3) 清理旧包</p>
+<p>yum clean all<br>4）把下载下来163repo文件设置成为默认源</p>
+<p>mv CentOS7-Base-163.repo CentOS-Base.repo<br>5）生成163yum源缓存并更新yum源</p>
+<p>yum makecache<br>yum update<br>阿里云yum源：<br>1）备份当前yum源防止出现意外还可以还原回来</p>
+<p>cd /etc/yum.repos.d/<br>cp /CentOS-Base.repo /CentOS-Base-repo.bak<br>2）使用wget下载阿里yum源repo文件</p>
+<p>wget <a href="http://mirrors.aliyun.com/repo/Centos-7.repo" target="_blank" rel="noopener">http://mirrors.aliyun.com/repo/Centos-7.repo</a><br>3) 清理旧包</p>
+<p>yum clean all<br>4）把下载下来阿里云repo文件设置成为默认源</p>
+<p>mv Centos-7.repo CentOS-Base.repo<br>5）生成阿里云yum源缓存并更新yum源</p>
+<p>yum makecache<br>yum update</p>
+<p>1,查找rpm-build，并安装</p>
+<p>1）yum 安装</p>
+<p>yum list |grep rpm-build 查找合适的rpm-build包<br>yum install -y rpm-build.x86_64 </p>
+<p>2）非yum 安装<br>如果没有yum源，可以先将rpm-build.rpm 下载到本地，下载rpm-build的时候，需要安装和操作系统版本一致的。否则会提示错误。比如我的系统如下： </p>
+<p>Linux sjs_78_213 2.6.32-220.17.1.el6.x86_64 #1 SMP Thu Apr 26 13:37:13 EDT 2012 x86_64 x86_64 x86_64 GNU/Linux </p>
+<p>对应的rpm包是 ：rpm-build-4.8.0-19.el6_2.1.x86_64.rpm  。<br>查找rpm包可以到 <a href="http://rpm.pbone.net/" target="_blank" rel="noopener">http://rpm.pbone.net/</a>  </p>
+<p>下载rpm包 ：<br>wget <a href="ftp://ftp.pbone.net/mirror/ftp.scientificlinux.org/linux/scientific/6.0/x86_64/updates/security/rpm-build-4.8.0-19.el6_2.1.x86_64.rpm" target="_blank" rel="noopener">ftp://ftp.pbone.net/mirror/ftp.scientificlinux.org/linux/scientific/6.0/x86_64/updates/security/rpm-build-4.8.0-19.el6_2.1.x86_64.rpm</a> </p>
+<p>安装   rpm -ivh rpm-build-4.8.0-19.el6_2.1.x86_64.rpm  </p>
+<p>2,创建一个普通用户，以普通用户打包<br>最好以普通用户打包，否则会有一些稀奇古怪的问题。<br>adduser wang<br>su - wang<br>mkdir -p /home/wang/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}</p>
+<p>echo “%_topdir  /home/wang/rpmbuild” &gt;~/.rpmmacros  </p>
+<p>rpmbuild –showrc|grep _topdir</p>
+<p>cd  /home/wang/rpmbuild/SPECS<br>rpmbuild -ba  dteworker-client.spec  </p>
+<p>一个完整的rpmbuild目录可以下载<a href="http://download.csdn.net/detail/wisgood/8384763，然后解压,打包即可。" target="_blank" rel="noopener">http://download.csdn.net/detail/wisgood/8384763，然后解压,打包即可。</a></p>
+<p>rpmbuild用法<br>利用rpmbuild打包，需要两类文件：1、源码，源码以tar归档进行压缩的源码包，以及一些.patch文件，存放于目录./SOURCES下；2、.spec文件，定义了打包的动作，以及依赖，是打包的最主要类容。</p>
+<p>首先介绍SPEC文件：</p>
+<p>SPEC文件的一些语法： </p>
+<p>.spec中的条件判断语句有两种：<br>1、if结构<br>引用<br>%if %{str}<br>%else<br>       动作<br>%endif<br>其中%{str}是条件，0为假，非0为真。<br>2、?:结构<br>引用<br>%{?变量:动作1}动作2<br>其中{}用于控制范围，而“？”号和“：”号是分割符，如果要判断条件是非的情况，可以在“？”号前加“！”号。<br>此条件与前面的%if有点不同，其只判断变量是否定义，定义了就为真，否则就为假，即使变量定义为0，也为真，并运行后面的语句。</p>
+<p>spec文件的一些定义：  </p>
+<p>Name:　　#软件包的名称</p>
+<p>Version:　　#软件包的版本号</p>
+<p>Release:　　#发布的序列</p>
+<p>Epoch:　　#发布的序列</p>
+<p>Summary:　　#摘要</p>
+<p>Group:　　#组描述</p>
+<p>License:　　发行许可证</p>
+<p>Sources[0-n]:　　#打包的源码包</p>
+<p>Patch0:  *.patch      #补丁文件</p>
+<p>BuildRequires:　　#打包时依赖的软件</p>
+<p>Requires:　　#安装此rpm包时依赖的软件包</p>
+<p>BuildRoot:　　#安装此软件的虚拟根目录</p>
+<p>以上是描述性的元素，其中Epoch:Version:Release表示了rpm包的新旧，优先级依次降低，打出的rpm包也是以${package}-${Version}-${Release}命名。</p>
+<p>spec文件主体内容：</p>
+<p>spec文件中引用的一些宏变量主要定义在/usr/lib/rpm/macros中</p>
+<p>主要有三个阶段：</p>
+<p>%pre</p>
+<p>#预处理阶段，解压缩软件包</p>
+<p>%setup </p>
+<p>%setup 不加任何选项，仅将软件包打开。<br>%setup -n newdir 将软件包解压在newdir目录。<br>%setup -c 解压缩之前先产生目录。<br>%setup -b num 将第num个source文件解压缩。<br>%setup -T 不使用default的解压缩操作。<br>%setup -T -b 0 将第0个源代码文件解压缩。<br>%setup -c -n newdir 指定目录名称newdir，并在此目录产生rpm套件。<br>%patch 最简单的补丁方式，自动指定patch level。<br>%patch0 -p0 打第1个补丁，利用当前相对路径名称<br>%pacth1 -p2 打第2个补丁，忽略补丁文件第一层目录<br>%patch 0 使用第0个补丁文件，相当于%patch ?p 0。<br>%patch -s 不显示打补丁时的信息。<br>%patch -T 将所有打补丁时产生的输出文件删除。
+　　</p>
+<p>%build 编译阶段</p>
+<p>./configure  –prefix=$RPM_BUILD_ROOT/usr<br>make<br>or<br>%configure            #可以用rpm –eval ‘%configure’命令查看该宏<br>make</p>
+<p>在openstack项目中直接是:python setup.py build</p>
+<p>%install 将软件安装到虚拟根目录</p>
+<p>常用命令：</p>
+<p>make DESTDIR=$RPM_BUILD_ROOT install</p>
+<p>install [options] src ${RPM_BUILD_ROOT}/${dst} #安装配置文件至指定目录,相当于cp</p>
+<p>建立连接关系等。</p>
+<p>在openstack 项目中：</p>
+<p>%{_python2} setup.py install -01 –skip-build –root %{buildroot}</p>
+<p>%clean</p>
+<p>清理一些临时文件，或是生产中不需要的文件</p>
+<p>%files [name]</p>
+<p>文件和目录的归档，rpm包真正包含的内容，$name 与package name对应，一个package生成一个rpm包,名字${name}-￥{version}-${release}.rpm。若没有name，则即是spec Name项。</p>
+<p>files是相对路径，应用宏或变量表示相对路径：</p>
+<p>如果描述为目录，表示目录中除%exclude外的所有文件。<br>%defattr (-,root,root) 指定包装文件的属性，分别是(mode,owner,group)，-表示默认值，对文本文件是0644，可执行文件是0755</p>
+<p>%changelog 变更日志</p>
+<p>一般会把git log记录输入，openstack文件中记录的日志：</p>
+<p>git rev-parse –abbrev-ref HEAD &gt;&gt; *.spec</p>
+<p>git log –pretty=oneline –abbrev-commit | head -n +1 &gt;&gt; *.spec</p>
+<p> #生成patch的命令</p>
+<p>diff -Naur path/to/A_Project  path/to/B_Project &gt; Project.patch （A是原始项目）</p>
+<p>或者利用 git命令:</p>
+<p>#new 是有更改的分支，old是没有更改的分支<br>git checkout new<br>git format-patch -M old</p>
+<p>生成：000-*.patch<br>git打patch的命令：</p>
+<p>git am 000-*.patch</p>
+<p>#解析rpm包</p>
+<p>rpm -qpl *.rpm #列出rpm包包含的内容</p>
+<p>rpm2cpio *.rpm | cpio -div  #解压缩出rpm包</p>
+<p>yum-duilddep *.spec 安装spec文件中的所有编译依赖软件，BuidRequires。</p>
+<p>rpmbuild –define “_topdir ${dir:-/home/rpmbuild}” -bb *.spec</p>
+<p>_topdir指定打包的目录，rpmbuild/{SURCES,BUILD,BUILDROOT,SPECS,RPMS,SRPMS}。</p>
+<p>也可以向spec文件传入参数，也是利用–define</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
     <div class="card">
     
     <div class="card-content article ">
@@ -1383,51 +1510,6 @@
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-12-02T15:42:35.000Z">2019-12-02</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/SYSTEM/">SYSTEM</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    几秒 read (About 41 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/12/02/Mac安装任何来源/">Mac 安装任何来源</a>
-            
-        </h1>
-        <div class="content">
-            <p>Mac安装来源：若没有“任何来源”这个选项<br>打开终端（Terminal.app），拷贝粘贴<br><code>sudo spctl --master-disable</code>，按回车键</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -1474,45 +1556,7 @@
         
         <article class="media">
             
-            <a href="/2020/05/29/@Select注解时使用in/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="文档标题">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T15:53:20.000Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/@Select注解时使用in/" class="title has-link-black-ter is-size-6 has-text-weight-normal">文档标题</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/JAVAEE/">JAVAEE</a> / <a class="has-link-grey -link" href="/categories/JAVAEE/MYBATIS/">MYBATIS</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/05/29/mysql共享锁和排它锁/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="mysql共享锁和排它锁">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T15:35:53.000Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/mysql共享锁和排它锁/" class="title has-link-black-ter is-size-6 has-text-weight-normal">mysql共享锁和排它锁</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/JAVAEE/">JAVAEE</a> / <a class="has-link-grey -link" href="/categories/JAVAEE/MYSQL/">MYSQL</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/05/29/邮箱找回密码与二次认证/" class="media-left">
+            <a href="/2020/05/30/邮箱找回密码与二次认证/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="">
                 </p>
@@ -1520,8 +1564,8 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T14:40:15.741Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/邮箱找回密码与二次认证/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-30T01:55:28.835Z">2020-05-30</time></div>
+                    <a href="/2020/05/30/邮箱找回密码与二次认证/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1531,7 +1575,7 @@
         
         <article class="media">
             
-            <a href="/2020/05/29/可视化面板/" class="media-left">
+            <a href="/2020/05/30/可视化面板/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="">
                 </p>
@@ -1539,8 +1583,8 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T14:40:15.601Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/可视化面板/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-30T01:55:28.755Z">2020-05-30</time></div>
+                    <a href="/2020/05/30/可视化面板/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1550,7 +1594,7 @@
         
         <article class="media">
             
-            <a href="/2020/05/29/CS应用配置/" class="media-left">
+            <a href="/2020/05/30/CS应用配置/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="">
                 </p>
@@ -1558,10 +1602,48 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T14:40:15.581Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/CS应用配置/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-30T01:55:28.745Z">2020-05-30</time></div>
+                    <a href="/2020/05/30/CS应用配置/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
                     <p class="is-size-7 is-uppercase">
                         
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/05/30/特权用户访问策略控制/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-30T01:55:28.745Z">2020-05-30</time></div>
+                    <a href="/2020/05/30/特权用户访问策略控制/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/05/30/md列表/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="markdown任务列表语法checkbox">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-30T01:55:28.735Z">2020-05-30</time></div>
+                    <a href="/2020/05/30/md列表/" class="title has-link-black-ter is-size-6 has-text-weight-normal">markdown任务列表语法checkbox</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/IT/">IT</a>
                     </p>
                 </div>
             </div>
@@ -1620,7 +1702,7 @@
                         Categories
                     </p>
                     <p class="title has-text-weight-normal">
-                        15
+                        14
                     </p>
                 </div>
             </div>
@@ -1715,7 +1797,7 @@
                 <span class="level-item">IT</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">194</span>
+                <span class="level-item tag">195</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/JAVAEE/">
@@ -1782,14 +1864,6 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/WORK/">
-            <span class="level-start">
-                <span class="level-item">WORK</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/office/">
             <span class="level-start">
                 <span class="level-item">office</span>
@@ -1825,7 +1899,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/ELASTICSEARCH/" style="font-size: 10px;">ELASTICSEARCH</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10.91px;">Eureka</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/IDEA/" style="font-size: 10.91px;">IDEA</a> <a href="/tags/IT/" style="font-size: 14.55px;">IT</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.82px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.91px;">JAVASE</a> <a href="/tags/LINUX/" style="font-size: 10px;">LINUX</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MQ/" style="font-size: 11.82px;">MQ</a> <a href="/tags/ONOS/" style="font-size: 15.45px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 14.55px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PROTOCAL/" style="font-size: 10px;">PROTOCAL</a> <a href="/tags/PYTHON/" style="font-size: 10.91px;">PYTHON</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/Ribbon/" style="font-size: 10px;">Ribbon</a> <a href="/tags/SECURITY/" style="font-size: 10px;">SECURITY</a> <a href="/tags/SPRING-BOOT/" style="font-size: 10px;">SPRING-BOOT</a> <a href="/tags/SQL/" style="font-size: 12.73px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.18px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/StringRedisTemplate/" style="font-size: 10px;">StringRedisTemplate</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/annotation/" style="font-size: 15.45px;">annotation</a> <a href="/tags/bazel/" style="font-size: 10px;">bazel</a> <a href="/tags/beanutils/" style="font-size: 10px;">beanutils</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/classloader/" style="font-size: 10px;">classloader</a> <a href="/tags/computer/" style="font-size: 10px;">computer</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/docker/" style="font-size: 12.73px;">docker</a> <a href="/tags/druid/" style="font-size: 10px;">druid</a> <a href="/tags/elasticsearch/" style="font-size: 13.64px;">elasticsearch</a> <a href="/tags/enlink/" style="font-size: 10.91px;">enlink</a> <a href="/tags/fastjson/" style="font-size: 10px;">fastjson</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/hexo/" style="font-size: 12.73px;">hexo</a> <a href="/tags/idea/" style="font-size: 10.91px;">idea</a> <a href="/tags/interceptor/" style="font-size: 11.82px;">interceptor</a> <a href="/tags/jetty/" style="font-size: 10px;">jetty</a> <a href="/tags/jpa/" style="font-size: 10.91px;">jpa</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/karaf/" style="font-size: 11.82px;">karaf</a> <a href="/tags/keepalived/" style="font-size: 10px;">keepalived</a> <a href="/tags/linux-shell/" style="font-size: 15.45px;">linux-shell</a> <a href="/tags/listener/" style="font-size: 10px;">listener</a> <a href="/tags/loadbalanced/" style="font-size: 10px;">loadbalanced</a> <a href="/tags/logback/" style="font-size: 10px;">logback</a> <a href="/tags/login/" style="font-size: 10.91px;">login</a> <a href="/tags/lombok/" style="font-size: 11.82px;">lombok</a> <a href="/tags/mac/" style="font-size: 15.45px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.82px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 17.27px;">mybatis</a> <a href="/tags/mycat/" style="font-size: 10.91px;">mycat</a> <a href="/tags/mysql/" style="font-size: 16.36px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/oauth2/" style="font-size: 10px;">oauth2</a> <a href="/tags/pagehelper/" style="font-size: 10px;">pagehelper</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/rabbitMq/" style="font-size: 11.82px;">rabbitMq</a> <a href="/tags/redis/" style="font-size: 11.82px;">redis</a> <a href="/tags/redisTemplate/" style="font-size: 10px;">redisTemplate</a> <a href="/tags/reflection/" style="font-size: 11.82px;">reflection</a> <a href="/tags/registry-center/" style="font-size: 10px;">registry center</a> <a href="/tags/restTemplate/" style="font-size: 10px;">restTemplate</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/serialVersionUID/" style="font-size: 10px;">serialVersionUID</a> <a href="/tags/servlet/" style="font-size: 10.91px;">servlet</a> <a href="/tags/session/" style="font-size: 10.91px;">session</a> <a href="/tags/spring/" style="font-size: 15.45px;">spring</a> <a href="/tags/spring-task/" style="font-size: 12.73px;">spring task</a> <a href="/tags/springboot/" style="font-size: 19.09px;">springboot</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/webClient/" style="font-size: 10px;">webClient</a> <a href="/tags/yaml/" style="font-size: 10.91px;">yaml</a> <a href="/tags/事物/" style="font-size: 10px;">事物</a> <a href="/tags/全局异常/" style="font-size: 10px;">全局异常</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.91px;">文件服务器</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/ELASTICSEARCH/" style="font-size: 10px;">ELASTICSEARCH</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10.91px;">Eureka</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/IDEA/" style="font-size: 10.91px;">IDEA</a> <a href="/tags/IT/" style="font-size: 14.55px;">IT</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.82px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.91px;">JAVASE</a> <a href="/tags/LINUX/" style="font-size: 10px;">LINUX</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MQ/" style="font-size: 11.82px;">MQ</a> <a href="/tags/ONOS/" style="font-size: 15.45px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 14.55px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PROTOCAL/" style="font-size: 10px;">PROTOCAL</a> <a href="/tags/PYTHON/" style="font-size: 10.91px;">PYTHON</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/Ribbon/" style="font-size: 10px;">Ribbon</a> <a href="/tags/SECURITY/" style="font-size: 10px;">SECURITY</a> <a href="/tags/SPRING-BOOT/" style="font-size: 10px;">SPRING-BOOT</a> <a href="/tags/SQL/" style="font-size: 12.73px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.18px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/StringRedisTemplate/" style="font-size: 10px;">StringRedisTemplate</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/annotation/" style="font-size: 15.45px;">annotation</a> <a href="/tags/bazel/" style="font-size: 10px;">bazel</a> <a href="/tags/beanutils/" style="font-size: 10px;">beanutils</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/classloader/" style="font-size: 10px;">classloader</a> <a href="/tags/computer/" style="font-size: 10px;">computer</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/docker/" style="font-size: 12.73px;">docker</a> <a href="/tags/druid/" style="font-size: 10px;">druid</a> <a href="/tags/elasticsearch/" style="font-size: 13.64px;">elasticsearch</a> <a href="/tags/enlink/" style="font-size: 10px;">enlink</a> <a href="/tags/fastjson/" style="font-size: 10px;">fastjson</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/hexo/" style="font-size: 12.73px;">hexo</a> <a href="/tags/idea/" style="font-size: 10.91px;">idea</a> <a href="/tags/interceptor/" style="font-size: 11.82px;">interceptor</a> <a href="/tags/jetty/" style="font-size: 10px;">jetty</a> <a href="/tags/jpa/" style="font-size: 10.91px;">jpa</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/karaf/" style="font-size: 11.82px;">karaf</a> <a href="/tags/keepalived/" style="font-size: 10px;">keepalived</a> <a href="/tags/linux-shell/" style="font-size: 15.45px;">linux-shell</a> <a href="/tags/listener/" style="font-size: 10px;">listener</a> <a href="/tags/loadbalanced/" style="font-size: 10px;">loadbalanced</a> <a href="/tags/logback/" style="font-size: 10px;">logback</a> <a href="/tags/login/" style="font-size: 10.91px;">login</a> <a href="/tags/lombok/" style="font-size: 11.82px;">lombok</a> <a href="/tags/mac/" style="font-size: 15.45px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.82px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 17.27px;">mybatis</a> <a href="/tags/mycat/" style="font-size: 10.91px;">mycat</a> <a href="/tags/mysql/" style="font-size: 16.36px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/oauth2/" style="font-size: 10px;">oauth2</a> <a href="/tags/pagehelper/" style="font-size: 10px;">pagehelper</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/rabbitMq/" style="font-size: 11.82px;">rabbitMq</a> <a href="/tags/redis/" style="font-size: 11.82px;">redis</a> <a href="/tags/redisTemplate/" style="font-size: 10px;">redisTemplate</a> <a href="/tags/reflection/" style="font-size: 11.82px;">reflection</a> <a href="/tags/registry-center/" style="font-size: 10px;">registry center</a> <a href="/tags/restTemplate/" style="font-size: 10px;">restTemplate</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/serialVersionUID/" style="font-size: 10px;">serialVersionUID</a> <a href="/tags/servlet/" style="font-size: 10.91px;">servlet</a> <a href="/tags/session/" style="font-size: 10.91px;">session</a> <a href="/tags/spring/" style="font-size: 15.45px;">spring</a> <a href="/tags/spring-task/" style="font-size: 12.73px;">spring task</a> <a href="/tags/springboot/" style="font-size: 19.09px;">springboot</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/webClient/" style="font-size: 10px;">webClient</a> <a href="/tags/yaml/" style="font-size: 10.91px;">yaml</a> <a href="/tags/事物/" style="font-size: 10px;">事物</a> <a href="/tags/全局异常/" style="font-size: 10px;">全局异常</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.91px;">文件服务器</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
     </div>
 </div>
 
@@ -1855,7 +1929,7 @@
                     <span class="level-item">四月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1910,7 +1984,7 @@
                     <span class="level-item">十一月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -2042,7 +2116,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/JAVAEE/">
                         <span class="tag">JAVAEE</span>
-                        <span class="tag is-grey">130</span>
+                        <span class="tag is-grey">131</span>
                     </a>
                 </div>
                 
@@ -2287,7 +2361,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/enlink/">
                         <span class="tag">enlink</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2745,7 +2819,7 @@
                         Categories
                     </p>
                     <p class="title has-text-weight-normal">
-                        15
+                        14
                     </p>
                 </div>
             </div>
@@ -2840,7 +2914,7 @@
                 <span class="level-item">IT</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">194</span>
+                <span class="level-item tag">195</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/JAVAEE/">
@@ -2907,14 +2981,6 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/WORK/">
-            <span class="level-start">
-                <span class="level-item">WORK</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/office/">
             <span class="level-start">
                 <span class="level-item">office</span>
@@ -2950,7 +3016,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/ELASTICSEARCH/" style="font-size: 10px;">ELASTICSEARCH</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10.91px;">Eureka</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/IDEA/" style="font-size: 10.91px;">IDEA</a> <a href="/tags/IT/" style="font-size: 14.55px;">IT</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.82px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.91px;">JAVASE</a> <a href="/tags/LINUX/" style="font-size: 10px;">LINUX</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MQ/" style="font-size: 11.82px;">MQ</a> <a href="/tags/ONOS/" style="font-size: 15.45px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 14.55px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PROTOCAL/" style="font-size: 10px;">PROTOCAL</a> <a href="/tags/PYTHON/" style="font-size: 10.91px;">PYTHON</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/Ribbon/" style="font-size: 10px;">Ribbon</a> <a href="/tags/SECURITY/" style="font-size: 10px;">SECURITY</a> <a href="/tags/SPRING-BOOT/" style="font-size: 10px;">SPRING-BOOT</a> <a href="/tags/SQL/" style="font-size: 12.73px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.18px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/StringRedisTemplate/" style="font-size: 10px;">StringRedisTemplate</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/annotation/" style="font-size: 15.45px;">annotation</a> <a href="/tags/bazel/" style="font-size: 10px;">bazel</a> <a href="/tags/beanutils/" style="font-size: 10px;">beanutils</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/classloader/" style="font-size: 10px;">classloader</a> <a href="/tags/computer/" style="font-size: 10px;">computer</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/docker/" style="font-size: 12.73px;">docker</a> <a href="/tags/druid/" style="font-size: 10px;">druid</a> <a href="/tags/elasticsearch/" style="font-size: 13.64px;">elasticsearch</a> <a href="/tags/enlink/" style="font-size: 10.91px;">enlink</a> <a href="/tags/fastjson/" style="font-size: 10px;">fastjson</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/hexo/" style="font-size: 12.73px;">hexo</a> <a href="/tags/idea/" style="font-size: 10.91px;">idea</a> <a href="/tags/interceptor/" style="font-size: 11.82px;">interceptor</a> <a href="/tags/jetty/" style="font-size: 10px;">jetty</a> <a href="/tags/jpa/" style="font-size: 10.91px;">jpa</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/karaf/" style="font-size: 11.82px;">karaf</a> <a href="/tags/keepalived/" style="font-size: 10px;">keepalived</a> <a href="/tags/linux-shell/" style="font-size: 15.45px;">linux-shell</a> <a href="/tags/listener/" style="font-size: 10px;">listener</a> <a href="/tags/loadbalanced/" style="font-size: 10px;">loadbalanced</a> <a href="/tags/logback/" style="font-size: 10px;">logback</a> <a href="/tags/login/" style="font-size: 10.91px;">login</a> <a href="/tags/lombok/" style="font-size: 11.82px;">lombok</a> <a href="/tags/mac/" style="font-size: 15.45px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.82px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 17.27px;">mybatis</a> <a href="/tags/mycat/" style="font-size: 10.91px;">mycat</a> <a href="/tags/mysql/" style="font-size: 16.36px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/oauth2/" style="font-size: 10px;">oauth2</a> <a href="/tags/pagehelper/" style="font-size: 10px;">pagehelper</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/rabbitMq/" style="font-size: 11.82px;">rabbitMq</a> <a href="/tags/redis/" style="font-size: 11.82px;">redis</a> <a href="/tags/redisTemplate/" style="font-size: 10px;">redisTemplate</a> <a href="/tags/reflection/" style="font-size: 11.82px;">reflection</a> <a href="/tags/registry-center/" style="font-size: 10px;">registry center</a> <a href="/tags/restTemplate/" style="font-size: 10px;">restTemplate</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/serialVersionUID/" style="font-size: 10px;">serialVersionUID</a> <a href="/tags/servlet/" style="font-size: 10.91px;">servlet</a> <a href="/tags/session/" style="font-size: 10.91px;">session</a> <a href="/tags/spring/" style="font-size: 15.45px;">spring</a> <a href="/tags/spring-task/" style="font-size: 12.73px;">spring task</a> <a href="/tags/springboot/" style="font-size: 19.09px;">springboot</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/webClient/" style="font-size: 10px;">webClient</a> <a href="/tags/yaml/" style="font-size: 10.91px;">yaml</a> <a href="/tags/事物/" style="font-size: 10px;">事物</a> <a href="/tags/全局异常/" style="font-size: 10px;">全局异常</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.91px;">文件服务器</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/ELASTICSEARCH/" style="font-size: 10px;">ELASTICSEARCH</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10.91px;">Eureka</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/IDEA/" style="font-size: 10.91px;">IDEA</a> <a href="/tags/IT/" style="font-size: 14.55px;">IT</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.82px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.91px;">JAVASE</a> <a href="/tags/LINUX/" style="font-size: 10px;">LINUX</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MQ/" style="font-size: 11.82px;">MQ</a> <a href="/tags/ONOS/" style="font-size: 15.45px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 14.55px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PROTOCAL/" style="font-size: 10px;">PROTOCAL</a> <a href="/tags/PYTHON/" style="font-size: 10.91px;">PYTHON</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/Ribbon/" style="font-size: 10px;">Ribbon</a> <a href="/tags/SECURITY/" style="font-size: 10px;">SECURITY</a> <a href="/tags/SPRING-BOOT/" style="font-size: 10px;">SPRING-BOOT</a> <a href="/tags/SQL/" style="font-size: 12.73px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.18px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/StringRedisTemplate/" style="font-size: 10px;">StringRedisTemplate</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/annotation/" style="font-size: 15.45px;">annotation</a> <a href="/tags/bazel/" style="font-size: 10px;">bazel</a> <a href="/tags/beanutils/" style="font-size: 10px;">beanutils</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/classloader/" style="font-size: 10px;">classloader</a> <a href="/tags/computer/" style="font-size: 10px;">computer</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/docker/" style="font-size: 12.73px;">docker</a> <a href="/tags/druid/" style="font-size: 10px;">druid</a> <a href="/tags/elasticsearch/" style="font-size: 13.64px;">elasticsearch</a> <a href="/tags/enlink/" style="font-size: 10px;">enlink</a> <a href="/tags/fastjson/" style="font-size: 10px;">fastjson</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/hexo/" style="font-size: 12.73px;">hexo</a> <a href="/tags/idea/" style="font-size: 10.91px;">idea</a> <a href="/tags/interceptor/" style="font-size: 11.82px;">interceptor</a> <a href="/tags/jetty/" style="font-size: 10px;">jetty</a> <a href="/tags/jpa/" style="font-size: 10.91px;">jpa</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/karaf/" style="font-size: 11.82px;">karaf</a> <a href="/tags/keepalived/" style="font-size: 10px;">keepalived</a> <a href="/tags/linux-shell/" style="font-size: 15.45px;">linux-shell</a> <a href="/tags/listener/" style="font-size: 10px;">listener</a> <a href="/tags/loadbalanced/" style="font-size: 10px;">loadbalanced</a> <a href="/tags/logback/" style="font-size: 10px;">logback</a> <a href="/tags/login/" style="font-size: 10.91px;">login</a> <a href="/tags/lombok/" style="font-size: 11.82px;">lombok</a> <a href="/tags/mac/" style="font-size: 15.45px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.82px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 17.27px;">mybatis</a> <a href="/tags/mycat/" style="font-size: 10.91px;">mycat</a> <a href="/tags/mysql/" style="font-size: 16.36px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/oauth2/" style="font-size: 10px;">oauth2</a> <a href="/tags/pagehelper/" style="font-size: 10px;">pagehelper</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/rabbitMq/" style="font-size: 11.82px;">rabbitMq</a> <a href="/tags/redis/" style="font-size: 11.82px;">redis</a> <a href="/tags/redisTemplate/" style="font-size: 10px;">redisTemplate</a> <a href="/tags/reflection/" style="font-size: 11.82px;">reflection</a> <a href="/tags/registry-center/" style="font-size: 10px;">registry center</a> <a href="/tags/restTemplate/" style="font-size: 10px;">restTemplate</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/serialVersionUID/" style="font-size: 10px;">serialVersionUID</a> <a href="/tags/servlet/" style="font-size: 10.91px;">servlet</a> <a href="/tags/session/" style="font-size: 10.91px;">session</a> <a href="/tags/spring/" style="font-size: 15.45px;">spring</a> <a href="/tags/spring-task/" style="font-size: 12.73px;">spring task</a> <a href="/tags/springboot/" style="font-size: 19.09px;">springboot</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/webClient/" style="font-size: 10px;">webClient</a> <a href="/tags/yaml/" style="font-size: 10.91px;">yaml</a> <a href="/tags/事物/" style="font-size: 10px;">事物</a> <a href="/tags/全局异常/" style="font-size: 10px;">全局异常</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.91px;">文件服务器</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
     </div>
 </div>
 
@@ -2980,7 +3046,7 @@
                     <span class="level-item">四月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -3035,7 +3101,7 @@
                     <span class="level-item">十一月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -3167,7 +3233,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/JAVAEE/">
                         <span class="tag">JAVAEE</span>
-                        <span class="tag is-grey">130</span>
+                        <span class="tag is-grey">131</span>
                     </a>
                 </div>
                 
@@ -3412,7 +3478,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/enlink/">
                         <span class="tag">enlink</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

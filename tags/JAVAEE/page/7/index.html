@@ -13,15 +13,15 @@
     <meta name="description" content="private learning">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Learning">
-<meta property="og:url" content="http://yoursite.com/tags/JAVAEE/page/7/index.html">
+<meta property="og:url" content="/blog/tags/JAVAEE/page/7/index.html">
 <meta property="og:site_name" content="Learning">
 <meta property="og:description" content="private learning">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:image" content="/images/og_image.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Learning">
 <meta name="twitter:description" content="private learning">
-<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+<meta name="twitter:image" content="/images/og_image.png">
 
 
 
@@ -151,6 +151,86 @@
         </nav>
     </div>
 </div>
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-07-14T16:32:00.000Z">2019-07-14</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/IT/">IT</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    13 分钟 read (About 1949 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/07/15/类加载器读取配置文件/">类加载器读取配置文件</a>
+            
+        </h1>
+        <div class="content">
+            <p>用类加载器的5种方式读取.properties文件</p>
+<p>用类加载器的5中形式读取.properties文件（这个.properties文件一般放在src的下面）</p>
+<p>用类加载器进行读取：这里采取先向大家讲读取类加载器的几种方法；然后写一个例子把几种方法融进去，让大家直观感受。最后分析原理。（主要是结合所牵涉的方法的源代码的角度进行分析）</p>
+<p>这里先介绍用类加载器读取的几种方法:</p>
+<p>1.任意类名.class.getResourceAsStream(“/文件所在的位置”);【文件所在的位置从包名开始写】</p>
+<p>2.和.properties文件在同一个目录下的类名.class.getResourceAsStream(“文件所在的位置”);【文件所在的位置从包名开始写，注意这里和上面的相比较少了一个斜杠/】</p>
+<p>　　当然你也可以写成跟1一样的形式即：任意类名.class.getResourceAsStream(“/文件所在的位置”);</p>
+<p>3.任意类名.class.getClassLoader().getResourceAsStream(“文件所在的位置”);【文件所在的位置从包名开始写】</p>
+<p>4.任意类名.class.getClassLoader().getResource(“文件所在的位置”).openStream();【文件所在的位置从包名开始写】</p>
+<p>5.任意类名.class.getClassLoader().getResource(“文件所在的位置”)..openConnection().getInputStream();【文件所在的位置从包名开始写】</p>
+<p>//一个例子，说明上述5中方法的用法。</p>
+<p>上面图片中的各个红色矩形就是我要读取的properties文件。主要是两类。一类直接放在src下面。另一类是放在某个文件夹下面.</p>
+<p>//f.properties文件的内容如下图所示；</p>
+<p>//上述五种情况说明的代码如下：</p>
+<figure class="highlight lsl hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"> <span class="hljs-number">1</span> package com.qls.commonclass;</span><br><span class="line"> <span class="hljs-number">2</span> </span><br><span class="line"> <span class="hljs-number">3</span> import java.io.IOException;</span><br><span class="line"> <span class="hljs-number">4</span> import java.io.InputStream;</span><br><span class="line"> <span class="hljs-number">5</span> import java.util.Properties;</span><br><span class="line"> <span class="hljs-number">6</span> </span><br><span class="line"> <span class="hljs-number">7</span> import com.qls.counter.Ok;</span><br><span class="line"> <span class="hljs-number">8</span> </span><br><span class="line"> <span class="hljs-number">9</span> <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">10  * 分别用类加载器的5种方法读取f.properties文件。</span></span><br><span class="line"><span class="hljs-comment">11  * @author 秦林森</span></span><br><span class="line"><span class="hljs-comment">12  *</span></span><br><span class="line"><span class="hljs-comment">13  */</span></span><br><span class="line"><span class="hljs-number">14</span> public class Test6 &#123;</span><br><span class="line"><span class="hljs-number">15</span> </span><br><span class="line"><span class="hljs-number">16</span>     public static void main(String[] args) throws IOException &#123;</span><br><span class="line"><span class="hljs-number">17</span>         <span class="hljs-comment">// TODO Auto-generated method stub</span></span><br><span class="line"><span class="hljs-number">18</span>         <span class="hljs-comment">/**第一种情形获取输入流。</span></span><br><span class="line"><span class="hljs-comment">19          * 任意类名.class.getResourceAsStream("/文件所在的位置");【文件所在的位置从包名开始写】</span></span><br><span class="line"><span class="hljs-comment">20          * @param args</span></span><br><span class="line"><span class="hljs-comment">21          */</span></span><br><span class="line"><span class="hljs-number">22</span>         <span class="hljs-comment">//获取输入流</span></span><br><span class="line"><span class="hljs-number">23</span>         InputStream in = Test.class.getResourceAsStream(<span class="hljs-string">"/com/qls/counter/f.properties"</span>);</span><br><span class="line"><span class="hljs-number">24</span>         <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">25          * 第二种情形获取输入流。</span></span><br><span class="line"><span class="hljs-comment">26          * 和.properties文件在同一个目录下的类名.class.getResourceAsStream("文件所在的位置");</span></span><br><span class="line"><span class="hljs-comment">27          * 【文件所在的位置从包名开始写，注意这里和上面的相比较少了一个斜杠/】</span></span><br><span class="line"><span class="hljs-comment">28          * 这里随便选择一个与：f.properties在同一个目录下的类比如Ok这个类吧！</span></span><br><span class="line"><span class="hljs-comment">29          * 这里你自然也可以写成跟第一种情况一样的形式：</span></span><br><span class="line"><span class="hljs-comment">30          * 即：</span></span><br><span class="line"><span class="hljs-comment">31          * InputStream in2 = Ok.class.getResourceAsStream("/com/qls/counter/f.properties");</span></span><br><span class="line"><span class="hljs-comment">32          * 因为第一种情况是针对任意一个类而言的公式。</span></span><br><span class="line"><span class="hljs-comment">33          */</span></span><br><span class="line"><span class="hljs-number">34</span>         InputStream in2 = Ok.class.getResourceAsStream(<span class="hljs-string">"f.properties"</span>);</span><br><span class="line"><span class="hljs-number">35</span>         <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">36          * 第三种情形获取输入流：</span></span><br><span class="line"><span class="hljs-comment">37          * 任意类名.class.getClassLoader().getResourceAsStream("文件所在的位置");</span></span><br><span class="line"><span class="hljs-comment">38          * 【文件所在的位置从包名开始写】</span></span><br><span class="line"><span class="hljs-comment">39          */</span></span><br><span class="line"><span class="hljs-number">40</span>         InputStream in3 = Test2.class.getClassLoader().getResourceAsStream(<span class="hljs-string">"com/qls/counter/f.properties"</span>);</span><br><span class="line"><span class="hljs-number">41</span>         <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">42          * 第四中情形获取输入流：</span></span><br><span class="line"><span class="hljs-comment">43          * 任意类名.class.getClassLoader().getResource("文件所在的位置").openStream();</span></span><br><span class="line"><span class="hljs-comment">44          * 【文件所在的位置从包名开始写】</span></span><br><span class="line"><span class="hljs-comment">45          */</span></span><br><span class="line"><span class="hljs-number">46</span>         InputStream in4 = Test4.class.getClassLoader().getResource(<span class="hljs-string">"com/qls/counter/f.properties"</span>).openStream();</span><br><span class="line"><span class="hljs-number">47</span>         <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">48          * 第五种情形获取输入流：</span></span><br><span class="line"><span class="hljs-comment">49          * .任意类名.class.getClassLoader().getResource("文件所在的位置").openConnection().getInputStream();</span></span><br><span class="line"><span class="hljs-comment">50          * 【文件所在的位置从包名开始写】</span></span><br><span class="line"><span class="hljs-comment">51          */</span></span><br><span class="line"><span class="hljs-number">52</span>         InputStream in5 = Test5.class.getClassLoader().getResource(<span class="hljs-string">"com/qls/counter/f.properties"</span>).openConnection().getInputStream();</span><br><span class="line"><span class="hljs-number">53</span>         <span class="hljs-comment">//创建Properties</span></span><br><span class="line"><span class="hljs-number">54</span>         Properties prop=new Properties();</span><br><span class="line"><span class="hljs-number">55</span>         <span class="hljs-comment">//把输入流in加载到prop中</span></span><br><span class="line"><span class="hljs-number">56</span>         <span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">57          * 验证上述5中输入流是否成立。只需带入prop.load(InputStream inputStream);验证即可。</span></span><br><span class="line"><span class="hljs-comment">58          * 也就是：</span></span><br><span class="line"><span class="hljs-comment">59          * prop.load(in);</span></span><br><span class="line"><span class="hljs-comment">60          * prop.load(in2);</span></span><br><span class="line"><span class="hljs-comment">61          * prop.load(in3);</span></span><br><span class="line"><span class="hljs-comment">62          * prop.load(in4);</span></span><br><span class="line"><span class="hljs-comment">63          * prop.load(in5);</span></span><br><span class="line"><span class="hljs-comment">64          */</span></span><br><span class="line"><span class="hljs-number">65</span>         prop.load(in5);</span><br><span class="line"><span class="hljs-number">66</span>         System.out.println(<span class="hljs-string">"sixi="</span>+prop.getProperty(<span class="hljs-string">"sixi"</span>));</span><br><span class="line"><span class="hljs-number">67</span>         System.out.println(<span class="hljs-string">"ouyangfeng="</span>+prop.getProperty(<span class="hljs-string">"ouyangfeng"</span>));</span><br><span class="line"><span class="hljs-number">68</span>         System.out.println(<span class="hljs-string">"rape="</span>+prop.getProperty(<span class="hljs-string">"farm"</span>));</span><br><span class="line"><span class="hljs-number">69</span>     &#125;</span><br><span class="line"><span class="hljs-number">70</span> </span><br><span class="line"><span class="hljs-number">71</span> &#125;<span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">72 Output:</span></span><br><span class="line"><span class="hljs-comment">73 sixi=river</span></span><br><span class="line"><span class="hljs-comment">74 ouyangfeng=masses</span></span><br><span class="line"><span class="hljs-comment">75 farm=flower</span></span><br><span class="line"><span class="hljs-comment">76 **/</span><span class="hljs-comment">//:~</span></span><br></pre></td></tr></table></figure>
+
+<p>上述5中方法的原理分析。</p>
+<p>首先看看Class中的resolveName(String name)究竟是干什么的。源码如下所示：</p>
+<figure class="highlight lsl hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> <span class="hljs-number">1</span>  private String resolveName(String name) &#123;</span><br><span class="line"> <span class="hljs-number">2</span>         if (name == null) &#123;</span><br><span class="line"> <span class="hljs-number">3</span>             return name;</span><br><span class="line"> <span class="hljs-number">4</span>         &#125;</span><br><span class="line"> <span class="hljs-number">5</span>         if (!name.startsWith(<span class="hljs-string">"/"</span>)) &#123;</span><br><span class="line"> <span class="hljs-number">6</span>             Class&lt;?&gt; c = this;</span><br><span class="line"> <span class="hljs-number">7</span>             while (c.isArray()) &#123;</span><br><span class="line"> <span class="hljs-number">8</span>                 c = c.getComponentType();</span><br><span class="line"> <span class="hljs-number">9</span>             &#125;</span><br><span class="line"><span class="hljs-number">10</span>             String baseName = c.getName();</span><br><span class="line"><span class="hljs-number">11</span>             int index = baseName.lastIndexOf('.');</span><br><span class="line"><span class="hljs-number">12</span>             if (index != <span class="hljs-number">-1</span>) &#123;</span><br><span class="line"><span class="hljs-number">13</span>                 name = baseName.substring(<span class="hljs-number">0</span>, index).replace('.', '/')</span><br><span class="line"><span class="hljs-number">14</span>                     +<span class="hljs-string">"/"</span>+name;</span><br><span class="line"><span class="hljs-number">15</span>             &#125;</span><br><span class="line"><span class="hljs-number">16</span>         &#125; else &#123;</span><br><span class="line"><span class="hljs-number">17</span>             name = name.substring(<span class="hljs-number">1</span>);</span><br><span class="line"><span class="hljs-number">18</span>         &#125;</span><br><span class="line"><span class="hljs-number">19</span>         return name;</span><br><span class="line"><span class="hljs-number">20</span>     &#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面我把这个源码讲的内容翻译人类语言：</p>
+<p>给任意一个字符串name，如果该name是以/开始的，则该函数返回的是：去掉/这个字符的字符串。（如name=”/ouyangfeng” 则调用该函数之后得到的结果是：name=ouyangfeng）。<br>如果该name这个字符串不是以/开始的，则该函数返回的结果是调用这个函数类所在的包名+name组成的字符串（例如假设Test5所在的包名是：com.qls.mount 。则：Test5.class.resolveName(“ouyangfeng”);返回结果是：com/qls/mount/ouyangfeng）</p>
+<p>也就是帮助文档讲述的：</p>
+<p>If the name begins with a ‘/‘ (‘\u002f’), then the absolute name of the resource is the portion of the name following the ‘/‘.<br>Otherwise, the absolute name is of the following form:<br>modified_package_name/name<br>Where the modified_package_name is the package name of this object with ‘/‘ substituted for ‘.’ (‘\u002e’). </p>
+<p>上述英文我简要翻译一下：如果name是以一个/开头，则这个资源的绝对name就是：name中/之后的部分内容。<br>否则：这这个绝对name就是如下形式。包名/name,把这里包名中的.用/代替掉。【如：com.qls.river把.用/代替掉就是：com/qls/river】<br>然后我们再看看Class类中的getResourceAsStream(String name)的源码和ClassLoader中的getResourceAsStream(String name)中的源码。</p>
+<p>Class类中的getResourceAsStream(String name)的源码如下：</p>
+<figure class="highlight basic hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-symbol">1 </span> public InputStream getResourceAsStream(String <span class="hljs-keyword">name</span>) &#123;</span><br><span class="line"><span class="hljs-symbol">2 </span>        <span class="hljs-keyword">name</span> = resolveName(<span class="hljs-keyword">name</span>);//注意这里有一个resolveName(String <span class="hljs-keyword">name</span>)方法，根据上述的分析，易知道这个源码的意思.</span><br><span class="line"><span class="hljs-symbol">3 </span>        ClassLoader cl = getClassLoader0();</span><br><span class="line"><span class="hljs-symbol">4 </span>        <span class="hljs-keyword">if</span> (cl==null) &#123;</span><br><span class="line"><span class="hljs-symbol">5 </span>            // A <span class="hljs-keyword">system</span> class.</span><br><span class="line"><span class="hljs-symbol">6 </span>            <span class="hljs-keyword">return</span> ClassLoader.getSystemResourceAsStream(<span class="hljs-keyword">name</span>);</span><br><span class="line"><span class="hljs-symbol">7 </span>        &#125;</span><br><span class="line"><span class="hljs-symbol">8 </span>        <span class="hljs-keyword">return</span> cl.getResourceAsStream(<span class="hljs-keyword">name</span>);</span><br><span class="line"><span class="hljs-symbol">9 </span>    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>ClassLoader中的getResourceAsStream(String name)中的源码如下：</p>
+<figure class="highlight basic hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-symbol">1 </span> public InputStream getResourceAsStream(String <span class="hljs-keyword">name</span>) &#123;</span><br><span class="line"><span class="hljs-symbol">2 </span>        URL url = getResource(<span class="hljs-keyword">name</span>);</span><br><span class="line"><span class="hljs-symbol">3 </span>        try &#123;</span><br><span class="line"><span class="hljs-symbol">4 </span>            <span class="hljs-keyword">return</span> url != null ? url.openStream() : null;//这句代码的意思是：如果url不是null时返回的是：url.openStream()，反之如果url为null则返回null.</span><br><span class="line"><span class="hljs-symbol">5 </span>        &#125; catch (IOException e) &#123;</span><br><span class="line"><span class="hljs-symbol">6 </span>            <span class="hljs-keyword">return</span> null;</span><br><span class="line"><span class="hljs-symbol">7 </span>        &#125;</span><br><span class="line"><span class="hljs-symbol">8 </span>    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过这Class.resolveName(String name)中的源代码和ClassLoader.getResourceAsStream(String name)中的源代码以及Class.getResourceAsStream（String name）中的原代码我们易知道上述五种情况是怎么来的。无需记忆。</p>
+<p>只需学会数学推理即可。</p>
+<p>大家在看源码是：发现Class.resolveName(String name)这个方法是private的，你用普通方法根本调用不了，下面我顺便提一下：如何调用这个方法。以便大家可以更好的理解这个方法所讲的意思。</p>
+<figure class="highlight lsl hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"> <span class="hljs-number">1</span> package com.qls.commonclass;</span><br><span class="line"> <span class="hljs-number">2</span> </span><br><span class="line"> <span class="hljs-number">3</span> import java.lang.reflect.InvocationTargetException;</span><br><span class="line"> <span class="hljs-number">4</span> import java.lang.reflect.Method;</span><br><span class="line"> <span class="hljs-number">5</span> </span><br><span class="line"> <span class="hljs-number">6</span> <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> 7  * 用反射调用ClassLoade中的 private String resolveName(String name)</span></span><br><span class="line"><span class="hljs-comment"> 8  * 验证这个方法所讲的意思。</span></span><br><span class="line"><span class="hljs-comment"> 9  * @author 秦林森</span></span><br><span class="line"><span class="hljs-comment">10  *</span></span><br><span class="line"><span class="hljs-comment">11  */</span></span><br><span class="line"><span class="hljs-number">12</span> public class Test7 &#123;</span><br><span class="line"><span class="hljs-number">13</span> </span><br><span class="line"><span class="hljs-number">14</span>     public static void main(String[] args) throws Exception&#123;</span><br><span class="line"><span class="hljs-number">15</span>         <span class="hljs-comment">// TODO Auto-generated method stub</span></span><br><span class="line"><span class="hljs-number">16</span>         <span class="hljs-comment">//得到这个方法。</span></span><br><span class="line"><span class="hljs-number">17</span>         Method method = Class.class.getDeclaredMethod(<span class="hljs-string">"resolveName"</span>, new Class[]&#123;String.class&#125;);</span><br><span class="line"><span class="hljs-number">18</span>         <span class="hljs-comment">//由于这个方法是private,所以要获取这个方法的访问权限</span></span><br><span class="line"><span class="hljs-number">19</span>         method.setAccessible(true);</span><br><span class="line"><span class="hljs-number">20</span>         <span class="hljs-comment">//写一个实例，以便调用这个方法。</span></span><br><span class="line"><span class="hljs-number">21</span>         </span><br><span class="line"><span class="hljs-number">22</span>         Object obj = Test7.class;<span class="hljs-comment">//Test这个类所在的包是:com.qls.commonclass</span></span><br><span class="line"><span class="hljs-number">23</span>         <span class="hljs-comment">//调用这个方法</span></span><br><span class="line"><span class="hljs-number">24</span>         String invoke = (String) method.invoke(obj, new Object[]&#123;<span class="hljs-string">"ouyangfeng"</span>&#125;);</span><br><span class="line"><span class="hljs-number">25</span>         String invoke2 = (String) method.invoke(obj, new Object[]&#123;<span class="hljs-string">"/ouyangfeng"</span>&#125;);</span><br><span class="line"><span class="hljs-number">26</span>         System.out.println(<span class="hljs-string">"invoke="</span>+invoke);</span><br><span class="line"><span class="hljs-number">27</span>         System.out.println(<span class="hljs-string">"invoke2="</span>+invoke2);</span><br><span class="line"><span class="hljs-number">28</span>         </span><br><span class="line"><span class="hljs-number">29</span>     &#125;</span><br><span class="line"><span class="hljs-number">30</span> </span><br><span class="line"><span class="hljs-number">31</span> &#125;<span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">32 Output:</span></span><br><span class="line"><span class="hljs-comment">33 invoke=com/qls/commonclass/ouyangfeng</span></span><br><span class="line"><span class="hljs-comment">34 invoke2=ouyangfeng</span></span><br><span class="line"><span class="hljs-comment">35 由此可以证明了:以/开头的字符串"/ouyangfeng"调用resolveName(String name)</span></span><br><span class="line"><span class="hljs-comment">36 这个方法之后返回的结果是：ouyangfeng</span></span><br><span class="line"><span class="hljs-comment">37 不以/开头的字符串："ouyangfeng"返回的结果是：调用这个方法的包名/name</span></span><br><span class="line"><span class="hljs-comment">38 【在本例中是Test7调用resolveName(String name),而Test7所在的包是：com.qls.commonclass</span></span><br><span class="line"><span class="hljs-comment">39 所以返回结果是：com/qls/commonclass/ouyangfeng】</span></span><br><span class="line"><span class="hljs-comment">40 </span></span><br><span class="line"><span class="hljs-comment">41 */</span><span class="hljs-comment">//:~</span></span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
 
     <div class="card">
     
@@ -841,45 +921,7 @@ mybatis的入门案例
         
         <article class="media">
             
-            <a href="/2020/05/29/@Select注解时使用in/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="文档标题">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T15:53:20.000Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/@Select注解时使用in/" class="title has-link-black-ter is-size-6 has-text-weight-normal">文档标题</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/JAVAEE/">JAVAEE</a> / <a class="has-link-grey -link" href="/categories/JAVAEE/MYBATIS/">MYBATIS</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/05/29/mysql共享锁和排它锁/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="mysql共享锁和排它锁">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T15:35:53.000Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/mysql共享锁和排它锁/" class="title has-link-black-ter is-size-6 has-text-weight-normal">mysql共享锁和排它锁</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/JAVAEE/">JAVAEE</a> / <a class="has-link-grey -link" href="/categories/JAVAEE/MYSQL/">MYSQL</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/05/29/邮箱找回密码与二次认证/" class="media-left">
+            <a href="/2020/05/30/邮箱找回密码与二次认证/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="">
                 </p>
@@ -887,8 +929,8 @@ mybatis的入门案例
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T14:40:15.741Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/邮箱找回密码与二次认证/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-30T01:55:28.835Z">2020-05-30</time></div>
+                    <a href="/2020/05/30/邮箱找回密码与二次认证/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -898,7 +940,7 @@ mybatis的入门案例
         
         <article class="media">
             
-            <a href="/2020/05/29/可视化面板/" class="media-left">
+            <a href="/2020/05/30/可视化面板/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="">
                 </p>
@@ -906,8 +948,8 @@ mybatis的入门案例
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T14:40:15.601Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/可视化面板/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-30T01:55:28.755Z">2020-05-30</time></div>
+                    <a href="/2020/05/30/可视化面板/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -917,7 +959,7 @@ mybatis的入门案例
         
         <article class="media">
             
-            <a href="/2020/05/29/CS应用配置/" class="media-left">
+            <a href="/2020/05/30/CS应用配置/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="">
                 </p>
@@ -925,10 +967,48 @@ mybatis的入门案例
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T14:40:15.581Z">2020-05-29</time></div>
-                    <a href="/2020/05/29/CS应用配置/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-30T01:55:28.745Z">2020-05-30</time></div>
+                    <a href="/2020/05/30/CS应用配置/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
                     <p class="is-size-7 is-uppercase">
                         
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/05/30/特权用户访问策略控制/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-30T01:55:28.745Z">2020-05-30</time></div>
+                    <a href="/2020/05/30/特权用户访问策略控制/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/05/30/md列表/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="markdown任务列表语法checkbox">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-30T01:55:28.735Z">2020-05-30</time></div>
+                    <a href="/2020/05/30/md列表/" class="title has-link-black-ter is-size-6 has-text-weight-normal">markdown任务列表语法checkbox</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/IT/">IT</a>
                     </p>
                 </div>
             </div>
@@ -987,7 +1067,7 @@ mybatis的入门案例
                         Categories
                     </p>
                     <p class="title has-text-weight-normal">
-                        15
+                        14
                     </p>
                 </div>
             </div>
@@ -1082,7 +1162,7 @@ mybatis的入门案例
                 <span class="level-item">IT</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">194</span>
+                <span class="level-item tag">195</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/JAVAEE/">
@@ -1149,14 +1229,6 @@ mybatis的入门案例
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/WORK/">
-            <span class="level-start">
-                <span class="level-item">WORK</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/office/">
             <span class="level-start">
                 <span class="level-item">office</span>
@@ -1192,7 +1264,7 @@ mybatis的入门案例
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/ELASTICSEARCH/" style="font-size: 10px;">ELASTICSEARCH</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10.91px;">Eureka</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/IDEA/" style="font-size: 10.91px;">IDEA</a> <a href="/tags/IT/" style="font-size: 14.55px;">IT</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.82px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.91px;">JAVASE</a> <a href="/tags/LINUX/" style="font-size: 10px;">LINUX</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MQ/" style="font-size: 11.82px;">MQ</a> <a href="/tags/ONOS/" style="font-size: 15.45px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 14.55px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PROTOCAL/" style="font-size: 10px;">PROTOCAL</a> <a href="/tags/PYTHON/" style="font-size: 10.91px;">PYTHON</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/Ribbon/" style="font-size: 10px;">Ribbon</a> <a href="/tags/SECURITY/" style="font-size: 10px;">SECURITY</a> <a href="/tags/SPRING-BOOT/" style="font-size: 10px;">SPRING-BOOT</a> <a href="/tags/SQL/" style="font-size: 12.73px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.18px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/StringRedisTemplate/" style="font-size: 10px;">StringRedisTemplate</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/annotation/" style="font-size: 15.45px;">annotation</a> <a href="/tags/bazel/" style="font-size: 10px;">bazel</a> <a href="/tags/beanutils/" style="font-size: 10px;">beanutils</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/classloader/" style="font-size: 10px;">classloader</a> <a href="/tags/computer/" style="font-size: 10px;">computer</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/docker/" style="font-size: 12.73px;">docker</a> <a href="/tags/druid/" style="font-size: 10px;">druid</a> <a href="/tags/elasticsearch/" style="font-size: 13.64px;">elasticsearch</a> <a href="/tags/enlink/" style="font-size: 10.91px;">enlink</a> <a href="/tags/fastjson/" style="font-size: 10px;">fastjson</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/hexo/" style="font-size: 12.73px;">hexo</a> <a href="/tags/idea/" style="font-size: 10.91px;">idea</a> <a href="/tags/interceptor/" style="font-size: 11.82px;">interceptor</a> <a href="/tags/jetty/" style="font-size: 10px;">jetty</a> <a href="/tags/jpa/" style="font-size: 10.91px;">jpa</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/karaf/" style="font-size: 11.82px;">karaf</a> <a href="/tags/keepalived/" style="font-size: 10px;">keepalived</a> <a href="/tags/linux-shell/" style="font-size: 15.45px;">linux-shell</a> <a href="/tags/listener/" style="font-size: 10px;">listener</a> <a href="/tags/loadbalanced/" style="font-size: 10px;">loadbalanced</a> <a href="/tags/logback/" style="font-size: 10px;">logback</a> <a href="/tags/login/" style="font-size: 10.91px;">login</a> <a href="/tags/lombok/" style="font-size: 11.82px;">lombok</a> <a href="/tags/mac/" style="font-size: 15.45px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.82px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 17.27px;">mybatis</a> <a href="/tags/mycat/" style="font-size: 10.91px;">mycat</a> <a href="/tags/mysql/" style="font-size: 16.36px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/oauth2/" style="font-size: 10px;">oauth2</a> <a href="/tags/pagehelper/" style="font-size: 10px;">pagehelper</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/rabbitMq/" style="font-size: 11.82px;">rabbitMq</a> <a href="/tags/redis/" style="font-size: 11.82px;">redis</a> <a href="/tags/redisTemplate/" style="font-size: 10px;">redisTemplate</a> <a href="/tags/reflection/" style="font-size: 11.82px;">reflection</a> <a href="/tags/registry-center/" style="font-size: 10px;">registry center</a> <a href="/tags/restTemplate/" style="font-size: 10px;">restTemplate</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/serialVersionUID/" style="font-size: 10px;">serialVersionUID</a> <a href="/tags/servlet/" style="font-size: 10.91px;">servlet</a> <a href="/tags/session/" style="font-size: 10.91px;">session</a> <a href="/tags/spring/" style="font-size: 15.45px;">spring</a> <a href="/tags/spring-task/" style="font-size: 12.73px;">spring task</a> <a href="/tags/springboot/" style="font-size: 19.09px;">springboot</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/webClient/" style="font-size: 10px;">webClient</a> <a href="/tags/yaml/" style="font-size: 10.91px;">yaml</a> <a href="/tags/事物/" style="font-size: 10px;">事物</a> <a href="/tags/全局异常/" style="font-size: 10px;">全局异常</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.91px;">文件服务器</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/ELASTICSEARCH/" style="font-size: 10px;">ELASTICSEARCH</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10.91px;">Eureka</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/IDEA/" style="font-size: 10.91px;">IDEA</a> <a href="/tags/IT/" style="font-size: 14.55px;">IT</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.82px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.91px;">JAVASE</a> <a href="/tags/LINUX/" style="font-size: 10px;">LINUX</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MQ/" style="font-size: 11.82px;">MQ</a> <a href="/tags/ONOS/" style="font-size: 15.45px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 14.55px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PROTOCAL/" style="font-size: 10px;">PROTOCAL</a> <a href="/tags/PYTHON/" style="font-size: 10.91px;">PYTHON</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/Ribbon/" style="font-size: 10px;">Ribbon</a> <a href="/tags/SECURITY/" style="font-size: 10px;">SECURITY</a> <a href="/tags/SPRING-BOOT/" style="font-size: 10px;">SPRING-BOOT</a> <a href="/tags/SQL/" style="font-size: 12.73px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.18px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/StringRedisTemplate/" style="font-size: 10px;">StringRedisTemplate</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/annotation/" style="font-size: 15.45px;">annotation</a> <a href="/tags/bazel/" style="font-size: 10px;">bazel</a> <a href="/tags/beanutils/" style="font-size: 10px;">beanutils</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/classloader/" style="font-size: 10px;">classloader</a> <a href="/tags/computer/" style="font-size: 10px;">computer</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/docker/" style="font-size: 12.73px;">docker</a> <a href="/tags/druid/" style="font-size: 10px;">druid</a> <a href="/tags/elasticsearch/" style="font-size: 13.64px;">elasticsearch</a> <a href="/tags/enlink/" style="font-size: 10px;">enlink</a> <a href="/tags/fastjson/" style="font-size: 10px;">fastjson</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/hexo/" style="font-size: 12.73px;">hexo</a> <a href="/tags/idea/" style="font-size: 10.91px;">idea</a> <a href="/tags/interceptor/" style="font-size: 11.82px;">interceptor</a> <a href="/tags/jetty/" style="font-size: 10px;">jetty</a> <a href="/tags/jpa/" style="font-size: 10.91px;">jpa</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/karaf/" style="font-size: 11.82px;">karaf</a> <a href="/tags/keepalived/" style="font-size: 10px;">keepalived</a> <a href="/tags/linux-shell/" style="font-size: 15.45px;">linux-shell</a> <a href="/tags/listener/" style="font-size: 10px;">listener</a> <a href="/tags/loadbalanced/" style="font-size: 10px;">loadbalanced</a> <a href="/tags/logback/" style="font-size: 10px;">logback</a> <a href="/tags/login/" style="font-size: 10.91px;">login</a> <a href="/tags/lombok/" style="font-size: 11.82px;">lombok</a> <a href="/tags/mac/" style="font-size: 15.45px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.82px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 17.27px;">mybatis</a> <a href="/tags/mycat/" style="font-size: 10.91px;">mycat</a> <a href="/tags/mysql/" style="font-size: 16.36px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/oauth2/" style="font-size: 10px;">oauth2</a> <a href="/tags/pagehelper/" style="font-size: 10px;">pagehelper</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/rabbitMq/" style="font-size: 11.82px;">rabbitMq</a> <a href="/tags/redis/" style="font-size: 11.82px;">redis</a> <a href="/tags/redisTemplate/" style="font-size: 10px;">redisTemplate</a> <a href="/tags/reflection/" style="font-size: 11.82px;">reflection</a> <a href="/tags/registry-center/" style="font-size: 10px;">registry center</a> <a href="/tags/restTemplate/" style="font-size: 10px;">restTemplate</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/serialVersionUID/" style="font-size: 10px;">serialVersionUID</a> <a href="/tags/servlet/" style="font-size: 10.91px;">servlet</a> <a href="/tags/session/" style="font-size: 10.91px;">session</a> <a href="/tags/spring/" style="font-size: 15.45px;">spring</a> <a href="/tags/spring-task/" style="font-size: 12.73px;">spring task</a> <a href="/tags/springboot/" style="font-size: 19.09px;">springboot</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/webClient/" style="font-size: 10px;">webClient</a> <a href="/tags/yaml/" style="font-size: 10.91px;">yaml</a> <a href="/tags/事物/" style="font-size: 10px;">事物</a> <a href="/tags/全局异常/" style="font-size: 10px;">全局异常</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.91px;">文件服务器</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
     </div>
 </div>
 
@@ -1222,7 +1294,7 @@ mybatis的入门案例
                     <span class="level-item">四月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1277,7 +1349,7 @@ mybatis的入门案例
                     <span class="level-item">十一月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -1409,7 +1481,7 @@ mybatis的入门案例
                 <div class="control">
                     <a class="tags has-addons" href="/tags/JAVAEE/">
                         <span class="tag">JAVAEE</span>
-                        <span class="tag is-grey">130</span>
+                        <span class="tag is-grey">131</span>
                     </a>
                 </div>
                 
@@ -1654,7 +1726,7 @@ mybatis的入门案例
                 <div class="control">
                     <a class="tags has-addons" href="/tags/enlink/">
                         <span class="tag">enlink</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2112,7 +2184,7 @@ mybatis的入门案例
                         Categories
                     </p>
                     <p class="title has-text-weight-normal">
-                        15
+                        14
                     </p>
                 </div>
             </div>
@@ -2207,7 +2279,7 @@ mybatis的入门案例
                 <span class="level-item">IT</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">194</span>
+                <span class="level-item tag">195</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/JAVAEE/">
@@ -2274,14 +2346,6 @@ mybatis的入门案例
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/WORK/">
-            <span class="level-start">
-                <span class="level-item">WORK</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/office/">
             <span class="level-start">
                 <span class="level-item">office</span>
@@ -2317,7 +2381,7 @@ mybatis的入门案例
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/ELASTICSEARCH/" style="font-size: 10px;">ELASTICSEARCH</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10.91px;">Eureka</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/IDEA/" style="font-size: 10.91px;">IDEA</a> <a href="/tags/IT/" style="font-size: 14.55px;">IT</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.82px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.91px;">JAVASE</a> <a href="/tags/LINUX/" style="font-size: 10px;">LINUX</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MQ/" style="font-size: 11.82px;">MQ</a> <a href="/tags/ONOS/" style="font-size: 15.45px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 14.55px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PROTOCAL/" style="font-size: 10px;">PROTOCAL</a> <a href="/tags/PYTHON/" style="font-size: 10.91px;">PYTHON</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/Ribbon/" style="font-size: 10px;">Ribbon</a> <a href="/tags/SECURITY/" style="font-size: 10px;">SECURITY</a> <a href="/tags/SPRING-BOOT/" style="font-size: 10px;">SPRING-BOOT</a> <a href="/tags/SQL/" style="font-size: 12.73px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.18px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/StringRedisTemplate/" style="font-size: 10px;">StringRedisTemplate</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/annotation/" style="font-size: 15.45px;">annotation</a> <a href="/tags/bazel/" style="font-size: 10px;">bazel</a> <a href="/tags/beanutils/" style="font-size: 10px;">beanutils</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/classloader/" style="font-size: 10px;">classloader</a> <a href="/tags/computer/" style="font-size: 10px;">computer</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/docker/" style="font-size: 12.73px;">docker</a> <a href="/tags/druid/" style="font-size: 10px;">druid</a> <a href="/tags/elasticsearch/" style="font-size: 13.64px;">elasticsearch</a> <a href="/tags/enlink/" style="font-size: 10.91px;">enlink</a> <a href="/tags/fastjson/" style="font-size: 10px;">fastjson</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/hexo/" style="font-size: 12.73px;">hexo</a> <a href="/tags/idea/" style="font-size: 10.91px;">idea</a> <a href="/tags/interceptor/" style="font-size: 11.82px;">interceptor</a> <a href="/tags/jetty/" style="font-size: 10px;">jetty</a> <a href="/tags/jpa/" style="font-size: 10.91px;">jpa</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/karaf/" style="font-size: 11.82px;">karaf</a> <a href="/tags/keepalived/" style="font-size: 10px;">keepalived</a> <a href="/tags/linux-shell/" style="font-size: 15.45px;">linux-shell</a> <a href="/tags/listener/" style="font-size: 10px;">listener</a> <a href="/tags/loadbalanced/" style="font-size: 10px;">loadbalanced</a> <a href="/tags/logback/" style="font-size: 10px;">logback</a> <a href="/tags/login/" style="font-size: 10.91px;">login</a> <a href="/tags/lombok/" style="font-size: 11.82px;">lombok</a> <a href="/tags/mac/" style="font-size: 15.45px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.82px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 17.27px;">mybatis</a> <a href="/tags/mycat/" style="font-size: 10.91px;">mycat</a> <a href="/tags/mysql/" style="font-size: 16.36px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/oauth2/" style="font-size: 10px;">oauth2</a> <a href="/tags/pagehelper/" style="font-size: 10px;">pagehelper</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/rabbitMq/" style="font-size: 11.82px;">rabbitMq</a> <a href="/tags/redis/" style="font-size: 11.82px;">redis</a> <a href="/tags/redisTemplate/" style="font-size: 10px;">redisTemplate</a> <a href="/tags/reflection/" style="font-size: 11.82px;">reflection</a> <a href="/tags/registry-center/" style="font-size: 10px;">registry center</a> <a href="/tags/restTemplate/" style="font-size: 10px;">restTemplate</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/serialVersionUID/" style="font-size: 10px;">serialVersionUID</a> <a href="/tags/servlet/" style="font-size: 10.91px;">servlet</a> <a href="/tags/session/" style="font-size: 10.91px;">session</a> <a href="/tags/spring/" style="font-size: 15.45px;">spring</a> <a href="/tags/spring-task/" style="font-size: 12.73px;">spring task</a> <a href="/tags/springboot/" style="font-size: 19.09px;">springboot</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/webClient/" style="font-size: 10px;">webClient</a> <a href="/tags/yaml/" style="font-size: 10.91px;">yaml</a> <a href="/tags/事物/" style="font-size: 10px;">事物</a> <a href="/tags/全局异常/" style="font-size: 10px;">全局异常</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.91px;">文件服务器</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/ELASTICSEARCH/" style="font-size: 10px;">ELASTICSEARCH</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10.91px;">Eureka</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/IDEA/" style="font-size: 10.91px;">IDEA</a> <a href="/tags/IT/" style="font-size: 14.55px;">IT</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.82px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.91px;">JAVASE</a> <a href="/tags/LINUX/" style="font-size: 10px;">LINUX</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MQ/" style="font-size: 11.82px;">MQ</a> <a href="/tags/ONOS/" style="font-size: 15.45px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 14.55px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PROTOCAL/" style="font-size: 10px;">PROTOCAL</a> <a href="/tags/PYTHON/" style="font-size: 10.91px;">PYTHON</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/Ribbon/" style="font-size: 10px;">Ribbon</a> <a href="/tags/SECURITY/" style="font-size: 10px;">SECURITY</a> <a href="/tags/SPRING-BOOT/" style="font-size: 10px;">SPRING-BOOT</a> <a href="/tags/SQL/" style="font-size: 12.73px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.18px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/StringRedisTemplate/" style="font-size: 10px;">StringRedisTemplate</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/annotation/" style="font-size: 15.45px;">annotation</a> <a href="/tags/bazel/" style="font-size: 10px;">bazel</a> <a href="/tags/beanutils/" style="font-size: 10px;">beanutils</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/classloader/" style="font-size: 10px;">classloader</a> <a href="/tags/computer/" style="font-size: 10px;">computer</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/docker/" style="font-size: 12.73px;">docker</a> <a href="/tags/druid/" style="font-size: 10px;">druid</a> <a href="/tags/elasticsearch/" style="font-size: 13.64px;">elasticsearch</a> <a href="/tags/enlink/" style="font-size: 10px;">enlink</a> <a href="/tags/fastjson/" style="font-size: 10px;">fastjson</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/hexo/" style="font-size: 12.73px;">hexo</a> <a href="/tags/idea/" style="font-size: 10.91px;">idea</a> <a href="/tags/interceptor/" style="font-size: 11.82px;">interceptor</a> <a href="/tags/jetty/" style="font-size: 10px;">jetty</a> <a href="/tags/jpa/" style="font-size: 10.91px;">jpa</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/karaf/" style="font-size: 11.82px;">karaf</a> <a href="/tags/keepalived/" style="font-size: 10px;">keepalived</a> <a href="/tags/linux-shell/" style="font-size: 15.45px;">linux-shell</a> <a href="/tags/listener/" style="font-size: 10px;">listener</a> <a href="/tags/loadbalanced/" style="font-size: 10px;">loadbalanced</a> <a href="/tags/logback/" style="font-size: 10px;">logback</a> <a href="/tags/login/" style="font-size: 10.91px;">login</a> <a href="/tags/lombok/" style="font-size: 11.82px;">lombok</a> <a href="/tags/mac/" style="font-size: 15.45px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.82px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 17.27px;">mybatis</a> <a href="/tags/mycat/" style="font-size: 10.91px;">mycat</a> <a href="/tags/mysql/" style="font-size: 16.36px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/oauth2/" style="font-size: 10px;">oauth2</a> <a href="/tags/pagehelper/" style="font-size: 10px;">pagehelper</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/rabbitMq/" style="font-size: 11.82px;">rabbitMq</a> <a href="/tags/redis/" style="font-size: 11.82px;">redis</a> <a href="/tags/redisTemplate/" style="font-size: 10px;">redisTemplate</a> <a href="/tags/reflection/" style="font-size: 11.82px;">reflection</a> <a href="/tags/registry-center/" style="font-size: 10px;">registry center</a> <a href="/tags/restTemplate/" style="font-size: 10px;">restTemplate</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/serialVersionUID/" style="font-size: 10px;">serialVersionUID</a> <a href="/tags/servlet/" style="font-size: 10.91px;">servlet</a> <a href="/tags/session/" style="font-size: 10.91px;">session</a> <a href="/tags/spring/" style="font-size: 15.45px;">spring</a> <a href="/tags/spring-task/" style="font-size: 12.73px;">spring task</a> <a href="/tags/springboot/" style="font-size: 19.09px;">springboot</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/webClient/" style="font-size: 10px;">webClient</a> <a href="/tags/yaml/" style="font-size: 10.91px;">yaml</a> <a href="/tags/事物/" style="font-size: 10px;">事物</a> <a href="/tags/全局异常/" style="font-size: 10px;">全局异常</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.91px;">文件服务器</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
     </div>
 </div>
 
@@ -2347,7 +2411,7 @@ mybatis的入门案例
                     <span class="level-item">四月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -2402,7 +2466,7 @@ mybatis的入门案例
                     <span class="level-item">十一月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">11</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -2534,7 +2598,7 @@ mybatis的入门案例
                 <div class="control">
                     <a class="tags has-addons" href="/tags/JAVAEE/">
                         <span class="tag">JAVAEE</span>
-                        <span class="tag is-grey">130</span>
+                        <span class="tag is-grey">131</span>
                     </a>
                 </div>
                 
@@ -2779,7 +2843,7 @@ mybatis的入门案例
                 <div class="control">
                     <a class="tags has-addons" href="/tags/enlink/">
                         <span class="tag">enlink</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
