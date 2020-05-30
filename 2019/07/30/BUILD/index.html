@@ -1,0 +1,3117 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>BUILD - Learning</title>
+
+
+    <meta name="description" content="bazel笔记：bazel的编译是基于工作区，也就是项目的根目录    workspace文件：制定当前文件夹就是一个bazel工作区。   一个或多个build文件，如果工作区中的一个目录包含build文件，那么他就是一个package.因此，要制定一个目录为bazel的工作区，就只要在该目录下创建一个空的workspace即可。//: 该符号标识根目录下的文件  target：cc_binar">
+<meta name="keywords" content="JAVAEE,ONOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BUILD">
+<meta property="og:url" content="http://yoursite.com/2019/07/30/BUILD/index.html">
+<meta property="og:site_name" content="Learning">
+<meta property="og:description" content="bazel笔记：bazel的编译是基于工作区，也就是项目的根目录    workspace文件：制定当前文件夹就是一个bazel工作区。   一个或多个build文件，如果工作区中的一个目录包含build文件，那么他就是一个package.因此，要制定一个目录为bazel的工作区，就只要在该目录下创建一个空的workspace即可。//: 该符号标识根目录下的文件  target：cc_binar">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2020-05-29T14:40:15.621Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BUILD">
+<meta name="twitter:description" content="bazel笔记：bazel的编译是基于工作区，也就是项目的根目录    workspace文件：制定当前文件夹就是一个bazel工作区。   一个或多个build文件，如果工作区中的一个目录包含build文件，那么他就是一个package.因此，要制定一个目录为bazel的工作区，就只要在该目录下创建一个空的workspace即可。//: 该符号标识根目录下的文件  target：cc_binar">
+<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="BUILD" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-07-30T01:20:00.000Z">2019-07-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/IT/">IT</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 小时 read (About 14971 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                BUILD
+            
+        </h1>
+        <div class="content">
+            <p>bazel笔记：<br>bazel的编译是基于工作区，也就是项目的根目录  </p>
+<ol>
+<li>workspace文件：制定当前文件夹就是一个bazel工作区。  </li>
+<li>一个或多个build文件，如果工作区中的一个目录包含build文件，那么他就是一个package.<br>因此，要制定一个目录为bazel的工作区，就只要在该目录下创建一个空的workspace即可。<br><font color="red">//: 该符号标识根目录下的文件  </font><br>target：<br>cc_binary (name)<br>cc_libary<br>cc_test  </li>
+</ol>
+<p>bazel有两个关键元素，一个是package，另一个是target<br>package是可独立编译的project包，由workspace文件（可为空）标识；<br>target是BUILD文件中的关键元素，也就是编译的目标，目标可以是二进制文件（cc_binary), 可以是libary(cc_libary)</p>
+<figure class="highlight markdown hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">visiblity: [<span class="hljs-string">"//visibility:public"</span>],[<span class="hljs-string">'//visibility:private'</span>](<span class="hljs-link">私有</span>)，[<span class="hljs-string">'//some/package:__pkg__'</span>](<span class="hljs-link">注意冒号</span>)  </span><br><span class="line">ex: package(default_visibility = ["//visibility:public"])</span><br></pre></td></tr></table></figure>
+
+<p>Dependencies：</p>
+<p> 在构建或者执行时，目标A依赖于目标B，这种依赖关系产生一个有向无环图，我们将这种有向无环图称为依赖图，<br> 一个目标的直接依赖关系指的是在依赖图中可以以1步到达依赖对象的关系，<br> 二传递依赖关系指的是需要经过数步才能到达依赖对象的关系。</p>
+<p>事实上在构建的上下文中，有两种依赖关系，<font color="red">实际依赖关系和声明依赖关系</font>。两者差别极小。实际依赖关系指的是构建或者执行的时候A需要B，而声名依赖关系仅仅是在包A中有从A到B的一条依赖线。</p>
+<p>为了确保构建的正确性，实际依赖关系A必须是声名依赖关系的子图，也就是说，每一个在A中的直接依赖关系对x—&gt;y，必须也是D中的直接依赖关系对。</p>
+<p>在a、b、c三个个字包含了BUILD文件的三个包中，a依赖b，b依赖c，比如下图：  </p>
+<p>其中的声明依赖关系为：deps：a–&gt;b;b–&gt;c;  </p>
+<p>实际依赖关系为：各自srcs的目标文件中的import 及相应的函数的表征：a–&gt;b；b–&gt;c;  </p>
+<p>三种常见的构建规则的依赖关系类型：  </p>
+<p>1、srcs依赖：也就是BUILD文件中规则的属性Srcs的值，他表示构建该规则时使用的程序代码；  </p>
+<p>2、deps依赖：也就是规则中的deps属性的值，表示构建规则时所需要的头文件等；  </p>
+<p>3、data依赖：它不是代码，只是构建规则时需要的数据；  </p>
+<p>构建系统在一个独立的目录中进行测试，该目录中仅仅只有命名为data的文件可视，因此，需要测试时，需要声明数据为data文件；  </p>
+<p><font color="red">注：您不应将目录指定为构建系统的输入，而应明确或使用该<code>glob()</code>函数枚举其中包含的文件集 用于强制递归。</font></p>
+<p>java_binary<br>java_binary（name，deps，srcs，data，resources，args，classpath_resources，compatible_with，<br>create_executable，deploy_env，deploy_manifest_lines，deprecation，distribs，exec_compatible_with，<br>features，javacopts，jvm_flags，launcher，licenses，main_class，output_licenses，plugins，resource_jars，<br>resource_strip_prefix，restricted_to，runtime_deps，stamp，tags，testonly，toolchains，use_testrunner，visibility）  </p>
+<p>构建Java归档文件（“jar文件”），以及与规则同名的包装器shell脚本。包装器shell脚本使用一个类路径，<br>其中包括二进制所依赖的每个库的jar文件。  </p>
+<p>包装器脚本接受几个唯一标志。请参阅 //src/main/java/com/google/devtools/build/lib/bazel/rules/java/java_stub_template.txt<br>包装器接受的可配置标志和环境变量的列表。</p>
+<p>建个target<br>可视化项目的依赖项<br>将项目拆分为多个目标和包<br>控制包之间的目标可见性<br>通过标签引用目标<br>部署目标</p>
+<p>设置工作区<br>理解BUILD文件<br>构建项目<br>查看依赖关系图<br>完善bazel 构建<br>指定多个生成目标<br>使用多个包<br>使用标签引用目标<br>打包部署的Java目标<br>进一步读</p>
+<p>构建一个项目前需要先建个工作区<br>工作区是保存项目源文件和bazel的目录。<br>工作区文件，将目录及其内容标识为bazel工程<br>位于项目目录结构的根目录<br>构建文件包含几种不同类型的bazel指令<br>最重要的类型是构建规则<br>告诉Bazel如何构建所需的输出<br>例如可执行的二进制文件或库<br>生成文件中生成规则的每个实例都称为目标<br>指向一组特定的源文件和依赖项<br>目标也可以指向其他目标<br>projectrunner目标实例化bazel的内置Java_二进制规则<br>目标中的属性显式地声明其依赖项和选项<br>规则告诉bazel构建一个.jar文件和一个包装shell脚本<br>虽然name属性是必需的，许多是可选的<br>例如，在ProjectRunner规则目标中，name是目标的名称<br>srcs指定bazel用于构建目标的源文件<br>main_类指定包含main方法的类<br>注意目标标签//部分是构建文件rela的位置<br>ProjectRunner是我们在构建文件中命名的目标<br>Bazel的产出与以下类似 </p>
+<figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">INFO:</span> Found <span class="hljs-number">1</span> target...</span><br><span class="line">Target <span class="hljs-comment">//:ProjectRunner up-to-date:</span></span><br><span class="line">  bazel-bin/ProjectRunner.jar</span><br><span class="line">  bazel-bin/ProjectRunner</span><br><span class="line"><span class="hljs-string">INFO:</span> Elapsed <span class="hljs-string">time:</span> <span class="hljs-number">1.021</span>s, Critical <span class="hljs-string">Path:</span> <span class="hljs-number">0.83</span>s</span><br></pre></td></tr></table></figure>
+
+<p>bazel将构建输出放在工作目录下的bazel bin目录中<br>浏览其内容以了解Bazel的输出结构<br>Bazel要求在生成文件中显式声明生成依赖项<br>Bazel使用这些语句创建项目的依赖关系图从而实现精确的增量构建<br>让我们可视化示例项目的依赖关系。<br>首先，生成依赖关系图的文本表示形式 在工作区根目录下运行命令<br><code>bazel query  --nohost_deps --noimplicit_deps &quot;deps(//:ProjectRunner)&quot; --output graph</code><br>上面的命令告诉bazel查找目标的所有依赖项<br>//:ProjectRunner<br>然后，将文本粘贴到graphviz中<br>如您所见，该项目有一个构建两个源文件的目标<br>现在您已经设置了工作区，构建了项目，并检查了它。<br>完善构建</p>
+<p>当一个目标就足以满足小型项目的需求 ，您可能希望将较大的项目拆分为多个目标和包允许快速增量生成<br>只重建已更改的内容 通过同时构建项目的多个部分来加速构建 </p>
+<p>指定多个生成目标<br>让我们将示例项目构建分为两个目标。替换内容 </p>
+<figure class="highlight nix hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">java_binary(</span><br><span class="line">    <span class="hljs-attr">name</span> = <span class="hljs-string">"ProjectRunner"</span>,</span><br><span class="line">    <span class="hljs-attr">srcs</span> = [<span class="hljs-string">"src/main/java/com/example/ProjectRunner.java"</span>],</span><br><span class="line">    <span class="hljs-attr">main_class</span> = <span class="hljs-string">"com.example.ProjectRunner"</span>,</span><br><span class="line">    <span class="hljs-attr">deps</span> = [<span class="hljs-string">":greeter"</span>],</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">java_library(</span><br><span class="line">    <span class="hljs-attr">name</span> = <span class="hljs-string">"greeter"</span>,</span><br><span class="line">    <span class="hljs-attr">srcs</span> = [<span class="hljs-string">"src/main/java/com/example/Greeting.java"</span>],</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>通过这种配置，Bazel首先构建了Greeter库。<br>然后是projectrunner二进制文件<br>java_二进制文件中的deps属性告诉bazel，需要Greeter库来构建ProjectRunner二进制文件<br>让我们构建这个新版本的项目。运行以下命令<br><code>bazel build //:ProjectRunner</code></p>
+<p>Bazel的输出与以下类似 </p>
+<figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">INFO:</span> Found <span class="hljs-number">1</span> target...</span><br><span class="line">Target <span class="hljs-comment">//:ProjectRunner up-to-date:</span></span><br><span class="line">  bazel-bin/ProjectRunner.jar</span><br><span class="line">  bazel-bin/ProjectRunner</span><br><span class="line"><span class="hljs-string">INFO:</span> Elapsed <span class="hljs-string">time:</span> <span class="hljs-number">2.454</span>s, Critical <span class="hljs-string">Path:</span> <span class="hljs-number">1.58</span>s</span><br></pre></td></tr></table></figure>
+
+<p>现在测试新构建的二进制文件 </p>
+<p><code>bazel-bin/ProjectRunner</code><br>如果现在修改projectrunner.java并重新生成项目，则bazel仅重新编译该文件<br>查看依赖关系图，您可以看到ProjectRunner 依赖于与以前相同的输入，但构建的结构不同<br>现在您已经用两个目标构建了项目。<br>ProjectRunner目标生成两个源文件并依赖于另一个目标:greeter它会生成一个附加的源文件 </p>
+<p>现在让我们把这个项目分成多个包<br>你现在看下src/main/java/com/example/cmdline这个文件夹<br>您可以看到它还包含一个生成文件 BUILD<br>加上一些源文件 因此，对于Bazel，工作区现在包含两个包 </p>
+<p><code>//src/main/java/com/example/cmdline 和 //</code></p>
+<p>因为在工作区的根目录下有一个生成文件<br>看一下 src/main/java/com/example/cmdline/BUILD 文件</p>
+<figure class="highlight nix hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">java_binary(</span><br><span class="line">    <span class="hljs-attr">name</span> = <span class="hljs-string">"runner"</span>,</span><br><span class="line">    <span class="hljs-attr">srcs</span> = [<span class="hljs-string">"Runner.java"</span>],</span><br><span class="line">    <span class="hljs-attr">main_class</span> = <span class="hljs-string">"com.example.cmdline.Runner"</span>,</span><br><span class="line">    <span class="hljs-attr">deps</span> = [<span class="hljs-string">"//:greeter"</span>]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>运行目标依赖greeter目标 在// 包下<br>因此，目标标签 //:greeter<br>bazel 通过deps属性知道这一点<br>看看依赖关系图<br>但是，要使构建成功，必须在//src/main/java/com/example/cmdline/BUILD 文件中明确地给出运行者目标<br>目标可见性在//BUILD中使用visibility属性这是因为默认情况下，目标仅对同一个build 文件中的其他目标可见<br>Bazel使用目标可见性来防止诸如包含泄漏到公共API中的实现细节的库<br>为此，将可见性属性添加到java-tutorial/BUILD中的greeter对象中。 </p>
+<p><code>bazel build //src/main/java/com/example/cmdline:runner</code></p>
+<figure class="highlight nix hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">java_library(</span><br><span class="line">    <span class="hljs-attr">name</span> = <span class="hljs-string">"greeter"</span>,</span><br><span class="line">    <span class="hljs-attr">srcs</span> = [<span class="hljs-string">"src/main/java/com/example/Greeting.java"</span>],</span><br><span class="line">    <span class="hljs-attr">visibility</span> = [<span class="hljs-string">"//src/main/java/com/example/cmdline:__pkg__"</span>],</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>现在我们来构建新的包。在t的根目录下运行以下命令<br>bazel的输出大概如下</p>
+<figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">INFO:</span> Found <span class="hljs-number">1</span> target...</span><br><span class="line">Target <span class="hljs-comment">//src/main/java/com/example/cmdline:runner up-to-date:</span></span><br><span class="line">  bazel-bin<span class="hljs-regexp">/src/</span>main<span class="hljs-regexp">/java/</span>com<span class="hljs-regexp">/example/</span>cmdline/runner.jar</span><br><span class="line">  bazel-bin<span class="hljs-regexp">/src/</span>main<span class="hljs-regexp">/java/</span>com<span class="hljs-regexp">/example/</span>cmdline/runner</span><br><span class="line"><span class="hljs-symbol">  INFO:</span> Elapsed <span class="hljs-string">time:</span> <span class="hljs-number">1.576</span>s, Critical <span class="hljs-string">Path:</span> <span class="hljs-number">0.81</span>s</span><br></pre></td></tr></table></figure>
+
+<p>现在测试新构建的二进制文件 </p>
+<p><code>./bazel-bin/src/main/java/com/example/cmdline/runner</code></p>
+<p>现在，您已经将项目修改为两个包，每个包含一个目标，并了解它们之间的依赖关系<br>使用标签引用目标<br>在构建文件和命令行中，bazel使用目标标签进行引用<br>//:ProjectRunner或//src/main/java/com/example/cmdline:runner 他们的语法如下：</p>
+<p><code>//path/to/package:target-name</code></p>
+<p>如果目标是规则目标 则path/to/package是包含BUILD生成文件的目录的路径<br>目标名称是您在构建文件中为目标命名的名称，如果目标是个文件目标则<br>path/to/package 是指向包根目录的路径目标名称是目标文件的名称，包括其完整路径。</p>
+<p>引用同一包中的目标时 您可以跳过包路径 就用 //:target-name<br>引用同一生成文件中的目标时甚至可以跳过工作区根标识符  就用:target-name<br>例如在java-tutorial/BUILD目标文件您不必指定包路径<br>因为工作区根本身就是一个包 (//)你的两个目标标签很简单<br>//:ProjectRunner 和 //:greeter.<br>然而目标在 //src/main/java/com/example/cmdline/BUILD 文件您必须指定全包路径你的目标标签是<br>//src/main/java/com/example/cmdline:runner<br>打包部署一个Java目标<br>现在我们通过构建二进制文件来打包部署Java目标。<br>正如您所记得的，java_二进制构建规则生成一个.jar包和包装shell脚本<br>看下runner.jar的内容使用如下命令</p>
+<p><code>jar tf bazel-bin/src/main/java/com/example/cmdline/runner.jar</code></p>
+<p>内容如下：</p>
+<figure class="highlight avrasm hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">META-INF/</span><br><span class="line">META-INF/MANIFEST.MF</span><br><span class="line"><span class="hljs-keyword">com</span>/</span><br><span class="line"><span class="hljs-keyword">com</span>/example/</span><br><span class="line"><span class="hljs-keyword">com</span>/example/cmdline/</span><br><span class="line"><span class="hljs-keyword">com</span>/example/cmdline/Runner.class</span><br></pre></td></tr></table></figure>
+
+<p>如你所见runner.jar包含Runner.class但不是它的依赖性 Greeting.class<br>runner脚本 bazel生成的runner脚本将greeter.jar添加到类路径中 ，所以如果你像这样放着，<br>他将会在本地运行，但它不会在另一台机器上独立运行 幸运的是，<br>java_二进制规则允许您构建一个自包含的depl<br>要构建它，请在构建runner时向文件名添加_deploy.jar后缀</p>
+<p><code>bazel build //src/main/java/com/example/cmdline:runner_deploy.jar</code><br> Bazel输出与以下类似 </p>
+ <figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-symbol"> INFO:</span> Found <span class="hljs-number">1</span> target...</span><br><span class="line">Target <span class="hljs-comment">//src/main/java/com/example/cmdline:runner_deploy.jar up-to-date:</span></span><br><span class="line">  bazel-bin<span class="hljs-regexp">/src/</span>main<span class="hljs-regexp">/java/</span>com<span class="hljs-regexp">/example/</span>cmdline/runner_deploy.jar</span><br><span class="line"><span class="hljs-string">INFO:</span> Elapsed <span class="hljs-string">time:</span> <span class="hljs-number">1.700</span>s, Critical <span class="hljs-string">Path:</span> <span class="hljs-number">0.23</span>s</span><br></pre></td></tr></table></figure>
+
+<p> 你刚刚建立了一个runner_deploy.jar<br>它可以独立运行在开发环境之外因为它包含所需的运行时依赖项。 </p>
+<p>隐含的输出目标<br>name.jar：Java归档文件，包含与二进制文件直接依赖项对应的类文件和其他资源。<br>name-src.jar：包含源（“源jar”）的存档。<br>name_deploy.jar：适合部署的Java归档文件（仅在明确请求时构建）。<br>构建规则的目标会创建一个自包含的jar文件，其中包含一个清单，允许使用命令或包装器脚本的 选项运行它 。<br>使用包装器脚本是首选，因为它还传递JVM标志和加载本机库的选项。 <name>_deploy.jarjava -jar–singlejarjava -jar</name></p>
+<p>部署jar包含类加载器可以找到的所有类，这些类从头到尾从二进制文件的包装器脚本中搜索类路径。它还包含依赖项所需的本机库。<br>它们在运行时自动加载到JVM中。</p>
+<p>如果您的目标指定了一个启动器 属性，那么_deploy.jar将是一个原生二进制文件，而不是一个普通的JAR文件。<br>这将包含启动程序以及规则的任何本机（C ++）依赖项，所有这些都链接到静态二进制文件。<br>实际的jar文件的字节将附加到该本机二进制文件，创建一个包含可执行文件和Java代码的二进制blob。<br>您可以直接执行生成的jar文件，就像执行任何本机二进制文件一样。</p>
+<p>name_deploy-src.jar：包含从目标的传递闭包收集的源的存档。这些将匹配 deploy.jar除了jar没有匹配的源jar的类。<br>deps没有java_binary规则的规则中 不允许 使用属性srcs; 这样的规则要求 main_class提供者 runtime_deps。</p>
+<p>以下代码段说明了一个常见错误：</p>
+<figure class="highlight nix hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">java_binary（</span><br><span class="line">    <span class="hljs-attr">name</span> =“DontDoThis”，</span><br><span class="line">    <span class="hljs-attr">srcs</span> = [</span><br><span class="line">        ... ,,</span><br><span class="line">         <span class="hljs-string">"GeneratedJavaFile.java"</span>＃生成的.java文件</span><br><span class="line">    ]</span><br><span class="line">    <span class="hljs-attr">deps</span> = [ <span class="hljs-string">":generating_rule"</span>,]，＃生成该文件的规则</span><br><span class="line">）</span><br></pre></td></tr></table></figure>
+
+<p>改为：</p>
+<figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">java_binary（</span><br><span class="line">    name =“DoThisInstead”，</span><br><span class="line">    srcs = [</span><br><span class="line">        <span class="hljs-built_in">..</span><span class="hljs-built_in">..</span><span class="hljs-built_in">..</span>，</span><br><span class="line">        “：generating_rule”</span><br><span class="line">    ]</span><br><span class="line">）</span><br></pre></td></tr></table></figure>
+
+<p>参数<br>属性<br>name<br>Name; required</p>
+<p>此目标的唯一名称。</p>
+<p>最好使用作为应用程序主入口点的源文件的名称（减去扩展名）。<br>例如，如果您的入口点被调用 Main.java，那么您的名字可能就是Main。<br>deps<br>List of labels; optional</p>
+<p>要链接到目标的其他库的列表。看到一般的评论deps在 共同所有的生成规则属性 。<br>srcs<br>List of labels; optional</p>
+<p>处理以创建目标的源文件列表。几乎总是需要此属性; 看下面的例外。<br>.java编译 类型的源文件。在生成.java文件的情况下， 通常建议在此处放置生成规则的名称，而不是文件本身的名称。<br>这不仅提高了可读性，而且使规则对未来的更改更具弹性：如果生成规则将来生成不同的文件，您只需要修复一个地方：outs生成规则。<br>您不应该列出生成规则，deps 因为它是无操作。</p>
+<p>类型的源文件.srcjar被解压缩和编译。（如果您需要生成一组.java带有genrule 的文件，这非常有用。）</p>
+<p>规则：如果规则（通常genrule或filegroup）生成上面列出的任何文件，它们将以与源文件所述相同的方式使用。</p>
+<p>除非main_class属性指定运行时类路径上的类或指定runtime_deps参数，否则几乎总是需要 此参数。</p>
+<p>resources<br>List of labels; optional</p>
+<p>要包含在Java jar中的数据文件列表。<br>如果指定了资源，它们将与.class编译生成的常用文件一起捆绑在jar中 。jar文件中资源的位置由项目结构决定。<br>Bazel首先查找Maven的 标准目录布局，（“src”目录后跟“资源”目录孙子）。<br>如果找不到，那么Bazel会查找名为“java”或“javatests”的最顶层目录<br>（例如，如果资源处于<workspace root>/x/java/y/java/z，则资源的路径将是y/java/z。此启发式扫描不能被覆盖。</workspace></p>
+<p>资源可以是源文件或生成的文件。</p>
+<p>classpath_resources<br>List of labels; optional</p>
+<p>除非没有其他方式，否则不要使用此选项）<br>必须位于Java树根目录的资源列表。此属性的唯一目的是支持第三方库，这些库要求在类路径上找到它们的资源”myconfig.xml”。<br>由于名称空间冲突的危险，它只允许在二进制文件而不是库中。</p>
+<p>create_executable<br>Boolean; optional; nonconfigurable; default is True</p>
+<p>二进制文件是否可执行。不可执行的二进制文件将传递的运行时Java依赖项收集到部署jar中，但不能直接执行。<br>如果设置了此属性，则不会创建包装器脚本。如果设置了launcher或main_class属性，则将此值设置为0是错误的。<br>deploy_env<br>List of labels; optional</p>
+<p>java_binary表示此二进制文件的部署环境 的其他目标的列表。在构建将由另一个加载的插件时设置此属性 java_binary。<br>设置此属性将排除此二进制文件的运行时类路径（和部署jar）中的所有依赖项，这些依赖项在此二进制文件和指定的目标之间共享deploy_env。<br>deploy_manifest_lines<br>List of strings; optional</p>
+<p>要添加到META-INF/manifest.mf为*_deploy.jar目标生成的文件 的行列表。此属性的内容不符合“使变量”替换。<br>javacopts<br>List of strings; optional</p>
+<p>此库的额外编译器选项。受“Make变量”替换和 Bourne shell标记化的约束。<br>这些编译器选项在全局编译器选项之后传递给javac。</p>
+<p>jvm_flags<br>List of strings; optional</p>
+<p>要在运行此二进制文件时生成的包装器脚本中嵌入的标志列表。受$（位置）和 “Make变量”替换，以及 Bourne shell标记化。<br>Java二进制文件的包装器脚本包括一个CLASSPATH定义（用于查找所有相关的jar）并调用正确的Java解释器。<br>包装器脚本生成的命令行包含主类的名称，后跟a，”$@”因此您可以在类名后传递其他参数。<br>但是，必须在命令行上的类名之前指定用于由JVM进行解析的参数。在jvm_flags列出类名之前，将内容添加到包装脚本中。</p>
+<p>请注意，此属性对 输出没有影响*_deploy.jar。</p>
+<p>launcher<br>Label; optional</p>
+<p>指定将用于运行Java程序的二进制文件，而不是bin/javaJDK附带的普通程序。<br>目标必须是a cc_binary。任何cc_binary实现 Java Invocation API的都可以指定为此属性的值。<br>默认情况下，Bazel将使用普通的JDK启动程序（bin / java或java.exe）。</p>
+<p>相关的 –java_launcherBazel标志仅影响未指定属性的那些 java_binary和java_test目标 。launcher</p>
+<p>请注意，根据您使用的是JDK启动程序还是其他启动程序，您的本机（C ++，SWIG，JNI）依赖项的构建方式会有所不同：</p>
+<p>如果您使用的是普通的JDK启动程序（默认），则将本机依赖项构建为名为的共享库{name}_nativedeps.so，其中 {name}是name此java_binary规则的属性。<br>在此配置中，链接器不会删除未使用的代码。<br>如果您正在使用任何其他启动程序，则本机（C ++）依赖项将静态链接到名为的二进制文件{name}_nativedeps，其中此java_binary规则{name} 的name属性。<br>在这种情况下，链接器将从生成的二进制文件中删除它认为未使用的任何代码，这意味着除非该cc_library目标指定，否则任何仅通过JNI访问的C ++代码都可能无法链接alwayslink = 1。<br>使用除默认JDK启动程序以外的任何启动程序时，*_deploy.jar输出的格式会更改。有关详细信息，请参阅主 java_binary文档。</p>
+<p>main_class<br>String; optional</p>
+<p>具有main()用作入口点的方法的类的名称。如果规则使用此选项，则不需要srcs=[…]列表。因此，使用此属性，可以从已包含一个或多个main()方法的Java库生成可执行文件。<br>此属性的值是类名，而不是源文件。该类必须在运行时可用：它可以由此规则（从srcs）编译，或由直接或传递依赖（通过runtime_deps或 deps）提供。如果该类不可用，则二进制文件将在运行时失败; 没有构建时间检查。</p>
+<p>plugins<br>List of labels; optional</p>
+<p>Java编译器插件在编译时运行。java_plugin无论何时构建此规则，都将运行此属性中指定的每个属性。库也可以从使用的依赖项继承插件 exported_plugins。插件生成的资源将包含在此规则的结果jar中。<br>resource_jars<br>List of labels; optional</p>
+<p>包含Java资源的档案集。<br>如果指定，这些jar的内容将合并到输出jar中。</p>
+<p>resource_strip_prefix<br>String; optional</p>
+<p>从Java资源中剥离的路径前缀。<br>如果指定，则从resources 属性中的每个文件中剥离此路径前缀。资源文件不在此目录下是错误的。如果未指定（默认值），则根据与源文件的Java包相同的逻辑确定资源文件的路径。例如，源文件 stuff/java/foo/bar/a.txt位于foo/bar/a.txt。</p>
+<p>runtime_deps<br>List of labels; optional</p>
+<p>库可用于最终二进制文件或仅在运行时测试。与普通类似deps，这些将出现在运行时类路径中，但与它们不同，不在编译时类路径上。应在此处列出仅在运行时所需的依赖关系。依赖性分析工具应该忽略出现在两个目标 runtime_deps和deps。<br>stamp<br>Integer; optional; default is -1</p>
+<p>启用链接标记。是否将构建信息编码为二进制文件。可能的值：<br>stamp = 1：将构建信息标记到二进制文件中。只有在依赖项发生变化时才会重建标记的二进制文件。如果存在依赖于构建信息的测试，请使用此选项。<br>stamp = 0：始终使用常量值替换构建信息。这提供了良好的构建结果缓存。<br>stamp = -1：嵌入构建信息由 - [no]戳标志控制。<br>toolchains<br>List of labels; optional</p>
+<p>提供“Make variables”的工具链集 ，该目标可以在其某些属性中使用。一些规则具有工具链，其默认情况下可以使用Make变量。<br>use_testrunner<br>Boolean; optional; default is False</p>
+<p>使用测试运行器（默认情况下 com.google.testing.junit.runner.BazelTestRunner）类作为Java程序的主入口点，并将测试类作为bazel.test_suite 系统属性的值提供给测试运行器。您可以使用它来覆盖默认行为，即使用测试运行器获取 java_test规则，而不是将其用于java_binary规则。你不太可能想要这样做。一种用途是用于AllTest 由另一个规则调用的规则（例如，在运行测试之前设置数据库）。该AllTest 规则必须被声明为java_binary，但仍应使用测试运行器作为其主要入口点。可以使用main_classattribute 覆盖测试运行器类的名称。<br>java_import<br>java_import（name，deps，data，compatible_with，constraints，deprecation，distribs，exec_compatible_with，exports，features，jars，licenses，neverlink，proguard_specs，restricted_to，runtime_deps，srcjar，tags，testonly，visibility）<br>此规则允许将预编译.jar文件用作库java_library和 java_binary规则。</p>
+<p>例子</p>
+<figure class="highlight lsl hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">java_import（</span><br><span class="line">    name =“maven_model”，</span><br><span class="line">    jars = [</span><br><span class="line">        “maven_model / Maven的以太网提供商<span class="hljs-number">-3.2</span><span class="hljs-number">.3</span>.jar”，</span><br><span class="line">        “maven_model / Maven的模型<span class="hljs-number">3.2</span><span class="hljs-number">.3</span>.jar”，</span><br><span class="line">        “maven_model / Maven的模型建设者<span class="hljs-number">-3.2</span><span class="hljs-number">.3</span>.jar”，</span><br><span class="line">    ]</span><br><span class="line">）</span><br></pre></td></tr></table></figure>
+
+<p>参数</p>
+<p>属性<br>name<br>Name; required</p>
+<p>此目标的唯一名称。</p>
+<p>deps<br>List of labels; optional</p>
+<p>要链接到目标的其他库的列表。请参阅java_library.deps。<br>constraints<br>List of strings; optional; nonconfigurable</p>
+<p>作为Java库对此规则施加额外约束。<br>exports<br>List of labels; optional</p>
+<p>目标可供此规则的用户使用。请参阅java_library.exports。<br>jars<br>List of labels; required</p>
+<p>提供给依赖于此目标的Java目标的JAR文件列表。<br>neverlink<br>Boolean; optional; default is False</p>
+<p>仅使用此库进行编译，而不是在运行时使用。如果库将在执行期间由运行时环境提供，则很有用。<br>像这样的库的示例是用于IDE插件的IDE API或tools.jar用于在标准JDK上运行的任何内容。<br>proguard_specs<br>List of labels; optional</p>
+<p>用作Proguard规范的文件。这些将描述Proguard使用的规范集。如果指定，它们将android_binary根据此库添加到任何目标。<br>此处包含的文件必须只有幂等规则，即-dontnote，-dontwarn，assumenosideeffects和以-keep开头的规则。<br>其他选项只能出现在 android_binaryproguard_specs中，以确保非重言式合并。<br>runtime_deps<br>List of labels; optional</p>
+<p>库可用于最终二进制文件或仅在运行时测试。请参阅java_library.runtime_deps。<br>srcjar<br>Label; optional</p>
+<p>包含已编译JAR文件的源代码的JAR文件。</p>
+<figure class="highlight mipsasm hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">java_library </span></span><br><span class="line"><span class="hljs-keyword">java_library（name，deps，srcs，data，resources，compatible_with，deprecation，</span></span><br><span class="line"><span class="hljs-keyword">distribs，exec_compatible_with，exported_plugins，exports，features，javacopts，</span></span><br><span class="line"><span class="hljs-keyword">licenses，neverlink，plugins，proguard_specs，resource_jars，resource_strip_prefix，</span></span><br><span class="line"><span class="hljs-keyword">restricted_to，runtime_deps，tags，testonly，能见度）</span></span><br></pre></td></tr></table></figure>
+
+<p>此规则编译源并将源链接到.jar文件中。</p>
+<p>隐含的输出目标<br>libname.jar：包含类文件的Java归档文件。<br>libname-src.jar：包含源（“源jar”）的存档。<br>参数<br>属性<br>name<br>Name; required</p>
+<p>此目标的唯一名称。</p>
+<p>deps<br>List of labels; optional</p>
+<p>要链接到此库的库列表。看到一般的评论deps在 共同所有的生成规则属性 。<br>由java_library列出的规则构建的jar deps将位于此规则的编译时类路径中。<br>此外，它们的传递闭包 deps，runtime_deps并将exports在运行时类路径上。</p>
+<p>相比之下，data属性中的目标包含在运行文件中，但既不包含在编译时也不包含在运行时类路径中。</p>
+<p>srcs<br>List of labels; optional</p>
+<p>处理以创建目标的源文件列表。几乎总是需要此属性; 看下面的例外。<br>.java编译 类型的源文件。在生成.java文件的情况下， 通常建议在此处放置生成规则的名称，而不是文件本身的名称。<br>这不仅提高了可读性，而且使规则对未来的更改更具弹性：如果生成规则将来生成不同的文件，您只需要修复一个地方：outs生成规则。<br>您不应该列出生成规则，deps 因为它是无操作。</p>
+<p>类型的源文件.srcjar被解压缩和编译。（如果您需要生成一组.java带有genrule 的文件，这非常有用。）</p>
+<p>规则：如果规则（通常genrule或filegroup）生成上面列出的任何文件，它们将以与源文件所述相同的方式使用。</p>
+<p>除非main_class属性指定运行时类路径上的类或指定runtime_deps参数，否则几乎总是需要 此参数。</p>
+<p>data<br>List of labels; optional</p>
+<p>此库在运行时所需的文件列表。看到一般的评论data在 共同所有的生成规则属性 。<br>在构建时java_library，Bazel不会将这些文件放在任何地方; 如果 data文件是生成文件，那么Bazel会生成它们。<br>构建依赖于此java_libraryBazel 的测试时，data会将文件复制或链接 到runfiles区域。</p>
+<p>resources<br>List of labels; optional</p>
+<p>要包含在Java jar中的数据文件列表。<br>如果指定了资源，它们将与.class编译生成的常用文件一起捆绑在jar中 。jar文件中资源的位置由项目结构决定。<br>Bazel首先查找Maven的 标准目录布局，（“src”目录后跟“资源”目录孙子）。<br>如果找不到，那么Bazel会查找名为“java”或“javatests”的最顶层目录（例如，如果资源处于<workspace root>/x/java/y/java/z，则资源的路径将是y/java/z。<br>此启发式扫描不能被覆盖。</workspace></p>
+<p>资源可以是源文件或生成的文件。</p>
+<p>exported_plugins<br>List of labels; optional</p>
+<p>java_plugin要导出到直接依赖于此库的库 的s（例如注释处理器）列表。<br>指定的java_plugins 列表将应用于任何直接依赖于此库的库，就像该库已明确声明这些标签一样plugins。</p>
+<p>exports<br>List of labels; optional</p>
+<p>导出的图书馆。<br>此处的列表规则将使它们可用于父规则，就像父项明确依赖于这些规则一样。对于常规（非导出），情况并非如此deps。</p>
+<p>简介：规则X可以访问Y中的代码，如果它们之间存在依赖路径，该路径以deps边缘开始，后跟零个或多个 exports边缘。让我们看一些例子来说明这一点。</p>
+<p>假设甲取决于乙和乙取决于Ç。在这种情况下，C是A 的传递依赖，因此更改C的源并重建A将正确地重建所有内容。然而，A将无法使用C中的类。<br>为了允许这种情况，要么A必须在其中声明C deps，要么B可以通过在其（B）中声明C来使A（以及可能依赖于A的任何东西）变得更容易。exports 属性。</p>
+<p>所有直接父规则都可以使用导出库的闭包。举一个稍微不同的例子：A依赖于B，B依赖于C和D，并且还导出C而不是D.现在A可以访问C但不能访问D.现在，如果C和D导出了一些库，C’和D’，A只能访问C’但不能访问D’。</p>
+<p>重要提示：导出的规则不是常规依赖项。坚持前面的例子，如果B导出C并且想要也使用C，它也必须自己列出它 deps。</p>
+<p>javacopts<br>List of strings; optional</p>
+<p>此库的额外编译器选项。受“Make变量”替换和 Bourne shell标记化的约束。<br>这些编译器选项在全局编译器选项之后传递给javac。</p>
+<p>neverlink<br>Boolean; optional; default is False</p>
+<p>此库是仅应用于编译而不是用于运行时。如果库将在执行期间由运行时环境提供，则很有用。此类库的示例是IDE插件的IDE API或tools.jar标准JDK上运行的任何内容。<br>请注意，neverlink = 1这不会阻止编译器将此库中的材料内联到依赖于它的编译目标中，如Java语言规范所允许的那样（例如， 原始类型的static final常量String或常量类型的常量）。因此，当运行时库与编译库相同时，首选用例是。</p>
+<p>如果运行时库与编译库不同，则必须确保它仅在JLS禁止编译器内联的位置（并且必须适用于JLS的所有未来版本）中有所不同。</p>
+<p>plugins<br>List of labels; optional</p>
+<p>Java编译器插件在编译时运行。java_plugin无论何时构建此规则，都将运行此属性中指定的每个属性。库也可以从使用的依赖项继承插件 exported_plugins。插件生成的资源将包含在此规则的结果jar中。<br>proguard_specs<br>List of labels; optional</p>
+<p>用作Proguard规范的文件。这些将描述Proguard使用的规范集。如果指定，它们将android_binary根据此库添加到任何目标。此处包含的文件必须只有幂等规则，即-dontnote，-dontwarn，assumenosideeffects和以-keep开头的规则。其他选项只能出现在 android_binaryproguard_specs中，以确保非重言式合并。<br>resource_jars<br>List of labels; optional</p>
+<p>包含Java资源的档案集。<br>如果指定，这些jar的内容将合并到输出jar中。</p>
+<p>resource_strip_prefix<br>String; optional</p>
+<p>从Java资源中剥离的路径前缀。<br>如果指定，则从resources 属性中的每个文件中剥离此路径前缀。资源文件不在此目录下是错误的。如果未指定（默认值），则根据与源文件的Java包相同的逻辑确定资源文件的路径。例如，源文件 stuff/java/foo/bar/a.txt位于foo/bar/a.txt。</p>
+<p>runtime_deps<br>List of labels; optional</p>
+<p>库可用于最终二进制文件或仅在运行时测试。与普通类似deps，这些将出现在运行时类路径中，但与它们不同，不在编译时类路径上。应在此处列出仅在运行时所需的依赖关系。依赖性分析工具应该忽略出现在两个目标 runtime_deps和deps。</p>
+<figure class="highlight autohotkey hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jav<span class="hljs-built_in">a_lite</span>_proto_library </span><br><span class="line">jav<span class="hljs-built_in">a_lite</span>_proto_library（name，deps，data，compatible_with，deprecation，distribs，exec_compatible_with，features，licenses，restricted_to，tags，testonly，visibility）</span><br><span class="line">jav<span class="hljs-built_in">a_lite</span>_proto_library从.proto文件生成Java代码。</span><br></pre></td></tr></table></figure>
+
+<p>deps必须指出proto_library 规则。</p>
+<p>例：</p>
+<figure class="highlight crystal hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">java_library（</span><br><span class="line">    name =“<span class="hljs-class"><span class="hljs-keyword">lib</span>”，</span></span><br><span class="line">    deps = [“：foo”]，</span><br><span class="line">）</span><br><span class="line"></span><br><span class="line">java_lite_proto_library（</span><br><span class="line">    name =“foo”，</span><br><span class="line">    deps = [“：bar”]，</span><br><span class="line">）</span><br><span class="line"></span><br><span class="line">proto_library（</span><br><span class="line">    name =“bar”，</span><br><span class="line">）</span><br></pre></td></tr></table></figure>
+
+<p>参数<br>属性<br>name<br>Name; required</p>
+<p>此目标的唯一名称。</p>
+<p>deps<br>List of labels; optional</p>
+<p>proto_library 生成Java代码 的规则列表。</p>
+<figure class="highlight autohotkey hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jav<span class="hljs-built_in">a_proto</span>_library </span><br><span class="line">jav<span class="hljs-built_in">a_proto</span>_library（name，deps，data，compatible_with，deprecation，distribs，exec_compatible_with，features，licenses，restricted_to，tags，testonly，visibility）</span><br><span class="line">jav<span class="hljs-built_in">a_proto</span>_library从.proto文件生成Java代码。</span><br></pre></td></tr></table></figure>
+
+<p>deps必须指出proto_library 规则。</p>
+<p>例：</p>
+<figure class="highlight crystal hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">java_library（</span><br><span class="line">    name =“<span class="hljs-class"><span class="hljs-keyword">lib</span>”，</span></span><br><span class="line">    deps = [“：foo_java_proto”]，</span><br><span class="line">）</span><br><span class="line"></span><br><span class="line">java_proto_library（</span><br><span class="line">    name =“foo_java_proto”，</span><br><span class="line">    deps = [“：foo_proto”]，</span><br><span class="line">）</span><br><span class="line"></span><br><span class="line">proto_library（</span><br><span class="line">    name =“foo_proto”，</span><br><span class="line">）</span><br></pre></td></tr></table></figure>
+
+<p>属性<br>name<br>Name; required</p>
+<p>此目标的唯一名称。</p>
+<p>deps<br>List of labels; optional</p>
+<p>proto_library 生成Java代码 的规则列表。</p>
+<p>java_test<br>java_test（名称，DEPS，索马里红新月会，数据，资源，ARGS，classpath_resources，compatible_with，create_executable，deploy_manifest_lines，折旧，发行商，exec_compatible_with，功能，片状，javacopts，jvm_flags，发射器，牌照，地方，MAIN_CLASS，插件，resource_jars，resource_strip_prefix，restricted_to，runtime_deps，shard_count，size，stamp，tags，test_class，testonly，timeout，toolchains，use_testrunner，visibility）<br>一个java_test()规则编译一个Java测试。测试是围绕测试代码的二进制包装器。调用测试运行器的main方法而不是正在编译的主类。</p>
+<p>隐含的输出目标<br>name.jar：Java存档。<br>name_deploy.jar：适合部署的Java归档文件。（仅在显式请求时才构建。）有关详细信息，请参阅 java_binaryname_deploy.jar输出的 说明。<br>请参阅有关java_binary（）参数的部分。此规则还支持所有测试规则（* _test）共有的所有属性。</p>
+<p>例子</p>
+<figure class="highlight nix hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">java_library（</span><br><span class="line">    <span class="hljs-attr">name</span> =“tests”，</span><br><span class="line">    <span class="hljs-attr">srcs</span> = glob（[“*。java”]），</span><br><span class="line">    <span class="hljs-attr">deps</span> = [</span><br><span class="line">        “// java的/ COM /富/碱：testResources”，</span><br><span class="line">        “//的Java / COM /富/测试/ UTIL”，</span><br><span class="line">    ]</span><br><span class="line">）</span><br><span class="line"></span><br><span class="line">java_test（</span><br><span class="line">    <span class="hljs-attr">name</span> =“AllTests”，</span><br><span class="line">    <span class="hljs-attr">size</span> =“small”，</span><br><span class="line">    <span class="hljs-attr">runtime_deps</span> = [</span><br><span class="line">        “：测试”，</span><br><span class="line">        “// UTIL / MySQL的”，</span><br><span class="line">    ]</span><br><span class="line">）</span><br></pre></td></tr></table></figure>
+
+<p>参数<br>属性<br>name<br>Name; required</p>
+<p>此目标的唯一名称。</p>
+<p>deps<br>List of labels; optional</p>
+<p>要链接到目标的其他库的列表。看到一般的评论deps在 共同所有的生成规则属性 。<br>srcs<br>List of labels; optional</p>
+<p>处理以创建目标的源文件列表。几乎总是需要此属性; 看下面的例外。<br>.java编译 类型的源文件。在生成.java文件的情况下， 通常建议在此处放置生成规则的名称，而不是文件本身的名称。这不仅提高了可读性，而且使规则对未来的更改更具弹性：如果生成规则将来生成不同的文件，您只需要修复一个地方：outs生成规则。您不应该列出生成规则，deps 因为它是无操作。</p>
+<p>类型的源文件.srcjar被解压缩和编译。（如果您需要生成一组.java带有genrule 的文件，这非常有用。）</p>
+<p>规则：如果规则（通常genrule或filegroup）生成上面列出的任何文件，它们将以与源文件所述相同的方式使用。</p>
+<p>除非main_class属性指定运行时类路径上的类或指定runtime_deps参数，否则几乎总是需要 此参数。</p>
+<p>resources<br>List of labels; optional</p>
+<p>要包含在Java jar中的数据文件列表。<br>如果指定了资源，它们将与.class编译生成的常用文件一起捆绑在jar中 。jar文件中资源的位置由项目结构决定。Bazel首先查找Maven的 标准目录布局，（“src”目录后跟“资源”目录孙子）。如果找不到，那么Bazel会查找名为“java”或“javatests”的最顶层目录（例如，如果资源处于<workspace root>/x/java/y/java/z，则资源的路径将是y/java/z。此启发式扫描不能被覆盖。</workspace></p>
+<p>资源可以是源文件或生成的文件。</p>
+<p>classpath_resources<br>List of labels; optional</p>
+<p>除非没有其他方式，否则不要使用此选项）<br>必须位于Java树根目录的资源列表。此属性的唯一目的是支持第三方库，这些库要求在类路径上找到它们的资源”myconfig.xml”。由于名称空间冲突的危险，它只允许在二进制文件而不是库中。</p>
+<p>create_executable<br>Boolean; optional; nonconfigurable; default is True</p>
+<p>二进制文件是否可执行。不可执行的二进制文件将传递的运行时Java依赖项收集到部署jar中，但不能直接执行。如果设置了此属性，则不会创建包装器脚本。如果设置了launcher或main_class属性，则将此值设置为0是错误的。<br>deploy_manifest_lines<br>List of strings; optional</p>
+<p>要添加到META-INF/manifest.mf为*_deploy.jar目标生成的文件 的行列表。此属性的内容不符合“使变量”替换。<br>javacopts<br>List of strings; optional</p>
+<p>此库的额外编译器选项。受“Make变量”替换和 Bourne shell标记化的约束。<br>这些编译器选项在全局编译器选项之后传递给javac。</p>
+<p>jvm_flags<br>List of strings; optional</p>
+<p>要在运行此二进制文件时生成的包装器脚本中嵌入的标志列表。受$（位置）和 “Make变量”替换，以及 Bourne shell标记化。<br>Java二进制文件的包装器脚本包括一个CLASSPATH定义（用于查找所有相关的jar）并调用正确的Java解释器。包装器脚本生成的命令行包含主类的名称，后跟a，”$@”因此您可以在类名后传递其他参数。但是，必须在命令行上的类名之前指定用于由JVM进行解析的参数。在jvm_flags列出类名之前，将内容添加到包装脚本中。</p>
+<p>请注意，此属性对 输出没有影响*_deploy.jar。</p>
+<p>launcher<br>Label; optional</p>
+<p>指定将用于运行Java程序的二进制文件，而不是bin/javaJDK附带的普通程序。目标必须是a cc_binary。任何cc_binary实现 Java Invocation API的都可以指定为此属性的值。<br>默认情况下，Bazel将使用普通的JDK启动程序（bin / java或java.exe）。</p>
+<p>相关的 –java_launcherBazel标志仅影响未指定属性的那些 java_binary和java_test目标 。launcher</p>
+<p>请注意，根据您使用的是JDK启动程序还是其他启动程序，您的本机（C ++，SWIG，JNI）依赖项的构建方式会有所不同：</p>
+<p>如果您使用的是普通的JDK启动程序（默认），则将本机依赖项构建为名为的共享库{name}_nativedeps.so，其中 {name}是name此java_binary规则的属性。在此配置中，链接器不会删除未使用的代码。<br>如果您正在使用任何其他启动程序，则本机（C ++）依赖项将静态链接到名为的二进制文件{name}_nativedeps，其中此java_binary规则{name} 的name属性。在这种情况下，链接器将从生成的二进制文件中删除它认为未使用的任何代码，这意味着除非该cc_library目标指定，否则任何仅通过JNI访问的C ++代码都可能无法链接alwayslink = 1。<br>使用除默认JDK启动程序以外的任何启动程序时，*_deploy.jar输出的格式会更改。有关详细信息，请参阅主 java_binary文档。</p>
+<p>main_class<br>String; optional</p>
+<p>具有main()用作入口点的方法的类的名称。如果规则使用此选项，则不需要srcs=[…]列表。因此，使用此属性，可以从已包含一个或多个main()方法的Java库生成可执行文件。<br>此属性的值是类名，而不是源文件。该类必须在运行时可用：它可以由此规则（从srcs）编译，或由直接或传递依赖（通过runtime_deps或 deps）提供。如果该类不可用，则二进制文件将在运行时失败; 没有构建时间检查。</p>
+<p>plugins<br>List of labels; optional</p>
+<p>Java编译器插件在编译时运行。java_plugin无论何时构建此规则，都将运行此属性中指定的每个属性。库也可以从使用的依赖项继承插件 exported_plugins。插件生成的资源将包含在此规则的结果jar中。<br>resource_jars<br>List of labels; optional</p>
+<p>包含Java资源的档案集。<br>如果指定，这些jar的内容将合并到输出jar中。</p>
+<p>resource_strip_prefix<br>String; optional</p>
+<p>从Java资源中剥离的路径前缀。<br>如果指定，则从resources 属性中的每个文件中剥离此路径前缀。资源文件不在此目录下是错误的。如果未指定（默认值），则根据与源文件的Java包相同的逻辑确定资源文件的路径。例如，源文件 stuff/java/foo/bar/a.txt位于foo/bar/a.txt。</p>
+<p>runtime_deps<br>List of labels; optional</p>
+<p>库可用于最终二进制文件或仅在运行时测试。与普通类似deps，这些将出现在运行时类路径中，但与它们不同，不在编译时类路径上。应在此处列出仅在运行时所需的依赖关系。依赖性分析工具应该忽略出现在两个目标 runtime_deps和deps。<br>stamp<br>Integer; optional; default is 0</p>
+<p>启用链接标记。是否将构建信息编码为二进制文件。可能的值：<br>stamp = 1：将构建信息标记到二进制文件中。只有在依赖项发生变化时才会重建标记的二进制文件。如果存在依赖于构建信息的测试，请使用此选项。<br>stamp = 0：始终使用常量值替换构建信息。这提供了良好的构建结果缓存。<br>stamp = -1：嵌入构建信息由 - [no]戳标志控制。<br>test_class<br>String; optional</p>
+<p>由测试运行器加载的Java类。<br>默认情况下，如果未定义此参数，则使用传统模式并使用测试参数。将–nolegacy_bazel_java_test标志设置为不在第一个参数上回退。</p>
+<p>此属性指定此测试要运行的Java类的名称。很少需要设置它。如果省略此参数，则将使用目标name及其source-root-relative路径推断出该参数。如果测试位于已知源根目录之外，则Bazel将报告错误（如果test_class 未设置）。</p>
+<p>对于JUnit3，测试类需要是子类， junit.framework.TestCase或者需要有一个suite()返回junit.framework.Test（或子类Test）的公共静态方法 。对于JUnit4，该类需要注释 org.junit.runner.RunWith。</p>
+<p>此属性允许多个java_test规则共享相同的Test （TestCase，TestSuite，…）。通常将附加信息传递给它（例如通过jvm_flags=[‘-Dkey=value’]），以便其行为在每种情况下都不同，例如运行不同的测试子集。此属性还允许在javatests树外使用Java测试。</p>
+<p>toolchains<br>List of labels; optional</p>
+<p>提供“Make variables”的工具链集 ，该目标可以在其某些属性中使用。一些规则具有工具链，其默认情况下可以使用Make变量。<br>use_testrunner<br>Boolean; optional; default is True</p>
+<p>使用测试运行器（默认情况下 com.google.testing.junit.runner.BazelTestRunner）类作为Java程序的主入口点，并将测试类作为bazel.test_suite 系统属性的值提供给测试运行器。您可以使用它来覆盖默认行为，即使用测试运行器获取 java_test规则，而不是将其用于java_binary规则。你不太可能想要这样做。一种用途是用于AllTest 由另一个规则调用的规则（例如，在运行测试之前设置数据库）。该AllTest 规则必须被声明为java_binary，但仍应使用测试运行器作为其主要入口点。可以使用main_classattribute 覆盖测试运行器类的名称。</p>
+<p>java_package_configuration<br>java_package_configuration（name，data，compatible_with，deprecation，distribs，features，javacopts，licenses，packages，restricted_to，tags，testonly，visibility）<br>要应用于一组包的配置。配置可以添加到 java_toolchain.javacoptss。</p>
+<p>例：</p>
+<figure class="highlight jboss-cli hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">java_package_configuration（</span><br><span class="line">    name =“my_configuration”，</span><br><span class="line">    packages = [“：my_packages”]，</span><br><span class="line">    javacopts = [“ -  Werror”]，</span><br><span class="line">）</span><br><span class="line"></span><br><span class="line">package_group（</span><br><span class="line">    name =“my_packages”，</span><br><span class="line">    包裹= [</span><br><span class="line">        “<span class="hljs-string">//</span> COM /我/项目/ <span class="hljs-string">...</span>”</span><br><span class="line">        “ -  <span class="hljs-string">//</span> COM /我/项目/测试/ <span class="hljs-string">...</span>”</span><br><span class="line">    ]</span><br><span class="line">）</span><br><span class="line"></span><br><span class="line">java_toolchain（</span><br><span class="line">    <span class="hljs-string">...</span></span><br><span class="line">    package_configuration = [</span><br><span class="line">        “：my_configuration”</span><br><span class="line">    ]</span><br><span class="line">）</span><br></pre></td></tr></table></figure>
+
+<p>参数<br>属性<br>name<br>Name; required</p>
+<p>此目标的唯一名称。</p>
+<p>data<br>List of labels; optional</p>
+<p>此配置在运行时所需的文件列表。<br>javacopts<br>List of strings; optional</p>
+<p>Java编译器标志。<br>packages<br>List of labels; optional</p>
+<p>package_group应该应用配置 集。</p>
+<p>java_plugin<br>java_plugin（name，deps，srcs，data，resources，compatible_with，deprecation，distribs，exec_compatible_with，features，generate_api，javacopts，licenses，neverlink，output_licenses，plugins，processor_class，proguard_specs，resource_jars，resource_strip_prefix，restricted_to，tags，testonly，能见度）<br>java_plugin为Bazel运行的Java编译器定义插件。目前，唯一受支持的插件类型是注释处理器。A java_library或 java_binary规则可以通过plugins 属性依赖于它们来运行插件。A java_library还可以自动将插件导出到直接依赖它的库 exported_plugins。</p>
+<p>隐含的输出目标<br>libname.jar：Java存档。<br>java_library除了添加processor_class参数外， 参数与之相同。</p>
+<p>参数<br>属性<br>name<br>Name; required</p>
+<p>此目标的唯一名称。</p>
+<p>deps<br>List of labels; optional</p>
+<p>要链接到此库的库列表。看到一般的评论deps在 共同所有的生成规则属性 。<br>由java_library列出的规则构建的jar deps将位于此规则的编译时类路径中。此外，它们的传递闭包 deps，runtime_deps并将exports在运行时类路径上。</p>
+<p>相比之下，data属性中的目标包含在运行文件中，但既不包含在编译时也不包含在运行时类路径中。</p>
+<p>srcs<br>List of labels; optional</p>
+<p>处理以创建目标的源文件列表。几乎总是需要此属性; 看下面的例外。<br>.java编译 类型的源文件。在生成.java文件的情况下， 通常建议在此处放置生成规则的名称，而不是文件本身的名称。这不仅提高了可读性，而且使规则对未来的更改更具弹性：如果生成规则将来生成不同的文件，您只需要修复一个地方：outs生成规则。您不应该列出生成规则，deps 因为它是无操作。</p>
+<p>类型的源文件.srcjar被解压缩和编译。（如果您需要生成一组.java带有genrule 的文件，这非常有用。）</p>
+<p>规则：如果规则（通常genrule或filegroup）生成上面列出的任何文件，它们将以与源文件所述相同的方式使用。</p>
+<p>除非main_class属性指定运行时类路径上的类或指定runtime_deps参数，否则几乎总是需要 此参数。</p>
+<p>data<br>List of labels; optional</p>
+<p>此库在运行时所需的文件列表。看到一般的评论data在 共同所有的生成规则属性 。<br>在构建时java_library，Bazel不会将这些文件放在任何地方; 如果 data文件是生成文件，那么Bazel会生成它们。构建依赖于此java_libraryBazel 的测试时，data会将文件复制或链接 到runfiles区域。</p>
+<p>resources<br>List of labels; optional</p>
+<p>要包含在Java jar中的数据文件列表。<br>如果指定了资源，它们将与.class编译生成的常用文件一起捆绑在jar中 。jar文件中资源的位置由项目结构决定。Bazel首先查找Maven的 标准目录布局，（“src”目录后跟“资源”目录孙子）。如果找不到，那么Bazel会查找名为“java”或“javatests”的最顶层目录（例如，如果资源处于<workspace root>/x/java/y/java/z，则资源的路径将是y/java/z。此启发式扫描不能被覆盖。</workspace></p>
+<p>资源可以是源文件或生成的文件。</p>
+<p>generates_api<br>Boolean; optional; default is False</p>
+<p>此属性标记生成API代码的注释处理器。<br>如果规则使用API 生成注释处理器，则只有在生成规则之后调度其编译操作时，依赖于它的其他规则才能引用生成的代码。当启用了–java_header_compilation时，此属性指示Bazel引入调度约束。</p>
+<p>警告：此属性会影响构建性能，仅在必要时使用它。</p>
+<p>javacopts<br>List of strings; optional</p>
+<p>此库的额外编译器选项。受“Make变量”替换和 Bourne shell标记化的约束。<br>这些编译器选项在全局编译器选项之后传递给javac。</p>
+<p>neverlink<br>Boolean; optional; default is False</p>
+<p>此库是仅应用于编译而不是用于运行时。如果库将在执行期间由运行时环境提供，则很有用。此类库的示例是IDE插件的IDE API或tools.jar标准JDK上运行的任何内容。<br>请注意，neverlink = 1这不会阻止编译器将此库中的材料内联到依赖于它的编译目标中，如Java语言规范所允许的那样（例如， 原始类型的static final常量String或常量类型的常量）。因此，当运行时库与编译库相同时，首选用例是。</p>
+<p>如果运行时库与编译库不同，则必须确保它仅在JLS禁止编译器内联的位置（并且必须适用于JLS的所有未来版本）中有所不同。</p>
+<p>output_licenses<br>Licence type; optional</p>
+<p>看到 common attributes<br>plugins<br>List of labels; optional</p>
+<p>Java编译器插件在编译时运行。java_plugin无论何时构建此规则，都将运行此属性中指定的每个属性。库也可以从使用的依赖项继承插件 exported_plugins。插件生成的资源将包含在此规则的结果jar中。<br>processor_class<br>String; optional</p>
+<p>处理器类是Java编译器应该用作注释处理器入口点的类的完全限定类型。如果未指定，此规则将不会为Java编译器的注释处理提供注释处理器，但其运行时类路径仍将包含在编译器的注释处理器路径中。（这主要供 Error Prone插件使用，它使用 java.util.ServiceLoader从注释处理器路径加载 。）<br>proguard_specs<br>List of labels; optional</p>
+<p>用作Proguard规范的文件。这些将描述Proguard使用的规范集。如果指定，它们将android_binary根据此库添加到任何目标。此处包含的文件必须只有幂等规则，即-dontnote，-dontwarn，assumenosideeffects和以-keep开头的规则。其他选项只能出现在 android_binaryproguard_specs中，以确保非重言式合并。<br>resource_jars<br>List of labels; optional</p>
+<p>包含Java资源的档案集。<br>如果指定，这些jar的内容将合并到输出jar中。</p>
+<p>resource_strip_prefix<br>String; optional</p>
+<p>从Java资源中剥离的路径前缀。<br>如果指定，则从resources 属性中的每个文件中剥离此路径前缀。资源文件不在此目录下是错误的。如果未指定（默认值），则根据与源文件的Java包相同的逻辑确定资源文件的路径。例如，源文件 stuff/java/foo/bar/a.txt位于foo/bar/a.txt。<br>java_runtime<br>java_runtime（name，srcs，compatible_with，deprecation，distribs，features，java，java_home，licenses，restricted_to，tags，testonly，visibility）<br>指定Java运行时的配置。</p>
+<p>例：</p>
+<figure class="highlight lsl hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">java_runtime（</span><br><span class="line">    name =“jdk<span class="hljs-number">-9</span>-ea + <span class="hljs-number">153</span>”，</span><br><span class="line">    srcs = glob（[“jdk9-ea + <span class="hljs-number">153</span> / **”]），</span><br><span class="line">    java_home =“jdk9-ea + <span class="hljs-number">153</span>”，</span><br><span class="line">）</span><br></pre></td></tr></table></figure>
+
+<p>参数<br>属性<br>name<br>Name; required</p>
+<p>此目标的唯一名称。</p>
+<p>srcs<br>List of labels; optional</p>
+<p>运行时中的所有文件。<br>java<br>Label; optional</p>
+<p>java可执行文件的路径。<br>java_home<br>String; optional</p>
+<p>运行时根目录的路径。受“制造”变量替代。如果此路径是绝对路径，则该规则表示具有众所周知路径的非密集Java运行时。在那种情况下，srcs和 属性必须为空。<br>java_toolchain<br>java_toolchain（名称，启动类路径，compatible_with，折旧，发行商，extclasspath，功能，forcibly_disable_header_compilation，genclass，header_compiler，header_compiler_direct，ijar，jacocorunner，javabuilder，javabuilder_jvm_opts，javac的，javac_supports_workers，javacopts，jvm_opts，许可证，oneversion，oneversion_whitelist，package_configuration，resourcejar，restricted_to，singlejar，source_version，tags，target_version，testonly，timezone_data，tools，visibility，xlint）<br>指定Java编译器的配置。可以通过–java_toolchain参数更改要使用的工具链。通常，除非要调整Java编译器，否则不应编写这些规则。</p>
+<p>例子<br>一个简单的例子是：</p>
+<figure class="highlight nix hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">java_toolchain（</span><br><span class="line">    <span class="hljs-attr">name</span> =“toolchain”，</span><br><span class="line">    <span class="hljs-attr">source_version</span> =“<span class="hljs-number">7</span>”，</span><br><span class="line">    <span class="hljs-attr">target_version</span> =“<span class="hljs-number">7</span>”，</span><br><span class="line">    <span class="hljs-attr">bootclasspath</span> = [“// tools / jdk：bootclasspath”]，</span><br><span class="line">    <span class="hljs-attr">xlint</span> = [“classfile”，“divzero”，“empty”，“options”，“path”]，</span><br><span class="line">    <span class="hljs-attr">javacopts</span> = [“ -  g”]，</span><br><span class="line">    <span class="hljs-attr">javabuilder</span> =“：JavaBuilder_deploy.jar”，</span><br><span class="line">）</span><br></pre></td></tr></table></figure>
+
+<p>参数<br>属性<br>name<br>Name; required</p>
+<p>此目标的唯一名称。</p>
+<p>bootclasspath<br>List of labels; optional</p>
+<p>Java目标bootclasspath条目。对应于javac的-bootclasspath标志。<br>extclasspath<br>List of labels; optional</p>
+<p>Java目标extdir条目。对应于javac的-extdir标志。<br>forcibly_disable_header_compilation<br>Boolean; optional; default is False</p>
+<p>覆盖–java_header_compilation以在不支持它的平台上禁用标头编译，例如JDK 7 Bazel。<br>genclass<br>List of labels; required</p>
+<p>GenClass部署jar的标签。<br>header_compiler<br>List of labels; optional</p>
+<p>标头编译器的标签。如果启用了–java_header_compilation，则为必需。<br>header_compiler_direct<br>List of labels; optional</p>
+<p>标头编译器的可选标签，用于不包含任何API生成注释处理器的直接类路径操作。<br>此工具不支持注释处理。</p>
+<p>ijar<br>List of labels; required</p>
+<p>ijar可执行文件的标签。<br>jacocorunner<br>Label; optional</p>
+<p>JacocoCoverageRunner部署jar的标签。<br>javabuilder<br>List of labels; required</p>
+<p>JavaBuilder部署jar的标签。<br>javabuilder_jvm_opts<br>List of strings; optional</p>
+<p>调用JavaBuilder时JVM的参数列表。<br>javac<br>List of labels; optional</p>
+<p>javac jar的标签。<br>javac_supports_workers<br>Boolean; optional; default is True</p>
+<p>如果JavaBuilder支持作为持久性工作程序运行，则为True，否则为false。<br>javacopts<br>List of strings; optional</p>
+<p>Java编译器的额外参数列表。有关可能的Java编译器标志的详尽列表，请参阅Java编译器文档。<br>jvm_opts<br>List of strings; optional</p>
+<p>调用Java编译器时JVM的参数列表。有关此选项的可能标志的详细列表，请参阅Java虚拟机文档。<br>oneversion<br>Label; optional</p>
+<p>单版本强制二进制文件的标签。<br>oneversion_whitelist<br>Label; optional</p>
+<p>单版本白名单的标签。<br>package_configuration<br>List of labels; optional</p>
+<p>应该应用于指定包组的配置。<br>resourcejar<br>List of labels; optional</p>
+<p>资源jar构建器可执行文件的标签。<br>singlejar<br>List of labels; required</p>
+<p>SingleJar部署jar的标签。<br>source_version<br>String; optional</p>
+<p>Java源代码版本（例如，’6’或’7’）。它指定Java源代码中允许哪组代码结构。<br>target_version<br>String; optional</p>
+<p>Java目标版本（例如，’6’或’7’）。它指定应该为哪个Java运行时构建类。<br>timezone_data<br>Label; optional</p>
+<p>包含时区数据的资源jar的标签。如果设置，则时区数据将作为所有java_binary规则的隐式运行时依赖项添加。<br>tools<br>List of labels; optional</p>
+<p>可用于jvm_opts中标签扩展的工具标签。<br>xlint<br>List of strings; optional</p>
+<p>要添加或从默认列表中删除的警告列表。用破折号在它之前删除它。有关更多信息，请参阅-Xlint选项上的Javac文档。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/JAVAEE/">JAVAEE</a>, <a class="has-link-grey -link" href="/tags/ONOS/">ONOS</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>Alipay</span>
+    <div class="qrcode"><img src="https://qr.alipay.com/fkx06199fabfxmwfjcxame4" alt="Alipay"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>Wechat</span>
+    <div class="qrcode"><img src="wxp://f2f0H5yOeRjkTFwOHiWtwCFS0UrLMWuaE_7U" alt="Wechat"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/07/30/OSGI-开发实例/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">OSGI 开发实例</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/07/29/OSGI-Command3/">
+                <span class="level-item">OSGI Command3</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/05/29/@Select注解时使用in/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="文档标题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T15:53:20.000Z">2020-05-29</time></div>
+                    <a href="/2020/05/29/@Select注解时使用in/" class="title has-link-black-ter is-size-6 has-text-weight-normal">文档标题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/JAVAEE/">JAVAEE</a> / <a class="has-link-grey -link" href="/categories/JAVAEE/MYBATIS/">MYBATIS</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/05/29/mysql共享锁和排它锁/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="mysql共享锁和排它锁">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T15:35:53.000Z">2020-05-29</time></div>
+                    <a href="/2020/05/29/mysql共享锁和排它锁/" class="title has-link-black-ter is-size-6 has-text-weight-normal">mysql共享锁和排它锁</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/JAVAEE/">JAVAEE</a> / <a class="has-link-grey -link" href="/categories/JAVAEE/MYSQL/">MYSQL</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/05/29/邮箱找回密码与二次认证/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T14:40:15.741Z">2020-05-29</time></div>
+                    <a href="/2020/05/29/邮箱找回密码与二次认证/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/05/29/可视化面板/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T14:40:15.601Z">2020-05-29</time></div>
+                    <a href="/2020/05/29/可视化面板/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/05/29/CS应用配置/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-29T14:40:15.581Z">2020-05-29</time></div>
+                    <a href="/2020/05/29/CS应用配置/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/avatar.png" alt="Joe">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        Joe
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Learning
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Your location</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        220
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        15
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        100
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/ppoffice" target="_blank">
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/joeithub">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Dribbble" href="https://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+        
+            
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/ES/">
+            <span class="level-start">
+                <span class="level-item">ES</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/GIT/">
+            <span class="level-start">
+                <span class="level-item">GIT</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/IT/">
+            <span class="level-start">
+                <span class="level-item">IT</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">194</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/JAVAEE/">
+            <span class="level-start">
+                <span class="level-item">JAVAEE</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/JAVAEE/DESIGN-PATTERNS/">
+            <span class="level-start">
+                <span class="level-item">DESIGN PATTERNS</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/JAVAEE/MYBATIS/">
+            <span class="level-start">
+                <span class="level-item">MYBATIS</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/JAVAEE/MYSQL/">
+            <span class="level-start">
+                <span class="level-item">MYSQL</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/SPRINGBOOT/">
+            <span class="level-start">
+                <span class="level-item">SPRINGBOOT</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/SPRINGBOOT/SECURITY/">
+            <span class="level-start">
+                <span class="level-item">SECURITY</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/SYSTEM/">
+            <span class="level-start">
+                <span class="level-item">SYSTEM</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/VIM/">
+            <span class="level-start">
+                <span class="level-item">VIM</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/WORK/">
+            <span class="level-start">
+                <span class="level-item">WORK</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/office/">
+            <span class="level-start">
+                <span class="level-item">office</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/分类1/">
+            <span class="level-start">
+                <span class="level-item">分类1</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/电商/">
+            <span class="level-start">
+                <span class="level-item">电商</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/ELASTICSEARCH/" style="font-size: 10px;">ELASTICSEARCH</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10.91px;">Eureka</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/IDEA/" style="font-size: 10.91px;">IDEA</a> <a href="/tags/IT/" style="font-size: 14.55px;">IT</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.82px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.91px;">JAVASE</a> <a href="/tags/LINUX/" style="font-size: 10px;">LINUX</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MQ/" style="font-size: 11.82px;">MQ</a> <a href="/tags/ONOS/" style="font-size: 15.45px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 14.55px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PROTOCAL/" style="font-size: 10px;">PROTOCAL</a> <a href="/tags/PYTHON/" style="font-size: 10.91px;">PYTHON</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/Ribbon/" style="font-size: 10px;">Ribbon</a> <a href="/tags/SECURITY/" style="font-size: 10px;">SECURITY</a> <a href="/tags/SPRING-BOOT/" style="font-size: 10px;">SPRING-BOOT</a> <a href="/tags/SQL/" style="font-size: 12.73px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.18px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/StringRedisTemplate/" style="font-size: 10px;">StringRedisTemplate</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/annotation/" style="font-size: 15.45px;">annotation</a> <a href="/tags/bazel/" style="font-size: 10px;">bazel</a> <a href="/tags/beanutils/" style="font-size: 10px;">beanutils</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/classloader/" style="font-size: 10px;">classloader</a> <a href="/tags/computer/" style="font-size: 10px;">computer</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/docker/" style="font-size: 12.73px;">docker</a> <a href="/tags/druid/" style="font-size: 10px;">druid</a> <a href="/tags/elasticsearch/" style="font-size: 13.64px;">elasticsearch</a> <a href="/tags/enlink/" style="font-size: 10.91px;">enlink</a> <a href="/tags/fastjson/" style="font-size: 10px;">fastjson</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/hexo/" style="font-size: 12.73px;">hexo</a> <a href="/tags/idea/" style="font-size: 10.91px;">idea</a> <a href="/tags/interceptor/" style="font-size: 11.82px;">interceptor</a> <a href="/tags/jetty/" style="font-size: 10px;">jetty</a> <a href="/tags/jpa/" style="font-size: 10.91px;">jpa</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/karaf/" style="font-size: 11.82px;">karaf</a> <a href="/tags/keepalived/" style="font-size: 10px;">keepalived</a> <a href="/tags/linux-shell/" style="font-size: 15.45px;">linux-shell</a> <a href="/tags/listener/" style="font-size: 10px;">listener</a> <a href="/tags/loadbalanced/" style="font-size: 10px;">loadbalanced</a> <a href="/tags/logback/" style="font-size: 10px;">logback</a> <a href="/tags/login/" style="font-size: 10.91px;">login</a> <a href="/tags/lombok/" style="font-size: 11.82px;">lombok</a> <a href="/tags/mac/" style="font-size: 15.45px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.82px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 17.27px;">mybatis</a> <a href="/tags/mycat/" style="font-size: 10.91px;">mycat</a> <a href="/tags/mysql/" style="font-size: 16.36px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/oauth2/" style="font-size: 10px;">oauth2</a> <a href="/tags/pagehelper/" style="font-size: 10px;">pagehelper</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/rabbitMq/" style="font-size: 11.82px;">rabbitMq</a> <a href="/tags/redis/" style="font-size: 11.82px;">redis</a> <a href="/tags/redisTemplate/" style="font-size: 10px;">redisTemplate</a> <a href="/tags/reflection/" style="font-size: 11.82px;">reflection</a> <a href="/tags/registry-center/" style="font-size: 10px;">registry center</a> <a href="/tags/restTemplate/" style="font-size: 10px;">restTemplate</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/serialVersionUID/" style="font-size: 10px;">serialVersionUID</a> <a href="/tags/servlet/" style="font-size: 10.91px;">servlet</a> <a href="/tags/session/" style="font-size: 10.91px;">session</a> <a href="/tags/spring/" style="font-size: 15.45px;">spring</a> <a href="/tags/spring-task/" style="font-size: 12.73px;">spring task</a> <a href="/tags/springboot/" style="font-size: 19.09px;">springboot</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/webClient/" style="font-size: 10px;">webClient</a> <a href="/tags/yaml/" style="font-size: 10.91px;">yaml</a> <a href="/tags/事物/" style="font-size: 10px;">事物</a> <a href="/tags/全局异常/" style="font-size: 10px;">全局异常</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.91px;">文件服务器</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">10</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">13</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">11</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">28</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">40</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">13</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">66</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AOP/">
+                        <span class="tag">AOP</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CI-CD/">
+                        <span class="tag">CI/CD</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ELASTICSEARCH/">
+                        <span class="tag">ELASTICSEARCH</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/EXCEL/">
+                        <span class="tag">EXCEL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Eureka/">
+                        <span class="tag">Eureka</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GO/">
+                        <span class="tag">GO</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/IDEA/">
+                        <span class="tag">IDEA</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/IT/">
+                        <span class="tag">IT</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JAVAEE/">
+                        <span class="tag">JAVAEE</span>
+                        <span class="tag is-grey">130</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JAVASCRIPT/">
+                        <span class="tag">JAVASCRIPT</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JAVASE/">
+                        <span class="tag">JAVASE</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/LINUX/">
+                        <span class="tag">LINUX</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Linux/">
+                        <span class="tag">Linux</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MAC/">
+                        <span class="tag">MAC</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MQ/">
+                        <span class="tag">MQ</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ONOS/">
+                        <span class="tag">ONOS</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/OSGI/">
+                        <span class="tag">OSGI</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/OSI/">
+                        <span class="tag">OSI</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PROTOCAL/">
+                        <span class="tag">PROTOCAL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PYTHON/">
+                        <span class="tag">PYTHON</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Quartz/">
+                        <span class="tag">Quartz</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RPM/">
+                        <span class="tag">RPM</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Ribbon/">
+                        <span class="tag">Ribbon</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/SECURITY/">
+                        <span class="tag">SECURITY</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/SPRING-BOOT/">
+                        <span class="tag">SPRING-BOOT</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/SQL/">
+                        <span class="tag">SQL</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/SQLAlert/">
+                        <span class="tag">SQLAlert</span>
+                        <span class="tag is-grey">13</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/SSO/">
+                        <span class="tag">SSO</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/StringRedisTemplate/">
+                        <span class="tag">StringRedisTemplate</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TCP/">
+                        <span class="tag">TCP</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TK-MYBATIS/">
+                        <span class="tag">TK.MYBATIS</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/UDP/">
+                        <span class="tag">UDP</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/annotation/">
+                        <span class="tag">annotation</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bazel/">
+                        <span class="tag">bazel</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/beanutils/">
+                        <span class="tag">beanutils</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/centos/">
+                        <span class="tag">centos</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/classloader/">
+                        <span class="tag">classloader</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/computer/">
+                        <span class="tag">computer</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cron/">
+                        <span class="tag">cron</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/debug/">
+                        <span class="tag">debug</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/druid/">
+                        <span class="tag">druid</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/elasticsearch/">
+                        <span class="tag">elasticsearch</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/enlink/">
+                        <span class="tag">enlink</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fastjson/">
+                        <span class="tag">fastjson</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git/">
+                        <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/gitlab/">
+                        <span class="tag">gitlab</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/go/">
+                        <span class="tag">go</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/interceptor/">
+                        <span class="tag">interceptor</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jetty/">
+                        <span class="tag">jetty</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jpa/">
+                        <span class="tag">jpa</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/json/">
+                        <span class="tag">json</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/karaf/">
+                        <span class="tag">karaf</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/keepalived/">
+                        <span class="tag">keepalived</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux-shell/">
+                        <span class="tag">linux-shell</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/listener/">
+                        <span class="tag">listener</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/loadbalanced/">
+                        <span class="tag">loadbalanced</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/logback/">
+                        <span class="tag">logback</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/login/">
+                        <span class="tag">login</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/lombok/">
+                        <span class="tag">lombok</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mac/">
+                        <span class="tag">mac</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/markdown/">
+                        <span class="tag">markdown</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mybatis/">
+                        <span class="tag">mybatis</span>
+                        <span class="tag is-grey">11</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mycat/">
+                        <span class="tag">mycat</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">9</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/network/">
+                        <span class="tag">network</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/oauth2/">
+                        <span class="tag">oauth2</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pagehelper/">
+                        <span class="tag">pagehelper</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/postman/">
+                        <span class="tag">postman</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/python/">
+                        <span class="tag">python</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/rabbitMq/">
+                        <span class="tag">rabbitMq</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redisTemplate/">
+                        <span class="tag">redisTemplate</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/reflection/">
+                        <span class="tag">reflection</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/registry-center/">
+                        <span class="tag">registry center</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/restTemplate/">
+                        <span class="tag">restTemplate</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ribbon/">
+                        <span class="tag">ribbon</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/serialVersionUID/">
+                        <span class="tag">serialVersionUID</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/servlet/">
+                        <span class="tag">servlet</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/session/">
+                        <span class="tag">session</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring-task/">
+                        <span class="tag">spring task</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">43</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/swagger/">
+                        <span class="tag">swagger</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webClient/">
+                        <span class="tag">webClient</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/yaml/">
+                        <span class="tag">yaml</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/事物/">
+                        <span class="tag">事物</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/全局异常/">
+                        <span class="tag">全局异常</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/抖音/">
+                        <span class="tag">抖音</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/文件服务器/">
+                        <span class="tag">文件服务器</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/日志/">
+                        <span class="tag">日志</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/时间转化/">
+                        <span class="tag">时间转化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/标签1/">
+                        <span class="tag">标签1</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/消息队列/">
+                        <span class="tag">消息队列</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/淘宝/">
+                        <span class="tag">淘宝</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/设计模式/">
+                        <span class="tag">设计模式</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/高可用/">
+                        <span class="tag">高可用</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/avatar.png" alt="Joe">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        Joe
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Learning
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Your location</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        220
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        15
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        100
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/ppoffice" target="_blank">
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/joeithub">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Dribbble" href="https://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/ES/">
+            <span class="level-start">
+                <span class="level-item">ES</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/GIT/">
+            <span class="level-start">
+                <span class="level-item">GIT</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/IT/">
+            <span class="level-start">
+                <span class="level-item">IT</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">194</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/JAVAEE/">
+            <span class="level-start">
+                <span class="level-item">JAVAEE</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/JAVAEE/DESIGN-PATTERNS/">
+            <span class="level-start">
+                <span class="level-item">DESIGN PATTERNS</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/JAVAEE/MYBATIS/">
+            <span class="level-start">
+                <span class="level-item">MYBATIS</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/JAVAEE/MYSQL/">
+            <span class="level-start">
+                <span class="level-item">MYSQL</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/SPRINGBOOT/">
+            <span class="level-start">
+                <span class="level-item">SPRINGBOOT</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/SPRINGBOOT/SECURITY/">
+            <span class="level-start">
+                <span class="level-item">SECURITY</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/SYSTEM/">
+            <span class="level-start">
+                <span class="level-item">SYSTEM</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/VIM/">
+            <span class="level-start">
+                <span class="level-item">VIM</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/WORK/">
+            <span class="level-start">
+                <span class="level-item">WORK</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/office/">
+            <span class="level-start">
+                <span class="level-item">office</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/分类1/">
+            <span class="level-start">
+                <span class="level-item">分类1</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/电商/">
+            <span class="level-start">
+                <span class="level-item">电商</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/ELASTICSEARCH/" style="font-size: 10px;">ELASTICSEARCH</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10.91px;">Eureka</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/IDEA/" style="font-size: 10.91px;">IDEA</a> <a href="/tags/IT/" style="font-size: 14.55px;">IT</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.82px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.91px;">JAVASE</a> <a href="/tags/LINUX/" style="font-size: 10px;">LINUX</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MQ/" style="font-size: 11.82px;">MQ</a> <a href="/tags/ONOS/" style="font-size: 15.45px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 14.55px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PROTOCAL/" style="font-size: 10px;">PROTOCAL</a> <a href="/tags/PYTHON/" style="font-size: 10.91px;">PYTHON</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/Ribbon/" style="font-size: 10px;">Ribbon</a> <a href="/tags/SECURITY/" style="font-size: 10px;">SECURITY</a> <a href="/tags/SPRING-BOOT/" style="font-size: 10px;">SPRING-BOOT</a> <a href="/tags/SQL/" style="font-size: 12.73px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.18px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/StringRedisTemplate/" style="font-size: 10px;">StringRedisTemplate</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/annotation/" style="font-size: 15.45px;">annotation</a> <a href="/tags/bazel/" style="font-size: 10px;">bazel</a> <a href="/tags/beanutils/" style="font-size: 10px;">beanutils</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/classloader/" style="font-size: 10px;">classloader</a> <a href="/tags/computer/" style="font-size: 10px;">computer</a> <a href="/tags/cron/" style="font-size: 10px;">cron</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/docker/" style="font-size: 12.73px;">docker</a> <a href="/tags/druid/" style="font-size: 10px;">druid</a> <a href="/tags/elasticsearch/" style="font-size: 13.64px;">elasticsearch</a> <a href="/tags/enlink/" style="font-size: 10.91px;">enlink</a> <a href="/tags/fastjson/" style="font-size: 10px;">fastjson</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/hexo/" style="font-size: 12.73px;">hexo</a> <a href="/tags/idea/" style="font-size: 10.91px;">idea</a> <a href="/tags/interceptor/" style="font-size: 11.82px;">interceptor</a> <a href="/tags/jetty/" style="font-size: 10px;">jetty</a> <a href="/tags/jpa/" style="font-size: 10.91px;">jpa</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/karaf/" style="font-size: 11.82px;">karaf</a> <a href="/tags/keepalived/" style="font-size: 10px;">keepalived</a> <a href="/tags/linux-shell/" style="font-size: 15.45px;">linux-shell</a> <a href="/tags/listener/" style="font-size: 10px;">listener</a> <a href="/tags/loadbalanced/" style="font-size: 10px;">loadbalanced</a> <a href="/tags/logback/" style="font-size: 10px;">logback</a> <a href="/tags/login/" style="font-size: 10.91px;">login</a> <a href="/tags/lombok/" style="font-size: 11.82px;">lombok</a> <a href="/tags/mac/" style="font-size: 15.45px;">mac</a> <a href="/tags/markdown/" style="font-size: 11.82px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 17.27px;">mybatis</a> <a href="/tags/mycat/" style="font-size: 10.91px;">mycat</a> <a href="/tags/mysql/" style="font-size: 16.36px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/oauth2/" style="font-size: 10px;">oauth2</a> <a href="/tags/pagehelper/" style="font-size: 10px;">pagehelper</a> <a href="/tags/postman/" style="font-size: 10px;">postman</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/rabbitMq/" style="font-size: 11.82px;">rabbitMq</a> <a href="/tags/redis/" style="font-size: 11.82px;">redis</a> <a href="/tags/redisTemplate/" style="font-size: 10px;">redisTemplate</a> <a href="/tags/reflection/" style="font-size: 11.82px;">reflection</a> <a href="/tags/registry-center/" style="font-size: 10px;">registry center</a> <a href="/tags/restTemplate/" style="font-size: 10px;">restTemplate</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/serialVersionUID/" style="font-size: 10px;">serialVersionUID</a> <a href="/tags/servlet/" style="font-size: 10.91px;">servlet</a> <a href="/tags/session/" style="font-size: 10.91px;">session</a> <a href="/tags/spring/" style="font-size: 15.45px;">spring</a> <a href="/tags/spring-task/" style="font-size: 12.73px;">spring task</a> <a href="/tags/springboot/" style="font-size: 19.09px;">springboot</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/webClient/" style="font-size: 10px;">webClient</a> <a href="/tags/yaml/" style="font-size: 10.91px;">yaml</a> <a href="/tags/事物/" style="font-size: 10px;">事物</a> <a href="/tags/全局异常/" style="font-size: 10px;">全局异常</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.91px;">文件服务器</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">10</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">13</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">11</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">28</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">40</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">13</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">66</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AOP/">
+                        <span class="tag">AOP</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CI-CD/">
+                        <span class="tag">CI/CD</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ELASTICSEARCH/">
+                        <span class="tag">ELASTICSEARCH</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/EXCEL/">
+                        <span class="tag">EXCEL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Eureka/">
+                        <span class="tag">Eureka</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GO/">
+                        <span class="tag">GO</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/IDEA/">
+                        <span class="tag">IDEA</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/IT/">
+                        <span class="tag">IT</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JAVAEE/">
+                        <span class="tag">JAVAEE</span>
+                        <span class="tag is-grey">130</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JAVASCRIPT/">
+                        <span class="tag">JAVASCRIPT</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JAVASE/">
+                        <span class="tag">JAVASE</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/LINUX/">
+                        <span class="tag">LINUX</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Linux/">
+                        <span class="tag">Linux</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MAC/">
+                        <span class="tag">MAC</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MQ/">
+                        <span class="tag">MQ</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ONOS/">
+                        <span class="tag">ONOS</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/OSGI/">
+                        <span class="tag">OSGI</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/OSI/">
+                        <span class="tag">OSI</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PROTOCAL/">
+                        <span class="tag">PROTOCAL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PYTHON/">
+                        <span class="tag">PYTHON</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Quartz/">
+                        <span class="tag">Quartz</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RPM/">
+                        <span class="tag">RPM</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Ribbon/">
+                        <span class="tag">Ribbon</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/SECURITY/">
+                        <span class="tag">SECURITY</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/SPRING-BOOT/">
+                        <span class="tag">SPRING-BOOT</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/SQL/">
+                        <span class="tag">SQL</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/SQLAlert/">
+                        <span class="tag">SQLAlert</span>
+                        <span class="tag is-grey">13</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/SSO/">
+                        <span class="tag">SSO</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/StringRedisTemplate/">
+                        <span class="tag">StringRedisTemplate</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TCP/">
+                        <span class="tag">TCP</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TK-MYBATIS/">
+                        <span class="tag">TK.MYBATIS</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/UDP/">
+                        <span class="tag">UDP</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/annotation/">
+                        <span class="tag">annotation</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bazel/">
+                        <span class="tag">bazel</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/beanutils/">
+                        <span class="tag">beanutils</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/centos/">
+                        <span class="tag">centos</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/classloader/">
+                        <span class="tag">classloader</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/computer/">
+                        <span class="tag">computer</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cron/">
+                        <span class="tag">cron</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/debug/">
+                        <span class="tag">debug</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/druid/">
+                        <span class="tag">druid</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/elasticsearch/">
+                        <span class="tag">elasticsearch</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/enlink/">
+                        <span class="tag">enlink</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fastjson/">
+                        <span class="tag">fastjson</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git/">
+                        <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/gitlab/">
+                        <span class="tag">gitlab</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/go/">
+                        <span class="tag">go</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/interceptor/">
+                        <span class="tag">interceptor</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jetty/">
+                        <span class="tag">jetty</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jpa/">
+                        <span class="tag">jpa</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/json/">
+                        <span class="tag">json</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/karaf/">
+                        <span class="tag">karaf</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/keepalived/">
+                        <span class="tag">keepalived</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux-shell/">
+                        <span class="tag">linux-shell</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/listener/">
+                        <span class="tag">listener</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/loadbalanced/">
+                        <span class="tag">loadbalanced</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/logback/">
+                        <span class="tag">logback</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/login/">
+                        <span class="tag">login</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/lombok/">
+                        <span class="tag">lombok</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mac/">
+                        <span class="tag">mac</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/markdown/">
+                        <span class="tag">markdown</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mybatis/">
+                        <span class="tag">mybatis</span>
+                        <span class="tag is-grey">11</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mycat/">
+                        <span class="tag">mycat</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">9</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/network/">
+                        <span class="tag">network</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/oauth2/">
+                        <span class="tag">oauth2</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pagehelper/">
+                        <span class="tag">pagehelper</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/postman/">
+                        <span class="tag">postman</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/python/">
+                        <span class="tag">python</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/rabbitMq/">
+                        <span class="tag">rabbitMq</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redis/">
+                        <span class="tag">redis</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/redisTemplate/">
+                        <span class="tag">redisTemplate</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/reflection/">
+                        <span class="tag">reflection</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/registry-center/">
+                        <span class="tag">registry center</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/restTemplate/">
+                        <span class="tag">restTemplate</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ribbon/">
+                        <span class="tag">ribbon</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/serialVersionUID/">
+                        <span class="tag">serialVersionUID</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/servlet/">
+                        <span class="tag">servlet</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/session/">
+                        <span class="tag">session</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/spring-task/">
+                        <span class="tag">spring task</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">43</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/swagger/">
+                        <span class="tag">swagger</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webClient/">
+                        <span class="tag">webClient</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/yaml/">
+                        <span class="tag">yaml</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/事物/">
+                        <span class="tag">事物</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/全局异常/">
+                        <span class="tag">全局异常</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/抖音/">
+                        <span class="tag">抖音</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/文件服务器/">
+                        <span class="tag">文件服务器</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/日志/">
+                        <span class="tag">日志</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/时间转化/">
+                        <span class="tag">时间转化</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/标签1/">
+                        <span class="tag">标签1</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/消息队列/">
+                        <span class="tag">消息队列</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/淘宝/">
+                        <span class="tag">淘宝</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/设计模式/">
+                        <span class="tag">设计模式</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/高可用/">
+                        <span class="tag">高可用</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="BUILD" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Joe Tong&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh_CN");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
