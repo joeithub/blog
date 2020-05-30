@@ -7,13 +7,13 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Tag: idea - Learning</title>
+<title>Tag: IDEA - Learning</title>
 
 
     <meta name="description" content="private learning">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Learning">
-<meta property="og:url" content="http://yoursite.com/tags/idea/index.html">
+<meta property="og:url" content="http://yoursite.com/tags/IDEA/index.html">
 <meta property="og:site_name" content="Learning">
 <meta property="og:description" content="private learning">
 <meta property="og:locale" content="zh_CN">
@@ -146,7 +146,7 @@
         <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
             <li><a href="/tags">Tags</a></li>
-            <li class="is-active"><a href="#" aria-current="page">idea</a></li>
+            <li class="is-active"><a href="#" aria-current="page">IDEA</a></li>
         </ul>
         </nav>
     </div>
@@ -158,7 +158,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-09-17T09:02:00.000Z">2019-09-17</time>
+                <time class="level-item has-text-grey" datetime="2019-10-11T17:58:00.000Z">2019-10-11</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/IT/">IT</a>
@@ -168,7 +168,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 read (About 352 words)
+                    3 分钟 read (About 380 words)
                 </span>
                 
                 
@@ -177,54 +177,23 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/09/17/debug-idea快捷键/">debug-idea快捷键</a>
+                <a class="has-link-black-ter" href="/2019/10/12/ide配置自定义模板/">ide配置自定义模板</a>
             
         </h1>
         <div class="content">
-            <table>
-<thead>
-<tr>
-<th align="left">快捷键</th>
-<th align="left">介绍</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">F7</td>
-<td align="left">在 Debug 模式下，进入下一步，如果当前行断点是一个方法，则进入当前方法体内，如果该方法体还有方法，则不会进入该内嵌的方法中</td>
-</tr>
-<tr>
-<td align="left">F8</td>
-<td align="left">在 Debug 模式下，进入下一步，如果当前行断点是一个方法，则不进入当前方法体内</td>
-</tr>
-<tr>
-<td align="left">F9</td>
-<td align="left">在 Debug 模式下，恢复程序运行，但是如果该断点下面代码还有断点则停在下一个断点上</td>
-</tr>
-<tr>
-<td align="left">Alt + F8</td>
-<td align="left">在 Debug 的状态下，选中对象，弹出可输入计算表达式调试框，查看该输入内容的调试结果</td>
-</tr>
-<tr>
-<td align="left">Ctrl + F8</td>
-<td align="left">在 Debug 模式下，设置光标当前行为断点，如果当前已经是断点则去掉断点</td>
-</tr>
-<tr>
-<td align="left">Shift + F7</td>
-<td align="left">在 Debug 模式下，智能步入。断点所在行上有多个方法调用，会弹出进入哪个方法</td>
-</tr>
-<tr>
-<td align="left">Shift + F8</td>
-<td align="left">在 Debug 模式下，跳出，表现出来的效果跟 F9 一样</td>
-</tr>
-<tr>
-<td align="left">Ctrl + Shift + F8</td>
-<td align="left">在 Debug 模式下，指定断点进入条件</td>
-</tr>
-<tr>
-<td align="left">Alt + Shift + F7</td>
-<td align="left">在 Debug 模式下，进入下一步，如果当前行断点是一个方法，则进入当前方法体内，如果方法体还有方法，则会进入该内嵌的方法中，依此循环进入</td>
-</tr>
-</tbody></table>
+            <p>设置类注释模板<br>1.选择File–&gt;Settings–&gt;Editor–&gt;File and Code Templates–&gt;Includes–&gt;File Header. </p>
+<p><img src="/images/pasted-176.png" alt="upload successful"><br>2.在右边空白处，编写自己的模板即可，注意Scheme是模板的生效范围，可选变量在description有介绍，附图中本人使用的模板（${USER}为计算机用户名，可以自行修改）。</p>
+<figure class="highlight elixir hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * <span class="hljs-variable">@Auther</span>: <span class="hljs-variable">$&#123;</span>USER&#125;</span><br><span class="line"> * <span class="hljs-variable">@Date</span>: <span class="hljs-variable">$&#123;</span>DATE&#125; <span class="hljs-variable">$&#123;</span>HOUR&#125;<span class="hljs-symbol">:</span><span class="hljs-variable">$&#123;</span>MINUTE&#125;</span><br><span class="line"> * <span class="hljs-variable">@Description</span>: </span><br><span class="line"> *<span class="hljs-regexp">/</span></span><br></pre></td></tr></table></figure>
+
+<p> 3.设置完成后，创建类时自动生成注释，效果如下。 </p>
+<p><img src="/images/pasted-177.png" alt="upload successful"><br>设置方法注释模板<br>Idea没有可以直接设置方法注释模板的地方，可以借用Live Templates基本实现，步骤如下。<br>1.选择File–&gt;Settings–&gt;Editor–&gt;Live Templates，先选择右侧绿色加号新建一个自己的模板组，如图命名为myGroup。   </p>
+<p><img src="/images/pasted-178.png" alt="upload successful"><br>2.选中已建好的组，选择右侧绿色加号新建模板，如下图。</p>
+<p><img src="/images/pasted-179.png" alt="upload successful"><br>3.填好Abbreviation（快捷输入），Description（描述）和模板内容（图中模板如下）  </p>
+<figure class="highlight elixir hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *</span><br><span class="line"> * 功能描述: </span><br><span class="line"> *</span><br><span class="line"> * <span class="hljs-variable">@param</span>: <span class="hljs-variable">$param</span>$</span><br><span class="line"> * <span class="hljs-variable">@return</span>: <span class="hljs-variable">$return</span>$</span><br><span class="line"> * <span class="hljs-variable">@auther</span>: <span class="hljs-variable">$user</span>$</span><br><span class="line"> * <span class="hljs-variable">@date</span>: <span class="hljs-variable">$date</span><span class="hljs-variable">$ </span><span class="hljs-variable">$time</span>$</span><br><span class="line"> *<span class="hljs-regexp">/</span></span><br></pre></td></tr></table></figure>
+
+<p>4.点击Define，勾选Java<br><img src="/images/pasted-180.png" alt="upload successful"><br>5.点击Edit variables编辑变量，设置如下，点击Ok–&gt;Apply完成设置。 </p>
+<p><img src="/images/pasted-181.png" alt="upload successful"><br>6.输入“<code>/**</code>”，然后按Tab键即可生成注释，如下图。注意此方式有个缺点，需要在方法内部生成，否则@param为null。 </p>
+<p><img src="/images/pasted-182.png" alt="upload successful"></p>
 
         </div>
         
@@ -246,7 +215,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-07-25T14:19:00.000Z">2019-07-25</time>
+                <time class="level-item has-text-grey" datetime="2019-07-16T02:30:00.000Z">2019-07-16</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/IT/">IT</a>
@@ -256,7 +225,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 read (About 43 words)
+                    几秒 read (About 73 words)
                 </span>
                 
                 
@@ -265,11 +234,25 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/07/25/serialVersionUID-idea-生成/">serialVersionUID idea 生成</a>
+                <a class="has-link-black-ter" href="/2019/07/16/idea-springboot-autowired-show-redunderline/">idea springboot autowired hide red underline</a>
             
         </h1>
         <div class="content">
-            <p>1.进入到设置<br><img src="/images/pasted-30.png" alt="upload successful"><br>2.设置之后，选中对应的类名，然后按 alt+enter 快捷键 的情况如下所示<br><img src="/images/pasted-31.png" alt="upload successful"></p>
+            <p>SpringBoot：Dao层mapper注入报红问题</p>
+<p>在mapper接口上加上</p>
+<p>@Component注解<br>例如:</p>
+<pre><code>import com.example.sptingboot_mybatis.model.User;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+@Mapper
+@Component(&quot;IUser&quot;)
+public interface IUser {
+   List&lt;User&gt; findAll();
+}</code></pre><p>就可以解决问题</p>
+<p>原文链接：<a href="https://blog.csdn.net/Sir_He/article/details/81879854" target="_blank" rel="noopener">https://blog.csdn.net/Sir_He/article/details/81879854</a> </p>
 
         </div>
         

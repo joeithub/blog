@@ -7,13 +7,13 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Tag: MAC - Learning</title>
+<title>Tag: mac - Learning</title>
 
 
     <meta name="description" content="private learning">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Learning">
-<meta property="og:url" content="http://yoursite.com/tags/MAC/index.html">
+<meta property="og:url" content="http://yoursite.com/tags/mac/index.html">
 <meta property="og:site_name" content="Learning">
 <meta property="og:description" content="private learning">
 <meta property="og:locale" content="zh_CN">
@@ -146,7 +146,7 @@
         <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
             <li><a href="/tags">Tags</a></li>
-            <li class="is-active"><a href="#" aria-current="page">MAC</a></li>
+            <li class="is-active"><a href="#" aria-current="page">mac</a></li>
         </ul>
         </nav>
     </div>
@@ -158,7 +158,60 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-19T10:02:13.000Z">2020-03-19</time>
+                <time class="level-item has-text-grey" datetime="2019-12-03T16:10:29.000Z">2019-12-03</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/IT/">IT</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 read (About 241 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/12/04/brew安装问题/">brew安装问题</a>
+            
+        </h1>
+        <div class="content">
+            <p>[TOCM]</p>
+<p>[TOC]</p>
+<h2 id="github下载"><a href="#github下载" class="headerlink" title="github下载"></a>github下载</h2><p><a href="https://github.com/Homebrew/brew.git" title="Homebrew for macOS " target="_blank" rel="noopener">Homebrew for macOS </a></p>
+<h2 id="替换源"><a href="#替换源" class="headerlink" title="替换源"></a>替换源</h2><p>把下载的install文件里的 BREW_REPO 替换掉<br>BREW_REPO = “<a href="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git”.freeze" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git”.freeze</a></p>
+<h2 id="然后install"><a href="#然后install" class="headerlink" title="然后install"></a>然后install</h2><p><code>./install</code></p>
+<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>brew 安装出现Checksum mismatch解决方法<br>用brew 安装APP出现Error: Checksum mismatch.说明下载的文件和期望的hashCode对不上，删掉对应的文件就行了<br>删除对应文件，然后重新执行brew安装脚本<br><code>rm -rf  /Users/tongqiao/Library/Caches/Homebrew/portable-ruby-2.6.3.mavericks.bottle.tar.gz</code></p>
+<hr>
+<h2 id="替换国内源为下载源"><a href="#替换国内源为下载源" class="headerlink" title="替换国内源为下载源"></a>替换国内源为下载源</h2><figure class="highlight dsconfig hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 执行下面这句命令，更换为中科院的镜像：</span><br><span class="line"><span class="hljs-string">git </span><span class="hljs-string">clone </span><span class="hljs-string">git:</span>//<span class="hljs-string">mirrors.</span><span class="hljs-string">ustc.</span><span class="hljs-string">edu.</span><span class="hljs-string">cn/</span><span class="hljs-string">homebrew-core.</span><span class="hljs-string">git/</span> /<span class="hljs-string">usr/</span><span class="hljs-string">local/</span><span class="hljs-string">Homebrew/</span><span class="hljs-string">Library/</span><span class="hljs-string">Taps/</span><span class="hljs-string">homebrew/</span><span class="hljs-string">homebrew-core </span><span class="hljs-built_in">--depth=1</span></span><br><span class="line"><span class="hljs-built_in"></span></span><br><span class="line"><span class="hljs-built_in">//</span> 把<span class="hljs-string">homebrew-core的</span>镜像地址也设为中科院的国内镜像</span><br><span class="line"></span><br><span class="line"><span class="hljs-string">cd </span><span class="hljs-string">"$(brew --repo)"</span> </span><br><span class="line"></span><br><span class="line"><span class="hljs-string">git </span><span class="hljs-string">remote </span><span class="hljs-built_in">set-url</span> <span class="hljs-string">origin </span><span class="hljs-string">https:</span>//<span class="hljs-string">mirrors.</span><span class="hljs-string">ustc.</span><span class="hljs-string">edu.</span><span class="hljs-string">cn/</span><span class="hljs-string">brew.</span><span class="hljs-string">git</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">cd </span><span class="hljs-string">"$(brew --repo)/Library/Taps/homebrew/homebrew-core"</span> </span><br><span class="line"></span><br><span class="line"><span class="hljs-string">git </span><span class="hljs-string">remote </span><span class="hljs-built_in">set-url</span> <span class="hljs-string">origin </span><span class="hljs-string">https:</span>//<span class="hljs-string">mirrors.</span><span class="hljs-string">ustc.</span><span class="hljs-string">edu.</span><span class="hljs-string">cn/</span><span class="hljs-string">homebrew-core.</span><span class="hljs-string">git</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">/</span>/ 更新</span><br><span class="line"><span class="hljs-string">brew </span><span class="hljs-string">update</span></span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-02T19:48:55.000Z">2019-12-02</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/SYSTEM/">SYSTEM</a>
@@ -168,7 +221,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 read (About 47 words)
+                    2 分钟 read (About 347 words)
                 </span>
                 
                 
@@ -177,18 +230,267 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/03/19/MAC设置ip/">MAC设置ip</a>
+                <a class="has-link-black-ter" href="/2019/12/03/mac虚拟机设置ip/">mac虚拟机设置ip</a>
             
         </h1>
         <div class="content">
-            <p>BasicIPv6ValidationError解决办法</p>
-<p>打开终端按如下命令操作</p>
-<p>1.列出你的网卡</p>
-<p>networksetup -listallnetworkservices</p>
-<p>2.关闭ipv6</p>
-<p>networksetup -setv6off “你网卡名字”</p>
-<p>3.设置ip地址</p>
-<p>networksetup -setmanual “网卡名字” 192.168.31.2 255.255.255.0 192.168.1.1</p>
+            <p>Mac 以太网连接 报无效的服务器地址 BasicIPv6ValidationError<br>用Mac这么久，一直是用WiFi连接网络，没搞过以太网连接，我也是醉了</p>
+<p>显然 Mac 不能像 Windows 一样，插入网线就可以自动连接网络。需要设置一下IP地址</p>
+<p>然后悲伤的事情发生了，显示无效的服务器地址  BasicIPv6ValidationError </p>
+<p>解决方案：</p>
+<p>思路是这样的：先关闭IPv6，然后设置IPv4，再重新开启IPv6。</p>
+<p>update 2017.03.14  我发现其实可以直接用命令行修改IPv4，不用管IPv6，如果它没报错的话</p>
+<ol>
+<li>关闭 IPv6</li>
+</ol>
+<p>显然 ”高级“ &gt; “TCP/IP” 下 IPv6 没有提供关闭选项，所以需要用终端命令  网络命令参看这里</p>
+<p>终端输入：networksetup -setv6off Ethernet</p>
+<p>这时候系统会弹窗要求输入密码，搞定后你会发现 ”高级“ &gt; “TCP/IP” 下 IPv6 多了个关闭选项</p>
+<ol start="2">
+<li>设置IPv4地址</li>
+</ol>
+<p>终端输入：networksetup -setmanual Ethernet 192.168.31.2 255.255.255.0 192.168.1.1</p>
+<p>对应IP地址、子网掩码、路由器</p>
+<p>设置完成后，可以看到，以太网显示状态是：已连接</p>
+<p>这个时候已经连接网络了，如果还不能正常上网，比如我是 QQ可以连接，但网页打不开，说明 DNS 有问题</p>
+<ol start="3">
+<li>设置DNS</li>
+</ol>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-02T15:42:35.000Z">2019-12-02</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/SYSTEM/">SYSTEM</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    几秒 read (About 41 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/12/02/Mac安装任何来源/">Mac 安装任何来源</a>
+            
+        </h1>
+        <div class="content">
+            <p>Mac安装来源：若没有“任何来源”这个选项<br>打开终端（Terminal.app），拷贝粘贴<br><code>sudo spctl --master-disable</code>，按回车键</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-11-29T14:18:26.000Z">2019-11-29</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/IT/">IT</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    几秒 read (About 11 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/11/29/dmg转iso/">mac转换dmg到iso</a>
+            
+        </h1>
+        <div class="content">
+            <p><code>hdiutil convert ~/Downloads/OSX109.dmg -format UDTO -o ~/Downloads/OSX109.iso</code></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-29T10:26:00.000Z">2019-10-29</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/SYSTEM/">SYSTEM</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 read (About 132 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/10/29/Mac格式化u盘和dmg/">Mac格式化u盘和dmg</a>
+            
+        </h1>
+        <div class="content">
+            <p>2.格式化U盘</p>
+<p>这个U盘最好选择一个USB3.0版本、8G或16G内存的。</p>
+<p>3.将ISO文件转换为dmg格式</p>
+<p>执行命令</p>
+<p>cd /users/用户名/下载文件夹<br>hdiutil convert AAAA.iso -format UDRW -o BBBBB.dmg    //AAAA为你下载ISO镜像的名字；BBBBB你随意取就好<br>4.制作启动U盘</p>
+<p>diskutil list</p>
+<p>diskutil unmountDisk /dev/diskN          //N为上面命令中显示出的你U盘的序号，一般是2。</p>
+<p>sudo dd if =BBBBB.dmg of=/dev/rdiskN bs=2m        //N同样为你U盘的序号</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-24T10:08:59.000Z">2019-10-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/SYSTEM/">SYSTEM</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    几秒 read (About 42 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/10/24/mac使用sourcetree跳过注册/">mac使用sourcetree跳过注册</a>
+            
+        </h1>
+        <div class="content">
+            <p>mac使用sourcetree跳过注册</p>
+<p><a href="https://blog.csdn.net/qq_32890891/article/details/89216954" target="_blank" rel="noopener">https://blog.csdn.net/qq_32890891/article/details/89216954</a><br>打开sourcetree<br>关闭sourcetree<br>命令终端输入defaults write com.torusknot.SourceTreeNotMAS completedWelcomeWizardVersion 3<br>打开sourcetree即可跳过登录</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-07-22T09:08:31.000Z">2019-07-22</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/SYSTEM/">SYSTEM</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 read (About 207 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/07/22/Mac-关闭开机声音/">Mac 关闭开机声音</a>
+            
+        </h1>
+        <div class="content">
+            <p>苹果 Mac系统如何关闭开机声音？<br>1、打开 “应用程序” ，打开“实用工具”，找到并打开[终端]程序，然后输入如下命令并回车（注意，复制的时候不要多复制了空格）： &nbsp;<br><code>sudo nvram SystemAudioVolume=%80</code>  </p>
+<p>2、之后会提示输入密码，输入你的用户密码，回车，如下图。这样之后再次启动Mac的时候就是完全静音的了。<br>（注意：输入密码是看不到的，不像普通的输入密码那样能看到，你只管输就可以了，输入完按回车。）</p>
+<p>3、如果想要恢复正常的开机声音，只要在终端中再次输入如下命令即可：<br><code>sudo nvram -d SystemAudioVolume</code></p>
 
         </div>
         
