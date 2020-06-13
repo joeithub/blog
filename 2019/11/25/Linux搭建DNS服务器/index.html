@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>搭建DNS服务器 | Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Linux下DNS服务器常规操作Red Hat Linux的各个版本已经包含DNS服务器的软件–Bind，一般不需要用户另行安装，如果用户需要安装最新版本，可以到Bind官网http://www.bind.com/浏览最新消息。也可以到其它网站下载。 源码软件包：https://www.isc.org/downloads/ 例如，在其它网站中下载源码包软件包bind-9.10.4-P1.tar.g">
+<meta name="keywords" content="LINUX,DNS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建DNS服务器">
+<meta property="og:url" content="/blog/2019/11/25/Linux搭建DNS服务器/index.html">
+<meta property="og:site_name" content="Learning">
+<meta property="og:description" content="Linux下DNS服务器常规操作Red Hat Linux的各个版本已经包含DNS服务器的软件–Bind，一般不需要用户另行安装，如果用户需要安装最新版本，可以到Bind官网http://www.bind.com/浏览最新消息。也可以到其它网站下载。 源码软件包：https://www.isc.org/downloads/ 例如，在其它网站中下载源码包软件包bind-9.10.4-P1.tar.g">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:updated_time" content="2020-06-13T07:49:08.199Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="搭建DNS服务器">
+<meta name="twitter:description" content="Linux下DNS服务器常规操作Red Hat Linux的各个版本已经包含DNS服务器的软件–Bind，一般不需要用户另行安装，如果用户需要安装最新版本，可以到Bind官网http://www.bind.com/浏览最新消息。也可以到其它网站下载。 源码软件包：https://www.isc.org/downloads/ 例如，在其它网站中下载源码包软件包bind-9.10.4-P1.tar.g">
+  
+    <link rel="alternate" href="/atom.xml" title="Learning" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Learning</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Joe&#39;s Blog</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Linux搭建DNS服务器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/25/Linux搭建DNS服务器/" class="article-date">
+  <time datetime="2019-11-25T13:06:43.000Z" itemprop="datePublished">2019-11-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      搭建DNS服务器
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Linux下DNS服务器常规操作"><a href="#Linux下DNS服务器常规操作" class="headerlink" title="Linux下DNS服务器常规操作"></a>Linux下DNS服务器常规操作</h2><p>Red Hat Linux的各个版本已经包含DNS服务器的软件–Bind，一般不需要用户另行安装，如果用户需要安装最新版本，可以到Bind官网<a href="http://www.bind.com/浏览最新消息。也可以到其它网站下载。" target="_blank" rel="noopener">http://www.bind.com/浏览最新消息。也可以到其它网站下载。</a></p>
+<p>源码软件包：<a href="https://www.isc.org/downloads/" target="_blank" rel="noopener">https://www.isc.org/downloads/</a></p>
+<p>例如，在其它网站中下载源码包软件包bind-9.10.4-P1.tar.gz</p>
+<p>以下是安装过程中的一些指令：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost root]<span class="comment"># tar xzvf bind-9.10.4-P1.tar.gz</span></span><br><span class="line">[root@localhost root]<span class="comment"># cd bind-9.10.4-P1</span></span><br><span class="line">[root@localhost <span class="keyword">bind</span>-<span class="number">9.10</span>.<span class="number">4</span>-P1]<span class="comment"># ./configure</span></span><br><span class="line">[root@localhost <span class="keyword">bind</span>-<span class="number">9.10</span>.<span class="number">4</span>-P1]<span class="comment"># make</span></span><br><span class="line">[root@localhost <span class="keyword">bind</span>-<span class="number">9.10</span>.<span class="number">4</span>-P1]<span class="comment"># make install</span></span><br></pre></td></tr></table></figure>
+
+<p>其中各参数含义如下：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tar xzvf bind-<span class="number">9.10</span>.<span class="number">4</span>-P1<span class="selector-class">.tar</span><span class="selector-class">.gz</span>        <span class="comment">//解压缩软件包</span></span><br><span class="line">./configure                               <span class="comment">//针对机器做安装的检查和设置，大部分工作由机器自动完成</span></span><br><span class="line">make                                     <span class="comment">//编译</span></span><br><span class="line">make install                            <span class="comment">//安装</span></span><br></pre></td></tr></table></figure>
+
+<p>软件包的功能</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Bind</span>：提供了域名服务的主要程序以及相关文件。</span><br><span class="line"></span><br><span class="line"><span class="keyword">Bind</span>-utils:提供了对DNS服务器的测试工具程序（nslookupdup、dig等）</span><br><span class="line"></span><br><span class="line"><span class="keyword">Bind</span>-chroot:为<span class="keyword">Bind</span>提供了一个伪装的根目录以增强安全性</span><br><span class="line"></span><br><span class="line">Caching-namserver:为配置<span class="keyword">Bind</span>作为缓存域名服务器提供必要的默认配置文件，用于参考</span><br></pre></td></tr></table></figure>
+
+<p>DNS常规操作<br>1.启动DNS服务器：<br><code>/etc/init.d/named start</code><br>2.停止DNS服务器：<br><code>/etc/init.d/named stop</code><br>3.重新启动DNS服务器:<br><code>/etc/init.d/named restart</code></p>
+<p>DNS配置文件</p>
+<p>与DNS相关的两个特殊文件<br>1./etc/resolv.conf</p>
+<p>该文件用来指定系统中DNS服务器的IP地址和一些相关信息，格式如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">search</span> <span class="selector-tag">abc</span><span class="selector-class">.com</span><span class="selector-class">.cn</span></span><br><span class="line"><span class="selector-tag">nameserver</span> 10<span class="selector-class">.1</span><span class="selector-class">.6</span><span class="selector-class">.250</span></span><br><span class="line"><span class="selector-tag">nameserver</span> 192<span class="selector-class">.168</span><span class="selector-class">.1</span><span class="selector-class">.254</span></span><br></pre></td></tr></table></figure>
+
+<p>2./etc/host.conf</p>
+<p>该文件决定进行域名解析时查找host文件和DNS服务器的顺序，其格式如下：</p>
+<p><code>order hosts,bind</code></p>
+<p>Bind的配置文件</p>
+<p>Bind的主配置文件是etc/name.conf,该文件是文本文件，一般需手动生成。除了主配置文件外，/var/named目录下的所有文件都是DNS服务器的相关配置文件，下面详细讲述这些文件的配置。</p>
+<p>1.name.conf文件详解</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">options &#123;</span><br><span class="line">listen-on port <span class="number">53</span> &#123; <span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span><span class="comment">; &#125;;      //设置named服务器监听端口及IP地址</span></span><br><span class="line">listen-on-v6 port <span class="number">53</span> &#123; ::<span class="number">1</span><span class="comment">; &#125;;</span></span><br><span class="line"><span class="keyword">directory </span>      <span class="string">"/var/named"</span><span class="comment">;    //设置区域数据库文件的默认存放地址</span></span><br><span class="line">dump-file       <span class="string">"/var/named/data/cache_dump.db"</span><span class="comment">;</span></span><br><span class="line">statistics-file <span class="string">"/var/named/data/named_stats.txt"</span><span class="comment">;</span></span><br><span class="line">memstatistics-file <span class="string">"/var/named/data/named_mem_stats.txt"</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line">allow-query     &#123; localhost<span class="comment">; &#125;;   //允许DNS查询客户端</span></span><br><span class="line">allow-query-<span class="keyword">cache </span>&#123; any<span class="comment">; &#125;;</span></span><br><span class="line">&#125;<span class="comment">;</span></span><br><span class="line">logging &#123;</span><br><span class="line">channel default_debug &#123;</span><br><span class="line">file <span class="string">"data/named.run"</span><span class="comment">;</span></span><br><span class="line">severity dynamic<span class="comment">;</span></span><br><span class="line">&#125;<span class="comment">;</span></span><br><span class="line">&#125;<span class="comment">;</span></span><br><span class="line">view localhost_resolver &#123;</span><br><span class="line">match-clients      &#123; any<span class="comment">; &#125;;</span></span><br><span class="line">match-destinations &#123; any<span class="comment">; &#125;;</span></span><br><span class="line">recursion yes<span class="comment">;                  //设置允许递归查询</span></span><br><span class="line">include <span class="string">"/etc/named.rfc1912.zones"</span><span class="comment">;</span></span><br><span class="line">&#125;<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<p>2.区域配置文件/etc/named.rfc1912.zones</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">zone <span class="string">"."</span> <span class="keyword">IN</span> &#123;    <span class="comment">//定义了根域</span></span><br><span class="line"><span class="keyword">type</span> hint;       <span class="comment">//定义服务器类型为hint</span></span><br><span class="line"><span class="keyword">file</span> <span class="string">"named.ca"</span>;  <span class="comment">//定义根域的配置文件名</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">zone <span class="string">"localdomain"</span> <span class="keyword">IN</span> &#123;   <span class="comment">//定义正向DNS区域</span></span><br><span class="line"><span class="keyword">type</span> master;              <span class="comment">//定义区域类型</span></span><br><span class="line"><span class="keyword">file</span> <span class="string">"localdomain.zone"</span>;  <span class="comment">//设置对应的正向区域地址数据库文件</span></span><br><span class="line">allow-<span class="keyword">update</span> &#123; none; &#125;;   <span class="comment">//设置允许动态更新的客户端地址（none为禁止）</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">zone <span class="string">"localhost"</span> <span class="keyword">IN</span> &#123;</span><br><span class="line"><span class="keyword">type</span> master;</span><br><span class="line"><span class="keyword">file</span> <span class="string">"localhost.zone"</span>;</span><br><span class="line">allow-<span class="keyword">update</span> &#123; none; &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">zone <span class="string">"0.0.127.in-addr.arpa"</span> <span class="keyword">IN</span> &#123;   <span class="comment">//设置反向DNS区域</span></span><br><span class="line"><span class="keyword">type</span> master;</span><br><span class="line"><span class="keyword">file</span> <span class="string">"named.local"</span>;</span><br><span class="line">allow-<span class="keyword">update</span> &#123; none; &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>3.根域配置文件named.ca</p>
+<p>根域配置文件设定根域的域名数据库，包括根域中13台DNS服务器的信息。几乎所有系统的这个文件都是一样的，用户不需要进行修改。</p>
+<p>4.正向域名解析数据库文件</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$TTL <span class="number">600</span></span><br><span class="line">@        IN   SOA    dns.cwlinux.com   dnsadmin.cwlinux.com. (<span class="comment">//SOA字段</span></span><br><span class="line">                          <span class="number">2015031288</span>   <span class="comment">//版本号    同步一次  +1</span></span><br><span class="line">                             <span class="number">1</span>H        <span class="comment">//更新时间</span></span><br><span class="line">                             <span class="number">2</span>M        <span class="comment">// 更新失败，重试更新时间</span></span><br><span class="line">                             <span class="number">2</span>D        <span class="comment">// 更新失败多长时间后此DNS失效时间</span></span><br><span class="line">                             <span class="number">1</span>D        <span class="comment">//解析不到请求不予回复时间</span></span><br><span class="line">)</span><br><span class="line">         IN    NS   dns            <span class="comment">//有两域名服务器</span></span><br><span class="line">         IN    NS   ns2</span><br><span class="line">         IN    MX  <span class="number">10</span> mial        <span class="comment">// 定义邮件服务器，10指优先级  0-99 数字越小优先级越高</span></span><br><span class="line">ns2      IN    A    <span class="number">192.168</span><span class="number">.1</span><span class="number">.113</span>  <span class="comment">//ns2域名服务器的ip地址</span></span><br><span class="line">dns      IN    A    <span class="number">192.168</span><span class="number">.1</span><span class="number">.10</span>   <span class="comment">//dns域名服务器的ip地址</span></span><br><span class="line">mail     IN    A    <span class="number">192.168</span><span class="number">.1</span><span class="number">.111</span>   <span class="comment">//邮件服务器的ip地址</span></span><br><span class="line">www      IN    A    <span class="number">192.168</span><span class="number">.1</span><span class="number">.112</span>   <span class="comment">//www.cwlinux.com的ip地址</span></span><br><span class="line">pop      IN   CNAME  mail         <span class="comment">//pop的正式名字是mail</span></span><br><span class="line">ftp      IN   CNAME  www         <span class="comment">//ftp的正式名字是www</span></span><br></pre></td></tr></table></figure>
+
+<p>5.反向域名解析数据库文件</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$TTL</span> <span class="number">600</span></span><br><span class="line">@         IN   SOA    dns<span class="selector-class">.cwlinux</span><span class="selector-class">.com</span>.   dnsadmin<span class="selector-class">.cwlinux</span><span class="selector-class">.com</span>. (</span><br><span class="line">                             <span class="number">2014031224</span></span><br><span class="line">                             <span class="number">1</span>H</span><br><span class="line">                             <span class="number">2</span>M</span><br><span class="line">                             <span class="number">2</span>D</span><br><span class="line">                             <span class="number">1</span>D</span><br><span class="line">)</span><br><span class="line">         IN   NS      dns<span class="selector-class">.cwlinux</span><span class="selector-class">.com</span>.</span><br><span class="line"><span class="number">10</span>       IN   PTR     dns<span class="selector-class">.cwlinux</span><span class="selector-class">.com</span>.     <span class="comment">//反向解析PTR格式</span></span><br><span class="line"><span class="number">111</span>       IN   PTR     mail<span class="selector-class">.cwlinux</span><span class="selector-class">.com</span>.</span><br><span class="line"><span class="number">112</span>       IN   PTR     www<span class="selector-class">.cwlinux</span><span class="selector-class">.com</span>.</span><br><span class="line"><span class="comment">// 声明域的时候已经有了，192.168.1 所以我们只需要输入10既代表192.168.1.10jc</span></span><br></pre></td></tr></table></figure>
+
+<p>DNS客户端的配置文件</p>
+<p>Linux系统中，DNS客户端的配置文件是/etc/resolv.conf,该文件记录了DNS服务器的地址和域名。</p>
+<p>一般格式如下：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#more</span> /etc/resolv.conf</span><br><span class="line">nameserver <span class="number">10.1</span>.<span class="number">6.250</span>  </span><br><span class="line">domainname abc<span class="selector-class">.com</span><span class="selector-class">.cn</span></span><br></pre></td></tr></table></figure>
+
+<p>其中，关键字nameserver记录该域中DNS服务器的IP地址，domainname记录所在域的名称。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/11/25/Linux搭建DNS服务器/" data-id="ckbdc9uqe002r24u2wwcngkja" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DNS/">DNS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LINUX/">LINUX</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/28/subList用法/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          subList用法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/15/java获取post请求参数/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">java获取post请求参数</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIT/">GIT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IT/">IT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVAEE/">JAVAEE</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVAEE/MYSQL/">MYSQL</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/OFFICE/">OFFICE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SYSTEM/">SYSTEM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VIM/">VIM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/分类1/">分类1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/电商/">电商</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ANNOTATION/">ANNOTATION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BAZEL/">BAZEL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BEANUTILS/">BEANUTILS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CENTOS/">CENTOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI-CD/">CI/CD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CLASSLOADER/">CLASSLOADER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CRONTAB/">CRONTAB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DEBUG/">DEBUG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DESIGN-PATTERNS/">DESIGN PATTERNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DNS/">DNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOCKER/">DOCKER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DRUID/">DRUID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ENLINK/">ENLINK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EUREKA/">EUREKA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EXCEL/">EXCEL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/">Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FASTJSON/">FASTJSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIT/">GIT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GITLAB/">GITLAB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GLOBALEXCEPTION/">GLOBALEXCEPTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO/">GO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HEXO/">HEXO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/INTERCEPTOR/">INTERCEPTOR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IT/">IT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVADOC/">JAVADOC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASCRIPT/">JAVASCRIPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASE/">JAVASE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JETTY/">JETTY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPA/">JPA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSONUTILS/">JSONUTILS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KARAF/">KARAF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KEEPALIVED/">KEEPALIVED</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LINUX/">LINUX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LISTENER/">LISTENER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOADBALANCED/">LOADBALANCED</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOG/">LOG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOGBACK/">LOGBACK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOGIN/">LOGIN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOMBOK/">LOMBOK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MARKDOWN/">MARKDOWN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIME-TYPE/">MIME-TYPE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQ/">MQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYBATIS/">MYBATIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYCAT/">MYCAT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/">MYSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NETWORK/">NETWORK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OAUTH2/">OAUTH2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ONOS/">ONOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSGI/">OSGI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSI/">OSI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAGEHELPER/">PAGEHELPER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POSTMAN/">POSTMAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PYTHON/">PYTHON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RABBITMQ/">RABBITMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REDIS/">REDIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REDISTEMPLATE/">REDISTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REFLECTION/">REFLECTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REGISTRY-CENTER/">REGISTRY CENTER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REPO/">REPO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTTEMPLATE/">RESTTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RIBBON/">RIBBON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPM/">RPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SECURITY/">SECURITY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SERIALVERSIONUID/">SERIALVERSIONUID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SERVLET/">SERVLET</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SESSION/">SESSION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SHELL/">SHELL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPINTBOOT/">SPINTBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING/">SPRING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-MVC/">SPRING MVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-STREAM/">SPRING STREAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGBBOT/">SPRINGBBOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGBOOT/">SPRINGBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGQUARTZ/">SPRINGQUARTZ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGTASK/">SPRINGTASK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGTBOOT/">SPRINGTBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPTING/">SPTING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLAlert/">SQLAlert</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSO/">SSO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STRINGREDISTEMPLATE/">STRINGREDISTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWAGGER/">SWAGGER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SYSTEM/">SYSTEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP-IP/">TCP/IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TERMUX/">TERMUX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TK-MYBATIS/">TK.MYBATIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TRANSECTION/">TRANSECTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UBUNTU/">UBUNTU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UDP/">UDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEBClIENT/">WEBClIENT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YAML/">YAML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rabbitMq/">rabbitMq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/抖音/">抖音</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件服务器/">文件服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间转化/">时间转化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标签1/">标签1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/淘宝/">淘宝</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高可用/">高可用</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ANNOTATION/" style="font-size: 14.62px;">ANNOTATION</a> <a href="/tags/AOP/" style="font-size: 10.77px;">AOP</a> <a href="/tags/BAZEL/" style="font-size: 10px;">BAZEL</a> <a href="/tags/BEANUTILS/" style="font-size: 10px;">BEANUTILS</a> <a href="/tags/CENTOS/" style="font-size: 10px;">CENTOS</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/CLASSLOADER/" style="font-size: 10px;">CLASSLOADER</a> <a href="/tags/CRONTAB/" style="font-size: 10.77px;">CRONTAB</a> <a href="/tags/DEBUG/" style="font-size: 10px;">DEBUG</a> <a href="/tags/DESIGN-PATTERNS/" style="font-size: 10px;">DESIGN PATTERNS</a> <a href="/tags/DNS/" style="font-size: 10px;">DNS</a> <a href="/tags/DOCKER/" style="font-size: 11.54px;">DOCKER</a> <a href="/tags/DRUID/" style="font-size: 10px;">DRUID</a> <a href="/tags/ENLINK/" style="font-size: 10px;">ENLINK</a> <a href="/tags/ES/" style="font-size: 16.15px;">ES</a> <a href="/tags/EUREKA/" style="font-size: 10px;">EUREKA</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10px;">Eureka</a> <a href="/tags/FASTJSON/" style="font-size: 10px;">FASTJSON</a> <a href="/tags/GIT/" style="font-size: 10px;">GIT</a> <a href="/tags/GITLAB/" style="font-size: 10px;">GITLAB</a> <a href="/tags/GLOBALEXCEPTION/" style="font-size: 10px;">GLOBALEXCEPTION</a> <a href="/tags/GO/" style="font-size: 10.77px;">GO</a> <a href="/tags/HEXO/" style="font-size: 12.31px;">HEXO</a> <a href="/tags/IDEA/" style="font-size: 12.31px;">IDEA</a> <a href="/tags/INTERCEPTOR/" style="font-size: 11.54px;">INTERCEPTOR</a> <a href="/tags/IT/" style="font-size: 11.54px;">IT</a> <a href="/tags/JAVADOC/" style="font-size: 10px;">JAVADOC</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.54px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.77px;">JAVASE</a> <a href="/tags/JETTY/" style="font-size: 10px;">JETTY</a> <a href="/tags/JPA/" style="font-size: 10.77px;">JPA</a> <a href="/tags/JSONUTILS/" style="font-size: 10px;">JSONUTILS</a> <a href="/tags/KARAF/" style="font-size: 11.54px;">KARAF</a> <a href="/tags/KEEPALIVED/" style="font-size: 10px;">KEEPALIVED</a> <a href="/tags/LINUX/" style="font-size: 16.92px;">LINUX</a> <a href="/tags/LISTENER/" style="font-size: 10px;">LISTENER</a> <a href="/tags/LOADBALANCED/" style="font-size: 10px;">LOADBALANCED</a> <a href="/tags/LOG/" style="font-size: 10px;">LOG</a> <a href="/tags/LOGBACK/" style="font-size: 10px;">LOGBACK</a> <a href="/tags/LOGIN/" style="font-size: 10px;">LOGIN</a> <a href="/tags/LOMBOK/" style="font-size: 11.54px;">LOMBOK</a> <a href="/tags/MAC/" style="font-size: 15.38px;">MAC</a> <a href="/tags/MARKDOWN/" style="font-size: 11.54px;">MARKDOWN</a> <a href="/tags/MIME-TYPE/" style="font-size: 10px;">MIME-TYPE</a> <a href="/tags/MQ/" style="font-size: 12.31px;">MQ</a> <a href="/tags/MYBATIS/" style="font-size: 17.69px;">MYBATIS</a> <a href="/tags/MYCAT/" style="font-size: 10.77px;">MYCAT</a> <a href="/tags/MYSQL/" style="font-size: 16.15px;">MYSQL</a> <a href="/tags/NETWORK/" style="font-size: 10px;">NETWORK</a> <a href="/tags/OAUTH2/" style="font-size: 10.77px;">OAUTH2</a> <a href="/tags/ONOS/" style="font-size: 14.62px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 13.85px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PAGEHELPER/" style="font-size: 10px;">PAGEHELPER</a> <a href="/tags/POSTMAN/" style="font-size: 10px;">POSTMAN</a> <a href="/tags/PYTHON/" style="font-size: 13.08px;">PYTHON</a> <a href="/tags/RABBITMQ/" style="font-size: 10.77px;">RABBITMQ</a> <a href="/tags/REDIS/" style="font-size: 11.54px;">REDIS</a> <a href="/tags/REDISTEMPLATE/" style="font-size: 10px;">REDISTEMPLATE</a> <a href="/tags/REFLECTION/" style="font-size: 11.54px;">REFLECTION</a> <a href="/tags/REGISTRY-CENTER/" style="font-size: 10px;">REGISTRY CENTER</a> <a href="/tags/REPO/" style="font-size: 10px;">REPO</a> <a href="/tags/RESTTEMPLATE/" style="font-size: 10px;">RESTTEMPLATE</a> <a href="/tags/RIBBON/" style="font-size: 10.77px;">RIBBON</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/SECURITY/" style="font-size: 12.31px;">SECURITY</a> <a href="/tags/SERIALVERSIONUID/" style="font-size: 10px;">SERIALVERSIONUID</a> <a href="/tags/SERVLET/" style="font-size: 10.77px;">SERVLET</a> <a href="/tags/SESSION/" style="font-size: 12.31px;">SESSION</a> <a href="/tags/SHELL/" style="font-size: 14.62px;">SHELL</a> <a href="/tags/SPINTBOOT/" style="font-size: 10px;">SPINTBOOT</a> <a href="/tags/SPRING/" style="font-size: 13.08px;">SPRING</a> <a href="/tags/SPRING-MVC/" style="font-size: 10px;">SPRING MVC</a> <a href="/tags/SPRING-STREAM/" style="font-size: 10px;">SPRING STREAM</a> <a href="/tags/SPRINGBBOT/" style="font-size: 10px;">SPRINGBBOT</a> <a href="/tags/SPRINGBOOT/" style="font-size: 19.23px;">SPRINGBOOT</a> <a href="/tags/SPRINGQUARTZ/" style="font-size: 10px;">SPRINGQUARTZ</a> <a href="/tags/SPRINGTASK/" style="font-size: 12.31px;">SPRINGTASK</a> <a href="/tags/SPRINGTBOOT/" style="font-size: 10px;">SPRINGTBOOT</a> <a href="/tags/SPTING/" style="font-size: 10px;">SPTING</a> <a href="/tags/SQL/" style="font-size: 12.31px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.46px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/STRINGREDISTEMPLATE/" style="font-size: 10px;">STRINGREDISTEMPLATE</a> <a href="/tags/SWAGGER/" style="font-size: 10px;">SWAGGER</a> <a href="/tags/SYSTEM/" style="font-size: 10px;">SYSTEM</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TCP-IP/" style="font-size: 11.54px;">TCP/IP</a> <a href="/tags/TERMUX/" style="font-size: 10.77px;">TERMUX</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/TRANSECTION/" style="font-size: 10px;">TRANSECTION</a> <a href="/tags/UBUNTU/" style="font-size: 10px;">UBUNTU</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/WEBClIENT/" style="font-size: 10px;">WEBClIENT</a> <a href="/tags/YAML/" style="font-size: 10.77px;">YAML</a> <a href="/tags/rabbitMq/" style="font-size: 10px;">rabbitMq</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.77px;">文件服务器</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/13/可视化面板/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/邮箱找回密码与二次认证/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/特权用户访问策略控制/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/md列表/">markdown任务列表语法checkbox</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/CS应用配置/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Joe Tong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

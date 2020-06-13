@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>类加载器读取配置文件 | Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="用类加载器的5种方式读取.properties文件 用类加载器的5中形式读取.properties文件（这个.properties文件一般放在src的下面） 用类加载器进行读取：这里采取先向大家讲读取类加载器的几种方法；然后写一个例子把几种方法融进去，让大家直观感受。最后分析原理。（主要是结合所牵涉的方法的源代码的角度进行分析） 这里先介绍用类加载器读取的几种方法: 1.任意类名.class.ge">
+<meta name="keywords" content="JAVAEE,CLASSLOADER">
+<meta property="og:type" content="article">
+<meta property="og:title" content="类加载器读取配置文件">
+<meta property="og:url" content="/blog/2019/07/14/类加载器读取配置文件/index.html">
+<meta property="og:site_name" content="Learning">
+<meta property="og:description" content="用类加载器的5种方式读取.properties文件 用类加载器的5中形式读取.properties文件（这个.properties文件一般放在src的下面） 用类加载器进行读取：这里采取先向大家讲读取类加载器的几种方法；然后写一个例子把几种方法融进去，让大家直观感受。最后分析原理。（主要是结合所牵涉的方法的源代码的角度进行分析） 这里先介绍用类加载器读取的几种方法: 1.任意类名.class.ge">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:updated_time" content="2020-06-13T07:49:08.207Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="类加载器读取配置文件">
+<meta name="twitter:description" content="用类加载器的5种方式读取.properties文件 用类加载器的5中形式读取.properties文件（这个.properties文件一般放在src的下面） 用类加载器进行读取：这里采取先向大家讲读取类加载器的几种方法；然后写一个例子把几种方法融进去，让大家直观感受。最后分析原理。（主要是结合所牵涉的方法的源代码的角度进行分析） 这里先介绍用类加载器读取的几种方法: 1.任意类名.class.ge">
+  
+    <link rel="alternate" href="/atom.xml" title="Learning" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Learning</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Joe&#39;s Blog</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-类加载器读取配置文件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/14/类加载器读取配置文件/" class="article-date">
+  <time datetime="2019-07-14T16:32:00.000Z" itemprop="datePublished">2019-07-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      类加载器读取配置文件
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>用类加载器的5种方式读取.properties文件</p>
+<p>用类加载器的5中形式读取.properties文件（这个.properties文件一般放在src的下面）</p>
+<p>用类加载器进行读取：这里采取先向大家讲读取类加载器的几种方法；然后写一个例子把几种方法融进去，让大家直观感受。最后分析原理。（主要是结合所牵涉的方法的源代码的角度进行分析）</p>
+<p>这里先介绍用类加载器读取的几种方法:</p>
+<p>1.任意类名.class.getResourceAsStream(“/文件所在的位置”);【文件所在的位置从包名开始写】</p>
+<p>2.和.properties文件在同一个目录下的类名.class.getResourceAsStream(“文件所在的位置”);【文件所在的位置从包名开始写，注意这里和上面的相比较少了一个斜杠/】</p>
+<p>　　当然你也可以写成跟1一样的形式即：任意类名.class.getResourceAsStream(“/文件所在的位置”);</p>
+<p>3.任意类名.class.getClassLoader().getResourceAsStream(“文件所在的位置”);【文件所在的位置从包名开始写】</p>
+<p>4.任意类名.class.getClassLoader().getResource(“文件所在的位置”).openStream();【文件所在的位置从包名开始写】</p>
+<p>5.任意类名.class.getClassLoader().getResource(“文件所在的位置”)..openConnection().getInputStream();【文件所在的位置从包名开始写】</p>
+<p>//一个例子，说明上述5中方法的用法。</p>
+<p>上面图片中的各个红色矩形就是我要读取的properties文件。主要是两类。一类直接放在src下面。另一类是放在某个文件夹下面.</p>
+<p>//f.properties文件的内容如下图所示；</p>
+<p>//上述五种情况说明的代码如下：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">1</span> package com.qls.commonclass;</span><br><span class="line"> <span class="number">2</span> </span><br><span class="line"> <span class="number">3</span> import java.io.IOException;</span><br><span class="line"> <span class="number">4</span> import java.io.InputStream;</span><br><span class="line"> <span class="number">5</span> import java.util.Properties;</span><br><span class="line"> <span class="number">6</span> </span><br><span class="line"> <span class="number">7</span> import com.qls.counter.Ok;</span><br><span class="line"> <span class="number">8</span> </span><br><span class="line"> <span class="number">9</span> <span class="comment">/**</span></span><br><span class="line"><span class="comment">10  * 分别用类加载器的5种方法读取f.properties文件。</span></span><br><span class="line"><span class="comment">11  * @author 秦林森</span></span><br><span class="line"><span class="comment">12  *</span></span><br><span class="line"><span class="comment">13  */</span></span><br><span class="line"><span class="number">14</span> public class Test6 &#123;</span><br><span class="line"><span class="number">15</span> </span><br><span class="line"><span class="number">16</span>     public static void main(String[] args) throws IOException &#123;</span><br><span class="line"><span class="number">17</span>         <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line"><span class="number">18</span>         <span class="comment">/**第一种情形获取输入流。</span></span><br><span class="line"><span class="comment">19          * 任意类名.class.getResourceAsStream("/文件所在的位置");【文件所在的位置从包名开始写】</span></span><br><span class="line"><span class="comment">20          * @param args</span></span><br><span class="line"><span class="comment">21          */</span></span><br><span class="line"><span class="number">22</span>         <span class="comment">//获取输入流</span></span><br><span class="line"><span class="number">23</span>         InputStream in = Test.class.getResourceAsStream(<span class="string">"/com/qls/counter/f.properties"</span>);</span><br><span class="line"><span class="number">24</span>         <span class="comment">/**</span></span><br><span class="line"><span class="comment">25          * 第二种情形获取输入流。</span></span><br><span class="line"><span class="comment">26          * 和.properties文件在同一个目录下的类名.class.getResourceAsStream("文件所在的位置");</span></span><br><span class="line"><span class="comment">27          * 【文件所在的位置从包名开始写，注意这里和上面的相比较少了一个斜杠/】</span></span><br><span class="line"><span class="comment">28          * 这里随便选择一个与：f.properties在同一个目录下的类比如Ok这个类吧！</span></span><br><span class="line"><span class="comment">29          * 这里你自然也可以写成跟第一种情况一样的形式：</span></span><br><span class="line"><span class="comment">30          * 即：</span></span><br><span class="line"><span class="comment">31          * InputStream in2 = Ok.class.getResourceAsStream("/com/qls/counter/f.properties");</span></span><br><span class="line"><span class="comment">32          * 因为第一种情况是针对任意一个类而言的公式。</span></span><br><span class="line"><span class="comment">33          */</span></span><br><span class="line"><span class="number">34</span>         InputStream in2 = Ok.class.getResourceAsStream(<span class="string">"f.properties"</span>);</span><br><span class="line"><span class="number">35</span>         <span class="comment">/**</span></span><br><span class="line"><span class="comment">36          * 第三种情形获取输入流：</span></span><br><span class="line"><span class="comment">37          * 任意类名.class.getClassLoader().getResourceAsStream("文件所在的位置");</span></span><br><span class="line"><span class="comment">38          * 【文件所在的位置从包名开始写】</span></span><br><span class="line"><span class="comment">39          */</span></span><br><span class="line"><span class="number">40</span>         InputStream in3 = Test2.class.getClassLoader().getResourceAsStream(<span class="string">"com/qls/counter/f.properties"</span>);</span><br><span class="line"><span class="number">41</span>         <span class="comment">/**</span></span><br><span class="line"><span class="comment">42          * 第四中情形获取输入流：</span></span><br><span class="line"><span class="comment">43          * 任意类名.class.getClassLoader().getResource("文件所在的位置").openStream();</span></span><br><span class="line"><span class="comment">44          * 【文件所在的位置从包名开始写】</span></span><br><span class="line"><span class="comment">45          */</span></span><br><span class="line"><span class="number">46</span>         InputStream in4 = Test4.class.getClassLoader().getResource(<span class="string">"com/qls/counter/f.properties"</span>).openStream();</span><br><span class="line"><span class="number">47</span>         <span class="comment">/**</span></span><br><span class="line"><span class="comment">48          * 第五种情形获取输入流：</span></span><br><span class="line"><span class="comment">49          * .任意类名.class.getClassLoader().getResource("文件所在的位置").openConnection().getInputStream();</span></span><br><span class="line"><span class="comment">50          * 【文件所在的位置从包名开始写】</span></span><br><span class="line"><span class="comment">51          */</span></span><br><span class="line"><span class="number">52</span>         InputStream in5 = Test5.class.getClassLoader().getResource(<span class="string">"com/qls/counter/f.properties"</span>).openConnection().getInputStream();</span><br><span class="line"><span class="number">53</span>         <span class="comment">//创建Properties</span></span><br><span class="line"><span class="number">54</span>         Properties prop=new Properties();</span><br><span class="line"><span class="number">55</span>         <span class="comment">//把输入流in加载到prop中</span></span><br><span class="line"><span class="number">56</span>         <span class="comment">/*</span></span><br><span class="line"><span class="comment">57          * 验证上述5中输入流是否成立。只需带入prop.load(InputStream inputStream);验证即可。</span></span><br><span class="line"><span class="comment">58          * 也就是：</span></span><br><span class="line"><span class="comment">59          * prop.load(in);</span></span><br><span class="line"><span class="comment">60          * prop.load(in2);</span></span><br><span class="line"><span class="comment">61          * prop.load(in3);</span></span><br><span class="line"><span class="comment">62          * prop.load(in4);</span></span><br><span class="line"><span class="comment">63          * prop.load(in5);</span></span><br><span class="line"><span class="comment">64          */</span></span><br><span class="line"><span class="number">65</span>         prop.load(in5);</span><br><span class="line"><span class="number">66</span>         System.out.println(<span class="string">"sixi="</span>+prop.getProperty(<span class="string">"sixi"</span>));</span><br><span class="line"><span class="number">67</span>         System.out.println(<span class="string">"ouyangfeng="</span>+prop.getProperty(<span class="string">"ouyangfeng"</span>));</span><br><span class="line"><span class="number">68</span>         System.out.println(<span class="string">"rape="</span>+prop.getProperty(<span class="string">"farm"</span>));</span><br><span class="line"><span class="number">69</span>     &#125;</span><br><span class="line"><span class="number">70</span> </span><br><span class="line"><span class="number">71</span> &#125;<span class="comment">/*</span></span><br><span class="line"><span class="comment">72 Output:</span></span><br><span class="line"><span class="comment">73 sixi=river</span></span><br><span class="line"><span class="comment">74 ouyangfeng=masses</span></span><br><span class="line"><span class="comment">75 farm=flower</span></span><br><span class="line"><span class="comment">76 **/</span><span class="comment">//:~</span></span><br></pre></td></tr></table></figure>
+
+<p>上述5中方法的原理分析。</p>
+<p>首先看看Class中的resolveName(String name)究竟是干什么的。源码如下所示：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">1</span>  private String resolveName(String name) &#123;</span><br><span class="line"> <span class="number">2</span>         if (name == null) &#123;</span><br><span class="line"> <span class="number">3</span>             return name;</span><br><span class="line"> <span class="number">4</span>         &#125;</span><br><span class="line"> <span class="number">5</span>         if (!name.startsWith(<span class="string">"/"</span>)) &#123;</span><br><span class="line"> <span class="number">6</span>             Class&amp;lt;?&amp;gt; c = this;</span><br><span class="line"> <span class="number">7</span>             while (c.isArray()) &#123;</span><br><span class="line"> <span class="number">8</span>                 c = c.getComponentType();</span><br><span class="line"> <span class="number">9</span>             &#125;</span><br><span class="line"><span class="number">10</span>             String baseName = c.getName();</span><br><span class="line"><span class="number">11</span>             int index = baseName.lastIndexOf('.');</span><br><span class="line"><span class="number">12</span>             if (index != <span class="number">-1</span>) &#123;</span><br><span class="line"><span class="number">13</span>                 name = baseName.substring(<span class="number">0</span>, index).replace('.', '/')</span><br><span class="line"><span class="number">14</span>                     +<span class="string">"/"</span>+name;</span><br><span class="line"><span class="number">15</span>             &#125;</span><br><span class="line"><span class="number">16</span>         &#125; else &#123;</span><br><span class="line"><span class="number">17</span>             name = name.substring(<span class="number">1</span>);</span><br><span class="line"><span class="number">18</span>         &#125;</span><br><span class="line"><span class="number">19</span>         return name;</span><br><span class="line"><span class="number">20</span>     &#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面我把这个源码讲的内容翻译人类语言：</p>
+<p>给任意一个字符串name，如果该name是以/开始的，则该函数返回的是：去掉/这个字符的字符串。（如name=”/ouyangfeng” 则调用该函数之后得到的结果是：name=ouyangfeng）。<br>如果该name这个字符串不是以/开始的，则该函数返回的结果是调用这个函数类所在的包名+name组成的字符串（例如假设Test5所在的包名是：com.qls.mount 。则：Test5.class.resolveName(“ouyangfeng”);返回结果是：com/qls/mount/ouyangfeng）</p>
+<p>也就是帮助文档讲述的：</p>
+<p>If the name begins with a ‘/‘ (‘\u002f’), then the absolute name of the resource is the portion of the name following the ‘/‘.<br>Otherwise, the absolute name is of the following form:<br>modified_package_name/name<br>Where the modified_package_name is the package name of this object with ‘/‘ substituted for ‘.’ (‘\u002e’). </p>
+<p>上述英文我简要翻译一下：如果name是以一个/开头，则这个资源的绝对name就是：name中/之后的部分内容。<br>否则：这这个绝对name就是如下形式。包名/name,把这里包名中的.用/代替掉。【如：com.qls.river把.用/代替掉就是：com/qls/river】<br>然后我们再看看Class类中的getResourceAsStream(String name)的源码和ClassLoader中的getResourceAsStream(String name)中的源码。</p>
+<p>Class类中的getResourceAsStream(String name)的源码如下：</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">1 </span> public InputStream getResourceAsStream(String <span class="keyword">name</span>) &#123;</span><br><span class="line"><span class="symbol">2 </span>        <span class="keyword">name</span> = resolveName(<span class="keyword">name</span>);//注意这里有一个resolveName(String <span class="keyword">name</span>)方法，根据上述的分析，易知道这个源码的意思.</span><br><span class="line"><span class="symbol">3 </span>        ClassLoader cl = getClassLoader0();</span><br><span class="line"><span class="symbol">4 </span>        <span class="keyword">if</span> (cl==null) &#123;</span><br><span class="line"><span class="symbol">5 </span>            // A <span class="keyword">system</span> class.</span><br><span class="line"><span class="symbol">6 </span>            <span class="keyword">return</span> ClassLoader.getSystemResourceAsStream(<span class="keyword">name</span>);</span><br><span class="line"><span class="symbol">7 </span>        &#125;</span><br><span class="line"><span class="symbol">8 </span>        <span class="keyword">return</span> cl.getResourceAsStream(<span class="keyword">name</span>);</span><br><span class="line"><span class="symbol">9 </span>    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>ClassLoader中的getResourceAsStream(String name)中的源码如下：</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">1 </span> public InputStream getResourceAsStream(String <span class="keyword">name</span>) &#123;</span><br><span class="line"><span class="symbol">2 </span>        URL url = getResource(<span class="keyword">name</span>);</span><br><span class="line"><span class="symbol">3 </span>        try &#123;</span><br><span class="line"><span class="symbol">4 </span>            <span class="keyword">return</span> url != null ? url.openStream() : null;//这句代码的意思是：如果url不是null时返回的是：url.openStream()，反之如果url为null则返回null.</span><br><span class="line"><span class="symbol">5 </span>        &#125; catch (IOException e) &#123;</span><br><span class="line"><span class="symbol">6 </span>            <span class="keyword">return</span> null;</span><br><span class="line"><span class="symbol">7 </span>        &#125;</span><br><span class="line"><span class="symbol">8 </span>    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过这Class.resolveName(String name)中的源代码和ClassLoader.getResourceAsStream(String name)中的源代码以及Class.getResourceAsStream（String name）中的原代码我们易知道上述五种情况是怎么来的。无需记忆。</p>
+<p>只需学会数学推理即可。</p>
+<p>大家在看源码是：发现Class.resolveName(String name)这个方法是private的，你用普通方法根本调用不了，下面我顺便提一下：如何调用这个方法。以便大家可以更好的理解这个方法所讲的意思。</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">1</span> package com.qls.commonclass;</span><br><span class="line"> <span class="number">2</span> </span><br><span class="line"> <span class="number">3</span> import java.lang.reflect.InvocationTargetException;</span><br><span class="line"> <span class="number">4</span> import java.lang.reflect.Method;</span><br><span class="line"> <span class="number">5</span> </span><br><span class="line"> <span class="number">6</span> <span class="comment">/**</span></span><br><span class="line"><span class="comment"> 7  * 用反射调用ClassLoade中的 private String resolveName(String name)</span></span><br><span class="line"><span class="comment"> 8  * 验证这个方法所讲的意思。</span></span><br><span class="line"><span class="comment"> 9  * @author 秦林森</span></span><br><span class="line"><span class="comment">10  *</span></span><br><span class="line"><span class="comment">11  */</span></span><br><span class="line"><span class="number">12</span> public class Test7 &#123;</span><br><span class="line"><span class="number">13</span> </span><br><span class="line"><span class="number">14</span>     public static void main(String[] args) throws Exception&#123;</span><br><span class="line"><span class="number">15</span>         <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line"><span class="number">16</span>         <span class="comment">//得到这个方法。</span></span><br><span class="line"><span class="number">17</span>         Method method = Class.class.getDeclaredMethod(<span class="string">"resolveName"</span>, new Class[]&#123;String.class&#125;);</span><br><span class="line"><span class="number">18</span>         <span class="comment">//由于这个方法是private,所以要获取这个方法的访问权限</span></span><br><span class="line"><span class="number">19</span>         method.setAccessible(true);</span><br><span class="line"><span class="number">20</span>         <span class="comment">//写一个实例，以便调用这个方法。</span></span><br><span class="line"><span class="number">21</span>         </span><br><span class="line"><span class="number">22</span>         Object obj = Test7.class;<span class="comment">//Test这个类所在的包是:com.qls.commonclass</span></span><br><span class="line"><span class="number">23</span>         <span class="comment">//调用这个方法</span></span><br><span class="line"><span class="number">24</span>         String invoke = (String) method.invoke(obj, new Object[]&#123;<span class="string">"ouyangfeng"</span>&#125;);</span><br><span class="line"><span class="number">25</span>         String invoke2 = (String) method.invoke(obj, new Object[]&#123;<span class="string">"/ouyangfeng"</span>&#125;);</span><br><span class="line"><span class="number">26</span>         System.out.println(<span class="string">"invoke="</span>+invoke);</span><br><span class="line"><span class="number">27</span>         System.out.println(<span class="string">"invoke2="</span>+invoke2);</span><br><span class="line"><span class="number">28</span>         </span><br><span class="line"><span class="number">29</span>     &#125;</span><br><span class="line"><span class="number">30</span> </span><br><span class="line"><span class="number">31</span> &#125;<span class="comment">/*</span></span><br><span class="line"><span class="comment">32 Output:</span></span><br><span class="line"><span class="comment">33 invoke=com/qls/commonclass/ouyangfeng</span></span><br><span class="line"><span class="comment">34 invoke2=ouyangfeng</span></span><br><span class="line"><span class="comment">35 由此可以证明了:以/开头的字符串"/ouyangfeng"调用resolveName(String name)</span></span><br><span class="line"><span class="comment">36 这个方法之后返回的结果是：ouyangfeng</span></span><br><span class="line"><span class="comment">37 不以/开头的字符串："ouyangfeng"返回的结果是：调用这个方法的包名/name</span></span><br><span class="line"><span class="comment">38 【在本例中是Test7调用resolveName(String name),而Test7所在的包是：com.qls.commonclass</span></span><br><span class="line"><span class="comment">39 所以返回结果是：com/qls/commonclass/ouyangfeng】</span></span><br><span class="line"><span class="comment">40 </span></span><br><span class="line"><span class="comment">41 */</span><span class="comment">//:~</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/07/14/类加载器读取配置文件/" data-id="ckbdc9v0900oo24u2ak9tr4y2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CLASSLOADER/">CLASSLOADER</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/07/15/handleintercepertor/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          HandlerInterceptor
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/07/12/yaml/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">yaml</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIT/">GIT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IT/">IT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVAEE/">JAVAEE</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVAEE/MYSQL/">MYSQL</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/OFFICE/">OFFICE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SYSTEM/">SYSTEM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VIM/">VIM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/分类1/">分类1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/电商/">电商</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ANNOTATION/">ANNOTATION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BAZEL/">BAZEL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BEANUTILS/">BEANUTILS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CENTOS/">CENTOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI-CD/">CI/CD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CLASSLOADER/">CLASSLOADER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CRONTAB/">CRONTAB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DEBUG/">DEBUG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DESIGN-PATTERNS/">DESIGN PATTERNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DNS/">DNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOCKER/">DOCKER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DRUID/">DRUID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ENLINK/">ENLINK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EUREKA/">EUREKA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EXCEL/">EXCEL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/">Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FASTJSON/">FASTJSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIT/">GIT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GITLAB/">GITLAB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GLOBALEXCEPTION/">GLOBALEXCEPTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO/">GO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HEXO/">HEXO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/INTERCEPTOR/">INTERCEPTOR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IT/">IT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVADOC/">JAVADOC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASCRIPT/">JAVASCRIPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASE/">JAVASE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JETTY/">JETTY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPA/">JPA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSONUTILS/">JSONUTILS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KARAF/">KARAF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KEEPALIVED/">KEEPALIVED</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LINUX/">LINUX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LISTENER/">LISTENER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOADBALANCED/">LOADBALANCED</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOG/">LOG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOGBACK/">LOGBACK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOGIN/">LOGIN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOMBOK/">LOMBOK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MARKDOWN/">MARKDOWN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIME-TYPE/">MIME-TYPE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQ/">MQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYBATIS/">MYBATIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYCAT/">MYCAT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/">MYSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NETWORK/">NETWORK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OAUTH2/">OAUTH2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ONOS/">ONOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSGI/">OSGI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSI/">OSI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAGEHELPER/">PAGEHELPER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POSTMAN/">POSTMAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PYTHON/">PYTHON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RABBITMQ/">RABBITMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REDIS/">REDIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REDISTEMPLATE/">REDISTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REFLECTION/">REFLECTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REGISTRY-CENTER/">REGISTRY CENTER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REPO/">REPO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTTEMPLATE/">RESTTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RIBBON/">RIBBON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPM/">RPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SECURITY/">SECURITY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SERIALVERSIONUID/">SERIALVERSIONUID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SERVLET/">SERVLET</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SESSION/">SESSION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SHELL/">SHELL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPINTBOOT/">SPINTBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING/">SPRING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-MVC/">SPRING MVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-STREAM/">SPRING STREAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGBBOT/">SPRINGBBOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGBOOT/">SPRINGBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGQUARTZ/">SPRINGQUARTZ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGTASK/">SPRINGTASK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGTBOOT/">SPRINGTBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPTING/">SPTING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLAlert/">SQLAlert</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSO/">SSO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STRINGREDISTEMPLATE/">STRINGREDISTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWAGGER/">SWAGGER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SYSTEM/">SYSTEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP-IP/">TCP/IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TERMUX/">TERMUX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TK-MYBATIS/">TK.MYBATIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TRANSECTION/">TRANSECTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UBUNTU/">UBUNTU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UDP/">UDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEBClIENT/">WEBClIENT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YAML/">YAML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rabbitMq/">rabbitMq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/抖音/">抖音</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件服务器/">文件服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间转化/">时间转化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标签1/">标签1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/淘宝/">淘宝</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高可用/">高可用</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ANNOTATION/" style="font-size: 14.62px;">ANNOTATION</a> <a href="/tags/AOP/" style="font-size: 10.77px;">AOP</a> <a href="/tags/BAZEL/" style="font-size: 10px;">BAZEL</a> <a href="/tags/BEANUTILS/" style="font-size: 10px;">BEANUTILS</a> <a href="/tags/CENTOS/" style="font-size: 10px;">CENTOS</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/CLASSLOADER/" style="font-size: 10px;">CLASSLOADER</a> <a href="/tags/CRONTAB/" style="font-size: 10.77px;">CRONTAB</a> <a href="/tags/DEBUG/" style="font-size: 10px;">DEBUG</a> <a href="/tags/DESIGN-PATTERNS/" style="font-size: 10px;">DESIGN PATTERNS</a> <a href="/tags/DNS/" style="font-size: 10px;">DNS</a> <a href="/tags/DOCKER/" style="font-size: 11.54px;">DOCKER</a> <a href="/tags/DRUID/" style="font-size: 10px;">DRUID</a> <a href="/tags/ENLINK/" style="font-size: 10px;">ENLINK</a> <a href="/tags/ES/" style="font-size: 16.15px;">ES</a> <a href="/tags/EUREKA/" style="font-size: 10px;">EUREKA</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10px;">Eureka</a> <a href="/tags/FASTJSON/" style="font-size: 10px;">FASTJSON</a> <a href="/tags/GIT/" style="font-size: 10px;">GIT</a> <a href="/tags/GITLAB/" style="font-size: 10px;">GITLAB</a> <a href="/tags/GLOBALEXCEPTION/" style="font-size: 10px;">GLOBALEXCEPTION</a> <a href="/tags/GO/" style="font-size: 10.77px;">GO</a> <a href="/tags/HEXO/" style="font-size: 12.31px;">HEXO</a> <a href="/tags/IDEA/" style="font-size: 12.31px;">IDEA</a> <a href="/tags/INTERCEPTOR/" style="font-size: 11.54px;">INTERCEPTOR</a> <a href="/tags/IT/" style="font-size: 11.54px;">IT</a> <a href="/tags/JAVADOC/" style="font-size: 10px;">JAVADOC</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.54px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.77px;">JAVASE</a> <a href="/tags/JETTY/" style="font-size: 10px;">JETTY</a> <a href="/tags/JPA/" style="font-size: 10.77px;">JPA</a> <a href="/tags/JSONUTILS/" style="font-size: 10px;">JSONUTILS</a> <a href="/tags/KARAF/" style="font-size: 11.54px;">KARAF</a> <a href="/tags/KEEPALIVED/" style="font-size: 10px;">KEEPALIVED</a> <a href="/tags/LINUX/" style="font-size: 16.92px;">LINUX</a> <a href="/tags/LISTENER/" style="font-size: 10px;">LISTENER</a> <a href="/tags/LOADBALANCED/" style="font-size: 10px;">LOADBALANCED</a> <a href="/tags/LOG/" style="font-size: 10px;">LOG</a> <a href="/tags/LOGBACK/" style="font-size: 10px;">LOGBACK</a> <a href="/tags/LOGIN/" style="font-size: 10px;">LOGIN</a> <a href="/tags/LOMBOK/" style="font-size: 11.54px;">LOMBOK</a> <a href="/tags/MAC/" style="font-size: 15.38px;">MAC</a> <a href="/tags/MARKDOWN/" style="font-size: 11.54px;">MARKDOWN</a> <a href="/tags/MIME-TYPE/" style="font-size: 10px;">MIME-TYPE</a> <a href="/tags/MQ/" style="font-size: 12.31px;">MQ</a> <a href="/tags/MYBATIS/" style="font-size: 17.69px;">MYBATIS</a> <a href="/tags/MYCAT/" style="font-size: 10.77px;">MYCAT</a> <a href="/tags/MYSQL/" style="font-size: 16.15px;">MYSQL</a> <a href="/tags/NETWORK/" style="font-size: 10px;">NETWORK</a> <a href="/tags/OAUTH2/" style="font-size: 10.77px;">OAUTH2</a> <a href="/tags/ONOS/" style="font-size: 14.62px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 13.85px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PAGEHELPER/" style="font-size: 10px;">PAGEHELPER</a> <a href="/tags/POSTMAN/" style="font-size: 10px;">POSTMAN</a> <a href="/tags/PYTHON/" style="font-size: 13.08px;">PYTHON</a> <a href="/tags/RABBITMQ/" style="font-size: 10.77px;">RABBITMQ</a> <a href="/tags/REDIS/" style="font-size: 11.54px;">REDIS</a> <a href="/tags/REDISTEMPLATE/" style="font-size: 10px;">REDISTEMPLATE</a> <a href="/tags/REFLECTION/" style="font-size: 11.54px;">REFLECTION</a> <a href="/tags/REGISTRY-CENTER/" style="font-size: 10px;">REGISTRY CENTER</a> <a href="/tags/REPO/" style="font-size: 10px;">REPO</a> <a href="/tags/RESTTEMPLATE/" style="font-size: 10px;">RESTTEMPLATE</a> <a href="/tags/RIBBON/" style="font-size: 10.77px;">RIBBON</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/SECURITY/" style="font-size: 12.31px;">SECURITY</a> <a href="/tags/SERIALVERSIONUID/" style="font-size: 10px;">SERIALVERSIONUID</a> <a href="/tags/SERVLET/" style="font-size: 10.77px;">SERVLET</a> <a href="/tags/SESSION/" style="font-size: 12.31px;">SESSION</a> <a href="/tags/SHELL/" style="font-size: 14.62px;">SHELL</a> <a href="/tags/SPINTBOOT/" style="font-size: 10px;">SPINTBOOT</a> <a href="/tags/SPRING/" style="font-size: 13.08px;">SPRING</a> <a href="/tags/SPRING-MVC/" style="font-size: 10px;">SPRING MVC</a> <a href="/tags/SPRING-STREAM/" style="font-size: 10px;">SPRING STREAM</a> <a href="/tags/SPRINGBBOT/" style="font-size: 10px;">SPRINGBBOT</a> <a href="/tags/SPRINGBOOT/" style="font-size: 19.23px;">SPRINGBOOT</a> <a href="/tags/SPRINGQUARTZ/" style="font-size: 10px;">SPRINGQUARTZ</a> <a href="/tags/SPRINGTASK/" style="font-size: 12.31px;">SPRINGTASK</a> <a href="/tags/SPRINGTBOOT/" style="font-size: 10px;">SPRINGTBOOT</a> <a href="/tags/SPTING/" style="font-size: 10px;">SPTING</a> <a href="/tags/SQL/" style="font-size: 12.31px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.46px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/STRINGREDISTEMPLATE/" style="font-size: 10px;">STRINGREDISTEMPLATE</a> <a href="/tags/SWAGGER/" style="font-size: 10px;">SWAGGER</a> <a href="/tags/SYSTEM/" style="font-size: 10px;">SYSTEM</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TCP-IP/" style="font-size: 11.54px;">TCP/IP</a> <a href="/tags/TERMUX/" style="font-size: 10.77px;">TERMUX</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/TRANSECTION/" style="font-size: 10px;">TRANSECTION</a> <a href="/tags/UBUNTU/" style="font-size: 10px;">UBUNTU</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/WEBClIENT/" style="font-size: 10px;">WEBClIENT</a> <a href="/tags/YAML/" style="font-size: 10.77px;">YAML</a> <a href="/tags/rabbitMq/" style="font-size: 10px;">rabbitMq</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.77px;">文件服务器</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/13/可视化面板/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/邮箱找回密码与二次认证/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/特权用户访问策略控制/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/md列表/">markdown任务列表语法checkbox</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/CS应用配置/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Joe Tong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

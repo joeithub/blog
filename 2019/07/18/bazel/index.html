@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>bazel | Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="bazel演变一: Carthage将整个工程拆分成多个仓库.每个仓库都是一个Framework.每个小组维护一个仓库.每个小组也只需关心这一个仓库.对其他仓库的依赖都用二进制依赖.大大加快编译速度.代表工具: Carthage.演变二: bazel不把每个库拆分成小仓库了.所有库都在一个Git仓库中.通过bazel拆分成多个package.每个package的编译缓存都是独立的.解决了编译过慢的">
+<meta name="keywords" content="JAVAEE,BAZEL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="bazel">
+<meta property="og:url" content="/blog/2019/07/18/bazel/index.html">
+<meta property="og:site_name" content="Learning">
+<meta property="og:description" content="bazel演变一: Carthage将整个工程拆分成多个仓库.每个仓库都是一个Framework.每个小组维护一个仓库.每个小组也只需关心这一个仓库.对其他仓库的依赖都用二进制依赖.大大加快编译速度.代表工具: Carthage.演变二: bazel不把每个库拆分成小仓库了.所有库都在一个Git仓库中.通过bazel拆分成多个package.每个package的编译缓存都是独立的.解决了编译过慢的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="/images/pasted-10.png">
+<meta property="og:image" content="/images/pasted-11.png">
+<meta property="og:updated_time" content="2020-06-13T07:49:08.199Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="bazel">
+<meta name="twitter:description" content="bazel演变一: Carthage将整个工程拆分成多个仓库.每个仓库都是一个Framework.每个小组维护一个仓库.每个小组也只需关心这一个仓库.对其他仓库的依赖都用二进制依赖.大大加快编译速度.代表工具: Carthage.演变二: bazel不把每个库拆分成小仓库了.所有库都在一个Git仓库中.通过bazel拆分成多个package.每个package的编译缓存都是独立的.解决了编译过慢的">
+<meta name="twitter:image" content="/images/pasted-10.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Learning" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Learning</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Joe&#39;s Blog</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-bazel" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/18/bazel/" class="article-date">
+  <time datetime="2019-07-18T19:48:00.000Z" itemprop="datePublished">2019-07-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      bazel
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>bazel<br>演变一: Carthage<br>将整个工程拆分成多个仓库.每个仓库都是一个Framework.<br>每个小组维护一个仓库.<br>每个小组也只需关心这一个仓库.对其他仓库的依赖都用二进制依赖.<br>大大加快编译速度.<br>代表工具: Carthage.<br>演变二: bazel<br>不把每个库拆分成小仓库了.<br>所有库都在一个Git仓库中.<br>通过bazel拆分成多个package.<br>每个package的编译缓存都是独立的.<br>解决了编译过慢的问题.<br>虽然在同一个大仓库里.<br>但是每组各自维护自己的package.<br>所以不会导致不同组之间的git冲突  </p>
+<p>bazel :<br>解决了编译过慢问题<br>解决了库之间依赖问题<br>解决了多人协作导致的git冲突  </p>
+<p>安装<br>安装过程请参考: <a href="http://bazel.io/docs/install.html" target="_blank" rel="noopener">http://bazel.io/docs/install.html</a><br>使用工作区（workspace）<br>所有的Bazel构建都是基于一个 工作区（workspace） 概念，它是文件系统中一个保存了全部源代码的目录，同时还将包含一些构建后的输出目录的符号链接（例如：bazel-bin和 bazel-out 等输出目录）。工作区目录可以随意放在哪里，但是工作区的根目录必须包含一个名为 WORKSPACE 的工作区配置文件。工作区配置文件可以是一个空文件，也可以包含引用外部构建输出所需的 依赖关系。<br>在一个工作区内，可以根据需要共享多个项目。为了简单，我们先从只有一个项目的工作区开始介绍。<br>先假设你已经有了一个项目，对应 ~/gitroot/my-project/ 目录。我们先创建一个空的 ~/gitroot/my-project/WORKSPACE 工作区配置文件，用于表示这是Bazel项目对应的根目录。<br>创建自己的Build构建文件<br>使用下面的命令创建一个简单的Java项目：<br>$ # If you’re not already there, move to your workspace directory.<br>$ cd ~/gitroot/my-project<br>$ mkdir -p src/main/java/com/example<br>$ cat &gt; src/main/java/com/example/ProjectRunner.java &lt;&lt;EOF<br>package com.example;  </p>
+<p>public class ProjectRunner {<br>public static void main(String args[]) {<br>Greeting.sayHi();<br>}  
+}<br>EOF<br>$ cat &gt; src/main/java/com/example/Greeting.java &lt;&lt;EOF<br>package com.example;  </p>
+<p>public class Greeting {<br>public static void sayHi() {<br>System.out.println(“Hi!”);<br>}  
+}<br>EOF  </p>
+<p>Bazel通过工作区中所有名为 BUILD 的文件来解析需要构建的项目信息，因此，我们需要先在 ~/gitroot/my-project 目录创建一个 BUILD 构建文件。下面是BUILD构建文件的内容：  </p>
+<h4 id="gitroot-my-project-BUILD"><a href="#gitroot-my-project-BUILD" class="headerlink" title="~/gitroot/my-project/BUILD"></a>~/gitroot/my-project/BUILD</h4><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">java_binary(</span><br><span class="line">name = <span class="string">"my-runner"</span>,</span><br><span class="line">srcs = glob([<span class="string">"**/*.java"</span>]),</span><br><span class="line">main_class = <span class="string">"com.example.ProjectRunner"</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>BUILD文件采用类似Python的语法。虽然不能包含任意的Python语法，但是BUILD文件中的每个构建规则看起来都象是一个Python函数调用，而且你也可以用 “#” 开头来添加单行注释。<br>java_binary 是一个构建规则。其中 name 对应一个构建目标的标识符，可用用它来向Bazel指定构建哪个项目。srcs 对应一个源文件列表，Bazel需要将这些源文件编译为二进制文件。其中 glob([“<em>*/</em>.java”]) 表示递归包含每个子目录中以每个 .java 为后缀名的文件。com.example.ProjectRunner 指定包含main方法的类。</p>
+<p>现在可以用下面的命令构建这个Java程序了：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ cd <span class="regexp">~/gitroot/</span>my-project</span><br><span class="line">$ bazel build <span class="comment">//:my-runner</span></span><br><span class="line"><span class="string">INFO:</span> Found <span class="number">1</span> target...</span><br><span class="line">Target <span class="comment">//:my-runner up-to-date:</span></span><br><span class="line">bazel-bin/my-runner.jar</span><br><span class="line">bazel-bin/my-runner</span><br><span class="line"><span class="string">INFO:</span> Elapsed <span class="string">time:</span> <span class="number">1.021</span>s, Critical <span class="string">Path:</span> <span class="number">0.83</span>s</span><br><span class="line">$ bazel-bin/my-runner</span><br><span class="line">Hi!</span><br></pre></td></tr></table></figure>
+
+<p>恭喜，你已经成功构建了第一个Bazel项目了！<br>添加依赖关系<br>对于小项目创建一个规则是可以的，但是随着项目的变大，则需要分别构建项目的不同的部件，最终再组装成产品。这种构建方式可以避免因为局部细小的修改儿导致重现构建整个应用，同时不同的构建步骤可以很好地并发执行以提高构建效率。<br>我们现在将一个项目拆分为两个部分独立构建，同时设置它们之间的依赖关系。基于上面的例子，我们重写了BUILD构建文件：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">java_binary(</span><br><span class="line">name = <span class="string">"my-other-runner"</span>,</span><br><span class="line">srcs = [<span class="string">"src/main/java/com/example/ProjectRunner.java"</span>],</span><br><span class="line">main_class = <span class="string">"com.example.ProjectRunner"</span>,</span><br><span class="line">deps = [<span class="string">":greeter"</span>],</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">java_library(</span><br><span class="line">name = <span class="string">"greeter"</span>,</span><br><span class="line">srcs = [<span class="string">"src/main/java/com/example/Greeting.java"</span>],</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>虽然源文件是一样的，但是现在Bazel将采用不同的方式来构建：首先是构建 greeter库，然后是构建 my-other-runner。可以在构建成功后立刻运行 //:my-other-runner：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ bazel run <span class="comment">//:my-other-runner</span></span><br><span class="line"><span class="string">INFO:</span> Found <span class="number">1</span> target...</span><br><span class="line">Target <span class="comment">//:my-other-runner up-to-date:</span></span><br><span class="line">bazel-bin/my-other-runner.jar</span><br><span class="line">bazel-bin/my-other-runner</span><br><span class="line"><span class="string">INFO:</span> Elapsed <span class="string">time:</span> <span class="number">2.454</span>s, Critical <span class="string">Path:</span> <span class="number">1.58</span>s</span><br><span class="line"></span><br><span class="line"><span class="string">INFO:</span> Running command <span class="string">line:</span> bazel-bin/my-other-runner</span><br><span class="line">Hi!</span><br></pre></td></tr></table></figure>
+
+<p>现在如果你改动ProjectRunner.java代码并重新构建my-other-runner目标，Greeting.java文件因为没有变化而不会重现编译。<br>使用多个包（Packages）<br>对于更大的项目，我们通常需要将它们拆分到多个目录中。你可以用类似//path/to/directory:target-name的名字引用在其他BUILD文件定义的目标。假设src/main/java/com/example/有一个cmdline/子目录，包含下面的文件：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p src<span class="regexp">/main/</span>java<span class="regexp">/com/</span>example/cmdline</span><br><span class="line">$ cat &amp;gt; src<span class="regexp">/main/</span>java<span class="regexp">/com/</span>example<span class="regexp">/cmdline/</span>Runner.java &amp;lt;&amp;lt;EOF</span><br><span class="line"><span class="keyword">package</span> com.example.cmdline;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.example.Greeting;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Runner</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String args[]) &#123;</span><br><span class="line">Greeting.sayHi();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<p>Runner.java依赖com.example.Greeting，因此我们需要在src/main/java/com/example/cmdline/BUILD构建文件中添加相应的依赖规则：  </p>
+<h5 id="gitroot-my-project-src-main-java-com-example-cmdline-BUILD"><a href="#gitroot-my-project-src-main-java-com-example-cmdline-BUILD" class="headerlink" title="~/gitroot/my-project/src/main/java/com/example/cmdline/BUILD"></a>~/gitroot/my-project/src/main/java/com/example/cmdline/BUILD</h5><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">java_binary(</span><br><span class="line">name = <span class="string">"runner"</span>,</span><br><span class="line">srcs = [<span class="string">"Runner.java"</span>],</span><br><span class="line">main_class = <span class="string">"com.example.cmdline.Runner"</span>,</span><br><span class="line">deps = [<span class="string">"//:greeter"</span>]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>然而，默认情况下构建目标都是 私有 的。也就是说，我们只能在同一个BUILD文件中被引用。这可以避免将很多实现的细节暴漏给公共的接口，但是也意味着我们需要手工允许runner所依赖的//:greeter目标。就是类似下面这个在构建runner目标时遇到的错误：  </p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ bazel build //src/main/java/com/example/cmdline:runner</span><br><span class="line"><span class="keyword">ERROR: </span>/home/user/gitroot/my-project/src/main/java/com/example/cmdline/BUILD:2:1:</span><br><span class="line">Target '//:greeter' is not visible from target '//src/main/java/com/example/cmdline:runner'.</span><br><span class="line">Check the visibility declaration of the former target if you think the dependency is legitimate.</span><br><span class="line"><span class="keyword">ERROR: </span>Analysis of target '//src/main/java/com/example/cmdline:runner' failed; build aborted.</span><br><span class="line">INFO: Elapsed time: 0.091s</span><br></pre></td></tr></table></figure>
+
+<p>可用通过在BUILD文件增加visibility = level属性来改变目标的可间范围。下面是通过在~/gitroot/my-project/BUILD文件增加可见规则，来改变greeter目标的可见范围：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">java_library(</span><br><span class="line">name = <span class="string">"greeter"</span>,</span><br><span class="line">srcs = [<span class="string">"src/main/java/com/example/Greeting.java"</span>],</span><br><span class="line">visibility = [<span class="string">"//src/main/java/com/example/cmdline:__pkg__"</span>],</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>这个规则表示//:greeter目标对于//src/main/java/com/example/cmdline包是可见的。现在我们可以重新构建runner目标程序：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ bazel run <span class="comment">//src/main/java/com/example/cmdline:runner</span></span><br><span class="line"><span class="string">INFO:</span> Found <span class="number">1</span> target...</span><br><span class="line">Target <span class="comment">//src/main/java/com/example/cmdline:runner up-to-date:</span></span><br><span class="line">bazel-bin<span class="regexp">/src/</span>main<span class="regexp">/java/</span>com<span class="regexp">/example/</span>cmdline/runner.jar</span><br><span class="line">bazel-bin<span class="regexp">/src/</span>main<span class="regexp">/java/</span>com<span class="regexp">/example/</span>cmdline/runner</span><br><span class="line"><span class="string">INFO:</span> Elapsed <span class="string">time:</span> <span class="number">1.576</span>s, Critical <span class="string">Path:</span> <span class="number">0.81</span>s</span><br><span class="line"><span class="string">INFO:</span> Running command <span class="string">line:</span> bazel-bin<span class="regexp">/src/</span>main<span class="regexp">/java/</span>com<span class="regexp">/example/</span>cmdline/runner</span><br><span class="line">Hi!</span><br></pre></td></tr></table></figure>
+
+<p>参考文档 中有可见性配置说明。<br>部署<br>如果你查看 bazel-bin/src/main/java/com/example/cmdline/runner.jar 的内容，可以看到里面只包含了Runner.class，并没有保护所依赖的Greeting.class：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ jar tf bazel-bin<span class="regexp">/src/</span>main<span class="regexp">/java/</span>com<span class="regexp">/example/</span>cmdline/runner.jar</span><br><span class="line">META-INF/</span><br><span class="line">META-INF/MANIFEST.MF</span><br><span class="line">com/</span><br><span class="line">com<span class="regexp">/example/</span></span><br><span class="line">com<span class="regexp">/example/</span>cmdline/</span><br><span class="line">com<span class="regexp">/example/</span>cmdline/Runner.<span class="keyword">class</span></span><br></pre></td></tr></table></figure>
+
+<p>这只能在本机正常工作（因为Bazel的runner脚本已经将greeter jar添加到了classpath），但是如果将runner.jar单独复制到另一台机器上讲不能正常运行。如果想要构建可用于部署发布的自包含所有依赖的目标，可以构建runner_deploy.jar目标（类似&lt;target-name&gt;_deploy.jar以_deploy为后缀的名字对应可部署目标）。</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>bazel build /<span class="regexp">/src/main</span><span class="regexp">/java/com</span><span class="regexp">/example/cmdline</span><span class="symbol">:runner_deploy</span>.jar</span><br><span class="line"><span class="symbol">INFO:</span> Found <span class="number">1</span> target...</span><br><span class="line">Target /<span class="regexp">/src/main</span><span class="regexp">/java/com</span><span class="regexp">/example/cmdline</span><span class="symbol">:runner_deploy</span>.jar up-to-<span class="symbol">date:</span></span><br><span class="line">bazel-bin/src/main/java/com/example/cmdline/runner_deploy.jar</span><br><span class="line"><span class="symbol">INFO:</span> Elapsed <span class="symbol">time:</span> <span class="number">1.700</span>s, Critical <span class="symbol">Path:</span> <span class="number">0</span>.<span class="number">23</span>s</span><br></pre></td></tr></table></figure>
+
+<p>win环境下 Bazel 离线安装教程<br>对于bazel谷歌的开发脚手架，发现用windows系统下powershell下载速度特别慢，在刨坑过程中发现了一种捷径，就是离线安装，接下来将简单介绍离线安装过程<br>1、安装choco<br>cmd安装指令：  </p>
+<figure class="highlight plain"><figcaption><span>-NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" &amp;&amp; SET "PATH</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">powershell安装指令：  </span><br><span class="line">```Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString(&apos;https://chocolatey.org/install.ps1&apos;))```  </span><br><span class="line">特别说明：一定注意都是在管理员用户权限下打开cmd或者是powershell 这里推荐win10系统下使用powershell，如图所示，右键开始菜单打开管理员用户下的powershell：  </span><br><span class="line">2、通过powershell安装bazel  </span><br><span class="line">2.1、输入指令：  </span><br><span class="line">`choco install bazel`  </span><br><span class="line"></span><br><span class="line">&amp;lt;hr/&amp;gt;  </span><br><span class="line">离线安装  </span><br><span class="line">从官网上下载目前最新的bazel压缩包  </span><br><span class="line">先运行choco install bazel指令  </span><br><span class="line">如图所示等待选择阶段，这个时候不要打y 或者 n，让命令行停留于此:  </span><br><span class="line">![upload successful](/images/pasted-9.png)    </span><br><span class="line">在命令行停留之际，修改C:\ProgramData\chocolatey\lib\bazel\tools目录下的params.txt文件内容，将网络版本指定地址修改为本地地址  </span><br><span class="line">修改之前的：  </span><br><span class="line">``` </span><br><span class="line">https://github.com/bazelbuild/bazel/releases/download/0.12.0/bazel-0.12.0-windows-x86_64.zip</span><br><span class="line"></span><br><span class="line">// 此处是文件哈希，禁止修改，原来系统给予是怎样的就是怎样的。</span><br><span class="line">86f84e2c870ed14e4d2e599c309614298b9e08a049657e860d218d56873111bc</span><br></pre></td></tr></table></figure>
+
+<p>修改之后的： 【由于我这里直接下载到桌面上，所以指向桌面地址，如果下载到其他位置，请将绝对地址替换，请勿复制粘贴此段】    </p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">C:</span><span class="regexp">/Users/</span>ke_li<span class="regexp">/Desktop/</span>bazel<span class="number">-0.12</span><span class="number">.0</span>-windows-x86_64.zip</span><br><span class="line"></span><br><span class="line"><span class="comment">// 此处是文件哈希，禁止修改，仅修改了上面文件目录，下面未修改，注意保留哈希的意思</span></span><br><span class="line"><span class="number">86</span>f84e2c870ed14e4d2e599c309614298b9e08a049657e860d218d56873111bc</span><br></pre></td></tr></table></figure>
+
+<p>接下来输入y，回车进行下一阶段，等待一段时间后，结果：</p>
+<p><img src="/images/pasted-10.png" alt="upload successful"></p>
+<p>可调试bazel，在命令行输入bazel 检查安装是否成功，如图所示即为成功安装</p>
+<p><img src="/images/pasted-11.png" alt="upload successful"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/07/18/bazel/" data-id="ckbdc9uzk00mx24u27ir81leo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BAZEL/">BAZEL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/07/19/CI-CD/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          CI/CD
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/07/18/RestTemplate/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">RestTemplate</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIT/">GIT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IT/">IT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVAEE/">JAVAEE</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVAEE/MYSQL/">MYSQL</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/OFFICE/">OFFICE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SYSTEM/">SYSTEM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VIM/">VIM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/分类1/">分类1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/电商/">电商</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ANNOTATION/">ANNOTATION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BAZEL/">BAZEL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BEANUTILS/">BEANUTILS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CENTOS/">CENTOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI-CD/">CI/CD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CLASSLOADER/">CLASSLOADER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CRONTAB/">CRONTAB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DEBUG/">DEBUG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DESIGN-PATTERNS/">DESIGN PATTERNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DNS/">DNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOCKER/">DOCKER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DRUID/">DRUID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ENLINK/">ENLINK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EUREKA/">EUREKA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EXCEL/">EXCEL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/">Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FASTJSON/">FASTJSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIT/">GIT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GITLAB/">GITLAB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GLOBALEXCEPTION/">GLOBALEXCEPTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO/">GO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HEXO/">HEXO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/INTERCEPTOR/">INTERCEPTOR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IT/">IT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVADOC/">JAVADOC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASCRIPT/">JAVASCRIPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASE/">JAVASE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JETTY/">JETTY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPA/">JPA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSONUTILS/">JSONUTILS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KARAF/">KARAF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KEEPALIVED/">KEEPALIVED</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LINUX/">LINUX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LISTENER/">LISTENER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOADBALANCED/">LOADBALANCED</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOG/">LOG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOGBACK/">LOGBACK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOGIN/">LOGIN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOMBOK/">LOMBOK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MARKDOWN/">MARKDOWN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIME-TYPE/">MIME-TYPE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQ/">MQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYBATIS/">MYBATIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYCAT/">MYCAT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/">MYSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NETWORK/">NETWORK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OAUTH2/">OAUTH2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ONOS/">ONOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSGI/">OSGI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSI/">OSI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAGEHELPER/">PAGEHELPER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POSTMAN/">POSTMAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PYTHON/">PYTHON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RABBITMQ/">RABBITMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REDIS/">REDIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REDISTEMPLATE/">REDISTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REFLECTION/">REFLECTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REGISTRY-CENTER/">REGISTRY CENTER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REPO/">REPO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTTEMPLATE/">RESTTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RIBBON/">RIBBON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPM/">RPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SECURITY/">SECURITY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SERIALVERSIONUID/">SERIALVERSIONUID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SERVLET/">SERVLET</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SESSION/">SESSION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SHELL/">SHELL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPINTBOOT/">SPINTBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING/">SPRING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-MVC/">SPRING MVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-STREAM/">SPRING STREAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGBBOT/">SPRINGBBOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGBOOT/">SPRINGBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGQUARTZ/">SPRINGQUARTZ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGTASK/">SPRINGTASK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGTBOOT/">SPRINGTBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPTING/">SPTING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLAlert/">SQLAlert</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSO/">SSO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STRINGREDISTEMPLATE/">STRINGREDISTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWAGGER/">SWAGGER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SYSTEM/">SYSTEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP-IP/">TCP/IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TERMUX/">TERMUX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TK-MYBATIS/">TK.MYBATIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TRANSECTION/">TRANSECTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UBUNTU/">UBUNTU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UDP/">UDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEBClIENT/">WEBClIENT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YAML/">YAML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rabbitMq/">rabbitMq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/抖音/">抖音</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件服务器/">文件服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间转化/">时间转化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标签1/">标签1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/淘宝/">淘宝</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高可用/">高可用</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ANNOTATION/" style="font-size: 14.62px;">ANNOTATION</a> <a href="/tags/AOP/" style="font-size: 10.77px;">AOP</a> <a href="/tags/BAZEL/" style="font-size: 10px;">BAZEL</a> <a href="/tags/BEANUTILS/" style="font-size: 10px;">BEANUTILS</a> <a href="/tags/CENTOS/" style="font-size: 10px;">CENTOS</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/CLASSLOADER/" style="font-size: 10px;">CLASSLOADER</a> <a href="/tags/CRONTAB/" style="font-size: 10.77px;">CRONTAB</a> <a href="/tags/DEBUG/" style="font-size: 10px;">DEBUG</a> <a href="/tags/DESIGN-PATTERNS/" style="font-size: 10px;">DESIGN PATTERNS</a> <a href="/tags/DNS/" style="font-size: 10px;">DNS</a> <a href="/tags/DOCKER/" style="font-size: 11.54px;">DOCKER</a> <a href="/tags/DRUID/" style="font-size: 10px;">DRUID</a> <a href="/tags/ENLINK/" style="font-size: 10px;">ENLINK</a> <a href="/tags/ES/" style="font-size: 16.15px;">ES</a> <a href="/tags/EUREKA/" style="font-size: 10px;">EUREKA</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10px;">Eureka</a> <a href="/tags/FASTJSON/" style="font-size: 10px;">FASTJSON</a> <a href="/tags/GIT/" style="font-size: 10px;">GIT</a> <a href="/tags/GITLAB/" style="font-size: 10px;">GITLAB</a> <a href="/tags/GLOBALEXCEPTION/" style="font-size: 10px;">GLOBALEXCEPTION</a> <a href="/tags/GO/" style="font-size: 10.77px;">GO</a> <a href="/tags/HEXO/" style="font-size: 12.31px;">HEXO</a> <a href="/tags/IDEA/" style="font-size: 12.31px;">IDEA</a> <a href="/tags/INTERCEPTOR/" style="font-size: 11.54px;">INTERCEPTOR</a> <a href="/tags/IT/" style="font-size: 11.54px;">IT</a> <a href="/tags/JAVADOC/" style="font-size: 10px;">JAVADOC</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.54px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.77px;">JAVASE</a> <a href="/tags/JETTY/" style="font-size: 10px;">JETTY</a> <a href="/tags/JPA/" style="font-size: 10.77px;">JPA</a> <a href="/tags/JSONUTILS/" style="font-size: 10px;">JSONUTILS</a> <a href="/tags/KARAF/" style="font-size: 11.54px;">KARAF</a> <a href="/tags/KEEPALIVED/" style="font-size: 10px;">KEEPALIVED</a> <a href="/tags/LINUX/" style="font-size: 16.92px;">LINUX</a> <a href="/tags/LISTENER/" style="font-size: 10px;">LISTENER</a> <a href="/tags/LOADBALANCED/" style="font-size: 10px;">LOADBALANCED</a> <a href="/tags/LOG/" style="font-size: 10px;">LOG</a> <a href="/tags/LOGBACK/" style="font-size: 10px;">LOGBACK</a> <a href="/tags/LOGIN/" style="font-size: 10px;">LOGIN</a> <a href="/tags/LOMBOK/" style="font-size: 11.54px;">LOMBOK</a> <a href="/tags/MAC/" style="font-size: 15.38px;">MAC</a> <a href="/tags/MARKDOWN/" style="font-size: 11.54px;">MARKDOWN</a> <a href="/tags/MIME-TYPE/" style="font-size: 10px;">MIME-TYPE</a> <a href="/tags/MQ/" style="font-size: 12.31px;">MQ</a> <a href="/tags/MYBATIS/" style="font-size: 17.69px;">MYBATIS</a> <a href="/tags/MYCAT/" style="font-size: 10.77px;">MYCAT</a> <a href="/tags/MYSQL/" style="font-size: 16.15px;">MYSQL</a> <a href="/tags/NETWORK/" style="font-size: 10px;">NETWORK</a> <a href="/tags/OAUTH2/" style="font-size: 10.77px;">OAUTH2</a> <a href="/tags/ONOS/" style="font-size: 14.62px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 13.85px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PAGEHELPER/" style="font-size: 10px;">PAGEHELPER</a> <a href="/tags/POSTMAN/" style="font-size: 10px;">POSTMAN</a> <a href="/tags/PYTHON/" style="font-size: 13.08px;">PYTHON</a> <a href="/tags/RABBITMQ/" style="font-size: 10.77px;">RABBITMQ</a> <a href="/tags/REDIS/" style="font-size: 11.54px;">REDIS</a> <a href="/tags/REDISTEMPLATE/" style="font-size: 10px;">REDISTEMPLATE</a> <a href="/tags/REFLECTION/" style="font-size: 11.54px;">REFLECTION</a> <a href="/tags/REGISTRY-CENTER/" style="font-size: 10px;">REGISTRY CENTER</a> <a href="/tags/REPO/" style="font-size: 10px;">REPO</a> <a href="/tags/RESTTEMPLATE/" style="font-size: 10px;">RESTTEMPLATE</a> <a href="/tags/RIBBON/" style="font-size: 10.77px;">RIBBON</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/SECURITY/" style="font-size: 12.31px;">SECURITY</a> <a href="/tags/SERIALVERSIONUID/" style="font-size: 10px;">SERIALVERSIONUID</a> <a href="/tags/SERVLET/" style="font-size: 10.77px;">SERVLET</a> <a href="/tags/SESSION/" style="font-size: 12.31px;">SESSION</a> <a href="/tags/SHELL/" style="font-size: 14.62px;">SHELL</a> <a href="/tags/SPINTBOOT/" style="font-size: 10px;">SPINTBOOT</a> <a href="/tags/SPRING/" style="font-size: 13.08px;">SPRING</a> <a href="/tags/SPRING-MVC/" style="font-size: 10px;">SPRING MVC</a> <a href="/tags/SPRING-STREAM/" style="font-size: 10px;">SPRING STREAM</a> <a href="/tags/SPRINGBBOT/" style="font-size: 10px;">SPRINGBBOT</a> <a href="/tags/SPRINGBOOT/" style="font-size: 19.23px;">SPRINGBOOT</a> <a href="/tags/SPRINGQUARTZ/" style="font-size: 10px;">SPRINGQUARTZ</a> <a href="/tags/SPRINGTASK/" style="font-size: 12.31px;">SPRINGTASK</a> <a href="/tags/SPRINGTBOOT/" style="font-size: 10px;">SPRINGTBOOT</a> <a href="/tags/SPTING/" style="font-size: 10px;">SPTING</a> <a href="/tags/SQL/" style="font-size: 12.31px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.46px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/STRINGREDISTEMPLATE/" style="font-size: 10px;">STRINGREDISTEMPLATE</a> <a href="/tags/SWAGGER/" style="font-size: 10px;">SWAGGER</a> <a href="/tags/SYSTEM/" style="font-size: 10px;">SYSTEM</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TCP-IP/" style="font-size: 11.54px;">TCP/IP</a> <a href="/tags/TERMUX/" style="font-size: 10.77px;">TERMUX</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/TRANSECTION/" style="font-size: 10px;">TRANSECTION</a> <a href="/tags/UBUNTU/" style="font-size: 10px;">UBUNTU</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/WEBClIENT/" style="font-size: 10px;">WEBClIENT</a> <a href="/tags/YAML/" style="font-size: 10.77px;">YAML</a> <a href="/tags/rabbitMq/" style="font-size: 10px;">rabbitMq</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.77px;">文件服务器</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/13/可视化面板/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/邮箱找回密码与二次认证/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/特权用户访问策略控制/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/md列表/">markdown任务列表语法checkbox</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/CS应用配置/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Joe Tong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>SQLAlert 基础函数 | Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="基础函数本小节描述 RDL 函数库中的基础函数。 print(v, …)本函数接受任意多个参数，将给定的所有参数在同一行进行打印输出，打印时每个参数之间用空格分隔。对于 List 与 Dict 数据，按标准 JSON 进行格式化输出。 该函数代码示例如下：  .cs .numberLines&amp;#125;12345&amp;gt; num  = 100;&amp;gt; list = [ 1, &amp;quot;stri">
+<meta name="keywords" content="SQLAlert">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQLAlert 基础函数">
+<meta property="og:url" content="/blog/2019/06/21/3010-base/index.html">
+<meta property="og:site_name" content="Learning">
+<meta property="og:description" content="基础函数本小节描述 RDL 函数库中的基础函数。 print(v, …)本函数接受任意多个参数，将给定的所有参数在同一行进行打印输出，打印时每个参数之间用空格分隔。对于 List 与 Dict 数据，按标准 JSON 进行格式化输出。 该函数代码示例如下：  .cs .numberLines&amp;#125;12345&amp;gt; num  = 100;&amp;gt; list = [ 1, &amp;quot;stri">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:updated_time" content="2020-06-13T07:49:08.195Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQLAlert 基础函数">
+<meta name="twitter:description" content="基础函数本小节描述 RDL 函数库中的基础函数。 print(v, …)本函数接受任意多个参数，将给定的所有参数在同一行进行打印输出，打印时每个参数之间用空格分隔。对于 List 与 Dict 数据，按标准 JSON 进行格式化输出。 该函数代码示例如下：  .cs .numberLines&amp;#125;12345&amp;gt; num  = 100;&amp;gt; list = [ 1, &amp;quot;stri">
+  
+    <link rel="alternate" href="/atom.xml" title="Learning" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Learning</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Joe&#39;s Blog</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-3010-base" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/3010-base/" class="article-date">
+  <time datetime="2019-06-21T23:17:00.000Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SQLAlert 基础函数
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="基础函数"><a href="#基础函数" class="headerlink" title="基础函数"></a>基础函数</h2><p>本小节描述 RDL 函数库中的基础函数。</p>
+<h3 id="print-v-…"><a href="#print-v-…" class="headerlink" title="print(v, …)"></a>print(v, …)</h3><p>本函数接受任意多个参数，将给定的所有参数在同一行进行打印输出，打印时每个参数之间用空格分隔。对于 List 与 Dict 数据，按标准 JSON 进行格式化输出。</p>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; num  = 100;</span><br><span class="line">&gt; list = [ 1, &quot;string&quot; ];</span><br><span class="line">&gt; dict = &#123; &quot;name&quot;: &quot;zhang&quot;, &quot;list&quot;: [ 1, 2, 3 ] &#125;;</span><br><span class="line">&gt; print(&quot;values =&quot;, num, list, dict);</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例代码的输出内容如下：</p>
+<blockquote>
+<figure class="highlight plain"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; values = 100 [1,&quot;string&quot;] &#123;&quot;list&quot;:[1,2,3],&quot;name&quot;:&quot;zhang&quot;&#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="pprint-v-…"><a href="#pprint-v-…" class="headerlink" title="pprint(v, …)"></a>pprint(v, …)</h3><p>本函数为 print() 函数的美化版本，首字母 p 为 pretty 的简写，该函数将给定的参数按 JSON 格式进行缩进、分行格式化，然后再输出。在打印输出时，同样在多个参数之间以空格分隔。</p>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; list = [</span><br><span class="line">&gt;     &#123; &quot;name&quot;: &quot;zhang&quot;, &quot;age&quot;: 18, &quot;desc&quot;: &quot;A good man.&quot; &#125;,</span><br><span class="line">&gt;     &#123; &quot;name&quot;: &quot;wang&quot;,  &quot;age&quot;: 22, &quot;desc&quot;: &quot;A good man too.&quot;&#125;</span><br><span class="line">&gt; ];</span><br><span class="line">&gt;</span><br><span class="line">&gt; pprint(list);</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例代码的输出内容如下：</p>
+<blockquote>
+<figure class="highlight plain"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt; [</span><br><span class="line">&gt;     &#123;</span><br><span class="line">&gt;         &quot;name&quot;: &quot;zhang&quot;,</span><br><span class="line">&gt;         &quot;age&quot;: 18,</span><br><span class="line">&gt;         &quot;desc&quot;: &quot;A good man.&quot;</span><br><span class="line">&gt;     &#125;,</span><br><span class="line">&gt;     &#123;</span><br><span class="line">&gt;         &quot;name&quot;: &quot;wang&quot;,</span><br><span class="line">&gt;         &quot;age&quot;: 22,</span><br><span class="line">&gt;         &quot;desc&quot;: &quot;A good man too.&quot;</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt; ]</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="print-list-list"><a href="#print-list-list" class="headerlink" title="print_list(list)"></a>print_list(list)</h3><p>本函数对指定的 List 进行打印输出。对 List 的每一个元素按 JSON 进行格式化，并将每个元素在同一行打印输出。在 List 元素较多，且需要对元素进行比较时，该函数非常有用。该函数接受 1 个参数：</p>
+<ul>
+<li>list: 数组（List）类型，数据内的元素可以是任意类型。</li>
+</ul>
+<p>本函数在打印 list 时，不输出起始符与结束符 []，如果 list 为空（即元素个数为零）时，将不输出任何内容。</p>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; list = [</span><br><span class="line">&gt;     &#123; &quot;name&quot;: &quot;zhang&quot;, &quot;age&quot;: 18, &quot;desc&quot;: &quot;A good man.&quot; &#125;,</span><br><span class="line">&gt;     &#123; &quot;name&quot;: &quot;wang&quot;,  &quot;age&quot;: 22, &quot;desc&quot;: &quot;A good man too.&quot;&#125;</span><br><span class="line">&gt; ];</span><br><span class="line">&gt;</span><br><span class="line">&gt; print_list(list);</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例代码的输出内容如下：</p>
+<blockquote>
+<figure class="highlight plain"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; &#123;&quot;age&quot;:18,&quot;desc&quot;:&quot;A good man.&quot;,&quot;name&quot;:&quot;zhang&quot;&#125;</span><br><span class="line">&gt; &#123;&quot;age&quot;:22,&quot;desc&quot;:&quot;A good man too.&quot;,&quot;name&quot;:&quot;wang&quot;&#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="print-ctx-print-context"><a href="#print-ctx-print-context" class="headerlink" title="print_ctx() || print_context()"></a>print_ctx() || print_context()</h3><p>本函数打印出脚本执行到当前位置时，执行上下文中的所有变量的值，函数不接受任何参数。print_context() 是该函数的完整函数名，print_ctx() 是函数的别名，二者在功能及使用上是一致的，本文档后续不再对这种格式进行解释。</p>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; name = &quot;zhang&quot;;</span><br><span class="line">&gt; list = [ 1, 2, 3, 4, 5  ];</span><br><span class="line">&gt; </span><br><span class="line">&gt; print_ctx();</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例代码的输出内容如下：</p>
+<blockquote>
+<figure class="highlight plain"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; Context-Global:</span><br><span class="line">&gt; __etc_scripts__ = /usr/local/etc</span><br><span class="line">&gt; name = zhang</span><br><span class="line">&gt; list = [1,2,3,4,5]</span><br><span class="line">&gt; </span><br><span class="line">&gt; Context-Local: empty</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>输出结果中，变量 _<em>etc_scripts_</em> 为 SQLAlert 执行 RDL 脚本时，自动添加的全局变量，用于指定脚本执行目录（搜索目录）。更多说明请参阅本文档附录部分。</p>
+<h3 id="exit"><a href="#exit" class="headerlink" title="exit()"></a>exit()</h3><p>该函数结束（终止）当前脚本的执行，该函数执行后，后面的所有语句将不再执行，函数不接受任何参数。</p>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(&quot;hello&quot;);</span><br><span class="line">&gt; print(&quot;world&quot;);</span><br><span class="line">&gt; exit();</span><br><span class="line">&gt; print(&quot;rest&quot;);</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例代码的输出内容如下：</p>
+<blockquote>
+<figure class="highlight plain"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; hello</span><br><span class="line">&gt; world</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例中，在 exit() 函数后面的语句 print(“rest”) 没有被执行。</p>
+<h3 id="error-msg"><a href="#error-msg" class="headerlink" title="error(msg)"></a>error(msg)</h3><p>与 exit() 函数类似，该函数结束（终止）当前脚本的执行，不同的是该函数会在结束脚本执行时，输出错误信息，函数接受 1 个参数：</p>
+<ul>
+<li>msg: 任意数据类型，需要打印输出的错误信息内容。</li>
+</ul>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; def test_error() &#123;</span><br><span class="line">&gt;     error(&quot;An error message&quot;);</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt; test_error(); </span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例代码的输出内容如下：</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; 2018-02-03 18:52:03 SQLAlert: [ERR] An error message</span><br><span class="line">&gt; in error(), in line 2 in file test.rule</span><br><span class="line">&gt; called by test_error(), in line 5 in file test.rule in task &apos;test&apos;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>如示例中所示，该函数在输出错误信息的同时会输出函数的调用栈信息。</p>
+<h3 id="copy-v"><a href="#copy-v" class="headerlink" title="copy(v)"></a>copy(v)</h3><p>本函数深度拷贝给定的对象，并返回新拷贝的对象。对新对象的任何修改不会影响到旧对象，该函数接收 1 个参数：</p>
+<ul>
+<li>v: 任意数据类型，需要拷贝的对象。</li>
+</ul>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; a = &#123; &quot;name&quot;: &quot;zhang&quot;, &quot;age&quot;: 18 &#125;;</span><br><span class="line">&gt; b = copy(a);</span><br><span class="line">&gt; b[&quot;age&quot;] = 22;</span><br><span class="line">&gt; </span><br><span class="line">&gt; print(&quot;a =&quot;, a)</span><br><span class="line">&gt; print(&quot;b =&quot;, b)</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例代码的输出内容如下：</p>
+<blockquote>
+<figure class="highlight plain"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; a = &#123;&quot;age&quot;:18,&quot;name&quot;:&quot;zhang&quot;&#125;</span><br><span class="line">&gt; b = &#123;&quot;age&quot;:22,&quot;name&quot;:&quot;zhang&quot;&#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="len-v"><a href="#len-v" class="headerlink" title="len(v)"></a>len(v)</h3><p>本函数用于计算给定对象的长度：（1）对于字符串，返回字符串的长度；（2）对于数组，返回数组元素的个数；（3）对于字典，返回字典 KEY 的个数；（4）对于其他类型数据，则返回 0。该函数接收 1 个参数：</p>
+<ul>
+<li>v: 任意数据类型，需要计算长度的对象。</li>
+</ul>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt; a = &quot;zhang&quot;;</span><br><span class="line">&gt; print(&quot;len(str) =&quot;, len(a));</span><br><span class="line">&gt; </span><br><span class="line">&gt; a = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];</span><br><span class="line">&gt; print(&quot;len(list) =&quot;, len(a));</span><br><span class="line">&gt; </span><br><span class="line">&gt; a = &#123; &quot;name&quot;: &quot;zhang&quot;, &quot;age&quot;: 10, &quot;desc&quot;: &quot;a good man&quot; &#125;;</span><br><span class="line">&gt; print(&quot;len(dict) =&quot;, len(a));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例代码的输出内容如下：</p>
+<blockquote>
+<figure class="highlight plain"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; len(str) = 5</span><br><span class="line">&gt; len(list) = 10</span><br><span class="line">&gt; len(dict) = 3</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="get-ctx-name-get-context-name"><a href="#get-ctx-name-get-context-name" class="headerlink" title="get_ctx(name) || get_context(name)"></a>get_ctx(name) || get_context(name)</h3><p>本函数返回当前执行上下文中的指定变量值，在搜索上下文时将忽略变量名的大小写。该函数接收 1 个参数：</p>
+<ul>
+<li>name: 字符串类型，需要获取的变量名。</li>
+</ul>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; aAcC = &quot;zhang&quot;;</span><br><span class="line">&gt; print(get_ctx(&quot;aAcC&quot;));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例代码的输出内容如下：</p>
+<blockquote>
+<figure class="highlight plain"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; zhang</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="set-session-name-value"><a href="#set-session-name-value" class="headerlink" title="set_session(name, value)"></a>set_session(name, value)</h3><p>本函数在脚本的 session 中设置一个名为 name 值为 value 的变量，以记录脚本执行的状态。SQLAlert 在循环调度执行脚本时，会为每一次执行创建一个新的执行上下文，同时将上次执行的 session 保存到当前的执行上下文中。脚本可以在当前执行时访问上一次执行的状态，以实现特殊的需求。</p>
+<p>需要注意的时，session 一旦被设置以后，将不会被自动回收，需要用户在脚本中显式的删除。通过 set_session(name, null) 设置某个名为 name 的 session 值为 null 即可将其使用的资源回收。在脚本中使用 session 功能需要特别小心，否则可能会产生内存泄漏的问题。</p>
+<p>在脚本中可以将任意类型的数据保存到 session 中，该函数接收 2 个参数：</p>
+<ul>
+<li>name: 字符串类型，session 的名称。</li>
+<li>value: 任意数据类型，session 的值。</li>
+</ul>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; name  = &quot;test&quot;;</span><br><span class="line">&gt; value = [ &#123; &quot;name&quot;: &quot;zhang&quot; &#125;, &#123; &quot;name&quot;: &quot;wang&quot; &#125; ];</span><br><span class="line">&gt; set_session(name, value);</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>该示例不会输出任何内容，只是在脚本的 session 中设置了一个名为 test 的变量。请阅读 get_session() 函数以了解如果获取脚本 session 的值。</p>
+<h3 id="get-session-name"><a href="#get-session-name" class="headerlink" title="get_session(name)"></a>get_session(name)</h3><p>本函数从脚本执行上下文的 session 中获取名为 name 的 session 值。该函数接收 1 个参数：</p>
+<ul>
+<li>name: 字符串类型，session 的名称。</li>
+</ul>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; name  = &quot;test&quot;;</span><br><span class="line">&gt; value = [ &#123; &quot;name&quot;: &quot;zhang&quot; &#125;, &#123; &quot;name&quot;: &quot;wang&quot; &#125; ];</span><br><span class="line">&gt; set_session(name, value);</span><br><span class="line">&gt; </span><br><span class="line">&gt; mySession = get_session(&quot;test&quot;);</span><br><span class="line">&gt; print(&quot;my session =&quot;, mySession);</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>示例代码的输出内容如下：</p>
+<blockquote>
+<figure class="highlight plain"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; my session = [&#123;&quot;name&quot;:&quot;zhang&quot;&#125;,&#123;&quot;name&quot;:&quot;wang&quot;&#125;]</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>用户可以通过如下指令来让 SQLAlert 循环执行指定的脚本：</p>
+<blockquote>
+<figure class="highlight plain"><figcaption><span>.cs&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; sqlalert --interval 5m --from &quot;2017-10-12 08:00:00&quot; --to &quot;2017-10-12 18:00:00&quot; -t test.rule</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>上述指令中，sqlalert 将循环执行指定的脚本 test.rule，并且修改脚本运行时的系统时间戳，时间戳从 2017-10-12 08:00:00 按每次递增 5m 的间隔进行变化，直到时间戳等于或超过 2017-10-12 18:00:00 停止。更多说明请参阅 SQLAlert 安装使用文档。</p>
+<h3 id="load-json-path"><a href="#load-json-path" class="headerlink" title="load_json(path)"></a>load_json(path)</h3><p>本函数将指定的文件以 JSON 格式加载到脚本上下文中，如果 path 为绝对路径，则直接加载；如果 path 为相对路径，则会在 path 之前添加 ETC 前缀。在使用 SQLAlert 执行 RDL 脚本时，可以通过选项 -e/–etc 来指定 ETC 路径，如果不指定，默认为 /usr/local/etc。函数接收 1 个参数：</p>
+<ul>
+<li>path: 字符串类型，文件路径名。</li>
+</ul>
+<p>该函数代码示例如下：</p>
+<blockquote>
+<figure class="highlight plain"><figcaption><span>.cs .numberLines&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; pprint(load_json(&quot;data.json&quot;));</span><br><span class="line">&gt; pprint(load_json(&quot;/home/&lt;user&gt;/sqlalert/data/data.json&quot;));</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>上述示例代码仅作为参考，无法执行，请用户换成自己的路径进行测试。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/06/21/3010-base/" data-id="ckbdc9usm005824u27rvr8pi1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQLAlert/">SQLAlert</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/06/21/3030-strings/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          SQLAlert 字符串函数
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/06/21/3000-libs/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">SQLAlert 库函数</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIT/">GIT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IT/">IT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVAEE/">JAVAEE</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVAEE/MYSQL/">MYSQL</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/OFFICE/">OFFICE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SYSTEM/">SYSTEM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VIM/">VIM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/分类1/">分类1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/电商/">电商</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ANNOTATION/">ANNOTATION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BAZEL/">BAZEL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BEANUTILS/">BEANUTILS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CENTOS/">CENTOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI-CD/">CI/CD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CLASSLOADER/">CLASSLOADER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CRONTAB/">CRONTAB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DEBUG/">DEBUG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DESIGN-PATTERNS/">DESIGN PATTERNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DNS/">DNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOCKER/">DOCKER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DRUID/">DRUID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ENLINK/">ENLINK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EUREKA/">EUREKA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EXCEL/">EXCEL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/">Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FASTJSON/">FASTJSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIT/">GIT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GITLAB/">GITLAB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GLOBALEXCEPTION/">GLOBALEXCEPTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO/">GO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HEXO/">HEXO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/INTERCEPTOR/">INTERCEPTOR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IT/">IT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVADOC/">JAVADOC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASCRIPT/">JAVASCRIPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASE/">JAVASE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JETTY/">JETTY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPA/">JPA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSONUTILS/">JSONUTILS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KARAF/">KARAF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KEEPALIVED/">KEEPALIVED</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LINUX/">LINUX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LISTENER/">LISTENER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOADBALANCED/">LOADBALANCED</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOG/">LOG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOGBACK/">LOGBACK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOGIN/">LOGIN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOMBOK/">LOMBOK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MARKDOWN/">MARKDOWN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIME-TYPE/">MIME-TYPE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQ/">MQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYBATIS/">MYBATIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYCAT/">MYCAT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/">MYSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NETWORK/">NETWORK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OAUTH2/">OAUTH2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ONOS/">ONOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSGI/">OSGI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSI/">OSI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAGEHELPER/">PAGEHELPER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POSTMAN/">POSTMAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PYTHON/">PYTHON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RABBITMQ/">RABBITMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REDIS/">REDIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REDISTEMPLATE/">REDISTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REFLECTION/">REFLECTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REGISTRY-CENTER/">REGISTRY CENTER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REPO/">REPO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTTEMPLATE/">RESTTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RIBBON/">RIBBON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPM/">RPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SECURITY/">SECURITY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SERIALVERSIONUID/">SERIALVERSIONUID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SERVLET/">SERVLET</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SESSION/">SESSION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SHELL/">SHELL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPINTBOOT/">SPINTBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING/">SPRING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-MVC/">SPRING MVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-STREAM/">SPRING STREAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGBBOT/">SPRINGBBOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGBOOT/">SPRINGBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGQUARTZ/">SPRINGQUARTZ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGTASK/">SPRINGTASK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGTBOOT/">SPRINGTBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPTING/">SPTING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLAlert/">SQLAlert</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSO/">SSO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STRINGREDISTEMPLATE/">STRINGREDISTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWAGGER/">SWAGGER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SYSTEM/">SYSTEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP-IP/">TCP/IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TERMUX/">TERMUX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TK-MYBATIS/">TK.MYBATIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TRANSECTION/">TRANSECTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UBUNTU/">UBUNTU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UDP/">UDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEBClIENT/">WEBClIENT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YAML/">YAML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rabbitMq/">rabbitMq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/抖音/">抖音</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件服务器/">文件服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间转化/">时间转化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标签1/">标签1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/淘宝/">淘宝</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高可用/">高可用</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ANNOTATION/" style="font-size: 14.62px;">ANNOTATION</a> <a href="/tags/AOP/" style="font-size: 10.77px;">AOP</a> <a href="/tags/BAZEL/" style="font-size: 10px;">BAZEL</a> <a href="/tags/BEANUTILS/" style="font-size: 10px;">BEANUTILS</a> <a href="/tags/CENTOS/" style="font-size: 10px;">CENTOS</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/CLASSLOADER/" style="font-size: 10px;">CLASSLOADER</a> <a href="/tags/CRONTAB/" style="font-size: 10.77px;">CRONTAB</a> <a href="/tags/DEBUG/" style="font-size: 10px;">DEBUG</a> <a href="/tags/DESIGN-PATTERNS/" style="font-size: 10px;">DESIGN PATTERNS</a> <a href="/tags/DNS/" style="font-size: 10px;">DNS</a> <a href="/tags/DOCKER/" style="font-size: 11.54px;">DOCKER</a> <a href="/tags/DRUID/" style="font-size: 10px;">DRUID</a> <a href="/tags/ENLINK/" style="font-size: 10px;">ENLINK</a> <a href="/tags/ES/" style="font-size: 16.15px;">ES</a> <a href="/tags/EUREKA/" style="font-size: 10px;">EUREKA</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10px;">Eureka</a> <a href="/tags/FASTJSON/" style="font-size: 10px;">FASTJSON</a> <a href="/tags/GIT/" style="font-size: 10px;">GIT</a> <a href="/tags/GITLAB/" style="font-size: 10px;">GITLAB</a> <a href="/tags/GLOBALEXCEPTION/" style="font-size: 10px;">GLOBALEXCEPTION</a> <a href="/tags/GO/" style="font-size: 10.77px;">GO</a> <a href="/tags/HEXO/" style="font-size: 12.31px;">HEXO</a> <a href="/tags/IDEA/" style="font-size: 12.31px;">IDEA</a> <a href="/tags/INTERCEPTOR/" style="font-size: 11.54px;">INTERCEPTOR</a> <a href="/tags/IT/" style="font-size: 11.54px;">IT</a> <a href="/tags/JAVADOC/" style="font-size: 10px;">JAVADOC</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.54px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.77px;">JAVASE</a> <a href="/tags/JETTY/" style="font-size: 10px;">JETTY</a> <a href="/tags/JPA/" style="font-size: 10.77px;">JPA</a> <a href="/tags/JSONUTILS/" style="font-size: 10px;">JSONUTILS</a> <a href="/tags/KARAF/" style="font-size: 11.54px;">KARAF</a> <a href="/tags/KEEPALIVED/" style="font-size: 10px;">KEEPALIVED</a> <a href="/tags/LINUX/" style="font-size: 16.92px;">LINUX</a> <a href="/tags/LISTENER/" style="font-size: 10px;">LISTENER</a> <a href="/tags/LOADBALANCED/" style="font-size: 10px;">LOADBALANCED</a> <a href="/tags/LOG/" style="font-size: 10px;">LOG</a> <a href="/tags/LOGBACK/" style="font-size: 10px;">LOGBACK</a> <a href="/tags/LOGIN/" style="font-size: 10px;">LOGIN</a> <a href="/tags/LOMBOK/" style="font-size: 11.54px;">LOMBOK</a> <a href="/tags/MAC/" style="font-size: 15.38px;">MAC</a> <a href="/tags/MARKDOWN/" style="font-size: 11.54px;">MARKDOWN</a> <a href="/tags/MIME-TYPE/" style="font-size: 10px;">MIME-TYPE</a> <a href="/tags/MQ/" style="font-size: 12.31px;">MQ</a> <a href="/tags/MYBATIS/" style="font-size: 17.69px;">MYBATIS</a> <a href="/tags/MYCAT/" style="font-size: 10.77px;">MYCAT</a> <a href="/tags/MYSQL/" style="font-size: 16.15px;">MYSQL</a> <a href="/tags/NETWORK/" style="font-size: 10px;">NETWORK</a> <a href="/tags/OAUTH2/" style="font-size: 10.77px;">OAUTH2</a> <a href="/tags/ONOS/" style="font-size: 14.62px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 13.85px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PAGEHELPER/" style="font-size: 10px;">PAGEHELPER</a> <a href="/tags/POSTMAN/" style="font-size: 10px;">POSTMAN</a> <a href="/tags/PYTHON/" style="font-size: 13.08px;">PYTHON</a> <a href="/tags/RABBITMQ/" style="font-size: 10.77px;">RABBITMQ</a> <a href="/tags/REDIS/" style="font-size: 11.54px;">REDIS</a> <a href="/tags/REDISTEMPLATE/" style="font-size: 10px;">REDISTEMPLATE</a> <a href="/tags/REFLECTION/" style="font-size: 11.54px;">REFLECTION</a> <a href="/tags/REGISTRY-CENTER/" style="font-size: 10px;">REGISTRY CENTER</a> <a href="/tags/REPO/" style="font-size: 10px;">REPO</a> <a href="/tags/RESTTEMPLATE/" style="font-size: 10px;">RESTTEMPLATE</a> <a href="/tags/RIBBON/" style="font-size: 10.77px;">RIBBON</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/SECURITY/" style="font-size: 12.31px;">SECURITY</a> <a href="/tags/SERIALVERSIONUID/" style="font-size: 10px;">SERIALVERSIONUID</a> <a href="/tags/SERVLET/" style="font-size: 10.77px;">SERVLET</a> <a href="/tags/SESSION/" style="font-size: 12.31px;">SESSION</a> <a href="/tags/SHELL/" style="font-size: 14.62px;">SHELL</a> <a href="/tags/SPINTBOOT/" style="font-size: 10px;">SPINTBOOT</a> <a href="/tags/SPRING/" style="font-size: 13.08px;">SPRING</a> <a href="/tags/SPRING-MVC/" style="font-size: 10px;">SPRING MVC</a> <a href="/tags/SPRING-STREAM/" style="font-size: 10px;">SPRING STREAM</a> <a href="/tags/SPRINGBBOT/" style="font-size: 10px;">SPRINGBBOT</a> <a href="/tags/SPRINGBOOT/" style="font-size: 19.23px;">SPRINGBOOT</a> <a href="/tags/SPRINGQUARTZ/" style="font-size: 10px;">SPRINGQUARTZ</a> <a href="/tags/SPRINGTASK/" style="font-size: 12.31px;">SPRINGTASK</a> <a href="/tags/SPRINGTBOOT/" style="font-size: 10px;">SPRINGTBOOT</a> <a href="/tags/SPTING/" style="font-size: 10px;">SPTING</a> <a href="/tags/SQL/" style="font-size: 12.31px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.46px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/STRINGREDISTEMPLATE/" style="font-size: 10px;">STRINGREDISTEMPLATE</a> <a href="/tags/SWAGGER/" style="font-size: 10px;">SWAGGER</a> <a href="/tags/SYSTEM/" style="font-size: 10px;">SYSTEM</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TCP-IP/" style="font-size: 11.54px;">TCP/IP</a> <a href="/tags/TERMUX/" style="font-size: 10.77px;">TERMUX</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/TRANSECTION/" style="font-size: 10px;">TRANSECTION</a> <a href="/tags/UBUNTU/" style="font-size: 10px;">UBUNTU</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/WEBClIENT/" style="font-size: 10px;">WEBClIENT</a> <a href="/tags/YAML/" style="font-size: 10.77px;">YAML</a> <a href="/tags/rabbitMq/" style="font-size: 10px;">rabbitMq</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.77px;">文件服务器</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/13/可视化面板/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/邮箱找回密码与二次认证/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/特权用户访问策略控制/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/md列表/">markdown任务列表语法checkbox</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/CS应用配置/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Joe Tong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

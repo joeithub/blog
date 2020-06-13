@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="private learning">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Learning">
+<meta property="og:url" content="/blog/page/17/index.html">
+<meta property="og:site_name" content="Learning">
+<meta property="og:description" content="private learning">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Learning">
+<meta name="twitter:description" content="private learning">
+  
+    <link rel="alternate" href="/atom.xml" title="Learning" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Learning</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Joe&#39;s Blog</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-TCP-UDP" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/21/TCP-UDP/" class="article-date">
+  <time datetime="2019-07-21T23:04:00.000Z" itemprop="datePublished">2019-07-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/21/TCP-UDP/">TCP UDP</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1、TCP和UDP的区别<br>（1）TCP面向连接；UDP面向无连接 &nbsp;<br>（2）TCP保证数据正确性；UDP可能丢包<br>（3）TCP传输速度慢；UDP速度快<br>（4）每一条TCP连接只能是点到点的；UDP支持一对一，一对多，多对一和多对多的交互通信<br>（5）TCP对系统资源要求较多，UDP对系统资源要求较少。<br>2、三次握手<br>三次握手的目的是建立可靠的通信信道。确认自己与对方的发送与接收机能正常。<br>TCP三次握手过程:<br>1、主机A通过向主机B 发送一个含有同步序列号的标志位的数据段给主机B ，向主机B请求建立连接,通过这个数据段,主机A告诉主机B两件事：我想要和你通信、你可以用哪个序列号作为起始数据段来回应我。<br>2、主机B收到主机A的请求后,用一个带有确认应答(ACK)和同步序列号(SYN)标志位的数据段响应主机A,也告诉主机A两件事：我已经收到你的请求了,你可以传输数据了、你要用哪个序列号作为起始数据段来回应我。<br>3、主机A收到这个数据段后，再发送一个确认应答，确认已收到主机B的数据段：我已收到回复，我现在要开始传输实际数据了。<br>这样3次握手就完成了,主机A和主机B 就可以传输数据了.<br>这里写图片描述<br>为什么需要三次握手：<br>三次握手能确认双发收发功能都正常，缺一不可。<br>第一次握手：Client什么都不能确认；Server确认了对方发送正常。<br>第二次握手：Client确认了：自己发送、接收正常，对方发送、接收正常；Server确认了：自己接收正常，对方发送正常。<br>第三次握手：Client确认了：自己发送、接收正常，对方发送、接收正常；Server确认了：自己发送、接收正常，对方发送接收正常。<br>三次握手的另一个目标是确认确认双方都支持TCP，告知对方用TCP传输。<br>第一次握手：Server猜测Client可能要建立TCP请求，但不确定，因为也可能是Client乱发了一个数据包给自己。<br>第二次握手：通过ack=J+1，Client知道Server是支持TCP的，且理解了自己要建立TCP连接的意图。<br>第三次握手：通过ack=K+1，Server知道Client是支持TCP的，且确实是要建立TCP连接。 &nbsp;<br>3、四次挥手<br>1、第一次挥手：主机1（可以使客户端，也可以是服务器端），设置Sequence Number和Acknowledgment Number，向主机2发送一个FIN报文段；此时，主机1进入FIN_WAIT_1状态；这表示主机1没有数据要发送给主机2了。<br>2、第二次挥手：主机2收到了主机1发送的FIN报文段，向主机1回一个ACK报文段，Acknowledgment Number为Sequence Number加1；主机1进入FIN_WAIT_2状态；主机2告诉主机1，我“同意”你的关闭请求。 &nbsp;<br>3、第三次挥手：主机2向主机1发送FIN报文段，请求关闭连接，同时主机2进入LAST_ACK状态。 &nbsp;<br>4、第四次挥手：主机1收到主机2发送的FIN报文段，向主机2发送ACK报文段，然后主机1进入TIME_WAIT状态；主机2收到主机1的ACK报文段以后，就关闭连接；此时，主机1等待2MSL后依然没有收到回复，则证明Server端已正常关闭，那好，主机1也可以关闭连接了。 &nbsp;<br>为什么要time wait，为什么是2msl<br>这里写图片描述 &nbsp;<br>为了保证A发送的最后一个ACK报文能够到达B。这个ACK报文段有可能丢失，因而使处在LAST-ACK状态的B收不到对已发送的FIN+ACK报文段的确认。B会超时重传这个FIN+ACK报文段，而A就能在2MSL时间内收到这个重传的FIN+ACK报文段。如果A在TIME-WAIT状态不等待一段时间，而是在发送完ACK报文段后就立即释放连接，就无法收到B重传的FIN+ACK报文段，因而也不会再发送一次确认报文段。这样，B就无法按照正常的步骤进入CLOSED状态。 &nbsp;<br>MSL指的是任何IP数据报能够在因特网上存活的最长时间。假设现在一个MSL的时候，接收端需要发送一个应答，这时候，我们也必须等待这个应答的消失，这个应答的消失也是需要一个MSL，所以我们需要等待2MSL。  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/07/21/TCP-UDP/" data-id="ckbdc9usy006724u2c2lp2v3u" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCP/">TCP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UDP/">UDP</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-网络体系机构" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/21/网络体系机构/" class="article-date">
+  <time datetime="2019-07-21T15:53:00.000Z" itemprop="datePublished">2019-07-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/21/网络体系机构/">网络体系机构</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>网络的体系结构分为哪五层，每层分别有哪些协议(阿里面试题)<br>面试题：讲一下OSI七层模型，每层的作用，问了wifi属于哪一层(百度面试题)<br>一、OSI七层模型<br><img src="/images/pasted-14.png" alt="upload successful"></p>
+<p>应用层<br>是最靠近用户的OSI层。这一层为用户的应用程序（例如电子邮件、文件传输和终端仿真）提供网络服务。<br>表示层<br>表示提供各种用于应用层数据编码和转换功能，确保一个系统的应用层发送的数据能被另一个系统的应用层识别。如果必要该层可提供一种标准表示形式，用于将计算机内部的多种数据格式转换成通信中采用的标准表示形式。数据压缩和加密也是表示层可提供的转换功能之一。<br>会话层<br>会话层负载建立、管理和终止表示层实体之间的通信会话。该层的通信由不同设备中的应用程序之间的服务请求和响应组成。<br>传输层<br>传输层建立了主机端到端的链接，传输层的作用是为上层协议提供端到端的可靠和透明的数据传输服务，包括处理差错控制和流量控制等问题。该层向高层屏蔽了下层数据通信的细节，是高层用户看到的只是在两个传输实体建的一个主机到主机的、可由用户控制和设定、可靠的数据通路。通常说的TCP UDP就是在这层。端口号即是这里的“端”。<br>网络层<br>本层通过IP寻址来建立两点之间的连接，为源端的运输层来的分组，选择合适的路由和交换节点，正确无误地按照地址传送给目的端的运输层。就是通常说的ip层。这一层就是我们经常说的IP协议层。IP协议是Internet的基础。<br>数据链路层<br>将比特组合成字节，再将字节组成帧，使用链路层地址（以太网mac地址）来访问介质，并进行差错检测。数据链路层又分为2个子层：逻辑链路控制子层（LLC）和媒体访问控制子层（MAC）。<br>物理层<br>主要定义物理设备标准，如网线的接口类型、光纤的接口类型、各种传输介质的传输速率等。它的主要作用是传输比特流（就是由1、0转化为电流强弱来进行传输,到达目的地后在转化为1、0，也就是我们常说的数模转换与模数转换）。这一层的数据叫做比特。<br>二、TCP/IP五层模型<br><img src="/images/pasted-15.png" alt="upload successful"></p>
+<p>三、Wifi和zigbee<br>zigbee和wifi符合局域网标准，是工作在OSI数据链路层和物理层的。  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/07/21/网络体系机构/" data-id="ckbdc9uxs00hf24u2wd3vvqz2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCP-IP/">TCP/IP</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Oauth2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/21/Oauth2/" class="article-date">
+  <time datetime="2019-07-21T07:19:00.000Z" itemprop="datePublished">2019-07-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/21/Oauth2/">Oauth2</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Oauth2授权模式</p>
+<h6 id="授权码模式（Authorization-Code）"><a href="#授权码模式（Authorization-Code）" class="headerlink" title="授权码模式（Authorization Code）"></a>授权码模式（Authorization Code）</h6><h6 id="隐士授权模式（Implicit）"><a href="#隐士授权模式（Implicit）" class="headerlink" title="隐士授权模式（Implicit）"></a>隐士授权模式（Implicit）</h6><h6 id="密码模式（Resource-Owner-Password-Credentials）"><a href="#密码模式（Resource-Owner-Password-Credentials）" class="headerlink" title="密码模式（Resource Owner Password Credentials）"></a>密码模式（Resource Owner Password Credentials）</h6><h6 id="客户端模式（Client-Credentials）-nbsp"><a href="#客户端模式（Client-Credentials）-nbsp" class="headerlink" title="客户端模式（Client Credentials） &nbsp;"></a>客户端模式（Client Credentials） &nbsp;</h6><p>授权码授权流程</p>
+<p><img src="/images/pasted-12.png" alt="upload successful"><br>客户端请求第三方授权<br>用户（资源有者）同意给客户端授权<br>客户端获取到授权码，请求认证服务器申请令牌<br>认证服务器向客户端响应令牌<br>客户端请求资源服务器的资源<br>资源服务器返回受保护资源</p>
+<p>申请授权码<br>请求认证服务获取授权码<br>get请求：</p>
+<p><img src="/images/pasted-13.png" alt="upload successful"></p>
+<p>客户端ID就是存到数据库里的client_id的值</p>
+<p>Spring security 会去数据库中查有没有这个服务</p>
+<p>校验令牌token<br>刷新令牌refresh_token </p>
+<p>JWT  (json web token)简化认证流程  </p>
+<p><img src="/images/pasted-16.png" alt="upload successful">      </p>
+<p>实现方式是通过RSA(公钥/私钥)完成签名<br>资源服务器和认证服务器之间通过公钥私钥的方式 &nbsp;<br>jwt格式包含三个部分：</p>
+<ul>
+<li>Header部分<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> <span class="attr">""</span>:<span class="string">""</span>,</span><br><span class="line"> <span class="attr">"typ"</span>:<span class="string">""</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>他会用base64url进行编码成字符串</p>
+<ul>
+<li>Payload部分（内容部分）<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>也会进行base64url进行编码  </p>
+<ul>
+<li>signature部分签名部分<br>防止篡改  <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HMACSHA256(</span><br><span class="line">  base64urlEncode(header) + <span class="string">"."</span> + </span><br><span class="line">  base64UrlEncode(payload),</span><br><span class="line">  secret</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>secret:签名使用的密钥<br>整个再进行加密</p>
+<p>生成密钥证书，采用rsa算法每个证书包含公钥和私钥   &nbsp;<br>生成私钥：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">keytool</span> <span class="selector-tag">-genkeypair</span> <span class="selector-tag">-alias</span> <span class="selector-tag">xxx</span>(密钥的别名) <span class="selector-tag">-keyalg</span> <span class="selector-tag">RSA</span>（采用的算法） <span class="selector-tag">-keypass</span> <span class="selector-tag">xxx</span>(密匙的访问密码) <span class="selector-tag">-keystore</span> <span class="selector-tag">xxx</span><span class="selector-class">.keystore</span>(密钥库文件即存储密钥的文件) <span class="selector-tag">-storepass</span> <span class="selector-tag">xxx</span>(密钥库的访问密码)</span><br></pre></td></tr></table></figure>
+
+<p>参数解析：<br>-alias 密钥的别名 &nbsp;<br>-alias 密钥的别名 &nbsp;<br>-keyalg 使用的hash算法<br>-keypass 密匙的访问密码<br>-keystore 密匙库文件名<br>-storepass 密匙库的访问密码 &nbsp;</p>
+<p>导出公钥：<br>需要openssl来导出公钥信息<br>安装openssl<br>到证书所在目录执行如下命令：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -<span class="built_in">list</span> rfc <span class="comment">--keystore xxx.keystore（密钥库文件名）| openssl x509 -inform pem -pubkey</span></span><br></pre></td></tr></table></figure>
+
+<p>springsecurityoauth2流程</p>
+<p><img src="/images/pasted-18.png" alt="upload successful"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/07/21/Oauth2/" data-id="ckbdc9uso005c24u2ewkuodka" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OAUTH2/">OAUTH2</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-find" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/20/find/" class="article-date">
+  <time datetime="2019-07-20T17:26:00.000Z" itemprop="datePublished">2019-07-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/20/find/">find</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code># find &amp;amp;lt;directory&amp;amp;gt; -type f -name &quot;*.c&quot; | xargs grep &quot;&amp;amp;lt;strings&amp;amp;gt;&quot;&amp;amp;lt;directory&amp;amp;gt;</code><br>是你要找的文件夹；如果是当前文件夹可以省略-type f 说明，只找文件-name “*.c”  表示只找C语言写的代码，从而避免去查binary；也可以不写，表示找所有文件&amp;lt;strings&amp;gt;是你要找的某个字符串  </p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">find</span> /your/<span class="built_in">path</span> -<span class="built_in">type</span> f -<span class="built_in">print</span> | xargs grep MASQUERADEgrep -F MASQUERADE -R /<span class="built_in">path</span></span><br></pre></td></tr></table></figure>
+
+<p>  <code>find -name &quot;.git&quot;</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/07/20/find/" data-id="ckbdc9uu8008l24u2pa45rlmb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LINUX/">LINUX</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SHELL/">SHELL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-crontab-another-form" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/20/crontab-another-form/" class="article-date">
+  <time datetime="2019-07-20T12:26:00.000Z" itemprop="datePublished">2019-07-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/20/crontab-another-form/">crontab another form</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@hourly /usr/local/www/awstats/cgi-bin/awstats.sh<br>使用 @hourly 对应的是 0 * * * *, 还有下述可以使用:  </p>
+<p>复制代码<br>string meaning<br>—— ——-<br>@reboot Run once, at startup.<br>@yearly Run once a year, “0 0 1 1 *”.<br>@annually (same as @yearly)<br>@monthly Run once a month, “0 0 1 * *”.<br>@weekly Run once a week, “0 0 * * 0”.<br>@daily Run once a day, “0 0 * * *”.<br>@midnight (same as @daily)<br>@hourly Run once an hour, “0 * * * *”. </p>
+<p>特別是看到 @reboot, 所以写 rc.local 的東西, 也可以使用 @reboot 寫在 crontab 里面。  </p>
+<p>1.每分钟定时执行一次规则：<br>每1分钟执行： <em>/1 * * * *或者</em> * * * *
+每5分钟执行： */5 * * * *</p>
+<p>2.每小时定时执行一次规则：<br>每小时执行： 0 * * * *或者0 */1 * * *
+每天上午7点执行：0 7 * * *
+每天上午7点10分执行：10 7 * * *</p>
+<p>3.每天定时执行一次规则：<br>每天执行 0 0 * * *</p>
+<p>4.每周定时执行一次规则：<br>每周执行 0 0 * * 0</p>
+<p>5.每月定时执行一次规则：<br>每月执行 0 0 1 * *</p>
+<p>6.每年定时执行一次规则：<br>每年执行 0 0 1 1 *</p>
+<p>7.其他例子<br>5 * * * * 指定每小时的第5分钟执行一次ls命令<br>30 5 * * * ls 指定每天的 5:30 执行ls命令<br>30 7 8 * * ls 指定每月8号的7：30分执行ls命令<br>30 5 8 6 * ls 指定每年的6月8日5：30执行ls命令<br>30 6 * * 0 ls 指定每星期日的6:30执行ls命令[注：0表示星期天，1表示星期1，以此类推，也可以用英文来表示，sun表示星期天，mon表示星期一等。]<br>30 3 10,20 * * ls 每月10号及20号的3：30执行ls命令[注：“，”用来连接多个不连续的时段]<br>25 8-11 * * * ls 每天8-11点的第25分钟执行ls命令[注：“-”用来连接连续的时段]<br>*/15 * * * * ls 每15分钟执行一次ls命令 [即每个小时的第0 15 30 45 60分钟执行ls命令 ]<br>30 6 */10 * * ls 每个月中，每隔10天6:30执行一次ls命令[即每月的1、11、21、31日是的6：30执行一次ls命令。 ]</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/07/20/crontab-another-form/" data-id="ckbdc9utn007224u2c3ghajsa" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CRONTAB/">CRONTAB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LINUX/">LINUX</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SHELL/">SHELL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-onos-源码编译安装" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/20/onos-源码编译安装/" class="article-date">
+  <time datetime="2019-07-20T02:29:00.000Z" itemprop="datePublished">2019-07-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/20/onos-源码编译安装/">onos-buck 源码编译安装</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>老版本  onos-buck<br>ONOS新版本源码安装方式<br>发表于 2017-03-08   |   分类于 项目展示   |     |    访问量:<br>1.安装JDK（从Oracle官网下载，不要用OpenJDK）<br>1.Download and Extract JDK package, such as jdk-8u121-linux-x64.tar.gz.<br><code>tar -xzf jdk-8u121-linux-x64.tar.gz</code></p>
+<p>and you can see new directory /home/yourname/jdk1.8.0_121.<br>2.Add two environment variables into ~/.bashrc or /etc/profile:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">JAVA_HOME</span>=/home/yourname/jdk1.8.0_121</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$&#123;JAVA_HOME&#125;</span>/bin:$PATH</span><br></pre></td></tr></table></figure>
+
+<p>3.Save and open a new terminal, go on next step.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get <span class="keyword">install</span> software-properties-common -y &amp;&amp; \</span><br><span class="line">sudo <span class="keyword">add</span>-apt-repository ppa:webupd8team/<span class="keyword">java</span> -y &amp;&amp; \</span><br><span class="line">sudo apt-<span class="keyword">get</span> <span class="keyword">update</span> &amp;&amp; \</span><br><span class="line">echo <span class="string">"oracle-java8-installer shared/accepted-oracle-license-v1-1 select true"</span> | sudo debconf-<span class="keyword">set</span>-selections &amp;&amp; \</span><br><span class="line">sudo apt-<span class="keyword">get</span> <span class="keyword">install</span> <span class="keyword">oracle</span>-java8-installer <span class="keyword">oracle</span>-java8-<span class="keyword">set</span>-<span class="keyword">default</span> -y</span><br></pre></td></tr></table></figure>
+
+<p>2.下载源码并编译</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">https</span>://gerrit.onosproject.org/onos</span><br><span class="line">cd onos <span class="comment">#之后的命令均在此目录下</span></span><br><span class="line">tools/build/onos-buck build onos --show-output</span><br></pre></td></tr></table></figure>
+
+<p>正常的话，会打印出.tar.gz目录，这个就是二进制安装文件。<br>3.本地运行ONOS<br><code>tools/build/onos-buck run onos-local -- clean debug</code><br>以上命令将会从本地的 onos.tar.gz文件中进行本地安装，并在后台开启ONOS服务。在终端上将会持续打出ONOS的日志内容。clean选项会使其进行ONOS的清洁安装，而debug选项意为默认调试端口5005将会开启。<br>4.设置环境变量<br>在/etc/profile中添加： </p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">ONOS_ROOT</span>=/home/yourname/onos</span><br><span class="line">source <span class="variable">$ONOS_ROOT</span>/tools/dev/bash_profile</span><br></pre></td></tr></table></figure>
+
+<p>5.开启ONOS的CLI控制台<br>在本地开启ONOS之后，在新的终端执行以下命令：<br><code>tools/test/bin/onos localhost</code><br>6.开启ONOS的GUI界面<br>在本地开启ONOS之后，在新的终端执行以下命令：<br><code>tools/test/bin/onos-gui localhost</code></p>
+<p>#（实际执行了open http://$host:8181/onos/ui，Ubuntu不支持，</p>
+<p>#出错Couldn’t get a file descriptor referring to the console）<br>或者访问<a href="http://localhost:8181/onos/ui" target="_blank" rel="noopener">http://localhost:8181/onos/ui</a> （推荐）<br>默认用户名onos，密码rocks<br>7.ONOS单元测试<br>To execute ONOS unit tests, including code Checkstyle validation, run the following command:<br><code>tools/build/onos-buck test</code><br>8.导入工程到IDE<code>If you want to import the project into IntelliJ, you can generate the hierarchical module structure via the following command:</code><br><code>tools/build/onos-buck project</code></p>
+<p>Then simply open the onos directory from IntelliJ IDEA.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/07/20/onos-源码编译安装/" data-id="ckbdc9uv400bk24u25fld337t" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ONOS/">ONOS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-CI-CD" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/19/CI-CD/" class="article-date">
+  <time datetime="2019-07-19T09:30:00.000Z" itemprop="datePublished">2019-07-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/19/CI-CD/">CI/CD</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/images/cicd.png" alt="upload successful"></p>
+<p>在软件开发中经常会提到持续集成<br>Continuous Integration<br>（CI）和持续交付<br>Continuous Delivery<br>（CD）这几个术语。但它们真正的意思是什么呢？<br>在谈论软件开发时，经常会提到持续集成<br>Continuous Integration<br>（CI）和持续交付<br>Continuous Delivery<br>（CD）这几个术语。但它们真正的意思是什么呢？在本文中，我将解释这些和相关术语背后的含义和意义，例如持续测试<br>Continuous Testing<br>和持续部署<br>Continuous Deployment<br>概览<br>工厂里的装配线以快速、自动化、可重复的方式从原材料生产出消费品。同样，软件交付管道以快速、自动化和可重复的方式从源代码生成发布版本。如何完成这项工作的总体设计称为“持续交付”（CD）。启动装配线的过程称为“持续集成”（CI）。确保质量的过程称为“持续测试”，将最终产品提供给用户的过程称为“持续部署”。一些专家让这一切简单、顺畅、高效地运行，这些人被称为运维开发<br>DevOps<br>践行者。<br>“持续”是什么意思？<br>“持续”用于描述遵循我在此提到的许多不同流程实践。这并不意味着“一直在运行”，而是“随时可运行”。在软件开发领域，它还包括几个核心概念/最佳实践。这些是：<br>频繁发布：持续实践背后的目标是能够频繁地交付高质量的软件。此处的交付频率是可变的，可由开发团队或公司定义。对于某些产品，一季度、一个月、一周或一天交付一次可能已经足够频繁了。对于另一些来说，一天可能需要多次交付也是可行的。所谓持续也有“偶尔、按需”的方面。最终目标是相同的：在可重复、可靠的过程中为最终用户提供高质量的软件更新。通常，这可以通过很少甚至无需用户的交互或掌握的知识来完成（想想设备更新）。<br>自动化流程：实现此频率的关键是用自动化流程来处理软件生产中的方方面面。这包括构建、测试、分析、版本控制，以及在某些情况下的部署。<br>可重复：如果我们使用的自动化流程在给定相同输入的情况下始终具有相同的行为，则这个过程应该是可重复的。也就是说，如果我们把某个历史版本的代码作为输入，我们应该得到对应相同的可交付产出。这也假设我们有相同版本的外部依赖项（即我们不创建该版本代码使用的其它交付物）。理想情况下，这也意味着可以对管道中的流程进行版本控制和重建（请参阅稍后的 DevOps 讨论）。<br>快速迭代：“快速”在这里是个相对术语，但无论软件更新/发布的频率如何，预期的持续过程都会以高效的方式将源代码转换为交付物。自动化负责大部分工作，但自动化处理的过程可能仍然很慢。例如，对于每天需要多次发布候选版更新的产品来说，一轮集成测试<br>integrated testing<br>下来耗时就要大半天可能就太慢了。<br>什么是“持续交付管道”？<br>将源代码转换为可发布产品的多个不同的任务<br>task<br>和作业<br>job<br>通常串联成一个软件“管道”，一个自动流程成功完成后会启动管道中的下一个流程。这些管道有许多不同的叫法，例如持续交付管道、部署管道和软件开发管道。大体上讲，程序管理者在管道执行时管理管道各部分的定义、运行、监控和报告。<br>持续交付管道是如何工作的？<br>软件交付管道的实际实现可以有很大不同。有许多程序可用在管道中，用于源代码跟踪、构建、测试、指标采集，版本管理等各个方面。但整体工作流程通常是相同的。单个业务流程/工作流应用程序管理整个管道，每个流程作为独立的作业运行或由该应用程序进行阶段管理。通常，在业务流程中，这些独立作业是以应用程序可理解并可作为工作流程管理的语法和结构定义的。<br>这些作业被用于一个或多个功能（构建、测试、部署等）。每个作业可能使用不同的技术或多种技术。关键是作业是自动化的、高效的，并且可重复的。如果作业成功，则工作流管理器将触发管道中的下一个作业。如果作业失败，工作流管理器会向开发人员、测试人员和其他人发出警报，以便他们尽快纠正问题。这个过程是自动化的，所以比手动运行一组过程可更快地找到错误。这种快速排错称为快速失败<br>fail fast<br>，并且在抵达管道端点方面同样有价值。<br>“快速失败”是什么意思？<br>管道的工作之一就是快速处理变更。另一个是监视创建发布的不同任务/作业。由于编译失败或测试未通过的代码可以阻止管道继续运行，因此快速通知用户此类情况非常重要。快速失败指的是在管道流程中尽快发现问题并快速通知用户的方式，这样可以及时修正问题并重新提交代码以便使管道再次运行。通常在管道流程中可通过查看历史记录来确定是谁做了那次修改并通知此人及其团队。<br>所有持续交付管道都应该被自动化吗？<br>管道的几乎所有部分都是应该自动化的。对于某些部分，有一些人为干预/互动的地方可能是有意义的。一个例子可能是用户验收测试<br>user-acceptance testing<br>（让最终用户试用软件并确保它能达到他们想要/期望的水平）。另一种情况可能是部署到生产环境时用户希望拥有更多的人为控制。当然，如果代码不正确或不能运行，则需要人工干预。<br>有了对“持续”含义理解的背景，让我们看看不同类型的持续流程以及它们在软件管道上下文中的含义。<br>什么是“持续集成”？<br>持续集成（CI）是在源代码变更后自动检测、拉取、构建和（在大多数情况下）进行单元测试的过程。持续集成是启动管道的环节（尽管某些预验证 —— 通常称为上线前检查<br>pre-flight checks<br>—— 有时会被归在持续集成之前）。<br>持续集成的目标是快速确保开发人员新提交的变更是好的，并且适合在代码库中进一步使用。<br>持续集成是如何工作的？<br>持续集成的基本思想是让一个自动化过程监测一个或多个源代码仓库是否有变更。当变更被推送到仓库时，它会监测到更改、下载副本、构建并运行任何相关的单元测试。<br>持续集成如何监测变更？<br>目前，监测程序通常是像 Jenkins 这样的应用程序，它还协调管道中运行的所有（或大多数）进程，监视变更是其功能之一。监测程序可以以几种不同方式监测变更。这些包括：<br>轮询：监测程序反复询问代码管理系统，“代码仓库里有什么我感兴趣的新东西吗？”当代码管理系统有新的变更时，监测程序会“唤醒”并完成其工作以获取新代码并构建/测试它。<br>定期：监测程序配置为定期启动构建，无论源码是否有变更。理想情况下，如果没有变更，则不会构建任何新内容，因此这不会增加额外的成本。<br>推送：这与用于代码管理系统检查的监测程序相反。在这种情况下，代码管理系统被配置为提交变更到仓库时将“推送”一个通知到监测程序。最常见的是，这可以以 webhook 的形式完成 —— 在新代码被推送时一个挂勾<br>hook<br>的程序通过互联网向监测程序发送通知。为此，监测程序必须具有可以通过网络接收 webhook 信息的开放端口。<br>什么是“预检查”（又称“上线前检查”）？<br>在将代码引入仓库并触发持续集成之前，可以进行其它验证。这遵循了最佳实践，例如测试构建<br>test build<br>和代码审查<br>code review<br>。它们通常在代码引入管道之前构建到开发过程中。但是一些管道也可能将它们作为其监控流程或工作流的一部分。<br>例如，一个名为 Gerrit 的工具允许在开发人员推送代码之后但在允许进入（Git 远程）仓库之前进行正式的代码审查、验证和测试构建。Gerrit 位于开发人员的工作区和 Git 远程仓库之间。它会“接收”来自开发人员的推送，并且可以执行通过/失败验证以确保它们在被允许进入仓库之前的检查是通过的。这可以包括检测新变更并启动构建测试（CI 的一种形式）。它还允许开发者在那时进行正式的代码审查。这种方式有一种额外的可信度评估机制，即当变更的代码被合并到代码库中时不会破坏任何内容。<br>什么是“单元测试” ？<br>单元测试（也称为“提交测试”），是由开发人员编写的小型的专项测试，以确保新代码独立工作。“独立”这里意味着不依赖或调用其它不可直接访问的代码，也不依赖外部数据源或其它模块。如果运行代码需要这样的依赖关系，那么这些资源可以用模拟<br>mock<br>来表示。模拟是指使用看起来像资源的代码存根<br>code stub<br>，可以返回值，但不实现任何功能。<br>在大多数组织中，开发人员负责创建单元测试以证明其代码正确。事实上，一种称为测试驱动开发<br>test-driven develop<br>（TDD）的模型要求将首先设计单元测试作为清楚地验证代码功能的基础。因为这样的代码可以更改速度快且改动量大，所以它们也必须执行很快。<br>由于这与持续集成工作流有关，因此开发人员在本地工作环境中编写或更新代码，并通单元测试来确保新开发的功能或方法正确。通常，这些测试采用断言形式，即函数或方法的给定输入集产生给定的输出集。它们通常进行测试以确保正确标记和处理出错条件。有很多单元测试框架都很有用，例如用于 Java 开发的 JUnit。<br>什么是“持续测试”？<br>持续测试是指在代码通过持续交付管道时运行扩展范围的自动化测试的实践。单元测试通常与构建过程集成，作为持续集成阶段的一部分，并专注于和其它与之交互的代码隔离的测试。<br>除此之外，可以有或者应该有各种形式的测试。这些可包括：<br>集成测试 验证组件和服务组合在一起是否正常。<br>功能测试 验证产品中执行功能的结果是否符合预期。<br>验收测试 根据可接受的标准验证产品的某些特征。如性能、可伸缩性、抗压能力和容量。<br>所有这些可能不存在于自动化的管道中，并且一些不同类型的测试分类界限也不是很清晰。但是，在交付管道中持续测试的目标始终是相同的：通过持续的测试级别证明代码的质量可以在正在进行的发布中使用。在持续集成快速的原则基础上，第二个目标是快速发现问题并提醒开发团队。这通常被称为快速失败。<br>除了测试之外，还可以对管道中的代码进行哪些其它类型的验证？<br>除了测试是否通过之外，还有一些应用程序可以告诉我们测试用例执行（覆盖）的源代码行数。这是一个可以衡量代码量指标的例子。这个指标称为代码覆盖率<br>code-coverage<br>，可以通过工具（例如用于 Java 的 JaCoCo）进行统计。<br>还有很多其它类型的指标统计，例如代码行数、复杂度以及代码结构对比分析等。诸如 SonarQube 之类的工具可以检查源代码并计算这些指标。此外，用户还可以为他们可接受的“合格”范围的指标设置阈值。然后可以在管道中针对这些阈值设置一个检查，如果结果不在可接受范围内，则流程终端上。SonarQube 等应用程序具有很高的可配置性，可以设置仅检查团队感兴趣的内容。<br>什么是“持续交付”？<br>持续交付（CD）通常是指整个流程链（管道），它自动监测源代码变更并通过构建、测试、打包和相关操作运行它们以生成可部署的版本，基本上没有任何人为干预。<br>持续交付在软件开发过程中的目标是自动化、效率、可靠性、可重复性和质量保障（通过持续测试）。<br>持续交付包含持续集成（自动检测源代码变更、执行构建过程、运行单元测试以验证变更），持续测试（对代码运行各种测试以保障代码质量），和（可选）持续部署（通过管道发布版本自动提供给用户）。<br>如何在管道中识别/跟踪多个版本？<br>版本控制是持续交付和管道的关键概念。持续意味着能够经常集成新代码并提供更新版本。但这并不意味着每个人都想要“最新、最好的”。对于想要开发或测试已知的稳定版本的内部团队来说尤其如此。因此，管道创建并轻松存储和访问的这些版本化对象非常重要。<br>在管道中从源代码创建的对象通常可以称为工件<br>artifact<br>。工件在构建时应该有应用于它们的版本。将版本号分配给工件的推荐策略称为语义化版本控制<br>semantic versioning<br>。（这也适用于从外部源引入的依赖工件的版本。）<br>语义版本号有三个部分：主要版本<br>major<br>、次要版本<br>minor<br>和 补丁版本<br>patch<br>。（例如，1.4.3 反映了主要版本 1，次要版本 4 和补丁版本 3。）这个想法是，其中一个部分的更改表示工件中的更新级别。主要版本仅针对不兼容的 API 更改而递增。当以向后兼容<br>backward-compatible<br>的方式添加功能时，次要版本会增加。当进行向后兼容的版本 bug 修复时，补丁版本会增加。这些是建议的指导方针，但只要团队在整个组织内以一致且易于理解的方式这样做，团队就可以自由地改变这种方法。例如，每次为发布完成构建时增加的数字可以放在补丁字段中。<br>如何“分销”工件？<br>团队可以为工件分配分销<br>promotion<br>级别以指示适用于测试、生产等环境或用途。有很多方法。可以用 Jenkins 或 Artifactory 等应用程序进行分销。或者一个简单的方案可以在版本号字符串的末尾添加标签。例如，-snapshot 可以指示用于构建工件的代码的最新版本（快照）。可以使用各种分销策略或工具将工件“提升”到其它级别，例如 -milestone 或 -production，作为工件稳定性和完备性版本的标记。<br>如何存储和访问多个工件版本？<br>从源代码构建的版本化工件可以通过管理工件仓库<br>artifact repository<br>的应用程序进行存储。工件仓库就像构建工件的版本控制工具一样。像 Artifactory 或 Nexus 这类应用可以接受版本化工件，存储和跟踪它们，并提供检索的方法。<br>管道用户可以指定他们想要使用的版本，并在这些版本中使用管道。<br>什么是“持续部署”？<br>持续部署（CD）是指能够自动提供持续交付管道中发布版本给最终用户使用的想法。根据用户的安装方式，可能是在云环境中自动部署、app 升级（如手机上的应用程序）、更新网站或只更新可用版本列表。<br>这里的一个重点是，仅仅因为可以进行持续部署并不意味着始终部署来自管道的每组可交付成果。它实际上指，通过管道每套可交付成果都被证明是“可部署的”。这在很大程度上是由持续测试的连续级别完成的（参见本文中的持续测试部分）。<br>管道构建的发布成果是否被部署可以通过人工决策，或利用在完全部署之前“试用”发布的各种方法来进行控制。<br>在完全部署到所有用户之前，有哪些方法可以测试部署？<br>由于必须回滚/撤消对所有用户的部署可能是一种代价高昂的情况（无论是技术上还是用户的感知），已经有许多技术允许“尝试”部署新功能并在发现问题时轻松“撤消”它们。这些包括：<br>蓝/绿测试/部署<br>在这种部署软件的方法中，维护了两个相同的主机环境 —— 一个“蓝色” 和一个“绿色”。（颜色并不重要，仅作为标识。）对应来说，其中一个是“生产环境”，另一个是“预发布环境”。<br>在这些实例的前面是调度系统，它们充当产品或应用程序的客户“网关”。通过将调度系统指向蓝色或绿色实例，可以将客户流量引流到期望的部署环境。通过这种方式，切换指向哪个部署实例（蓝色或绿色）对用户来说是快速，简单和透明的。<br>当新版本准备好进行测试时，可以将其部署到非生产环境中。在经过测试和批准后，可以更改调度系统设置以将传入的线上流量指向它（因此它将成为新的生产站点）。现在，曾作为生产环境实例可供下一次候选发布使用。<br>同理，如果在最新部署中发现问题并且之前的生产实例仍然可用，则简单的更改可以将客户流量引流回到之前的生产实例 —— 有效地将问题实例“下线”并且回滚到以前的版本。然后有问题的新实例可以在其它区域中修复。<br>金丝雀测试/部署<br>在某些情况下，通过蓝/绿发布切换整个部署可能不可行或不是期望的那样。另一种方法是为金丝雀<br>canary<br>测试/部署。在这种模型中，一部分客户流量被重新引流到新的版本部署中。例如，新版本的搜索服务可以与当前服务的生产版本一起部署。然后，可以将 10％ 的搜索查询引流到新版本，以在生产环境中对其进行测试。<br>如果服务那些流量的新版本没问题，那么可能会有更多的流量会被逐渐引流过去。如果仍然没有问题出现，那么随着时间的推移，可以对新版本增量部署，直到 100％ 的流量都调度到新版本。这有效地“更替”了以前版本的服务，并让新版本对所有客户生效。<br>功能开关<br>对于可能需要轻松关掉的新功能（如果发现问题），开发人员可以添加功能开关<br>feature toggles<br>。这是代码中的 if-then 软件功能开关，仅在设置数据值时才激活新代码。此数据值可以是全局可访问的位置，部署的应用程序将检查该位置是否应执行新代码。如果设置了数据值，则执行代码；如果没有，则不执行。<br>这为开发人员提供了一个远程“终止开关”，以便在部署到生产环境后发现问题时关闭新功能。<br>暗箱发布<br>在暗箱发布<br>dark launch<br>中，代码被逐步测试/部署到生产环境中，但是用户不会看到更改（因此名称中有暗箱<br>dark<br>一词）。例如，在生产版本中，网页查询的某些部分可能会重定向到查询新数据源的服务。开发人员可收集此信息进行分析，而不会将有关接口，事务或结果的任何信息暴露给用户。<br>这个想法是想获取候选版本在生产环境负载下如何执行的真实信息，而不会影响用户或改变他们的经验。随着时间的推移，可以调度更多负载，直到遇到问题或认为新功能已准备好供所有人使用。实际上功能开关标志可用于这种暗箱发布机制。<br>什么是“运维开发”？<br>运维开发<br>DevOps<br>是关于如何使开发和运维团队更容易合作开发和发布软件的一系列想法和推荐的实践。从历史上看，开发团队研发了产品，但没有像客户那样以常规、可重复的方式安装/部署它们。在整个周期中，这组安装/部署任务（以及其它支持任务）留给运维团队负责。这经常导致很多混乱和问题，因为运维团队在后期才开始介入，并且必须在短时间内完成他们的工作。同样，开发团队经常处于不利地位 —— 因为他们没有充分测试产品的安装/部署功能，他们可能会对该过程中出现的问题感到惊讶。<br>这往往导致开发和运维团队之间严重脱节和缺乏合作。DevOps 理念主张是贯穿整个开发周期的开发和运维综合协作的工作方式，就像持续交付那样。<br>持续交付如何与运维开发相交？<br>持续交付管道是几个 DevOps 理念的实现。产品开发的后期阶段（如打包和部署）始终可以在管道的每次运行中完成，而不是等待产品开发周期中的特定时间。同样，从开发到部署过程中，开发和运维都可以清楚地看到事情何时起作用，何时不起作用。要使持续交付管道循环成功，不仅要通过与开发相关的流程，还要通过与运维相关的流程。<br>说得更远一些，DevOps 建议实现管道的基础架构也会被视为代码。也就是说，它应该自动配置、可跟踪、易于修改，并在管道发生变化时触发新一轮运行。这可以通过将管道实现为代码来完成。<br>什么是“管道即代码”？<br>管道即代码<br>pipeline-as-code<br>是通过编写代码创建管道作业/任务的通用术语，就像开发人员编写代码一样。它的目标是将管道实现表示为代码，以便它可以与代码一起存储、评审、跟踪，如果出现问题并且必须终止管道，则可以轻松地重建。有几个工具允许这样做，如 Jenkins 2。<br>DevOps 如何影响生产软件的基础设施？<br>传统意义上，管道中使用的各个硬件系统都有配套的软件（操作系统、应用程序、开发工具等）。在极端情况下，每个系统都是手工设置来定制的。这意味着当系统出现问题或需要更新时，这通常也是一项自定义任务。这种方法违背了持续交付的基本理念，即具有易于重现和可跟踪的环境。<br>多年来，很多应用被开发用于标准化交付（安装和配置）系统。同样，虚拟机<br>virtual machine<br>被开发为模拟在其它计算机之上运行的计算机程序。这些 VM 要有管理程序才能在底层主机系统上运行，并且它们需要自己的操作系统副本才能运行。<br>后来有了容器<br>container<br>。容器虽然在概念上与 VM 类似，但工作方式不同。它们只需使用一些现有的操作系统结构来划分隔离空间，而不需要运行单独的程序和操作系统的副本。因此，它们的行为类似于 VM 以提供隔离但不需要过多的开销。<br>VM 和容器是根据配置定义创建的，因此可以轻易地销毁和重建，而不会影响运行它们的主机系统。这允许运行管道的系统也可重建。此外，对于容器，我们可以跟踪其构建定义文件的更改 —— 就像对源代码一样。<br>因此，如果遇到 VM 或容器中的问题，我们可以更容易、更快速地销毁和重建它们，而不是在当前环境尝试调试和修复。<br>这也意味着对管道代码的任何更改都可以触发管道新一轮运行（通过 CI），就像对代码的更改一样。这是 DevOps 关于基础架构的核心理念之一。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/07/19/CI-CD/" data-id="ckbdc9uz600m624u2iixfaerl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CI-CD/">CI/CD</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-bazel" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/18/bazel/" class="article-date">
+  <time datetime="2019-07-18T19:48:00.000Z" itemprop="datePublished">2019-07-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/18/bazel/">bazel</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>bazel<br>演变一: Carthage<br>将整个工程拆分成多个仓库.每个仓库都是一个Framework.<br>每个小组维护一个仓库.<br>每个小组也只需关心这一个仓库.对其他仓库的依赖都用二进制依赖.<br>大大加快编译速度.<br>代表工具: Carthage.<br>演变二: bazel<br>不把每个库拆分成小仓库了.<br>所有库都在一个Git仓库中.<br>通过bazel拆分成多个package.<br>每个package的编译缓存都是独立的.<br>解决了编译过慢的问题.<br>虽然在同一个大仓库里.<br>但是每组各自维护自己的package.<br>所以不会导致不同组之间的git冲突  </p>
+<p>bazel :<br>解决了编译过慢问题<br>解决了库之间依赖问题<br>解决了多人协作导致的git冲突  </p>
+<p>安装<br>安装过程请参考: <a href="http://bazel.io/docs/install.html" target="_blank" rel="noopener">http://bazel.io/docs/install.html</a><br>使用工作区（workspace）<br>所有的Bazel构建都是基于一个 工作区（workspace） 概念，它是文件系统中一个保存了全部源代码的目录，同时还将包含一些构建后的输出目录的符号链接（例如：bazel-bin和 bazel-out 等输出目录）。工作区目录可以随意放在哪里，但是工作区的根目录必须包含一个名为 WORKSPACE 的工作区配置文件。工作区配置文件可以是一个空文件，也可以包含引用外部构建输出所需的 依赖关系。<br>在一个工作区内，可以根据需要共享多个项目。为了简单，我们先从只有一个项目的工作区开始介绍。<br>先假设你已经有了一个项目，对应 ~/gitroot/my-project/ 目录。我们先创建一个空的 ~/gitroot/my-project/WORKSPACE 工作区配置文件，用于表示这是Bazel项目对应的根目录。<br>创建自己的Build构建文件<br>使用下面的命令创建一个简单的Java项目：<br>$ # If you’re not already there, move to your workspace directory.<br>$ cd ~/gitroot/my-project<br>$ mkdir -p src/main/java/com/example<br>$ cat &gt; src/main/java/com/example/ProjectRunner.java &lt;&lt;EOF<br>package com.example;  </p>
+<p>public class ProjectRunner {<br>public static void main(String args[]) {<br>Greeting.sayHi();<br>}  
+}<br>EOF<br>$ cat &gt; src/main/java/com/example/Greeting.java &lt;&lt;EOF<br>package com.example;  </p>
+<p>public class Greeting {<br>public static void sayHi() {<br>System.out.println(“Hi!”);<br>}  
+}<br>EOF  </p>
+<p>Bazel通过工作区中所有名为 BUILD 的文件来解析需要构建的项目信息，因此，我们需要先在 ~/gitroot/my-project 目录创建一个 BUILD 构建文件。下面是BUILD构建文件的内容：  </p>
+<h4 id="gitroot-my-project-BUILD"><a href="#gitroot-my-project-BUILD" class="headerlink" title="~/gitroot/my-project/BUILD"></a>~/gitroot/my-project/BUILD</h4><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">java_binary(</span><br><span class="line">name = <span class="string">"my-runner"</span>,</span><br><span class="line">srcs = glob([<span class="string">"**/*.java"</span>]),</span><br><span class="line">main_class = <span class="string">"com.example.ProjectRunner"</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>BUILD文件采用类似Python的语法。虽然不能包含任意的Python语法，但是BUILD文件中的每个构建规则看起来都象是一个Python函数调用，而且你也可以用 “#” 开头来添加单行注释。<br>java_binary 是一个构建规则。其中 name 对应一个构建目标的标识符，可用用它来向Bazel指定构建哪个项目。srcs 对应一个源文件列表，Bazel需要将这些源文件编译为二进制文件。其中 glob([“<em>*/</em>.java”]) 表示递归包含每个子目录中以每个 .java 为后缀名的文件。com.example.ProjectRunner 指定包含main方法的类。</p>
+<p>现在可以用下面的命令构建这个Java程序了：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ cd <span class="regexp">~/gitroot/</span>my-project</span><br><span class="line">$ bazel build <span class="comment">//:my-runner</span></span><br><span class="line"><span class="string">INFO:</span> Found <span class="number">1</span> target...</span><br><span class="line">Target <span class="comment">//:my-runner up-to-date:</span></span><br><span class="line">bazel-bin/my-runner.jar</span><br><span class="line">bazel-bin/my-runner</span><br><span class="line"><span class="string">INFO:</span> Elapsed <span class="string">time:</span> <span class="number">1.021</span>s, Critical <span class="string">Path:</span> <span class="number">0.83</span>s</span><br><span class="line">$ bazel-bin/my-runner</span><br><span class="line">Hi!</span><br></pre></td></tr></table></figure>
+
+<p>恭喜，你已经成功构建了第一个Bazel项目了！<br>添加依赖关系<br>对于小项目创建一个规则是可以的，但是随着项目的变大，则需要分别构建项目的不同的部件，最终再组装成产品。这种构建方式可以避免因为局部细小的修改儿导致重现构建整个应用，同时不同的构建步骤可以很好地并发执行以提高构建效率。<br>我们现在将一个项目拆分为两个部分独立构建，同时设置它们之间的依赖关系。基于上面的例子，我们重写了BUILD构建文件：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">java_binary(</span><br><span class="line">name = <span class="string">"my-other-runner"</span>,</span><br><span class="line">srcs = [<span class="string">"src/main/java/com/example/ProjectRunner.java"</span>],</span><br><span class="line">main_class = <span class="string">"com.example.ProjectRunner"</span>,</span><br><span class="line">deps = [<span class="string">":greeter"</span>],</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">java_library(</span><br><span class="line">name = <span class="string">"greeter"</span>,</span><br><span class="line">srcs = [<span class="string">"src/main/java/com/example/Greeting.java"</span>],</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>虽然源文件是一样的，但是现在Bazel将采用不同的方式来构建：首先是构建 greeter库，然后是构建 my-other-runner。可以在构建成功后立刻运行 //:my-other-runner：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ bazel run <span class="comment">//:my-other-runner</span></span><br><span class="line"><span class="string">INFO:</span> Found <span class="number">1</span> target...</span><br><span class="line">Target <span class="comment">//:my-other-runner up-to-date:</span></span><br><span class="line">bazel-bin/my-other-runner.jar</span><br><span class="line">bazel-bin/my-other-runner</span><br><span class="line"><span class="string">INFO:</span> Elapsed <span class="string">time:</span> <span class="number">2.454</span>s, Critical <span class="string">Path:</span> <span class="number">1.58</span>s</span><br><span class="line"></span><br><span class="line"><span class="string">INFO:</span> Running command <span class="string">line:</span> bazel-bin/my-other-runner</span><br><span class="line">Hi!</span><br></pre></td></tr></table></figure>
+
+<p>现在如果你改动ProjectRunner.java代码并重新构建my-other-runner目标，Greeting.java文件因为没有变化而不会重现编译。<br>使用多个包（Packages）<br>对于更大的项目，我们通常需要将它们拆分到多个目录中。你可以用类似//path/to/directory:target-name的名字引用在其他BUILD文件定义的目标。假设src/main/java/com/example/有一个cmdline/子目录，包含下面的文件：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p src<span class="regexp">/main/</span>java<span class="regexp">/com/</span>example/cmdline</span><br><span class="line">$ cat &amp;gt; src<span class="regexp">/main/</span>java<span class="regexp">/com/</span>example<span class="regexp">/cmdline/</span>Runner.java &amp;lt;&amp;lt;EOF</span><br><span class="line"><span class="keyword">package</span> com.example.cmdline;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.example.Greeting;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Runner</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String args[]) &#123;</span><br><span class="line">Greeting.sayHi();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<p>Runner.java依赖com.example.Greeting，因此我们需要在src/main/java/com/example/cmdline/BUILD构建文件中添加相应的依赖规则：  </p>
+<h5 id="gitroot-my-project-src-main-java-com-example-cmdline-BUILD"><a href="#gitroot-my-project-src-main-java-com-example-cmdline-BUILD" class="headerlink" title="~/gitroot/my-project/src/main/java/com/example/cmdline/BUILD"></a>~/gitroot/my-project/src/main/java/com/example/cmdline/BUILD</h5><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">java_binary(</span><br><span class="line">name = <span class="string">"runner"</span>,</span><br><span class="line">srcs = [<span class="string">"Runner.java"</span>],</span><br><span class="line">main_class = <span class="string">"com.example.cmdline.Runner"</span>,</span><br><span class="line">deps = [<span class="string">"//:greeter"</span>]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>然而，默认情况下构建目标都是 私有 的。也就是说，我们只能在同一个BUILD文件中被引用。这可以避免将很多实现的细节暴漏给公共的接口，但是也意味着我们需要手工允许runner所依赖的//:greeter目标。就是类似下面这个在构建runner目标时遇到的错误：  </p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ bazel build //src/main/java/com/example/cmdline:runner</span><br><span class="line"><span class="keyword">ERROR: </span>/home/user/gitroot/my-project/src/main/java/com/example/cmdline/BUILD:2:1:</span><br><span class="line">Target '//:greeter' is not visible from target '//src/main/java/com/example/cmdline:runner'.</span><br><span class="line">Check the visibility declaration of the former target if you think the dependency is legitimate.</span><br><span class="line"><span class="keyword">ERROR: </span>Analysis of target '//src/main/java/com/example/cmdline:runner' failed; build aborted.</span><br><span class="line">INFO: Elapsed time: 0.091s</span><br></pre></td></tr></table></figure>
+
+<p>可用通过在BUILD文件增加visibility = level属性来改变目标的可间范围。下面是通过在~/gitroot/my-project/BUILD文件增加可见规则，来改变greeter目标的可见范围：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">java_library(</span><br><span class="line">name = <span class="string">"greeter"</span>,</span><br><span class="line">srcs = [<span class="string">"src/main/java/com/example/Greeting.java"</span>],</span><br><span class="line">visibility = [<span class="string">"//src/main/java/com/example/cmdline:__pkg__"</span>],</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>这个规则表示//:greeter目标对于//src/main/java/com/example/cmdline包是可见的。现在我们可以重新构建runner目标程序：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ bazel run <span class="comment">//src/main/java/com/example/cmdline:runner</span></span><br><span class="line"><span class="string">INFO:</span> Found <span class="number">1</span> target...</span><br><span class="line">Target <span class="comment">//src/main/java/com/example/cmdline:runner up-to-date:</span></span><br><span class="line">bazel-bin<span class="regexp">/src/</span>main<span class="regexp">/java/</span>com<span class="regexp">/example/</span>cmdline/runner.jar</span><br><span class="line">bazel-bin<span class="regexp">/src/</span>main<span class="regexp">/java/</span>com<span class="regexp">/example/</span>cmdline/runner</span><br><span class="line"><span class="string">INFO:</span> Elapsed <span class="string">time:</span> <span class="number">1.576</span>s, Critical <span class="string">Path:</span> <span class="number">0.81</span>s</span><br><span class="line"><span class="string">INFO:</span> Running command <span class="string">line:</span> bazel-bin<span class="regexp">/src/</span>main<span class="regexp">/java/</span>com<span class="regexp">/example/</span>cmdline/runner</span><br><span class="line">Hi!</span><br></pre></td></tr></table></figure>
+
+<p>参考文档 中有可见性配置说明。<br>部署<br>如果你查看 bazel-bin/src/main/java/com/example/cmdline/runner.jar 的内容，可以看到里面只包含了Runner.class，并没有保护所依赖的Greeting.class：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ jar tf bazel-bin<span class="regexp">/src/</span>main<span class="regexp">/java/</span>com<span class="regexp">/example/</span>cmdline/runner.jar</span><br><span class="line">META-INF/</span><br><span class="line">META-INF/MANIFEST.MF</span><br><span class="line">com/</span><br><span class="line">com<span class="regexp">/example/</span></span><br><span class="line">com<span class="regexp">/example/</span>cmdline/</span><br><span class="line">com<span class="regexp">/example/</span>cmdline/Runner.<span class="keyword">class</span></span><br></pre></td></tr></table></figure>
+
+<p>这只能在本机正常工作（因为Bazel的runner脚本已经将greeter jar添加到了classpath），但是如果将runner.jar单独复制到另一台机器上讲不能正常运行。如果想要构建可用于部署发布的自包含所有依赖的目标，可以构建runner_deploy.jar目标（类似&lt;target-name&gt;_deploy.jar以_deploy为后缀的名字对应可部署目标）。</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>bazel build /<span class="regexp">/src/main</span><span class="regexp">/java/com</span><span class="regexp">/example/cmdline</span><span class="symbol">:runner_deploy</span>.jar</span><br><span class="line"><span class="symbol">INFO:</span> Found <span class="number">1</span> target...</span><br><span class="line">Target /<span class="regexp">/src/main</span><span class="regexp">/java/com</span><span class="regexp">/example/cmdline</span><span class="symbol">:runner_deploy</span>.jar up-to-<span class="symbol">date:</span></span><br><span class="line">bazel-bin/src/main/java/com/example/cmdline/runner_deploy.jar</span><br><span class="line"><span class="symbol">INFO:</span> Elapsed <span class="symbol">time:</span> <span class="number">1.700</span>s, Critical <span class="symbol">Path:</span> <span class="number">0</span>.<span class="number">23</span>s</span><br></pre></td></tr></table></figure>
+
+<p>win环境下 Bazel 离线安装教程<br>对于bazel谷歌的开发脚手架，发现用windows系统下powershell下载速度特别慢，在刨坑过程中发现了一种捷径，就是离线安装，接下来将简单介绍离线安装过程<br>1、安装choco<br>cmd安装指令：  </p>
+<figure class="highlight plain"><figcaption><span>-NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" &amp;&amp; SET "PATH</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">powershell安装指令：  </span><br><span class="line">```Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString(&apos;https://chocolatey.org/install.ps1&apos;))```  </span><br><span class="line">特别说明：一定注意都是在管理员用户权限下打开cmd或者是powershell 这里推荐win10系统下使用powershell，如图所示，右键开始菜单打开管理员用户下的powershell：  </span><br><span class="line">2、通过powershell安装bazel  </span><br><span class="line">2.1、输入指令：  </span><br><span class="line">`choco install bazel`  </span><br><span class="line"></span><br><span class="line">&amp;lt;hr/&amp;gt;  </span><br><span class="line">离线安装  </span><br><span class="line">从官网上下载目前最新的bazel压缩包  </span><br><span class="line">先运行choco install bazel指令  </span><br><span class="line">如图所示等待选择阶段，这个时候不要打y 或者 n，让命令行停留于此:  </span><br><span class="line">![upload successful](/images/pasted-9.png)    </span><br><span class="line">在命令行停留之际，修改C:\ProgramData\chocolatey\lib\bazel\tools目录下的params.txt文件内容，将网络版本指定地址修改为本地地址  </span><br><span class="line">修改之前的：  </span><br><span class="line">``` </span><br><span class="line">https://github.com/bazelbuild/bazel/releases/download/0.12.0/bazel-0.12.0-windows-x86_64.zip</span><br><span class="line"></span><br><span class="line">// 此处是文件哈希，禁止修改，原来系统给予是怎样的就是怎样的。</span><br><span class="line">86f84e2c870ed14e4d2e599c309614298b9e08a049657e860d218d56873111bc</span><br></pre></td></tr></table></figure>
+
+<p>修改之后的： 【由于我这里直接下载到桌面上，所以指向桌面地址，如果下载到其他位置，请将绝对地址替换，请勿复制粘贴此段】    </p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">C:</span><span class="regexp">/Users/</span>ke_li<span class="regexp">/Desktop/</span>bazel<span class="number">-0.12</span><span class="number">.0</span>-windows-x86_64.zip</span><br><span class="line"></span><br><span class="line"><span class="comment">// 此处是文件哈希，禁止修改，仅修改了上面文件目录，下面未修改，注意保留哈希的意思</span></span><br><span class="line"><span class="number">86</span>f84e2c870ed14e4d2e599c309614298b9e08a049657e860d218d56873111bc</span><br></pre></td></tr></table></figure>
+
+<p>接下来输入y，回车进行下一阶段，等待一段时间后，结果：</p>
+<p><img src="/images/pasted-10.png" alt="upload successful"></p>
+<p>可调试bazel，在命令行输入bazel 检查安装是否成功，如图所示即为成功安装</p>
+<p><img src="/images/pasted-11.png" alt="upload successful"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/07/18/bazel/" data-id="ckbdc9uzk00mx24u27ir81leo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BAZEL/">BAZEL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-RestTemplate" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/18/RestTemplate/" class="article-date">
+  <time datetime="2019-07-18T00:00:00.000Z" itemprop="datePublished">2019-07-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/18/RestTemplate/">RestTemplate</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>SpringBoot26 RestTemplate、WebClient<br>Springboot — 用更优雅的方式发HTTP请求(RestTemplate详解)<br>RestTemplate是Spring提供的用于访问Rest服务的客户端，RestTemplate提供了多种便捷访问远程Http服务的方法,能够大大提高客户端的编写效率。</p>
+<p>我之前的HTTP开发是用apache的HttpClient开发，代码复杂，还得操心资源回收等。代码很复杂，冗余代码多，稍微截个图，这是我封装好的一个post请求工具：</p>
+<p>本教程将带领大家实现Spring生态内RestTemplate的Get请求和Post请求还有exchange指定请求类型的实践和RestTemplate核心方法源码的分析，看完你就会用优雅的方式来发HTTP请求。</p>
+<p>1.简述RestTemplate</p>
+<p>是Spring用于同步client端的核心类，简化了与http服务的通信，并满足RestFul原则，程序代码可以给它提供URL，并提取结果。默认情况下，RestTemplate默认依赖jdk的HTTP连接工具。当然你也可以 通过setRequestFactory属性切换到不同的HTTP源，比如Apache HttpComponents、Netty和OkHttp。</p>
+<p>RestTemplate能大幅简化了提交表单数据的难度，并且附带了自动转换JSON数据的功能，但只有理解了HttpEntity的组成结构（header与body），且理解了与uriVariables之间的差异，才能真正掌握其用法。这一点在Post请求更加突出，下面会介绍到。</p>
+<p>该类的入口主要是根据HTTP的六个方法制定：</p>
+<p>此外，exchange和excute可以通用上述方法。</p>
+<p>在内部，RestTemplate默认使用HttpMessageConverter实例将HTTP消息转换成POJO或者从POJO转换成HTTP消息。默认情况下会注册主mime类型的转换器，但也可以通过setMessageConverters注册其他的转换器。</p>
+<p>其实这点在使用的时候是察觉不到的，很多方法有一个responseType 参数，它让你传入一个响应体所映射成的对象，然后底层用HttpMessageConverter将其做映射</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HttpMessageConverterExtractor&amp;<span class="keyword">lt</span>;T&amp;<span class="keyword">gt</span>; responseExtractor =</span><br><span class="line">                <span class="keyword">new</span> HttpMessageConverterExtractor&amp;<span class="keyword">lt</span>;&amp;<span class="keyword">gt</span>;(responseType, <span class="built_in">getMessageConverters</span>(), logger);</span><br></pre></td></tr></table></figure>
+
+<p>HttpMessageConverter.java源码：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">public</span> <span class="selector-tag">interface</span> <span class="selector-tag">HttpMessageConverter</span><span class="selector-tag">&amp;</span><span class="selector-tag">lt</span>;<span class="selector-tag">T</span><span class="selector-tag">&amp;</span><span class="selector-tag">gt</span>; &#123;</span><br><span class="line">        <span class="comment">//指示此转换器是否可以读取给定的类。</span></span><br><span class="line">    <span class="selector-tag">boolean</span> <span class="selector-tag">canRead</span>(Class&amp;lt;?&amp;gt; clazz, <span class="variable">@Nullable</span> MediaType mediaType);</span><br><span class="line"> </span><br><span class="line">        <span class="comment">//指示此转换器是否可以写给定的类。</span></span><br><span class="line">    <span class="selector-tag">boolean</span> <span class="selector-tag">canWrite</span>(Class&amp;lt;?&amp;gt; clazz, <span class="variable">@Nullable</span> MediaType mediaType);</span><br><span class="line"> </span><br><span class="line">        <span class="comment">//返回List&amp;lt;MediaType&amp;gt;</span></span><br><span class="line">    <span class="selector-tag">List</span><span class="selector-tag">&amp;</span><span class="selector-tag">lt</span>;<span class="selector-tag">MediaType</span><span class="selector-tag">&amp;</span><span class="selector-tag">gt</span>; <span class="selector-tag">getSupportedMediaTypes</span>();</span><br><span class="line"> </span><br><span class="line">        <span class="comment">//读取一个inputMessage</span></span><br><span class="line">    <span class="selector-tag">T</span> <span class="selector-tag">read</span>(Class&amp;lt;? extends T&amp;gt; clazz, HttpInputMessage inputMessage)</span><br><span class="line">            <span class="selector-tag">throws</span> <span class="selector-tag">IOException</span>, <span class="selector-tag">HttpMessageNotReadableException</span>;</span><br><span class="line"> </span><br><span class="line">        <span class="comment">//往output message写一个Object</span></span><br><span class="line">    <span class="selector-tag">void</span> <span class="selector-tag">write</span>(T t, <span class="variable">@Nullable</span> MediaType contentType, HttpOutputMessage outputMessage)</span><br><span class="line">            <span class="selector-tag">throws</span> <span class="selector-tag">IOException</span>, <span class="selector-tag">HttpMessageNotWritableException</span>;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在内部，RestTemplate默认使用SimpleClientHttpRequestFactory和DefaultResponseErrorHandler来分别处理HTTP的创建和错误，但也可以通过setRequestFactory和setErrorHandler来覆盖。</p>
+<p>2.get请求实践</p>
+<p>2.1.getForObject()方法</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public &amp;<span class="keyword">lt</span>;T&amp;<span class="keyword">gt</span>; T getForObject(<span class="keyword">String</span> url, Class&amp;<span class="keyword">lt</span>;T&amp;<span class="keyword">gt</span>; responseType, Object... uriVariables)&#123;&#125;</span><br><span class="line">public &amp;<span class="keyword">lt</span>;T&amp;<span class="keyword">gt</span>; T getForObject(<span class="keyword">String</span> url, Class&amp;<span class="keyword">lt</span>;T&amp;<span class="keyword">gt</span>; responseType, Map&amp;<span class="keyword">lt</span>;<span class="keyword">String</span>, ?&amp;<span class="keyword">gt</span>; uriVariables)</span><br><span class="line">public &amp;<span class="keyword">lt</span>;T&amp;<span class="keyword">gt</span>; T getForObject(URI url, Class&amp;<span class="keyword">lt</span>;T&amp;<span class="keyword">gt</span>; responseType)</span><br><span class="line">``` </span><br><span class="line">getForObject()其实比getForEntity()多包含了将HTTP转成POJO的功能，但是getForObject没有处理response的能力。因为它拿到手的就是成型的pojo。省略了很多response的信息。</span><br><span class="line"></span><br><span class="line"><span class="number">2.1</span>.<span class="number">1</span> POJO:</span><br></pre></td></tr></table></figure>
+
+<p>public class Notice {<br>    private int status;<br>    private Object msg;<br>    private List&lt;DataBean&gt; data;<br>}
+public  class DataBean {<br>  private int noticeId;<br>  private String noticeTitle;<br>  private Object noticeImg;<br>  private long noticeCreateTime;<br>  private long noticeUpdateTime;<br>  private String noticeContent;<br>}</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">示例：2<span class="selector-class">.1</span><span class="selector-class">.2</span> 不带参的<span class="selector-tag">get</span>请求</span><br></pre></td></tr></table></figure>
+
+<p>/**
+     * 不带参的get请求<br>     */<br>    @Test<br>    public void restTemplateGetTest(){<br>        RestTemplate restTemplate = new RestTemplate();<br>        Notice notice = restTemplate.getForObject(“<a href="http://xxx.top/notice/list/1/5&quot;" target="_blank" rel="noopener">http://xxx.top/notice/list/1/5&quot;</a><br>                , Notice.class);<br>        System.out.println(notice);<br>    }
+　　</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">控制台打印：</span><br></pre></td></tr></table></figure>
+
+<dl><dt>INFO 19076 — [           main] c.w.s.c.w.c.HelloControllerTest</dt><dd>Started HelloControllerTest in 5.532 seconds (JVM running for 7.233)</dd></dl><p>Notice{status=200, msg=null, data=[DataBean{noticeId=21, noticeTitle=’aaa’, noticeImg=null,<br>noticeCreateTime=1525292723000, noticeUpdateTime=1525292723000, noticeContent=’&lt;p&gt;aaa&lt;/p&gt;’},<br>DataBean{noticeId=20, noticeTitle=’ahaha’, noticeImg=null, noticeCreateTime=1525291492000,<br>noticeUpdateTime=1525291492000, noticeContent=’&lt;p&gt;ah…….’</p>
+<p>　</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">示例：<span class="number">2.1</span><span class="number">.3</span> 带参数的get请求<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>Notice notice = restTemplate.getForObject(“<a href="http://fantj.top/notice/list/{1}/{2}&quot;" target="_blank" rel="noopener">http://fantj.top/notice/list/{1}/{2}&quot;</a><br>                , Notice.class,1,5);</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">明眼人一眼能看出是用了占位符&#123;<span class="number">1</span>&#125;。</span><br><span class="line"></span><br><span class="line">示例：<span class="number">2.1</span><span class="number">.4</span> 带参数的get请求<span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>Map&lt;String,String&gt; map = new HashMap();<br>        map.put(“start”,”1”);<br>        map.put(“page”,”5”);<br>        Notice notice = restTemplate.getForObject(“<a href="http://fantj.top/notice/list/&quot;" target="_blank" rel="noopener">http://fantj.top/notice/list/&quot;</a><br>                , Notice.class,map);
+　　</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">明眼人一看就是利用<span class="built_in">map</span>装载参数，不过它默认解析的是PathVariable的url形式。</span><br><span class="line"></span><br><span class="line"><span class="number">2.2</span> getForEntity()方法</span><br></pre></td></tr></table></figure>
+
+<p>public &lt;T&gt; ResponseEntity&lt;T&gt; getForEntity(String url, Class&lt;T&gt; responseType, Object… uriVariables){}<br>public &lt;T&gt; ResponseEntity&lt;T&gt; getForEntity(String url, Class&lt;T&gt; responseType, Map&lt;String, ?&gt; uriVariables){}<br>public &lt;T&gt; ResponseEntity&lt;T&gt; getForEntity(URI url, Class&lt;T&gt; responseType){}<br> <figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">与getForObject()方法不同的是返回的是ResponseEntity对象，如果需要转换成pojo，还需要json工具类的引入，这个按个人喜好用。不会解析json的可以百度FastJson或者Jackson等工具类。然后我们就研究一下ResponseEntity下面有啥方法。</span><br><span class="line"></span><br><span class="line">ResponseEntity、HttpStatus、BodyBuilder结构</span><br><span class="line"></span><br><span class="line">ResponseEntity.java</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="function">HttpStatus <span class="title">getStatusCode</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">getStatusCodeValue</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(@Nullable Object other)</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="function">String <span class="title">toString</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function">BodyBuilder <span class="title">status</span><span class="params">(HttpStatus status)</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function">BodyBuilder <span class="title">ok</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &amp;lt;T&amp;gt; ResponseEntity&amp;lt;T&amp;gt; ok(T body) &#123;&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function">BodyBuilder <span class="title">created</span><span class="params">(URI location)</span> </span>&#123;&#125;</span><br><span class="line">...</span><br><span class="line">　　</span><br><span class="line"></span><br><span class="line">HttpStatus.java</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> HttpStatus &#123;</span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">is1xxInformational</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">is2xxSuccessful</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">is3xxRedirection</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">is4xxClientError</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">is5xxServerError</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">isError</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">　　</span><br><span class="line"></span><br><span class="line">BodyBuilder.java</span><br></pre></td></tr></table></figure></p>
+<p>public interface BodyBuilder extends HeadersBuilder&lt;BodyBuilder&gt; {<br>    //设置正文的长度，以字节为单位，由Content-Length标头<br>      BodyBuilder contentLength(long contentLength);<br>    //设置body的MediaType 类型<br>      BodyBuilder contentType(MediaType contentType);<br>    //设置响应实体的主体并返回它。<br>      &lt;T&gt; ResponseEntity&lt;T&gt; body(@Nullable T body);<br>｝
+ <figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">可以看出来，ResponseEntity包含了HttpStatus和<span class="keyword">BodyBuilder的这些信息，这更方便我们处理response原生的东西。</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword">示例：</span></span><br></pre></td></tr></table></figure></p>
+<p>@Test<br>public void rtGetEntity(){<br>        RestTemplate restTemplate = new RestTemplate();<br>        ResponseEntity&lt;Notice&gt; entity = restTemplate.getForEntity(“<a href="http://fantj.top/notice/list/1/5&quot;" target="_blank" rel="noopener">http://fantj.top/notice/list/1/5&quot;</a><br>                , Notice.class);</p>
+<pre><code>    HttpStatus statusCode = entity.getStatusCode();
+    System.out.println(&quot;statusCode.is2xxSuccessful()&quot;+statusCode.is2xxSuccessful());
+
+    Notice body = entity.getBody();
+    System.out.println(&quot;entity.getBody()&quot;+body);
+
+
+    ResponseEntity.BodyBuilder status = ResponseEntity.status(statusCode);
+    status.contentLength(100);
+    status.body(&quot;我在这里添加一句话&quot;);
+    ResponseEntity&amp;lt;Class&amp;lt;Notice&amp;gt;&amp;gt; body1 = status.body(Notice.class);
+    Class&amp;lt;Notice&amp;gt; body2 = body1.getBody();
+    System.out.println(&quot;body1.toString()&quot;+body1.toString());
+}</code></pre> <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">statusCode.is2xxSuccessful()<span class="literal">true</span></span><br><span class="line">entity.getBody()Notice&#123;<span class="attribute">status</span>=200, <span class="attribute">msg</span>=<span class="literal">null</span>, data=[DataBean&#123;<span class="attribute">noticeId</span>=21, <span class="attribute">noticeTitle</span>=<span class="string">'aaa'</span>, <span class="built_in">..</span>.</span><br><span class="line">body1.toString()&amp;lt;200 OK,class com.waylau.spring.cloud.weather.pojo.Notice,&#123;Content-Length=[100]&#125;&amp;gt;</span><br><span class="line"></span><br><span class="line">　</span><br><span class="line"></span><br><span class="line">当然，还有getHeaders()等方法没有举例。</span><br><span class="line"></span><br><span class="line">3. post请求实践</span><br><span class="line"></span><br><span class="line">同样的,post请求也有postForObject和postForEntity。</span><br></pre></td></tr></table></figure>
+
+<p>public &lt;T&gt; T postForObject(String url, @Nullable Object request, Class&lt;T&gt; responseType, Object… uriVariables)<br>            throws RestClientException {}<br>public &lt;T&gt; T postForObject(String url, @Nullable Object request, Class&lt;T&gt; responseType, Map&lt;String, ?&gt; uriVariables)<br>            throws RestClientException {}<br>public &lt;T&gt; T postForObject(URI url, @Nullable Object request, Class&lt;T&gt; responseType) throws RestClientException {}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">示例</span><br><span class="line"></span><br><span class="line">我用一个验证邮箱的接口来测试。</span><br></pre></td></tr></table></figure>
+
+<p>@Test<br>public void rtPostObject(){<br>    RestTemplate restTemplate = new RestTemplate();<br>    String url = “<a href="http://47.xxx.xxx.96/register/checkEmail&quot;" target="_blank" rel="noopener">http://47.xxx.xxx.96/register/checkEmail&quot;</a>;
+    HttpHeaders headers = new HttpHeaders();<br>    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);<br>    MultiValueMap&lt;String, String&gt; map= new LinkedMultiValueMap&lt;&gt;();<br>    map.add(“email”, “<a href="mailto:844072586@qq.com" target="_blank" rel="noopener">844072586@qq.com</a>“);</p>
+<pre><code>HttpEntity&amp;lt;MultiValueMap&amp;lt;String, String&amp;gt;&amp;gt; request = new HttpEntity&amp;lt;&amp;gt;(map, headers);
+ResponseEntity&amp;lt;String&amp;gt; response = restTemplate.postForEntity( url, request , String.class );
+System.out.println(response.getBody());</code></pre><p>}
+　</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">执行结果：</span><br><span class="line"></span><br><span class="line">&#123;<span class="string">"status"</span>:<span class="number">500</span>,<span class="string">"msg"</span>:<span class="string">"该邮箱已被注册"</span>,<span class="string">"data"</span>:<span class="keyword">null</span>&#125;</span><br><span class="line">Springboot -- 用更优雅的方式发HTTP请求(RestTemplate详解)</span><br><span class="line"></span><br><span class="line">代码中，MultiValueMap是<span class="built_in">Map</span>的一个子类，它的一个key可以存储多个value，简单的看下这个接口：</span><br><span class="line"></span><br><span class="line">public <span class="class"><span class="keyword">interface</span> <span class="title">MultiValueMap</span>&amp;<span class="title">lt</span>;<span class="title">K</span>, <span class="title">V</span>&amp;<span class="title">gt</span>; <span class="keyword">extends</span> <span class="title">Map</span>&amp;<span class="title">lt</span>;<span class="title">K</span>, <span class="title">List</span>&amp;<span class="title">lt</span>;<span class="title">V</span>&amp;<span class="title">gt</span>;&amp;<span class="title">gt</span>; </span>&#123;...&#125;</span><br><span class="line"> </span><br><span class="line">为什么用MultiValueMap?因为HttpEntity接受的request类型是它。</span><br><span class="line"></span><br><span class="line">public HttpEntity(<span class="meta">@Nullable</span> T body, <span class="meta">@Nullable</span> MultiValueMap&amp;lt;<span class="built_in">String</span>, <span class="built_in">String</span>&amp;gt; headers)&#123;&#125;</span><br><span class="line"><span class="comment">//我这里只展示它的一个construct,从它可以看到我们传入的map是请求体，headers是请求头。</span></span><br><span class="line">　　</span><br><span class="line"></span><br><span class="line">为什么用HttpEntity是因为restTemplate.postForEntity方法虽然表面上接收的request是<span class="meta">@Nullable</span> <span class="built_in">Object</span> request类型，但是你追踪下去会发现，这个request是用HttpEntity来解析。核心代码如下：</span><br></pre></td></tr></table></figure>
+
+<p>if (requestBody instanceof HttpEntity) {<br>    this.requestEntity = (HttpEntity&lt;?&gt;) requestBody;<br>}else if (requestBody != null) {<br>    this.requestEntity = new HttpEntity&lt;&gt;(requestBody);<br>}else {<br>    this.requestEntity = HttpEntity.EMPTY;<br>}
+　</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">我曾尝试用<span class="selector-tag">map</span>来传递参数，编译不会报错，但是执行不了，是无效的<span class="selector-tag">url</span> <span class="selector-tag">request</span>请求(<span class="number">400</span> ERROR)。其实这样的请求方式已经满足<span class="selector-tag">post</span>请求了，<span class="selector-tag">cookie</span>也是属于<span class="selector-tag">header</span>的一部分。可以按需求设置请求头和请求体。其它方法与之类似。</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">4</span>.使用<span class="selector-tag">exchange</span>指定调用方式</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">exchange</span>()方法跟上面的<span class="selector-tag">getForObject</span>()、<span class="selector-tag">getForEntity</span>()、<span class="selector-tag">postForObject</span>()、<span class="selector-tag">postForEntity</span>()等方法不同之处在于它可以指定请求的<span class="selector-tag">HTTP</span>类型。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">但是你会发现<span class="selector-tag">exchange</span>的方法中似乎都有@<span class="selector-tag">Nullable</span> <span class="selector-tag">HttpEntity</span> <span class="selector-tag">requestEntity</span>这个参数，这就意味着我们至少要用<span class="selector-tag">HttpEntity</span>来传递这个请求体，之前说过源码所以建议就使用<span class="selector-tag">HttpEntity</span>提高性能。</span><br><span class="line"></span><br><span class="line">示例</span><br></pre></td></tr></table></figure>
+
+<p>@Test<br>    public void rtExchangeTest() throws JSONException {<br>        RestTemplate restTemplate = new RestTemplate();<br>        String url = “<a href="http://xxx.top/notice/list&quot;" target="_blank" rel="noopener">http://xxx.top/notice/list&quot;</a>;
+        HttpHeaders headers = new HttpHeaders();<br>        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);<br>        JSONObject jsonObj = new JSONObject();<br>        jsonObj.put(“start”,1);<br>        jsonObj.put(“page”,5);</p>
+<pre><code>    HttpEntity&amp;lt;String&amp;gt; entity = new HttpEntity&amp;lt;&amp;gt;(jsonObj.toString(), headers);
+    ResponseEntity&amp;lt;JSONObject&amp;gt; exchange = restTemplate.exchange(url,
+                                      HttpMethod.GET, entity, JSONObject.class);
+    System.out.println(exchange.getBody());
+}</code></pre> <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">这次可以看到，我使用了JSONObject对象传入和返回。</span><br><span class="line">当然，HttpMethod方法还有很多，用法类似。</span><br><span class="line"></span><br><span class="line"><span class="number">5</span>.excute()指定调用方式</span><br><span class="line"></span><br><span class="line">excute()的用法与exchange()大同小异了，它同样可以指定不同的HttpMethod，不同的是它返回的对象是响应体所映射成的对象，而不是ResponseEntity。</span><br><span class="line"></span><br><span class="line">需要强调的是，execute()方法是以上所有方法的底层调用。随便看一个：</span><br><span class="line"></span><br><span class="line">```    </span><br><span class="line">@Override</span><br><span class="line">    @Nullable</span><br><span class="line">    public &amp;<span class="keyword">lt</span>;T&amp;<span class="keyword">gt</span>; T postForObject(<span class="keyword">String</span> url, @Nullable Object request, Class&amp;<span class="keyword">lt</span>;T&amp;<span class="keyword">gt</span>; responseType, Map&amp;<span class="keyword">lt</span>;<span class="keyword">String</span>, ?&amp;<span class="keyword">gt</span>; uriVariables)</span><br><span class="line">            throws RestClientException &#123;</span><br><span class="line"> </span><br><span class="line">        RequestCallback requestCallback = httpEntityCallback(request, responseType);</span><br><span class="line">        HttpMessageConverterExtractor&amp;<span class="keyword">lt</span>;T&amp;<span class="keyword">gt</span>; responseExtractor =</span><br><span class="line">                new HttpMessageConverterExtractor&amp;<span class="keyword">lt</span>;&amp;<span class="keyword">gt</span>;(responseType, getMessageConverters(), logger);</span><br><span class="line">        return execute(url, HttpMethod.POST, requestCallback, responseExtractor, uriVariables);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="1-RestTemplate"><a href="#1-RestTemplate" class="headerlink" title="1 RestTemplate"></a>1 RestTemplate</h3><p>　　RestTemplate是在客户端访问 Restful 服务的一个核心类；RestTemplate通过提供回调方法和允许配置信息转换器来实现个性化定制RestTemplate的功能，通过RestTemplate可以封装请求对象，也可以对响应对象进行解析。<br> &nbsp;<br><img src="/images/rst.png" alt="upload successful"><br>技巧01：RestTemplate默认使用JDK提供的包去建立HTTP连接，当然，开发者也可以使用诸如 Apache HttpComponents, Netty, and OkHttp 去建立HTTP连接。<br>　　技巧02：RestTemplate内部默认使用HttpMessageConverter来实现HTTTP messages 和 POJO 之间的转换，可以通过RestTemplate的成员方  法&nbsp;setMessageConverters(java.util.List&lt;org.springframework.http.converter.HttpMessageConverter&lt;?&gt;&gt;). 去修改默认的转换器。<br>　　技巧03：RestTemplate内部默认使用SimpleClientHttpRequestFactory and&nbsp;DefaultResponseErrorHandler 去创建HTTP连接和处理HTTP错误，可以通过HttpAccessor.setRequestFactory(org.springframework.http.client.ClientHttpRequestFactory)&nbsp;and&nbsp;setErrorHandler(org.springframework.web.client.ResponseErrorHandler)去做相应的修改。<br>　　##### 1.1 RestTemplate中方法概览<br>　　　　RestTemplate为每种HTTP请求都实现了相关的请求封装方法<br>技巧01：这些方法的命名是有讲究的，方法名的第一部分表示HTTP请求类型，方法名的第二部分表示响应类型<br>  例如：getForObject 表示执行GET请求并将响应转化成一个Object类型的对象　</p>
+<p>技巧02：利用RestTemplate封装客户端发送HTTP请求时，如果出现异常就会抛出&nbsp;RestClientException&nbsp;类型的异常；可以通过在创建RestTemplate对象的时候指定一个ResponseErrorHandler类型的异常处理类来处理这个异常 </p>
+<p>技巧03：exchange 和 excute 这两个方法是通用的HTTP请求方法，而且这两个方法还支持额外的HTTP请求类型【PS: 前提是使用的HTTP连接包也支持这些额外的HTTP请求类型】 &nbsp;</p>
+<p><img src="/images/htt.png" alt="upload successful"><br>　技巧04：每种方法都有3个重载方法，其中两个接收String类型的请求路径和响应类型、参数；另外一个接收URI类型的请求路径和响应类型。  </p>
+<p><img src="/images/ty.png" alt="upload successful"><br>技巧05：使用String类型的请求路径时，RestTemplate会自动进行一次编码，所以为了避免重复编码问题最好使用URI类型的请求路径<br>例如：restTemplate.getForObject(“<a href="http://example.com/hotel" target="_blank" rel="noopener">http://example.com/hotel</a> list”)&nbsp;becomes”<a href="http://example.com/hotel%20list&quot;" target="_blank" rel="noopener">http://example.com/hotel%20list&quot;</a><br>技巧06：URI 和URL 知识点扫盲</p>
+<p><img src="/images/ecd.png" alt="upload successful"><br>技巧06：利用接收URI参数的RestTemplate.getForObject方法发送Get请求</p>
+<p><img src="/images/gt.png" alt="upload successful"><br>　##### 1.2 常用构造器<br>　　　　技巧01：利用无参构造器创建RestTemplate实例时，什么都是使用默认的【即：使用HttpMessageConverter来实现HTTTP messages 和 POJO 之间的转换、使用SimpleClientHttpRequestFactory and&nbsp;DefaultResponseErrorHandler 去创建HTTP连接和处理HTTP错误】<br>　　　　技巧02：利用&nbsp;RestTemplate(ClientHttpRequestFactory requestFactory) 创建RestTemplate实例时使用自定义的requestFactory去创建HTTP连接<br>　　　　技巧03：利用&nbsp;RestTemplate(java.util.List&lt;HttpMessageConverter&lt;?&gt;&gt;&nbsp;messageConverters)&nbsp;&nbsp;创建RestTemplate实例时使用自定义的转换器列表实现HTTTP messages 和 POJO 之间的转换<br> &nbsp; &nbsp;<br><img src="/images/cnst.png" alt="upload successful"></p>
+<h5 id="1-3-GET相关方法"><a href="#1-3-GET相关方法" class="headerlink" title="1.3 GET相关方法"></a>1.3 GET相关方法</h5><p>　　　　技巧01：本博文使用的是SpringBoot项目，利用了一个配置文件来将RestTemplate注入的容器中 </p>
+<p> #######1.3.1&nbsp;public &lt;T&gt; T getForObject(String url, Class&lt;T&gt; responseType, Object… uriVariables)<br>1》远程服务代码【不带请求参数的】<br> &nbsp;<br><img src="/images/rm.png" alt="upload successful"><br>1》模拟客户端代码【不带请求参数的】<br> &nbsp; &nbsp; &nbsp; &nbsp;<br><img src="/images/cl.png" alt="upload successful"><br>2》远程服务代码【带请求参数的】<br>　技巧01：HTTP请求中url路径？后面的参数就是请求参数格式以 key=value 的形式传递；后台需要用@RequestParam注解，如果前端的 key 和 后台方法的参数名称一致时可以不用@RequestParam注解【因为@RequestParam注解时默认的参数注解】<br>　技巧02：对于请求参数，最好在服务端利用@RequestParam注解设置该请求参数为非必传参数并设定默认值  </p>
+<p><img src="/images/dc.png" alt="upload successful"><br>2》模拟客户端代码【带请求参数的】</p>
+<p><img src="/images/mn.png" alt="upload successful"><br>3》远程服务代码【带路径参数的】<br>　技巧01：HTTP请求的路径可以成为路径参数，前提是服务端进行路径配置【即：需要配合@RequestMapping和@PathVariable一起使用】<br>　技巧02：由于路径参数不能设置默认是，所以在后台通过@PathVariable将路径参数设置成必传可以减少出错率<br>　技巧03：@PathVariable可以设置正则表达式【详情参见：<a href="https://www.cnblogs.com/NeverCtrl-C/p/8185576.html】" target="_blank" rel="noopener">https://www.cnblogs.com/NeverCtrl-C/p/8185576.html】</a>  </p>
+<p><img src="/images/lj.png" alt="upload successful"><br>3》模拟客户端代码【带路径参数的】</p>
+<p><img src="/images/lj2.png" alt="upload successful"><br>4》远程服务代码【带路径参数和请求参数的】<br>　技巧01： @PathVariable和@RequestParam都可以设定是否必传【默认必传】<br>　技巧02：@PathVariable不可以设定默认值，@RequestParam可以设定默认值【默认值就是不传入的时候代替的值】<br>　技巧03：&nbsp;@PathVariable如果设置必传为true，前端不传入时就会报错【技巧：开启必传】<br>　技巧04：@RequestParam如果设置必传为true，前端不传入还是也会报错【技巧：关闭必传，开启默认值】<br>　技巧05：@PathVariable可以设置正则表达式【详情参见：<a href="https://www.cnblogs.com/NeverCtrl-C/p/8185576.html】" target="_blank" rel="noopener">https://www.cnblogs.com/NeverCtrl-C/p/8185576.html】</a>  </p>
+<p><img src="/images/dlhc.png" alt="upload successful"><br>4》模拟客户端代码【带路径参数和请求参数的】</p>
+<p><img src="/images/lc.png" alt="upload successful">  </p>
+<p>#######     1.3.2&nbsp; public &lt;T&gt; T getForObject(String url, Class&lt;T&gt; responseType, Map&lt;String, ?&gt; uriVariables)<br>&nbsp;　　　　　　1》远程服务代码【带请求参数的】<br> &nbsp;<br><img src="/images/dqcs.png" alt="upload successful"><br>1》模拟客户端代码【带请求参数的】</p>
+<p><img src="/images/kc.png" alt="upload successful"></p>
+<p>#######　1.3.3&nbsp;public &lt;T&gt; ResponseEntity&lt;T&gt; getForEntity(String url, Class&lt;T&gt; responseType, Object… uriVariables)<br>技巧01：getForObject 和 getForEntity 的区别：后者可以获取到更多的响应信息，前者这可以获取到响应体的数据<br>1》远程服务代码【不带请求参数的】</p>
+<p><img src="/images/bdc.png" alt="upload successful"><br>　1》模拟客户端代码【不带请求参数的】</p>
+<p><img src="/images/mncbd.png" alt="upload successful"><br>  2》远程服务代码【带请求参数的】</p>
+<p><img src="/images/pasted-0.png" alt="filename already exists, renamed"><br>2》模拟客户端代码【带请求参数的】</p>
+<p><img src="/images/pasted-1.png" alt="upload successful"><br>3》远程服务代码【带路径参数的】<br><img src="/images/pasted-2.png" alt="upload successful"><br>3》模拟客户端代码【带路径参数的】<br><img src="/images/pasted-3.png" alt="upload successful"><br>4》远程服务代码【带路径参数和请求参数的】<br><img src="/images/pasted-4.png" alt="upload successful"><br>4》模拟客户端代码【带路径参数和请求参数的】<br><img src="/images/pasted-5.png" alt="upload successful"></p>
+<p>#######　　1.3.4 public &lt;T&gt; ResponseEntity&lt;T&gt; getForEntity(String url, Class&lt;T&gt; responseType, Map&lt;String, ?&gt; uriVariables)<br>1》远程服务代码【带请求参数的】  </p>
+<p><img src="/images/pasted-6.png" alt="upload successful"><br> 1》模拟客户端代码【带请求参数的】</p>
+<p><img src="/images/pasted-7.png" alt="upload successful"></p>
+<p>#####　1.4 POST<br>服务端源代码：点击前往</p>
+<p>#######　1.4.1&nbsp;public &lt;T&gt; T postForObject(String url, @Nullable Object request, Class&lt;T&gt; responseType, Object… uriVariables)<br>　　　　　　参数解释：<br>　　　　　　　　url -&gt; String类型的请求路径<br>　　　　　　　　request -&gt; 请求体对象<br>　　　　　　　　responseType -&gt; 响应数据类型<br>　　　　　　　　uriVariables -&gt; 请求参数  </p>
+<p>#######　　　　1.4.2&nbsp;public &lt;T&gt; T postForObject(String url, @Nullable Object request, Class&lt;T&gt; responseType, Map&lt;String, ?&gt; uriVariables)<br>　　　　　　参数解释：<br>　　　　　　　　url -&gt; String类型的请求路径<br>　　　　　　　　request -&gt; 请求体对象<br>　　　　　　　　responseType&nbsp;-&gt; 响应数据类型<br>　　　　　　　　uriVariables -&gt; 请求参数  </p>
+<p>#######　　　　1.4.3&nbsp;public &lt;T&gt; T postForObject(URI url, @Nullable Object request, Class&lt;T&gt; responseType)<br>　　　　　　参数解释：<br>　　　　　　　　url -&gt; URI类型的请求路径<br>　　　　　　　　request -&gt; 请求体对象<br>　　　　　　　　responseType&nbsp;-&gt; 响应数据类型  </p>
+<p>#######　　　　1.4.4 请求体对象说明<br>　技巧01：请求体对象（@Nullable Object request）可以直接传一个实体，服务端利用@RequestBody接收这个实体即可<br>　技巧02：请求体对象（@Nullable Object request）也可以传入一个&nbsp;&nbsp;HttpEntity 的实例，服务端的代码不变；创建&nbsp;HttpEntity 实例时可以设定请求体数据和请求头数据（详情请参见 HttpEntity 的相关构造函数）<br> &nbsp;<br><img src="/images/pasted-8.png" alt="upload successful"></p>
+<h5 id="1-5-其他请求和GET、POST类似"><a href="#1-5-其他请求和GET、POST类似" class="headerlink" title="1.5 其他请求和GET、POST类似"></a>1.5 其他请求和GET、POST类似</h5><p>　　　　待更新……<br>&nbsp;</p>
+<h3 id="2-WebClient"><a href="#2-WebClient" class="headerlink" title="2 WebClient"></a>2 WebClient</h3><p>　　WebClient 是一个非阻塞、响应式的HTTP客户端，它以响应式被压流的方式执行HTTP请求；WebClient默认使用&nbsp;Reactor Netty 作为HTTP连接器，当然也可以通过 ClientHttpConnector修改其它的HTTP连接器。<br>　　技巧01：使用WebClient需要进入Spring5的相关依赖，如果使用的是SpringBoot项目的话直接引入下面的依赖就可以啦<br>  <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&amp;<span class="keyword">lt</span>;dependency&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;groupId&amp;<span class="keyword">gt</span>;org.springframework.boot&amp;<span class="keyword">lt</span>;/groupId&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;artifactId&amp;<span class="keyword">gt</span>;spring-boot-starter-webflux&amp;<span class="keyword">lt</span>;/artifactId&amp;<span class="keyword">gt</span>;</span><br><span class="line">&amp;<span class="keyword">lt</span>;/dependency&amp;<span class="keyword">gt</span>;</span><br></pre></td></tr></table></figure></p>
+<p>&nbsp;WebClient源码<br>　　##### 2.1 创建WebClient实例的方式<br>　　　　技巧01：从WebClient的源码中可以看出，WebClient接口提供了三个静态方法来创建WebClient实例</p>
+<p>@Bean注入</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Bean</span><br><span class="line">   <span class="keyword">public</span> RestTemplate restTemplate()&#123;</span><br><span class="line">       RestTemplate restTemplate = <span class="keyword">new</span> <span class="type">RestTemplate</span>();;</span><br><span class="line">       restTemplate.setRequestFactory(<span class="keyword">new</span> <span class="type">HttpComponentsClientHttpRequestFactory</span>());</span><br><span class="line">       MappingJackson2HttpMessageConverter converter = <span class="keyword">new</span> <span class="type">MappingJackson2HttpMessageConverter</span>();</span><br><span class="line">       converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));</span><br><span class="line">       restTemplate.getMessageConverters().add(converter);</span><br><span class="line">       <span class="keyword">return</span> restTemplate;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p> 使用：</p>
+ <figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> MultiValueMap&amp;lt;<span class="keyword">String</span>, <span class="keyword">Object</span>&amp;gt; headers = <span class="keyword">new</span> LinkedMultiValueMap&amp;lt;<span class="keyword">String</span>, <span class="keyword">Object</span>&amp;gt;();</span><br><span class="line">headers.<span class="built_in">add</span>(<span class="string">"Accept"</span>, <span class="string">"application/json"</span>);</span><br><span class="line">headers.<span class="built_in">add</span>(<span class="string">"Content-Type"</span>, <span class="string">"application/json"</span>);</span><br><span class="line">HttpEntity request = <span class="keyword">new</span> HttpEntity(requestBody, headers);</span><br><span class="line"><span class="keyword">Object</span> sqlResult = restTemplate.postForObject(logConf.getAccessAddr() + <span class="string">"/_sql"</span>, request, <span class="keyword">Object</span>.class);</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/07/18/RestTemplate/" data-id="ckbdc9v1900qy24u29gogwgis" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RESTTEMPLATE/">RESTTEMPLATE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SPRINGBOOT/">SPRINGBOOT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WEBClIENT/">WEBClIENT</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-StringRedisTemplate" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/17/StringRedisTemplate/" class="article-date">
+  <time datetime="2019-07-17T22:31:00.000Z" itemprop="datePublished">2019-07-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/17/StringRedisTemplate/">StringRedisTemplate  &amp;amp; redisTemplate</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="RedisTemplate和StringRedisTemplate的区别"><a href="#RedisTemplate和StringRedisTemplate的区别" class="headerlink" title="RedisTemplate和StringRedisTemplate的区别"></a>RedisTemplate和StringRedisTemplate的区别</h5><ol>
+<li><p>两者的关系是StringRedisTemplate继承RedisTemplate。</p>
+</li>
+<li><p>两者的数据是&lt;font color=”red”&gt;不共通的&lt;/font&gt;；也就是说StringRedisTemplate只能管理StringRedisTemplate里面的数据，RedisTemplate只能管理RedisTemplate中的数据。</p>
+</li>
+<li><p>SDR默认采用的序列化策略有两种，一种是String的序列化策略，一种是JDK的序列化策略。</p>
+</li>
+</ol>
+<p>StringRedisTemplate默认采用的是String的序列化策略，保存的key和value都是采用此策略序列化保存的。</p>
+<p>RedisTemplate默认采用的是JDK的序列化策略，保存的key和value都是采用此策略序列化保存的。</p>
+<p>RedisTemplate使用的序列类在在操作数据的时候，比如说存入数据会将数据先序列化成字节数组然后在存入Redis数据库，这个时候打开Redis查看的时候，你会看到你的数据不是以可读的形式展现的，而是以字节数组显示，类似下面</p>
+<p>当然从Redis获取数据的时候也会默认将数据当做字节数组转化，这样就会导致一个问题，当需要获取的数据不是以字节数组存在redis当中而是正常的可读的字符串的时候，比如说下面这种形式的数据</p>
+<p>注：使用的软件是RedisDesktopManager</p>
+<p>RedisTemplate就无法获取到数据，这个时候获取到的值就是NULL。这个时候StringRedisTempate就派上了用场。</p>
+<p><strong>当Redis当中的数据值是以可读的形式显示出来的时候，只能使用StringRedisTemplate才能获取到里面的数据。</strong></p>
+<p>所以当你使用RedisTemplate获取不到数据的时候请检查一下是不是Redis里面的数据是可读形式而非字节数组</p>
+<p>另外我在测试的时候即使把StringRedisTemplate的序列化类修改成RedisTemplate的JdkSerializationRedisSerializer</p>
+<p>最后还是无法获取被序列化的对象数据，即使是没有转化为对象的字节数组，代码如下</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">@Test  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> testRedisSerializer()&#123;  </span><br><span class="line">    User u = <span class="keyword">new</span> User();  </span><br><span class="line">    u.setName(<span class="string">"java"</span>);  </span><br><span class="line">    u.setSex(<span class="string">"male"</span>);  </span><br><span class="line">    redisTemplate.opsForHash().<span class="built_in">put</span>(<span class="string">"user:"</span>,<span class="string">"1"</span>,u);  </span><br><span class="line">    <span class="comment">/*查看redisTemplate 的Serializer*/</span>  </span><br><span class="line">    System.out.<span class="built_in">println</span>(redisTemplate.getKeySerializer());  </span><br><span class="line">    System.out.<span class="built_in">println</span>(redisTemplate.getValueSerializer());  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*查看StringRedisTemplate 的Serializer*/</span>  </span><br><span class="line">    System.out.<span class="built_in">println</span>(stringRedisTemplate.getValueSerializer());  </span><br><span class="line">    System.out.<span class="built_in">println</span>(stringRedisTemplate.getValueSerializer());  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*将stringRedisTemplate序列化类设置成RedisTemplate的序列化类*/</span>  </span><br><span class="line">    stringRedisTemplate.setKeySerializer(<span class="keyword">new</span> JdkSerializationRedisSerializer());  </span><br><span class="line">    stringRedisTemplate.setValueSerializer(<span class="keyword">new</span> JdkSerializationRedisSerializer());  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*即使在更换stringRedisTemplate的的Serializer和redisTemplate一致的 </span></span><br><span class="line"><span class="comment">    * JdkSerializationRedisSerializer </span></span><br><span class="line"><span class="comment">    * 最后还是无法从redis中获取序列化的数据 </span></span><br><span class="line"><span class="comment">    * */</span>  </span><br><span class="line">    System.out.<span class="built_in">println</span>(stringRedisTemplate.getValueSerializer());  </span><br><span class="line">    System.out.<span class="built_in">println</span>(stringRedisTemplate.getValueSerializer());  </span><br><span class="line">    </span><br><span class="line">    User user = (User)  redisTemplate.opsForHash().<span class="built_in">get</span>(<span class="string">"user:"</span>,<span class="string">"1"</span>);  </span><br><span class="line">    User  user2 = (User) stringRedisTemplate.opsForHash().<span class="built_in">get</span>(<span class="string">"user:"</span>,<span class="string">"1"</span>);  </span><br><span class="line">    System.out.<span class="built_in">println</span>(<span class="string">"dsd"</span>);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Debug结果</p>
+<p>&lt;table&gt;&lt;td&gt;<br>总结：  </p>
+<p>当你的redis数据库里面本来存的是字符串数据或者你要存取的数据就是字符串类型数据的时候，那么你就使用StringRedisTemplate即可，但是如果你的数据是复杂的对象类型，而取出的时候又不想做任何的数据转换，直接从Redis里面取出一个对象，那么使用RedisTemplate是更好的选择。<br>&lt;/td&gt;&lt;/table&gt;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/07/17/StringRedisTemplate/" data-id="ckbdc9usw006024u2lpu6zj47" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/REDIS/">REDIS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/REDISTEMPLATE/">REDISTEMPLATE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SPRINGBBOT/">SPRINGBBOT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/STRINGREDISTEMPLATE/">STRINGREDISTEMPLATE</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/16/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/18/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIT/">GIT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IT/">IT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVAEE/">JAVAEE</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVAEE/MYSQL/">MYSQL</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/OFFICE/">OFFICE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SYSTEM/">SYSTEM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VIM/">VIM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/分类1/">分类1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/电商/">电商</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ANNOTATION/">ANNOTATION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BAZEL/">BAZEL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BEANUTILS/">BEANUTILS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CENTOS/">CENTOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI-CD/">CI/CD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CLASSLOADER/">CLASSLOADER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CRONTAB/">CRONTAB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DEBUG/">DEBUG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DESIGN-PATTERNS/">DESIGN PATTERNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DNS/">DNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOCKER/">DOCKER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DRUID/">DRUID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ENLINK/">ENLINK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EUREKA/">EUREKA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EXCEL/">EXCEL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/">Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FASTJSON/">FASTJSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIT/">GIT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GITLAB/">GITLAB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GLOBALEXCEPTION/">GLOBALEXCEPTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO/">GO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HEXO/">HEXO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/INTERCEPTOR/">INTERCEPTOR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IT/">IT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVADOC/">JAVADOC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASCRIPT/">JAVASCRIPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASE/">JAVASE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JETTY/">JETTY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPA/">JPA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSONUTILS/">JSONUTILS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KARAF/">KARAF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KEEPALIVED/">KEEPALIVED</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LINUX/">LINUX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LISTENER/">LISTENER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOADBALANCED/">LOADBALANCED</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOG/">LOG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOGBACK/">LOGBACK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOGIN/">LOGIN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOMBOK/">LOMBOK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MARKDOWN/">MARKDOWN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIME-TYPE/">MIME-TYPE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQ/">MQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYBATIS/">MYBATIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYCAT/">MYCAT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/">MYSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NETWORK/">NETWORK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OAUTH2/">OAUTH2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ONOS/">ONOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSGI/">OSGI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSI/">OSI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAGEHELPER/">PAGEHELPER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POSTMAN/">POSTMAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PYTHON/">PYTHON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RABBITMQ/">RABBITMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REDIS/">REDIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REDISTEMPLATE/">REDISTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REFLECTION/">REFLECTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REGISTRY-CENTER/">REGISTRY CENTER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REPO/">REPO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTTEMPLATE/">RESTTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RIBBON/">RIBBON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPM/">RPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SECURITY/">SECURITY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SERIALVERSIONUID/">SERIALVERSIONUID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SERVLET/">SERVLET</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SESSION/">SESSION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SHELL/">SHELL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPINTBOOT/">SPINTBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING/">SPRING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-MVC/">SPRING MVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-STREAM/">SPRING STREAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGBBOT/">SPRINGBBOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGBOOT/">SPRINGBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGQUARTZ/">SPRINGQUARTZ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGTASK/">SPRINGTASK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGTBOOT/">SPRINGTBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPTING/">SPTING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLAlert/">SQLAlert</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSO/">SSO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STRINGREDISTEMPLATE/">STRINGREDISTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWAGGER/">SWAGGER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SYSTEM/">SYSTEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP-IP/">TCP/IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TERMUX/">TERMUX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TK-MYBATIS/">TK.MYBATIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TRANSECTION/">TRANSECTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UBUNTU/">UBUNTU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UDP/">UDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEBClIENT/">WEBClIENT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YAML/">YAML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rabbitMq/">rabbitMq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/抖音/">抖音</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件服务器/">文件服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间转化/">时间转化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标签1/">标签1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/淘宝/">淘宝</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高可用/">高可用</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ANNOTATION/" style="font-size: 14.62px;">ANNOTATION</a> <a href="/tags/AOP/" style="font-size: 10.77px;">AOP</a> <a href="/tags/BAZEL/" style="font-size: 10px;">BAZEL</a> <a href="/tags/BEANUTILS/" style="font-size: 10px;">BEANUTILS</a> <a href="/tags/CENTOS/" style="font-size: 10px;">CENTOS</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/CLASSLOADER/" style="font-size: 10px;">CLASSLOADER</a> <a href="/tags/CRONTAB/" style="font-size: 10.77px;">CRONTAB</a> <a href="/tags/DEBUG/" style="font-size: 10px;">DEBUG</a> <a href="/tags/DESIGN-PATTERNS/" style="font-size: 10px;">DESIGN PATTERNS</a> <a href="/tags/DNS/" style="font-size: 10px;">DNS</a> <a href="/tags/DOCKER/" style="font-size: 11.54px;">DOCKER</a> <a href="/tags/DRUID/" style="font-size: 10px;">DRUID</a> <a href="/tags/ENLINK/" style="font-size: 10px;">ENLINK</a> <a href="/tags/ES/" style="font-size: 16.15px;">ES</a> <a href="/tags/EUREKA/" style="font-size: 10px;">EUREKA</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10px;">Eureka</a> <a href="/tags/FASTJSON/" style="font-size: 10px;">FASTJSON</a> <a href="/tags/GIT/" style="font-size: 10px;">GIT</a> <a href="/tags/GITLAB/" style="font-size: 10px;">GITLAB</a> <a href="/tags/GLOBALEXCEPTION/" style="font-size: 10px;">GLOBALEXCEPTION</a> <a href="/tags/GO/" style="font-size: 10.77px;">GO</a> <a href="/tags/HEXO/" style="font-size: 12.31px;">HEXO</a> <a href="/tags/IDEA/" style="font-size: 12.31px;">IDEA</a> <a href="/tags/INTERCEPTOR/" style="font-size: 11.54px;">INTERCEPTOR</a> <a href="/tags/IT/" style="font-size: 11.54px;">IT</a> <a href="/tags/JAVADOC/" style="font-size: 10px;">JAVADOC</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.54px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.77px;">JAVASE</a> <a href="/tags/JETTY/" style="font-size: 10px;">JETTY</a> <a href="/tags/JPA/" style="font-size: 10.77px;">JPA</a> <a href="/tags/JSONUTILS/" style="font-size: 10px;">JSONUTILS</a> <a href="/tags/KARAF/" style="font-size: 11.54px;">KARAF</a> <a href="/tags/KEEPALIVED/" style="font-size: 10px;">KEEPALIVED</a> <a href="/tags/LINUX/" style="font-size: 16.92px;">LINUX</a> <a href="/tags/LISTENER/" style="font-size: 10px;">LISTENER</a> <a href="/tags/LOADBALANCED/" style="font-size: 10px;">LOADBALANCED</a> <a href="/tags/LOG/" style="font-size: 10px;">LOG</a> <a href="/tags/LOGBACK/" style="font-size: 10px;">LOGBACK</a> <a href="/tags/LOGIN/" style="font-size: 10px;">LOGIN</a> <a href="/tags/LOMBOK/" style="font-size: 11.54px;">LOMBOK</a> <a href="/tags/MAC/" style="font-size: 15.38px;">MAC</a> <a href="/tags/MARKDOWN/" style="font-size: 11.54px;">MARKDOWN</a> <a href="/tags/MIME-TYPE/" style="font-size: 10px;">MIME-TYPE</a> <a href="/tags/MQ/" style="font-size: 12.31px;">MQ</a> <a href="/tags/MYBATIS/" style="font-size: 17.69px;">MYBATIS</a> <a href="/tags/MYCAT/" style="font-size: 10.77px;">MYCAT</a> <a href="/tags/MYSQL/" style="font-size: 16.15px;">MYSQL</a> <a href="/tags/NETWORK/" style="font-size: 10px;">NETWORK</a> <a href="/tags/OAUTH2/" style="font-size: 10.77px;">OAUTH2</a> <a href="/tags/ONOS/" style="font-size: 14.62px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 13.85px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PAGEHELPER/" style="font-size: 10px;">PAGEHELPER</a> <a href="/tags/POSTMAN/" style="font-size: 10px;">POSTMAN</a> <a href="/tags/PYTHON/" style="font-size: 13.08px;">PYTHON</a> <a href="/tags/RABBITMQ/" style="font-size: 10.77px;">RABBITMQ</a> <a href="/tags/REDIS/" style="font-size: 11.54px;">REDIS</a> <a href="/tags/REDISTEMPLATE/" style="font-size: 10px;">REDISTEMPLATE</a> <a href="/tags/REFLECTION/" style="font-size: 11.54px;">REFLECTION</a> <a href="/tags/REGISTRY-CENTER/" style="font-size: 10px;">REGISTRY CENTER</a> <a href="/tags/REPO/" style="font-size: 10px;">REPO</a> <a href="/tags/RESTTEMPLATE/" style="font-size: 10px;">RESTTEMPLATE</a> <a href="/tags/RIBBON/" style="font-size: 10.77px;">RIBBON</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/SECURITY/" style="font-size: 12.31px;">SECURITY</a> <a href="/tags/SERIALVERSIONUID/" style="font-size: 10px;">SERIALVERSIONUID</a> <a href="/tags/SERVLET/" style="font-size: 10.77px;">SERVLET</a> <a href="/tags/SESSION/" style="font-size: 12.31px;">SESSION</a> <a href="/tags/SHELL/" style="font-size: 14.62px;">SHELL</a> <a href="/tags/SPINTBOOT/" style="font-size: 10px;">SPINTBOOT</a> <a href="/tags/SPRING/" style="font-size: 13.08px;">SPRING</a> <a href="/tags/SPRING-MVC/" style="font-size: 10px;">SPRING MVC</a> <a href="/tags/SPRING-STREAM/" style="font-size: 10px;">SPRING STREAM</a> <a href="/tags/SPRINGBBOT/" style="font-size: 10px;">SPRINGBBOT</a> <a href="/tags/SPRINGBOOT/" style="font-size: 19.23px;">SPRINGBOOT</a> <a href="/tags/SPRINGQUARTZ/" style="font-size: 10px;">SPRINGQUARTZ</a> <a href="/tags/SPRINGTASK/" style="font-size: 12.31px;">SPRINGTASK</a> <a href="/tags/SPRINGTBOOT/" style="font-size: 10px;">SPRINGTBOOT</a> <a href="/tags/SPTING/" style="font-size: 10px;">SPTING</a> <a href="/tags/SQL/" style="font-size: 12.31px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.46px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/STRINGREDISTEMPLATE/" style="font-size: 10px;">STRINGREDISTEMPLATE</a> <a href="/tags/SWAGGER/" style="font-size: 10px;">SWAGGER</a> <a href="/tags/SYSTEM/" style="font-size: 10px;">SYSTEM</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TCP-IP/" style="font-size: 11.54px;">TCP/IP</a> <a href="/tags/TERMUX/" style="font-size: 10.77px;">TERMUX</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/TRANSECTION/" style="font-size: 10px;">TRANSECTION</a> <a href="/tags/UBUNTU/" style="font-size: 10px;">UBUNTU</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/WEBClIENT/" style="font-size: 10px;">WEBClIENT</a> <a href="/tags/YAML/" style="font-size: 10.77px;">YAML</a> <a href="/tags/rabbitMq/" style="font-size: 10px;">rabbitMq</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.77px;">文件服务器</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/13/可视化面板/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/邮箱找回密码与二次认证/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/特权用户访问策略控制/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/md列表/">markdown任务列表语法checkbox</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/CS应用配置/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Joe Tong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

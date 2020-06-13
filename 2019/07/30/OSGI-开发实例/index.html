@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>OSGI 开发实例 | Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="OSGI(Open Services Gateway Initiative)，或者通俗点说JAVA动态模块系统，定义了一套模块应用开发的框架。OSGI容器实现方案如Knopflerfish, Equinox, and Apache Felix允许你把你的应用分成多个功能模块，这样通过依赖管理这些功能会更加方便。 和Servlet和EJB规范类似，OSGI规范包含两大块：一个OSGI容器需要实现的服">
+<meta name="keywords" content="JAVAEE,OSGI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OSGI 开发实例">
+<meta property="og:url" content="/blog/2019/07/30/OSGI-开发实例/index.html">
+<meta property="og:site_name" content="Learning">
+<meta property="og:description" content="OSGI(Open Services Gateway Initiative)，或者通俗点说JAVA动态模块系统，定义了一套模块应用开发的框架。OSGI容器实现方案如Knopflerfish, Equinox, and Apache Felix允许你把你的应用分成多个功能模块，这样通过依赖管理这些功能会更加方便。 和Servlet和EJB规范类似，OSGI规范包含两大块：一个OSGI容器需要实现的服">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:updated_time" content="2020-06-13T07:49:08.199Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OSGI 开发实例">
+<meta name="twitter:description" content="OSGI(Open Services Gateway Initiative)，或者通俗点说JAVA动态模块系统，定义了一套模块应用开发的框架。OSGI容器实现方案如Knopflerfish, Equinox, and Apache Felix允许你把你的应用分成多个功能模块，这样通过依赖管理这些功能会更加方便。 和Servlet和EJB规范类似，OSGI规范包含两大块：一个OSGI容器需要实现的服">
+  
+    <link rel="alternate" href="/atom.xml" title="Learning" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Learning</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Joe&#39;s Blog</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-OSGI-开发实例" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/30/OSGI-开发实例/" class="article-date">
+  <time datetime="2019-07-30T08:24:00.000Z" itemprop="datePublished">2019-07-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      OSGI 开发实例
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>OSGI(Open Services Gateway Initiative)，或者通俗点说JAVA动态模块系统，定义了一套模块应用开发的框架。OSGI容器实现方案如Knopflerfish, Equinox, and Apache Felix允许你把你的应用分成多个功能模块，这样通过依赖管理这些功能会更加方便。</p>
+<p>和Servlet和EJB规范类似，OSGI规范包含两大块：一个OSGI容器需要实现的服务集合；一种OSGI容器和应用之间通信的机制。开发OSGI平台意味着你需要使用OSGI API编写你的应用，然后将其部署到OSGI容器中。从开发者的视角来看，OSGI提供以下优势：</p>
+<pre><code>你可以动态地安装、卸载、启动、停止不同的应用模块，而不需要重启容器。
+你的应用可以在同一时刻跑多个同一个模块的实例。
+OSGI在SOA领域提供成熟的解决方案，包括嵌入式，移动设备和富客户端应用等。</code></pre><p>OK，你已经有个Servlet容器来做web 应用，有了EJB容器来做事务处理，你可能在想为什么你还需要一个新的容器？简单点说，OSGI容器被设计专门用来开发可分解为功能模块的复杂的Java应用。</p>
+<p>企业应用领域的OSGI</p>
+<p>OSGI规范最初是由OSGI联盟在1999年3月发起。它的主要目的是成为向网络设备传输服务管理的开放规范。核心思想是一旦你向网络设备中添加了一个OSGI服务平台，你可以在网络中的任意位置管理该设备上的服务组件。这些服务组件可以任意安装，更新或移除而不会对设备产生影响。</p>
+<p>多年来，OSGI技术只出现在嵌入式系统和网络设备市场。现在，Eclipse使OSGI在企业开发领域焕发出新的光彩。</p>
+<p>OSGI受到越来越广泛的支持</p>
+<p>2003年，Eclipse开发团队开始寻找一种使eclipse成为一种功能更动态、工具更模块化的富客户端平台。最终，他们的目光锁定在OSGI框架上。Eclipse3.0，2004年6月发布，是基于OSGI技术搭建的首个Eclipse版本。</p>
+<p>几乎所有企业应用服务提供商支持或计划支持OSGI。Spring框架同样支持OSGI，通过Spring DM（Spring Dynamic Modules for OSGI Service Platforms）项目，可以让我们在Spring上更方便的应用OSGI。</p>
+<p>开源OSGI容器</p>
+<p>从企业应用开发者的角度看，OSGI容器侵入性非常小，你可以方便地将其嵌入一个企业应用。举个例子来说，假设你在开发一个复杂的web应用。你希望将这个应用分解成多个功能模块。一个View层模块，一个Model层模块，一个DAO模块。使用嵌入式OSGI容器来跨依赖地管理这些模块可以让你随时更新你的DAO模块却不需要重启你的服务器。</p>
+<p>只要你的应用完全符合OSGI规范，它就可以在所有符合OSGI规范的容器内运行。现在，有三种流行的开源OSGI容器：</p>
+<pre><code>Equinox是OSGI Service Platform Release 4的一个实现。是Eclipse 模块化运行时的核心。
+Knopflerfish另一个选择。
+Apache Felix是Apache软件基金会赞助的一个OSGI容器</code></pre><p>在这篇文章里我们使用Equinox作为我们的OSGI容器。</p>
+<p>尝试开发一个Hello World bundle</p>
+<p>在OSGI的领域，发布的软件是以bundle的形式出现。bundle由java class类和资源文件组成，向设备所有者提供功能，同时可以为其他的bundles提供服务。Eclipse对开发bundles提供了强大的支持。Eclipse不仅仅提供创建bundles的功能，它还集成了Equinox这个OSGI容器，你可以在其上开发和调试OSGI组件。其实所有的Eclipse插件都是使用Eclipse规范代码写的OSGI bundle。接下来，你将可以学到如何使用Eclipse IDE开发一个Hello world osgi bundle。</p>
+<p>开始开发bundle</p>
+<p>我们一步步的开始：</p>
+<pre><code>启动Eclipse，依次点 File --&gt; New --&gt; Project。
+选择Plug-in Project，next。
+输入Project Name项目名称，比如com.howard.sample.HelloWorld,Target Platform(目标平台)里的an OSGI framework，选择standard。
+剩下的保持默认，next。
+下个对话框也默认，next。
+然后选择Hello OSGI Bundle作为模版。Finish。</code></pre><p>Eclipse会飞快的为你创建Hello world bundle的模版代码。主要包含两个文件：Activator.java和MANIFEST.MF。</p>
+<p>Activator.java的代码如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.osgi.framework.BundleActivator;</span><br><span class="line"><span class="keyword">import</span> org.osgi.framework.BundleContext;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Activator</span> <span class="keyword">implements</span> <span class="title">BundleActivator</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">(BundleContext context)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello world"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stop</span><span class="params">(BundleContext context)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Goodbye World"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果你的bundle在启动和关闭的时候需要被通知，你可以考虑实现BundleActivator接口。以下是定义Activator的一些注意点：</p>
+<pre><code>你的Activator类需要一个公有的无参数构造函数。OSGI框架会通过类反射的方式来实例化一个Activator类。
+容器启动bundle过程中负责调用你的Activator类的start方法。bundle可以在此初始化资源比如说初始化数据库连接。start方法需要一个参数，BundleContext对象。这个对象允许bundles以取得OSGI容器相关信息的方式和框架交互。如果某一个bundle有异常抛出，容器将对该bundle标记为stopped并不将其纳入service列表。
+容器关闭的时候会调用你的Activator类方法stop(),你可以利用这个机会做一些清理的操作。</code></pre><p>MANIFEST.MF</p>
+<p>这个文件是你的bundle的部署描述文件。格式和Jar里的MANIFEST.MF是一样的。包含的不少名值对，就像如下：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Manifest-<span class="string">Version:</span> <span class="number">1.0</span></span><br><span class="line">Bundle-<span class="string">ManifestVersion:</span> <span class="number">2</span></span><br><span class="line">Bundle-<span class="string">Name:</span> HelloWorld Plug-<span class="keyword">in</span></span><br><span class="line">Bundle-<span class="string">SymbolicName:</span> com.howard.sample.HelloWorld</span><br><span class="line">Bundle-<span class="string">Version:</span> <span class="number">1.0</span><span class="number">.0</span></span><br><span class="line">Bundle-<span class="string">Activator:</span> com.howard.sample.helloworld.Activator</span><br><span class="line">Bundle-<span class="string">Vendor:</span> HOWARD</span><br><span class="line">Bundle-<span class="string">RequiredExecutionEnvironment:</span> JavaSE<span class="number">-1.6</span></span><br><span class="line">Import-<span class="string">Package:</span> org.osgi.framework;version=<span class="string">"1.3.0"</span></span><br></pre></td></tr></table></figure>
+
+<p>分别来看下：<br>Bundle-ManifestVersion</p>
+<p>数值为2意味着本bundle支持OSGI规范第四版；如果是1那就是支持OSGI规范第三版。</p>
+<p>Bundle-Name</p>
+<p>给bundle定义一个短名，方便人员阅读</p>
+<p>Bundle-SymbolicName</p>
+<p>给bundle定义一个唯一的非局部名。方便分辨。</p>
+<p>Bundle-Activator</p>
+<p>声明在start和stop事件发生时会被通知的监听类的名字。</p>
+<p>Import-Package</p>
+<p>定义bundle的导入包。</p>
+<p>Hello World bundle完成了，接下来我们运行一下。<br>执行bundle  </p>
+<pre><code>点击Run --&gt; Run Configuration
+在左边的OSGI Framework选项里右键 new ，创建一个新的OSGI Run Configuration
+名字随便取好了，我们取个OSGi hello world。
+你会注意到中间的窗口里Workspace项目里有一子项 com.howard.sample.HelloWorld,将其勾选上，其他的不用管。这时的状态应该如下图。
+点击Run按钮。在控制台你应该可以看见点东西了。那是叫做OSGI控制台的东东。与子相伴，还有一个&quot;Hello world&quot;。  
+OSGI控制台</code></pre><p>OSGI控制台是一个OSGI容器的命令行界面。你可以利用它做些诸如启动，关闭，安装bundles，更新和删除bundles等操作。现在，点击OSGI控制台所在的位置，回车，你就会发现可以输入命令了。这时的OSGI控制台应该如下图：<br>下面列出一些常用的OSGI命令，你可以试着和OSGI容器交互。</p>
+<p>ss 显示已安装的bundles的状态信息，信息包括bundle ID，短名，状态等等。</p>
+<p>start 启动一个bundle</p>
+<p>stop  关闭一个bundle</p>
+<p>update  载入一个新的JAR文件更新一个bundle</p>
+<p>install  安装一个新的bundle到容器中</p>
+<p>uninstall  卸载一个已在容器中的bundle</p>
+<p>依赖管理</p>
+<p>OSGI规范允许你把你的应用分解成多个模块然后管理各个模块间的依赖关系。</p>
+<p>这需要通过bundle scope来完成。默认情况下，一个bundle内的class对其他bundle来说是不可见的。那么，如果要让一个bundle访问另一个bundle里的class要怎么做？解决的方案就是从源bundle导出包，然后在目标bundle里导入。</p>
+<p>接下来我们对此做一个例子。</p>
+<p>首先，我们需要先创建一个com.howard.sample.HelloService bundle,我们将通过它导出一个包。</p>
+<p>然后，我们在com.howard.sample.HelloWorld 这个bundle里导入包。  </p>
+<p>导出包</p>
+<p>1、创建名为com.howard.sample.HelloService的bundle，创建步骤和前面一样。</p>
+<p>2、在这个bundle内，添加一个com.howard.sample.service.HelloService.java 接口，代码如下：  </p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public<span class="built_in"> interface </span>HelloService &#123;</span><br><span class="line">    public String sayHello();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  创建一个com.howard.sample.service.impl.HelloServiceImpl.java类实现刚才的接口：<br>  <figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloServiceImpl</span> <span class="keyword"><span class="keyword">implements</span> <span class="type">HelloService</span></span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">String</span> sayHello() &#123;</span><br><span class="line">        System.out.println(<span class="string">"Inside HelloServiceImple.sayHello()"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Say Hello"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>4、打开MANIFEST.MF,选择Runtime标签项，在Exported Packages选项栏，点击Add并且选择com.howard.sample.service这个包。然后MANIFEST.MF的代码应该如下：  </p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Manifest-<span class="string">Version:</span> <span class="number">1.0</span></span><br><span class="line">Bundle-<span class="string">ManifestVersion:</span> <span class="number">2</span></span><br><span class="line">Bundle-<span class="string">Name:</span> HelloService Plug-<span class="keyword">in</span></span><br><span class="line">Bundle-<span class="string">SymbolicName:</span> com.howard.sample.HelloService</span><br><span class="line">Bundle-<span class="string">Version:</span> <span class="number">1.0</span><span class="number">.0</span></span><br><span class="line">Bundle-<span class="string">Activator:</span> com.howard.sample.helloservice.Activator</span><br><span class="line">Bundle-<span class="string">Vendor:</span> HOWARD</span><br><span class="line">Bundle-<span class="string">RequiredExecutionEnvironment:</span> JavaSE<span class="number">-1.6</span></span><br><span class="line">Import-<span class="string">Package:</span> org.osgi.framework;version=<span class="string">"1.3.0"</span></span><br><span class="line">Export-<span class="string">Package:</span> com.howard.sample.service</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">你可以看到，MANIFEST.MF文件和刚才的HelloWorld的那份很类似。唯一的区别就是这个多了Export-Package这个标记，对应的值就是我们刚才选择的com.howard.sample.service。</span><br><span class="line"></span><br><span class="line">Export-Package标记告诉OSGI容器在com.howard.sample.service包内的classes可以被外部访问。</span><br><span class="line"></span><br><span class="line">注意，我们仅仅暴露了HelloService接口，而不是直接暴露HelloServiceImpl实现。  </span><br><span class="line"></span><br><span class="line">导入包</span><br><span class="line"></span><br><span class="line">接下来我们要更新原来的HelloWorld bundle以导入com.howard.sample.service包。步骤如下：</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>、进入HelloWorld bundle，打开MANIFEST.MF，进入Dependencies标签页，在Imported Packages里添加com.howard.sample.service。MANIFEST.MF文件应该如下所示：</span><br></pre></td></tr></table></figure>
+
+<p>Manifest-Version: 1.0<br>Bundle-ManifestVersion: 2<br>Bundle-Name: HelloWorld Plug-in<br>Bundle-SymbolicName: com.howard.sample.HelloWorld<br>Bundle-Version: 1.0.0<br>Bundle-Activator: com.howard.sample.helloworld.Activator<br>Bundle-Vendor: HOWARD<br>Bundle-RequiredExecutionEnvironment: JavaSE-1.6<br>Import-Package: com.howard.sample.service,<br> org.osgi.framework;version=”1.3.0”</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">没错，Import-package标记的值也就是导入的包名之间是用逗号隔开的。在这里导入了两个包om<span class="selector-class">.howard</span><span class="selector-class">.sample</span><span class="selector-class">.service</span>和org<span class="selector-class">.osgi</span><span class="selector-class">.framework</span>。后者是使用Activator类时必须导入的包。</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、接下来，打开HelloWorld项目下的Activator.java文件，这时候你会发现可以使用HelloService这个接口了。但还是不能使用HelloServiceImpl实现类。Eclipse会告诉你：Access restriction（立入禁止）。</span><br><span class="line"></span><br><span class="line">Class级别可见域</span><br><span class="line">为什么OSGI容器可以做到让jar包中的一些classes可见而另一些又不可见呢。</span><br><span class="line"></span><br><span class="line">答案其实就是OSGI容器自定义了java class loader来有选择的加载类。OSGI容器为每一个bundle都创建了不同的class loader。因此，bundle可以访问的classes包括</span><br><span class="line"> </span><br><span class="line">    Boot classpath：所有的java基础类。</span><br><span class="line">    Framework classpath：OSGI框架级别的classloader加载的类</span><br><span class="line">    Bundle classpath：Bundle本身引用的关系紧密的JAR的路径</span><br><span class="line">    Imported packages：就是在MANIFEST.MF里声明的导入包，一旦声明，在bundle内就可见了。  </span><br><span class="line">bundle级别的可见域允许你可以随时放心的更改HelloServiceImpl实现类而不需要去担心依赖关系会被破坏。  </span><br><span class="line">OSGI服务</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">OSGI框架是实现SOA的绝佳土壤。通过它可以实现bundles暴露服务接口给其他bundles消费而不需要让细节暴露。消费bundles甚至可以完全不知道提供服务的bundles。凭着可以良好的隐藏具体实现的能力，OSGI当之无愧是SOA的一种较完美的实现方案。</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">OSGI中，提供服务的bundle在OSGI容器上将一个POJO注册成一个service。消费者bundle请求OSGI容器中基于某个特殊接口的注册service。一旦找到，消费者bundle就会绑定它，然后就可以调用service中的方法了。举个例子会更容易说明。  </span><br><span class="line">导出services</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="number">1</span>、确保com<span class="selector-class">.howard</span><span class="selector-class">.sample</span><span class="selector-class">.HelloService</span>里的MANIFEST.MF导入org<span class="selector-class">.osgi</span><span class="selector-class">.framework</span>包</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、创建com<span class="selector-class">.howard</span><span class="selector-class">.sample</span><span class="selector-class">.service</span><span class="selector-class">.impl</span><span class="selector-class">.HelloServiceActivator</span><span class="selector-class">.java</span>,代码如下：</span><br></pre></td></tr></table></figure>
+
+<pre><code>public class HelloServiceActivator implements BundleActivator {
+    ServiceRegistration helloServiceRegistration;
+    @Override
+    public void start(BundleContext context) throws Exception {
+        HelloService helloService = new HelloServiceImpl();
+        helloServiceRegistration = context.registerService(HelloService.class
+                .getName(), helloService, null);
+    }
+
+    @Override
+    public void stop(BundleContext context) throws Exception {
+        helloServiceRegistration.unregister();
+    }
+
+}</code></pre><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">OK，我们就是用BundleContext的registerService方法注册service的。这个方法需要三个参数。  </span><br><span class="line">service的接口名。如果service实现了多个接口，那样你需要传入一个包含所有接口名的String数组。在这里我们传入的是HelloService这个接口。  </span><br><span class="line">    真正的service实现。在例子中我们传了一个HelloServiceImpl实现。  </span><br><span class="line">    service属性。这个参数可以在有多个service实现同一个接口的情况下，消费者用来区分真正感兴趣的service。  </span><br><span class="line"></span><br><span class="line"><span class="number">3</span>、最后一步就是修改HelloService的MANIFEST.MF文件，将Bundle-Activator改成com<span class="selector-class">.howard</span><span class="selector-class">.sample</span><span class="selector-class">.service</span><span class="selector-class">.impl</span><span class="selector-class">.HelloServiceActivator</span>  </span><br><span class="line">现在HelloService bundle已经随时准备将HelloServiceImpl服务发布了。OSGI容器启动HelloServie bundle的时候会让HelloServiceActivator运作，在那个时候将HelloServiceImpl注册到容器中，接下来就是创建消费者的问题了。    </span><br><span class="line">导入service  </span><br><span class="line">我们的消费者就是HelloWorld bundle，主要修改的就是其中的Activator<span class="selector-class">.java</span>,修改代码如下：</span><br></pre></td></tr></table></figure>
+
+<pre><code>public class Activator implements BundleActivator {
+ServiceReference helloServiceReference;
+    public void start(BundleContext context) throws Exception {
+        System.out.println(&quot;Hello World!!&quot;);
+        helloServiceReference=context.getServiceReference(HelloService.class.getName());
+        HelloService helloService=(HelloService)context.getService(helloServiceReference);
+        System.out.println(helloService.sayHello());
+    }
+    public void stop(BundleContext context) throws Exception {
+        System.out.println(&quot;Goodbye World!!&quot;);
+        context.ungetService(helloServiceReference);
+    }
+}</code></pre><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">代码很简单，就不多说了。</span><br><span class="line"></span><br><span class="line">在运行之前我们在Run--&gt;Run Configurations对话框里，把HelloWorld和HelloService这两个bundle前面的钩都打上。然后运行时你会发现HelloServiceImpl.sayHello()方法已经被调用了。</span><br><span class="line">在OSGI控制台输入ss并回车，所有容器内的bundle状态一目了然。其中id为<span class="number">0</span>的bundle是OSGI框架基础bundle，另两个就是HelloService和HelloWorld了，它俩的id是随机的，状态是<span class="literal">ACTIVE</span>也就是已启动状态。假设HelloService的id为<span class="number">7</span>，HelloWorld为<span class="number">8</span>。</span><br><span class="line">输入stop <span class="number">8</span>就可以暂停bundle的运行，容器内这个bundle还是存在的，只是状态变成了RESOLVED。再次启动使用start <span class="number">8</span>，然后就会看见HelloWorld bundle消费了HelloService的服务。</span><br><span class="line"></span><br><span class="line">创建服务工厂  </span><br><span class="line">刚才例子所示，我们会在HelloService bundle启动时初始化并注册service。然后不管存不存在消费端，这个service都会存在，而且消费端取得的service 实例其实都是同一个。OK，某些servie是比较耗费资源的主，我们不希望它一直占用资源，最好是在真正用它的时候创建不用的时候销毁就最好了。  </span><br><span class="line">解决如上问题的方案就是使用ServiceFactory接口的实现来代替原先service具体的实现到OSGI容器去注册。这样，以后只有当其他bundle请求该服务时，才会由ServiceFactory实现类来处理请求并返回一个新的service实例。  </span><br><span class="line">实例步骤如下：</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>、在HelloService bundle创建一个实现ServiceFactory接口的类HelloServiceFactory类，代码如下：</span><br></pre></td></tr></table></figure>
+
+<p>public class HelloServiceFactory implements ServiceFactory {<br>    private int usageCounter = 0;<br>    @Override<br>    public Object getService(Bundle bundle, ServiceRegistration registration) {<br>        System.out.println(“Create object of HelloService for “ + bundle.getSymbolicName());<br>        usageCounter++;<br>        System.out.println(“Number of bundles using service “ + usageCounter);<br>        HelloService helloService = new HelloServiceImpl();<br>        return helloService;<br>    }<br>    @Override<br>    public void ungetService(Bundle bundle, ServiceRegistration registration, Object service) {<br>        System.out.println(“Release object of HelloService for “ + bundle.getSymbolicName());<br>        usageCounter–;<br>        System.out.println(“Number of bundles using service “ + usageCounter);<br>    }<br>}</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">ServiceFactory</span>接口定义了两个方法：  </span><br><span class="line">    getService方法：特定的<span class="keyword">bundle在第一次调用BundleContext的getService方法时由OSGI框架调用，在实例代码中，我们用这个方法来返回一个新的HelloService的实现。OSGI框架会缓存这个返回的对象，如果同一个bundle在未来再次调用BundleContext的getService方法的话，会直接返回这个缓存中的对象。 </span> </span><br><span class="line">    ungetService方法：<span class="keyword">bundle释放service的时候由OSGI容器调用。 </span> </span><br><span class="line"><span class="number">2</span>、修改HelloServiceActivator.java的start方法，将ServiceFactory作为服务注册，代码如下：</span><br></pre></td></tr></table></figure>
+
+<pre><code>public class HelloServiceActivator implements BundleActivator {
+    ServiceRegistration helloServiceRegistration;
+    @Override
+    public void start(BundleContext context) throws Exception {
+        HelloServiceFactory helloServiceFactory = new HelloServiceFactory();
+        helloServiceRegistration = context.registerService(HelloService.class
+                .getName(), helloServiceFactory, null);
+    }
+
+    @Override
+    public void stop(BundleContext context) throws Exception {
+        helloServiceRegistration.unregister();
+    }
+}</code></pre><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">现在运行下试试看，你会发现HelloWorld bundle启动时才会初始化HelloService，控制台会打印出<span class="string">"Number of bundles using service 1"</span>，当HelloWorld bundle暂停时会打印出<span class="string">"Number of bundles using service 0"</span>。  </span><br><span class="line"></span><br><span class="line">services跟踪  </span><br><span class="line">某种情形下，我们可能需要在某个特殊的接口有新的服务注册或取消注册时通知消费端。这时我们可以使用ServiceTracker类。如下步骤所示：  </span><br><span class="line"><span class="number">1</span>、在HelloWorld bundle里的MANIFEST.MF导入org<span class="selector-class">.util</span><span class="selector-class">.tracker</span>包。 </span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、创建HelloServiceTracker类，代码如下：</span><br></pre></td></tr></table></figure>
+
+<pre><code>public class HelloServiceTracker extends ServiceTracker {
+    public HelloServiceTracker(BundleContext context) {
+        super(context, HelloService.class.getName(),null);
+    }
+    public Object addingService(ServiceReference reference) {
+        System.out.println(&quot;Inside HelloServiceTracker.addingService &quot; + reference.getBundle());
+        return super.addingService(reference);
+    }
+    public void removedService(ServiceReference reference, Object service) {
+        System.out.println(&quot;Inside HelloServiceTracker.removedService &quot; + reference.getBundle());
+        super.removedService(reference, service);
+    }
+}</code></pre> <figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> 我们在HelloServiceTracker的构造函数里将HelloService接口名传进去，ServiceTracker会跟踪实现这个接口的所有的注册services。ServiceTracker主要有两个重要方法：</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">    <span class="keyword">addingService方法：bundle注册一个基于给定接口的service时调用。</span></span><br><span class="line"><span class="keyword"> </span>   removeService方法：<span class="keyword">bundle取消注册一个基于给定接口的service时调用。</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword"> </span></span><br><span class="line"></span><br><span class="line"><span class="number">3</span>、修改Activator类，使用刚刚创建的HelloServiceTracker来获取service：</span><br></pre></td></tr></table></figure>
+
+<pre><code>public class Activator implements BundleActivator {
+    HelloServiceTracker helloServiceTracker;
+    public void start(BundleContext context) throws Exception {
+        System.out.println(&quot;Hello World!!&quot;);
+        helloServiceTracker= new HelloServiceTracker(context);
+        helloServiceTracker.open();
+        HelloService helloService=(HelloService)helloServiceTracker.getService();
+        System.out.println(helloService.sayHello());
+    }
+
+    public void stop(BundleContext context) throws Exception {
+        System.out.println(&quot;Goodbye World!!&quot;);
+        helloServiceTracker.close();
+    }
+}</code></pre><pre><code>
+现在运行一下，可以发现只要HelloService bundle启动或是暂停都会导致HelloServiceTracker的对addingService或removedService方法的调用。
+
+
+
+ServiceTracker不仅仅能跟踪Service的动向，它还能通过getService方法取得Service实例并返回。但是如果同一个接口下有多个service注册，这时返回哪个service呢？这时候就需要看service的等级哪个高了。这个等级是service注册时的property属性里的一项：SERVICE_RANKING。谁的SERVICE_RANKING高，就返回谁。
+
+如果有两个一样高的呢？这时再看这两个service谁的PID更低了。
+
+
+
+如果对OSGI的ClassLoader机制有疑问，可以看看这篇解释ClassLoader机制和自定义ClassLoader相关的文章：
+
+http://longdick.iteye.com/blog/442213
+
+
+
+OSGI的基本原理和入门开发就到这里了。希望同学们能对OSGI开发有个简单而清晰的认识。
+
+
+
+参考资料：Hello, OSGi, Part 1: Bundles for beginners </code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/07/30/OSGI-开发实例/" data-id="ckbdc9uza00mb24u2o4m4jwpl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OSGI/">OSGI</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/07/30/ONOS-开发指南/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ONOS 开发指南
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/07/30/BUILD/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">BUILD</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIT/">GIT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IT/">IT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVAEE/">JAVAEE</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVAEE/MYSQL/">MYSQL</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/OFFICE/">OFFICE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SYSTEM/">SYSTEM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VIM/">VIM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/分类1/">分类1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/电商/">电商</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ANNOTATION/">ANNOTATION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BAZEL/">BAZEL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BEANUTILS/">BEANUTILS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CENTOS/">CENTOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI-CD/">CI/CD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CLASSLOADER/">CLASSLOADER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CRONTAB/">CRONTAB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DEBUG/">DEBUG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DESIGN-PATTERNS/">DESIGN PATTERNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DNS/">DNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOCKER/">DOCKER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DRUID/">DRUID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ENLINK/">ENLINK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EUREKA/">EUREKA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EXCEL/">EXCEL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/">Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FASTJSON/">FASTJSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIT/">GIT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GITLAB/">GITLAB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GLOBALEXCEPTION/">GLOBALEXCEPTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO/">GO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HEXO/">HEXO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/INTERCEPTOR/">INTERCEPTOR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IT/">IT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVADOC/">JAVADOC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASCRIPT/">JAVASCRIPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASE/">JAVASE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JETTY/">JETTY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPA/">JPA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSONUTILS/">JSONUTILS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KARAF/">KARAF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KEEPALIVED/">KEEPALIVED</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LINUX/">LINUX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LISTENER/">LISTENER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOADBALANCED/">LOADBALANCED</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOG/">LOG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOGBACK/">LOGBACK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOGIN/">LOGIN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOMBOK/">LOMBOK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MARKDOWN/">MARKDOWN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIME-TYPE/">MIME-TYPE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQ/">MQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYBATIS/">MYBATIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYCAT/">MYCAT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/">MYSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NETWORK/">NETWORK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OAUTH2/">OAUTH2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ONOS/">ONOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSGI/">OSGI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSI/">OSI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAGEHELPER/">PAGEHELPER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POSTMAN/">POSTMAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PYTHON/">PYTHON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RABBITMQ/">RABBITMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REDIS/">REDIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REDISTEMPLATE/">REDISTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REFLECTION/">REFLECTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REGISTRY-CENTER/">REGISTRY CENTER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REPO/">REPO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTTEMPLATE/">RESTTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RIBBON/">RIBBON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPM/">RPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SECURITY/">SECURITY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SERIALVERSIONUID/">SERIALVERSIONUID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SERVLET/">SERVLET</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SESSION/">SESSION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SHELL/">SHELL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPINTBOOT/">SPINTBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING/">SPRING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-MVC/">SPRING MVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-STREAM/">SPRING STREAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGBBOT/">SPRINGBBOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGBOOT/">SPRINGBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGQUARTZ/">SPRINGQUARTZ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGTASK/">SPRINGTASK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGTBOOT/">SPRINGTBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPTING/">SPTING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLAlert/">SQLAlert</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSO/">SSO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STRINGREDISTEMPLATE/">STRINGREDISTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWAGGER/">SWAGGER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SYSTEM/">SYSTEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP-IP/">TCP/IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TERMUX/">TERMUX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TK-MYBATIS/">TK.MYBATIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TRANSECTION/">TRANSECTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UBUNTU/">UBUNTU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UDP/">UDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEBClIENT/">WEBClIENT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YAML/">YAML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rabbitMq/">rabbitMq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/抖音/">抖音</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件服务器/">文件服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间转化/">时间转化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标签1/">标签1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/淘宝/">淘宝</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高可用/">高可用</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ANNOTATION/" style="font-size: 14.62px;">ANNOTATION</a> <a href="/tags/AOP/" style="font-size: 10.77px;">AOP</a> <a href="/tags/BAZEL/" style="font-size: 10px;">BAZEL</a> <a href="/tags/BEANUTILS/" style="font-size: 10px;">BEANUTILS</a> <a href="/tags/CENTOS/" style="font-size: 10px;">CENTOS</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/CLASSLOADER/" style="font-size: 10px;">CLASSLOADER</a> <a href="/tags/CRONTAB/" style="font-size: 10.77px;">CRONTAB</a> <a href="/tags/DEBUG/" style="font-size: 10px;">DEBUG</a> <a href="/tags/DESIGN-PATTERNS/" style="font-size: 10px;">DESIGN PATTERNS</a> <a href="/tags/DNS/" style="font-size: 10px;">DNS</a> <a href="/tags/DOCKER/" style="font-size: 11.54px;">DOCKER</a> <a href="/tags/DRUID/" style="font-size: 10px;">DRUID</a> <a href="/tags/ENLINK/" style="font-size: 10px;">ENLINK</a> <a href="/tags/ES/" style="font-size: 16.15px;">ES</a> <a href="/tags/EUREKA/" style="font-size: 10px;">EUREKA</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10px;">Eureka</a> <a href="/tags/FASTJSON/" style="font-size: 10px;">FASTJSON</a> <a href="/tags/GIT/" style="font-size: 10px;">GIT</a> <a href="/tags/GITLAB/" style="font-size: 10px;">GITLAB</a> <a href="/tags/GLOBALEXCEPTION/" style="font-size: 10px;">GLOBALEXCEPTION</a> <a href="/tags/GO/" style="font-size: 10.77px;">GO</a> <a href="/tags/HEXO/" style="font-size: 12.31px;">HEXO</a> <a href="/tags/IDEA/" style="font-size: 12.31px;">IDEA</a> <a href="/tags/INTERCEPTOR/" style="font-size: 11.54px;">INTERCEPTOR</a> <a href="/tags/IT/" style="font-size: 11.54px;">IT</a> <a href="/tags/JAVADOC/" style="font-size: 10px;">JAVADOC</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.54px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.77px;">JAVASE</a> <a href="/tags/JETTY/" style="font-size: 10px;">JETTY</a> <a href="/tags/JPA/" style="font-size: 10.77px;">JPA</a> <a href="/tags/JSONUTILS/" style="font-size: 10px;">JSONUTILS</a> <a href="/tags/KARAF/" style="font-size: 11.54px;">KARAF</a> <a href="/tags/KEEPALIVED/" style="font-size: 10px;">KEEPALIVED</a> <a href="/tags/LINUX/" style="font-size: 16.92px;">LINUX</a> <a href="/tags/LISTENER/" style="font-size: 10px;">LISTENER</a> <a href="/tags/LOADBALANCED/" style="font-size: 10px;">LOADBALANCED</a> <a href="/tags/LOG/" style="font-size: 10px;">LOG</a> <a href="/tags/LOGBACK/" style="font-size: 10px;">LOGBACK</a> <a href="/tags/LOGIN/" style="font-size: 10px;">LOGIN</a> <a href="/tags/LOMBOK/" style="font-size: 11.54px;">LOMBOK</a> <a href="/tags/MAC/" style="font-size: 15.38px;">MAC</a> <a href="/tags/MARKDOWN/" style="font-size: 11.54px;">MARKDOWN</a> <a href="/tags/MIME-TYPE/" style="font-size: 10px;">MIME-TYPE</a> <a href="/tags/MQ/" style="font-size: 12.31px;">MQ</a> <a href="/tags/MYBATIS/" style="font-size: 17.69px;">MYBATIS</a> <a href="/tags/MYCAT/" style="font-size: 10.77px;">MYCAT</a> <a href="/tags/MYSQL/" style="font-size: 16.15px;">MYSQL</a> <a href="/tags/NETWORK/" style="font-size: 10px;">NETWORK</a> <a href="/tags/OAUTH2/" style="font-size: 10.77px;">OAUTH2</a> <a href="/tags/ONOS/" style="font-size: 14.62px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 13.85px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PAGEHELPER/" style="font-size: 10px;">PAGEHELPER</a> <a href="/tags/POSTMAN/" style="font-size: 10px;">POSTMAN</a> <a href="/tags/PYTHON/" style="font-size: 13.08px;">PYTHON</a> <a href="/tags/RABBITMQ/" style="font-size: 10.77px;">RABBITMQ</a> <a href="/tags/REDIS/" style="font-size: 11.54px;">REDIS</a> <a href="/tags/REDISTEMPLATE/" style="font-size: 10px;">REDISTEMPLATE</a> <a href="/tags/REFLECTION/" style="font-size: 11.54px;">REFLECTION</a> <a href="/tags/REGISTRY-CENTER/" style="font-size: 10px;">REGISTRY CENTER</a> <a href="/tags/REPO/" style="font-size: 10px;">REPO</a> <a href="/tags/RESTTEMPLATE/" style="font-size: 10px;">RESTTEMPLATE</a> <a href="/tags/RIBBON/" style="font-size: 10.77px;">RIBBON</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/SECURITY/" style="font-size: 12.31px;">SECURITY</a> <a href="/tags/SERIALVERSIONUID/" style="font-size: 10px;">SERIALVERSIONUID</a> <a href="/tags/SERVLET/" style="font-size: 10.77px;">SERVLET</a> <a href="/tags/SESSION/" style="font-size: 12.31px;">SESSION</a> <a href="/tags/SHELL/" style="font-size: 14.62px;">SHELL</a> <a href="/tags/SPINTBOOT/" style="font-size: 10px;">SPINTBOOT</a> <a href="/tags/SPRING/" style="font-size: 13.08px;">SPRING</a> <a href="/tags/SPRING-MVC/" style="font-size: 10px;">SPRING MVC</a> <a href="/tags/SPRING-STREAM/" style="font-size: 10px;">SPRING STREAM</a> <a href="/tags/SPRINGBBOT/" style="font-size: 10px;">SPRINGBBOT</a> <a href="/tags/SPRINGBOOT/" style="font-size: 19.23px;">SPRINGBOOT</a> <a href="/tags/SPRINGQUARTZ/" style="font-size: 10px;">SPRINGQUARTZ</a> <a href="/tags/SPRINGTASK/" style="font-size: 12.31px;">SPRINGTASK</a> <a href="/tags/SPRINGTBOOT/" style="font-size: 10px;">SPRINGTBOOT</a> <a href="/tags/SPTING/" style="font-size: 10px;">SPTING</a> <a href="/tags/SQL/" style="font-size: 12.31px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.46px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/STRINGREDISTEMPLATE/" style="font-size: 10px;">STRINGREDISTEMPLATE</a> <a href="/tags/SWAGGER/" style="font-size: 10px;">SWAGGER</a> <a href="/tags/SYSTEM/" style="font-size: 10px;">SYSTEM</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TCP-IP/" style="font-size: 11.54px;">TCP/IP</a> <a href="/tags/TERMUX/" style="font-size: 10.77px;">TERMUX</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/TRANSECTION/" style="font-size: 10px;">TRANSECTION</a> <a href="/tags/UBUNTU/" style="font-size: 10px;">UBUNTU</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/WEBClIENT/" style="font-size: 10px;">WEBClIENT</a> <a href="/tags/YAML/" style="font-size: 10.77px;">YAML</a> <a href="/tags/rabbitMq/" style="font-size: 10px;">rabbitMq</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.77px;">文件服务器</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/13/可视化面板/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/邮箱找回密码与二次认证/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/特权用户访问策略控制/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/md列表/">markdown任务列表语法checkbox</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/CS应用配置/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Joe Tong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

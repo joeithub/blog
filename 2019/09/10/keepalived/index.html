@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>keepalived | Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="高性能集群软件Keepalived的介绍以及安装与配置   Keepalived介绍：           Keepalived是Linux下一个轻量级的高可用解决方案；起初是为LVS设计的，专门用来监控集群系统中各个服务节点的状态。它根据TCP/IP参考模型的第三、第四和第五层交换机机制检测每个服务节点的状态，如果某个服务节点出现异常，或工作出现故障，Keepalived将检测到，并将出现故障的">
+<meta name="keywords" content="JAVAEE,KEEPALIVED,高可用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="keepalived">
+<meta property="og:url" content="/blog/2019/09/10/keepalived/index.html">
+<meta property="og:site_name" content="Learning">
+<meta property="og:description" content="高性能集群软件Keepalived的介绍以及安装与配置   Keepalived介绍：           Keepalived是Linux下一个轻量级的高可用解决方案；起初是为LVS设计的，专门用来监控集群系统中各个服务节点的状态。它根据TCP/IP参考模型的第三、第四和第五层交换机机制检测每个服务节点的状态，如果某个服务节点出现异常，或工作出现故障，Keepalived将检测到，并将出现故障的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:updated_time" content="2020-06-13T07:49:08.203Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="keepalived">
+<meta name="twitter:description" content="高性能集群软件Keepalived的介绍以及安装与配置   Keepalived介绍：           Keepalived是Linux下一个轻量级的高可用解决方案；起初是为LVS设计的，专门用来监控集群系统中各个服务节点的状态。它根据TCP/IP参考模型的第三、第四和第五层交换机机制检测每个服务节点的状态，如果某个服务节点出现异常，或工作出现故障，Keepalived将检测到，并将出现故障的">
+  
+    <link rel="alternate" href="/atom.xml" title="Learning" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Learning</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Joe&#39;s Blog</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-keepalived" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/10/keepalived/" class="article-date">
+  <time datetime="2019-09-10T21:57:00.000Z" itemprop="datePublished">2019-09-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      keepalived
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>高性能集群软件Keepalived的介绍以及安装与配置  </p>
+<p>Keepalived介绍：<br>           Keepalived是Linux下一个轻量级的高可用解决方案；起初是为LVS设计的，专门用来监控集群系统中各个服务节点的状态。它根据TCP/IP参考模型的第三、第四和第五层交换机机制检测每个服务节点的状态，如果某个服务节点出现异常，或工作出现故障，Keepalived将检测到，并将出现故障的服务节点从集群系统中剔除，而在故障节点恢复正常后，Keepalived又可以自动将此服务节点重新加入服务器集群中，这些工作全部自动完成，不需要人工干涉，需要人工完成的只是修复出现故障的服务节点。<br>           Keepalived后来又加入了VRRP的功能，VRRP（Virtual Router Redundancy Protocol,虚拟路由器冗余协议）出现的目的是解决静态路由出现的单点故障问题，通过VRRP可以实现网络不间断稳定运行。因此，Keepalived一方面具有服务器状态检测和故障隔离功能，另一方面也具有HA cluster 功能。</p>
+<p>VRRP协议与工作原理<br>VRRP，它是一种主备模式的协议，通过VRRP可以在网络发生故障时透明地进行设备切换而不影响主机间的数据通信；这其中涉及两个概念：物理路由器和虚拟路由器。<br>         VRRP可以将两台或多台物理路由器设备虚拟成一个虚拟路由器，这个虚拟路由器通过虚拟IP（一个或多个)对外提供服务，而在虚拟路由器内部是多个物理路由器协同工作，同一时间只有一台物理路由器对外提供服务，这台物理路由器被称为主路由器（处于MASTER角色）。一般情况MASTER由选举算法产生，它拥有对外服务的虚拟IP，提供各种网络功能，如ARP请求、ICMP、数据转发等。而其他物理路由器不拥有对外的虚拟Ip，也不提供对外网络功能，仅仅接收MASTER的VRRP状态通告信息，这些路由器被统称为备份路由器（处于BACKUP角色）。当主路由器失效时，处于BACKUP角色的备份路由器将重新进行选举，产生一个新的主路由器进入MASTER角色继续提供对外服务。<br>        每个虚拟路由器独有一个唯一标识，称为VRID，一个VRID与一组IP地址构成了一个虚拟路由器。在VRRP协议中，所有的报文都是通过IP多播形式发送的，而在一个虚拟路由器中，只有处于MASTER角色的路由器会一直发生VRRP数据包，处于BACKUP角色的路由器只接收MASTER发送过来的报文信息，用来监控MASTER运行状态，因此，不会发生BACKUP抢占的现象，除非它的优先级更高。而当MASTER出现故障，多台BACKUP就会进行选举，优先级最高的BACKUP成为新的MASTER，这种选举并进行角色切换的过程非常快，因而保证了服务的持续可用性。</p>
+<p>Keepalived工作原理<br>keepalive运行机制如下：<br>        在网络层，运行着4个重要的协议：互联网协议IP、互联网控制报文协议ICMP、地址转换协议ARP以及反向地址转换协议RARP。Keepalived在网络层采用的最常见的工作方式是通过ICMP协议向服务器集群中的那个节点发送一个ICMP数据包（类似于ping实现的功能），如果某个节点没有返回响应数据包，那么认为此节点发生了故障，Keepalived将报告次节点失效，并从服务器集群中剔除故障节点。<br>        在传输层，提供了两个主要的协议：传输控制协议TCP和用户数据协议UDP。传输控制协议TCP可以提供可靠的数据传输服务、Ip地址和端口代表TCP的一个连接端。要获得TCP服务，需要在发送机的一个端口上和接收机的一个端口上建立连接，而Keepalived在传输层就是利用TCP协议的端口连接和扫描技术来判断集群点是否正常的。比如，对于常见的WEB服务默认的80端口、SSH服务默认的22端口等，Keepalived一旦在传输层探测到这些端口没有响应数据返回，就认为这些端口发生异常，然后强制将此端口对应得节点从服务器集群组中移除。<br>       在应用层，可运行FTP、TELNET、SMTIP、DNS等各种不同类型的高层协议，Keepalived的运行方式也更加全面化和复杂化，用户可以通过自定义Keepalived的工作方式；例如：用户可以通过编写程序来运行keepalived。而keepalived将根据用户的设定检测各种程序或服务是否运行正常，如果Keepalived的检测结果与用户设定不一致时，Keepalived将把对应的服务从服务器中移除。  </p>
+<p>Keepalived的组件：<br>核心组件：<br>             VRRP　Stack:实现HA集群中失败切换（Failover)功能。Keepalived通过VRRP功能能<br>再结合LVS负载均衡软件即可部署一个高性能的负载均衡集群系统。<br>ipvs wrapper:可以将设置好的IP VS规则发送到内核空间并提交给IP VS模块，最终实<br>现 IP VS模块的负载均衡功能。<br>           checkers:这是Keepalived 最基础的功能，也是最主要的功能，可实现对服务器运行状<br>态检测和故障隔离。<br>HA Cluster的配置前提：<br>(1) 各节点时间必须同步；<br>   ntp, chrony<br>(2) 确保iptables及selinux不会成为阻碍；<br>(3) 各节点之间可通过主机名互相通信（对KA并非必须）；<br>建议使用/etc/hosts文件实现；<br>(4) 确保各节点的用于集群服务的接口支持MULTICAST通信；<br>   D类：224-239；<br>Keepalived安装与配置：<br>Centos6.4以后版本可以直接yum安装：<br> yum install keepalived<br> 程序环境：<br> 主配置文件：/etc/keepalived/keepalived.conf<br> 主程序文件：/usr/sbin/keepalived<br> Unit File:keepalived.service<br> Unit File的环境配置文件：/etc/sysconfig/keepalived<br>根据配置文件所实现的功能，将Keepalived配置分三类：<br>Global Configuration<br>VRRPD 配置、LVS配置  </p>
+<p>全局配置以”<code>global_defs”</code>作为标识，在“<code>global_defs</code>”区域内的都是<br>全局配置选项： </p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">global_defs &#123;</span><br><span class="line">notification_email &#123;  </span><br><span class="line">acassen@firewall<span class="selector-class">.loc</span>                                   failover@firewall<span class="selector-class">.loc</span>                                   sysadmin@firewall.loc</span><br><span class="line">&#125;  </span><br><span class="line">notification_email_from                                   Alexandre.Cassen@firewall.loc</span><br><span class="line">smtp_server <span class="number">192.168</span>.<span class="number">200.1</span>                             smtp_connect_timeout <span class="number">30</span></span><br><span class="line">router_id LVS_DEVEL</span><br><span class="line">vrrp_mcast_group4 <span class="number">224.110</span>.<span class="number">129.18</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>主配置文件详解</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line">global_defs &#123;</span><br><span class="line">   notification_email &#123;   <span class="comment">#发送报警邮件收件地址</span></span><br><span class="line">     acassen@firewall.loc</span><br><span class="line">     failover@firewall.loc</span><br><span class="line">     sysadmin@firewall.loc</span><br><span class="line">   &#125;</span><br><span class="line">   notification_email_from Alexandre.Cassen@firewall.loc   <span class="comment">#指明报警邮件的发送地址</span></span><br><span class="line">   smtp_server <span class="number">192.168</span>.<span class="number">200.1</span>    <span class="comment">#邮件服务器地址</span></span><br><span class="line">   smtp_connect_timeout <span class="number">30</span>      <span class="comment">#smtp的超时时间</span></span><br><span class="line">   router_id LVS_DEVEL          <span class="comment">#物理服务器的主机名</span></span><br><span class="line">   vrrp_mcast_group4            <span class="comment">#定义一个组播地址</span></span><br><span class="line">   static_ipaddress</span><br><span class="line">        &#123;</span><br><span class="line">        <span class="number">192.168</span>.<span class="number">1.1</span>/<span class="number">24</span> dev eth0 scope global</span><br><span class="line">        &#125;</span><br><span class="line">        static_routes</span><br><span class="line">        &#123;</span><br><span class="line">        <span class="number">192.168</span>.<span class="number">2.0</span>/<span class="number">24</span> via <span class="number">192.168</span>.<span class="number">1.100</span> dev eth0</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">    vrrp_sync_group VG_1 &#123;              <span class="comment">#定义一个故障组，组内有一个虚拟路由出现故障另一个也会一起跟着转移，适用于LVS的NAT模型。</span></span><br><span class="line">        <span class="keyword">group</span> <span class="title">&#123;</span></span><br><span class="line"><span class="title">            VI1</span>     <span class="comment"># name of vrrp_instance (below)         </span></span><br><span class="line">            VI2     <span class="comment"># One for each moveable IP</span></span><br><span class="line"></span><br><span class="line">             &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123;        <span class="comment">#定义一个虚拟路由</span></span><br><span class="line">    state <span class="literal">MASTER</span>|BACKUP     <span class="comment">#当前节点在此虚拟路由器上的初始状态；只能有一个是MASTER，余下的都应该为BACKUP；</span></span><br><span class="line">    interface eth0          <span class="comment">#绑定为当前虚拟路由器使用的物理接口；</span></span><br><span class="line">    virtual_router_id <span class="number">51</span>    <span class="comment">#当前虚拟路由器的惟一标识，范围是0-255；</span></span><br><span class="line">    priority <span class="number">100</span>            <span class="comment">#当前主机在此虚拟路径器中的优先级；范围1-254；</span></span><br><span class="line">    advert_int <span class="number">1</span>            <span class="comment">#通告发送间隔，包含主机优先级、心跳等。</span></span><br><span class="line">    authentication &#123;        <span class="comment">#认证配置   </span></span><br><span class="line">        auth_type PASS      <span class="comment">#认证类型，PASS表示简单字符串认证</span></span><br><span class="line">        auth_pass <span class="number">1111</span>      <span class="comment">#密码,PASS密码最长为8位</span></span><br><span class="line"></span><br><span class="line">   virtual_ipaddress &#123;</span><br><span class="line">    <span class="number">192.168</span>.<span class="number">200.16</span>          <span class="comment">#虚拟路由IP地址，以辅助地址方式设置</span></span><br><span class="line">    <span class="number">192.168</span>.<span class="number">200.18</span>/<span class="number">24</span> dev eth2 label eth2:<span class="number">1</span> <span class="comment">#以别名的方式设置</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">track_interface &#123;</span><br><span class="line">        eth0</span><br><span class="line">        eth1</span><br><span class="line"></span><br><span class="line">&#125;                           <span class="comment">#配置要监控的网络接口，一旦接口出现故障，则转为FAULT状态；</span></span><br><span class="line">nopreempt                   <span class="comment">#定义工作模式为非抢占模式；</span></span><br><span class="line">preempt_delay <span class="number">300</span>           <span class="comment">#抢占式模式下，节点上线后触发新选举操作的延迟时长；</span></span><br><span class="line">   virtual_routes &#123;         <span class="comment">#配置路由信息，可选项</span></span><br><span class="line">               <span class="comment">#  src &amp;lt;IPADDR&amp;gt; [to] &amp;lt;IPADDR&amp;gt;/&amp;lt;MASK&amp;gt; via|gw &amp;lt;IPADDR&amp;gt; [or &amp;lt;IPADDR&amp;gt;] dev &amp;lt;STRING&amp;gt; scope</span></span><br><span class="line">       &amp;<span class="keyword">lt</span>;SCOPE&amp;<span class="keyword">gt</span>; tab</span><br><span class="line">               src <span class="number">192.168</span>.<span class="number">100.1</span> to <span class="number">192.168</span>.<span class="number">109.0</span>/<span class="number">24</span> via <span class="number">192.168</span>.<span class="number">200.254</span> dev eth1</span><br><span class="line">               <span class="number">192.168</span>.<span class="number">112.0</span>/<span class="number">24</span> via <span class="number">192.168</span>.<span class="number">100.254</span>       <span class="number">192.168</span>.<span class="number">113.0</span>/<span class="number">24</span>  via  <span class="number">192.168</span>.<span class="number">200.254</span>  <span class="keyword">or</span> <span class="number">192.168</span>.<span class="number">100.254</span> dev eth1      blackhole <span class="number">192.168</span>.<span class="number">114.0</span>/<span class="number">24</span></span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    notify_master &amp;<span class="keyword">lt</span>;<span class="keyword">STRING</span>&amp;<span class="keyword">gt</span>;|&amp;<span class="keyword">lt</span>;QUOTED-<span class="keyword">STRING</span>&amp;<span class="keyword">gt</span>;       <span class="comment">#当前节点成为主节点时触发的脚本。</span></span><br><span class="line">    notify_backup &amp;<span class="keyword">lt</span>;<span class="keyword">STRING</span>&amp;<span class="keyword">gt</span>;|&amp;<span class="keyword">lt</span>;QUOTED-<span class="keyword">STRING</span>&amp;<span class="keyword">gt</span>;       <span class="comment">#当前节点转为备节点时触发的脚本。</span></span><br><span class="line">    notify_fault &amp;<span class="keyword">lt</span>;<span class="keyword">STRING</span>&amp;<span class="keyword">gt</span>;|&amp;<span class="keyword">lt</span>;QUOTED-<span class="keyword">STRING</span>&amp;<span class="keyword">gt</span>;        <span class="comment">#当前节点转为“失败”状态时触发的脚本。</span></span><br><span class="line">    notify &amp;<span class="keyword">lt</span>;<span class="keyword">STRING</span>&amp;<span class="keyword">gt</span>;|&amp;<span class="keyword">lt</span>;QUOTED-<span class="keyword">STRING</span>&amp;<span class="keyword">gt</span>;              <span class="comment">#通用格式的通知触发机制，一个脚本可完成以上三种状态的转换时的通知。</span></span><br><span class="line">    smtp_alert                                   <span class="comment">#如果加入这个选项，将调用前面设置的邮件设置，并自动根据状态发送信息 </span></span><br><span class="line">&#125;</span><br><span class="line">virtual_server <span class="number">192.168</span>.<span class="number">200.100</span> <span class="number">443</span> &#123;    <span class="comment">#LVS配置段 ，设置LVS的VIP地址和端口</span></span><br><span class="line">    delay_loop                          <span class="comment">#服务轮询的时间间隔；检测RS服务器的状态。</span></span><br><span class="line">    lb_algo rr                          <span class="comment">#调度算法，可选rr|wrr|lc|wlc|lblc|sh|dh。</span></span><br><span class="line">    lb_kind NAT                         <span class="comment">#集群类型。</span></span><br><span class="line">    nat_mask <span class="number">255.255</span>.<span class="number">255.0</span>              <span class="comment">#子网掩码，可选项。</span></span><br><span class="line">    persistence_timeout <span class="number">50</span>              <span class="comment">#是否启用持久连接，连接保存时长</span></span><br><span class="line">    protocol TCP                        <span class="comment">#协议，只支持TCP</span></span><br><span class="line">    sorry_server &amp;<span class="keyword">lt</span>;IPADDR&amp;<span class="keyword">gt</span>; &amp;<span class="keyword">lt</span>;PORT&amp;<span class="keyword">gt</span>;        <span class="comment">#备用服务器地址，可选项。</span></span><br><span class="line"></span><br><span class="line">    real_server <span class="number">192.168</span>.<span class="number">201.100</span> <span class="number">443</span> &#123;   <span class="comment">#配置RS服务器的地址和端口</span></span><br><span class="line">        weight <span class="number">1</span>                        <span class="comment">#权重</span></span><br><span class="line">     SSL_GET &#123;                          <span class="comment">#检测RS服务器的状态，发送请求报文</span></span><br><span class="line">            url &#123;</span><br><span class="line">              path /                    <span class="comment">#请求的URL</span></span><br><span class="line">              digest ff20ad2481f97b1754ef3e12ecd3a9cc  <span class="comment">#对请求的页面进行hash运算，然后和这个hash码进行比对，如果hash码一样就表示状态正常</span></span><br><span class="line">              status_code &amp;<span class="keyword">lt</span>;INT&amp;<span class="keyword">gt</span>;         <span class="comment">#判断上述检测机制为健康状态的响应码,和digest二选一即可。</span></span><br><span class="line"></span><br><span class="line">            &#125;                           <span class="comment">#这个hash码可以使用genhash命令请求这个页面生成</span></span><br><span class="line">            connect_timeout <span class="number">3</span>           <span class="comment">#连接超时时间</span></span><br><span class="line">            nb_get_retry <span class="number">3</span>              <span class="comment">#超时重试次数</span></span><br><span class="line">            delay_before_retry <span class="number">3</span>        <span class="comment">#每次超时过后多久再进行连接</span></span><br><span class="line">            connect_ip &amp;<span class="keyword">lt</span>;IP ADDRESS&amp;<span class="keyword">gt</span>;     <span class="comment">#向当前RS的哪个IP地址发起健康状态检测请求</span></span><br><span class="line">            connect_port &amp;<span class="keyword">lt</span>;PORT&amp;<span class="keyword">gt</span>;         <span class="comment">#向当前RS的哪个PORT发起健康状态检测请求</span></span><br><span class="line">            bindto &amp;<span class="keyword">lt</span>;IP ADDRESS&amp;<span class="keyword">gt</span>;         <span class="comment">#发出健康状态检测请求时使用的源地址；</span></span><br><span class="line">            bind_port &amp;<span class="keyword">lt</span>;PORT&amp;<span class="keyword">gt</span>;            <span class="comment">#发出健康状态检测请求时使用的源端口；</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>健康状态检测机制</p>
+<p>HTTP_GET<br>SSL_GET<br>TCP_CHECK<br>SMTP_CHECK<br>MISS_CHECK #调用自定义脚本进行检测  </p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">TCP_CHECK </span>&#123;</span><br><span class="line">        connect_ip <span class="variable">&amp;lt</span>;IP ADDRESS<span class="variable">&amp;gt</span>;         <span class="meta">#向当前RS的哪个IP地址发起健康状态检测请求;</span></span><br><span class="line">        connect_port <span class="variable">&amp;lt</span>;PORT<span class="variable">&amp;gt</span>;             <span class="meta">#向当前RS的哪个PORT发起健康状态检测请求;</span></span><br><span class="line">        bindto <span class="variable">&amp;lt</span>;IP ADDRESS<span class="variable">&amp;gt</span>;             <span class="meta">#发出健康状态检测请求时使用的源地址；</span></span><br><span class="line">        bind_port <span class="variable">&amp;lt</span>;PORT<span class="variable">&amp;gt</span>;                <span class="meta">#发出健康状态检测请求时使用的源端口；</span></span><br><span class="line">        connect_timeout <span class="variable">&amp;lt</span>;INTEGER<span class="variable">&amp;gt</span>;       <span class="meta">#连接请求的超时时长；</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注：在配置服务前需要注意几台主机的防火墙策略，和SELinux配置。<br><code>ip a l eth0</code></p>
+<p>注意：主设备必需先于从设备启动。<br>Keepalived的执行配置的脚本文件时，需要一个默认的用户keepalived_script，使用如下命令进行添加：</p>
+<p><code>useradd keepalived_script</code></p>
+<p>防火墙配置<br>防火墙配置文件是/etc/sysconfig/iptables<br>需要在防火墙配置文件中加入以下两条规则：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-A DEFAULT-INPUT -p<span class="built_in"> vrrp </span>-j ACCEPT      #允许vrrp组播协议访问；</span><br><span class="line">-A DEFAULT-INPUT -p tcp -m multiport --dports 3306,6379  -j ACCEPT</span><br><span class="line">允许对方ip访问本机的mysql端口和redis端口  #ip需要配置成对方ip</span><br></pre></td></tr></table></figure>
+
+<p>主：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">global_defs &#123;</span><br><span class="line">	router_id casb_device</span><br><span class="line">	enable_script_security</span><br><span class="line">&#125;</span><br><span class="line">vrrp_instance VI_REDIS &#123;</span><br><span class="line">	state MASTER  </span><br><span class="line"><span class="built_in">	interface </span>eth0</span><br><span class="line">	virtual_router_id 51</span><br><span class="line">	priority 100</span><br><span class="line">	advert_int 1</span><br><span class="line">	authentication &#123;</span><br><span class="line">		auth_type PASS</span><br><span class="line">		auth_pass 1111</span><br><span class="line">	&#125;</span><br><span class="line">	virtual_ipaddress &#123;</span><br><span class="line">		192.168.100.237</span><br><span class="line">	&#125;</span><br><span class="line">	notify_master <span class="string">"/usr/local/enlink/casb_master.sh"</span></span><br><span class="line">	notify_backup <span class="string">"/usr/local/enlink/casb_backup.sh"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>备：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">global_defs &#123;</span><br><span class="line">	router_id casb_device</span><br><span class="line">	enable_script_security</span><br><span class="line">&#125;</span><br><span class="line">vrrp_instance VI_REDIS &#123;</span><br><span class="line">	state BACKUP  #定义主备</span><br><span class="line"><span class="built_in">	interface </span>eth0</span><br><span class="line">	virtual_router_id 51</span><br><span class="line">	priority 100</span><br><span class="line">	advert_int 1  </span><br><span class="line"> &amp;nbsp; nopreempt #只有在备时配置</span><br><span class="line">	authentication &#123;</span><br><span class="line">		auth_type PASS</span><br><span class="line">		auth_pass 1111</span><br><span class="line">	&#125;</span><br><span class="line">	virtual_ipaddress &#123;</span><br><span class="line">		192.168.100.237 #被争夺的虚拟ip</span><br><span class="line">	&#125;</span><br><span class="line">	notify_master <span class="string">"/usr/local/enlink/casb_master.sh"</span></span><br><span class="line">	notify_backup <span class="string">"/usr/local/enlink/casb_backup.sh"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/09/10/keepalived/" data-id="ckbdc9uzq00nb24u2qrbnp9kr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/KEEPALIVED/">KEEPALIVED</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/高可用/">高可用</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/09/12/beanutils/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          beanutils
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/09/09/解决打包/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">MAVEN解决打包</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIT/">GIT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IT/">IT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVAEE/">JAVAEE</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVAEE/MYSQL/">MYSQL</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/OFFICE/">OFFICE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SYSTEM/">SYSTEM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VIM/">VIM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/分类1/">分类1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/电商/">电商</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ANNOTATION/">ANNOTATION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BAZEL/">BAZEL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BEANUTILS/">BEANUTILS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CENTOS/">CENTOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI-CD/">CI/CD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CLASSLOADER/">CLASSLOADER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CRONTAB/">CRONTAB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DEBUG/">DEBUG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DESIGN-PATTERNS/">DESIGN PATTERNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DNS/">DNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOCKER/">DOCKER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DRUID/">DRUID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ENLINK/">ENLINK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EUREKA/">EUREKA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EXCEL/">EXCEL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/">Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FASTJSON/">FASTJSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIT/">GIT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GITLAB/">GITLAB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GLOBALEXCEPTION/">GLOBALEXCEPTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO/">GO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HEXO/">HEXO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/INTERCEPTOR/">INTERCEPTOR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IT/">IT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVADOC/">JAVADOC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASCRIPT/">JAVASCRIPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASE/">JAVASE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JETTY/">JETTY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPA/">JPA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSONUTILS/">JSONUTILS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KARAF/">KARAF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KEEPALIVED/">KEEPALIVED</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LINUX/">LINUX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LISTENER/">LISTENER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOADBALANCED/">LOADBALANCED</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOG/">LOG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOGBACK/">LOGBACK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOGIN/">LOGIN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOMBOK/">LOMBOK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MARKDOWN/">MARKDOWN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIME-TYPE/">MIME-TYPE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQ/">MQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYBATIS/">MYBATIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYCAT/">MYCAT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/">MYSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NETWORK/">NETWORK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OAUTH2/">OAUTH2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ONOS/">ONOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSGI/">OSGI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSI/">OSI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAGEHELPER/">PAGEHELPER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POSTMAN/">POSTMAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PYTHON/">PYTHON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RABBITMQ/">RABBITMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REDIS/">REDIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REDISTEMPLATE/">REDISTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REFLECTION/">REFLECTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REGISTRY-CENTER/">REGISTRY CENTER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REPO/">REPO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTTEMPLATE/">RESTTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RIBBON/">RIBBON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPM/">RPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SECURITY/">SECURITY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SERIALVERSIONUID/">SERIALVERSIONUID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SERVLET/">SERVLET</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SESSION/">SESSION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SHELL/">SHELL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPINTBOOT/">SPINTBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING/">SPRING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-MVC/">SPRING MVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-STREAM/">SPRING STREAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGBBOT/">SPRINGBBOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGBOOT/">SPRINGBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGQUARTZ/">SPRINGQUARTZ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGTASK/">SPRINGTASK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGTBOOT/">SPRINGTBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPTING/">SPTING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLAlert/">SQLAlert</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSO/">SSO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STRINGREDISTEMPLATE/">STRINGREDISTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWAGGER/">SWAGGER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SYSTEM/">SYSTEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP-IP/">TCP/IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TERMUX/">TERMUX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TK-MYBATIS/">TK.MYBATIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TRANSECTION/">TRANSECTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UBUNTU/">UBUNTU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UDP/">UDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEBClIENT/">WEBClIENT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YAML/">YAML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rabbitMq/">rabbitMq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/抖音/">抖音</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件服务器/">文件服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间转化/">时间转化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标签1/">标签1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/淘宝/">淘宝</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高可用/">高可用</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ANNOTATION/" style="font-size: 14.62px;">ANNOTATION</a> <a href="/tags/AOP/" style="font-size: 10.77px;">AOP</a> <a href="/tags/BAZEL/" style="font-size: 10px;">BAZEL</a> <a href="/tags/BEANUTILS/" style="font-size: 10px;">BEANUTILS</a> <a href="/tags/CENTOS/" style="font-size: 10px;">CENTOS</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/CLASSLOADER/" style="font-size: 10px;">CLASSLOADER</a> <a href="/tags/CRONTAB/" style="font-size: 10.77px;">CRONTAB</a> <a href="/tags/DEBUG/" style="font-size: 10px;">DEBUG</a> <a href="/tags/DESIGN-PATTERNS/" style="font-size: 10px;">DESIGN PATTERNS</a> <a href="/tags/DNS/" style="font-size: 10px;">DNS</a> <a href="/tags/DOCKER/" style="font-size: 11.54px;">DOCKER</a> <a href="/tags/DRUID/" style="font-size: 10px;">DRUID</a> <a href="/tags/ENLINK/" style="font-size: 10px;">ENLINK</a> <a href="/tags/ES/" style="font-size: 16.15px;">ES</a> <a href="/tags/EUREKA/" style="font-size: 10px;">EUREKA</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10px;">Eureka</a> <a href="/tags/FASTJSON/" style="font-size: 10px;">FASTJSON</a> <a href="/tags/GIT/" style="font-size: 10px;">GIT</a> <a href="/tags/GITLAB/" style="font-size: 10px;">GITLAB</a> <a href="/tags/GLOBALEXCEPTION/" style="font-size: 10px;">GLOBALEXCEPTION</a> <a href="/tags/GO/" style="font-size: 10.77px;">GO</a> <a href="/tags/HEXO/" style="font-size: 12.31px;">HEXO</a> <a href="/tags/IDEA/" style="font-size: 12.31px;">IDEA</a> <a href="/tags/INTERCEPTOR/" style="font-size: 11.54px;">INTERCEPTOR</a> <a href="/tags/IT/" style="font-size: 11.54px;">IT</a> <a href="/tags/JAVADOC/" style="font-size: 10px;">JAVADOC</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.54px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.77px;">JAVASE</a> <a href="/tags/JETTY/" style="font-size: 10px;">JETTY</a> <a href="/tags/JPA/" style="font-size: 10.77px;">JPA</a> <a href="/tags/JSONUTILS/" style="font-size: 10px;">JSONUTILS</a> <a href="/tags/KARAF/" style="font-size: 11.54px;">KARAF</a> <a href="/tags/KEEPALIVED/" style="font-size: 10px;">KEEPALIVED</a> <a href="/tags/LINUX/" style="font-size: 16.92px;">LINUX</a> <a href="/tags/LISTENER/" style="font-size: 10px;">LISTENER</a> <a href="/tags/LOADBALANCED/" style="font-size: 10px;">LOADBALANCED</a> <a href="/tags/LOG/" style="font-size: 10px;">LOG</a> <a href="/tags/LOGBACK/" style="font-size: 10px;">LOGBACK</a> <a href="/tags/LOGIN/" style="font-size: 10px;">LOGIN</a> <a href="/tags/LOMBOK/" style="font-size: 11.54px;">LOMBOK</a> <a href="/tags/MAC/" style="font-size: 15.38px;">MAC</a> <a href="/tags/MARKDOWN/" style="font-size: 11.54px;">MARKDOWN</a> <a href="/tags/MIME-TYPE/" style="font-size: 10px;">MIME-TYPE</a> <a href="/tags/MQ/" style="font-size: 12.31px;">MQ</a> <a href="/tags/MYBATIS/" style="font-size: 17.69px;">MYBATIS</a> <a href="/tags/MYCAT/" style="font-size: 10.77px;">MYCAT</a> <a href="/tags/MYSQL/" style="font-size: 16.15px;">MYSQL</a> <a href="/tags/NETWORK/" style="font-size: 10px;">NETWORK</a> <a href="/tags/OAUTH2/" style="font-size: 10.77px;">OAUTH2</a> <a href="/tags/ONOS/" style="font-size: 14.62px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 13.85px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PAGEHELPER/" style="font-size: 10px;">PAGEHELPER</a> <a href="/tags/POSTMAN/" style="font-size: 10px;">POSTMAN</a> <a href="/tags/PYTHON/" style="font-size: 13.08px;">PYTHON</a> <a href="/tags/RABBITMQ/" style="font-size: 10.77px;">RABBITMQ</a> <a href="/tags/REDIS/" style="font-size: 11.54px;">REDIS</a> <a href="/tags/REDISTEMPLATE/" style="font-size: 10px;">REDISTEMPLATE</a> <a href="/tags/REFLECTION/" style="font-size: 11.54px;">REFLECTION</a> <a href="/tags/REGISTRY-CENTER/" style="font-size: 10px;">REGISTRY CENTER</a> <a href="/tags/REPO/" style="font-size: 10px;">REPO</a> <a href="/tags/RESTTEMPLATE/" style="font-size: 10px;">RESTTEMPLATE</a> <a href="/tags/RIBBON/" style="font-size: 10.77px;">RIBBON</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/SECURITY/" style="font-size: 12.31px;">SECURITY</a> <a href="/tags/SERIALVERSIONUID/" style="font-size: 10px;">SERIALVERSIONUID</a> <a href="/tags/SERVLET/" style="font-size: 10.77px;">SERVLET</a> <a href="/tags/SESSION/" style="font-size: 12.31px;">SESSION</a> <a href="/tags/SHELL/" style="font-size: 14.62px;">SHELL</a> <a href="/tags/SPINTBOOT/" style="font-size: 10px;">SPINTBOOT</a> <a href="/tags/SPRING/" style="font-size: 13.08px;">SPRING</a> <a href="/tags/SPRING-MVC/" style="font-size: 10px;">SPRING MVC</a> <a href="/tags/SPRING-STREAM/" style="font-size: 10px;">SPRING STREAM</a> <a href="/tags/SPRINGBBOT/" style="font-size: 10px;">SPRINGBBOT</a> <a href="/tags/SPRINGBOOT/" style="font-size: 19.23px;">SPRINGBOOT</a> <a href="/tags/SPRINGQUARTZ/" style="font-size: 10px;">SPRINGQUARTZ</a> <a href="/tags/SPRINGTASK/" style="font-size: 12.31px;">SPRINGTASK</a> <a href="/tags/SPRINGTBOOT/" style="font-size: 10px;">SPRINGTBOOT</a> <a href="/tags/SPTING/" style="font-size: 10px;">SPTING</a> <a href="/tags/SQL/" style="font-size: 12.31px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.46px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/STRINGREDISTEMPLATE/" style="font-size: 10px;">STRINGREDISTEMPLATE</a> <a href="/tags/SWAGGER/" style="font-size: 10px;">SWAGGER</a> <a href="/tags/SYSTEM/" style="font-size: 10px;">SYSTEM</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TCP-IP/" style="font-size: 11.54px;">TCP/IP</a> <a href="/tags/TERMUX/" style="font-size: 10.77px;">TERMUX</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/TRANSECTION/" style="font-size: 10px;">TRANSECTION</a> <a href="/tags/UBUNTU/" style="font-size: 10px;">UBUNTU</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/WEBClIENT/" style="font-size: 10px;">WEBClIENT</a> <a href="/tags/YAML/" style="font-size: 10.77px;">YAML</a> <a href="/tags/rabbitMq/" style="font-size: 10px;">rabbitMq</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.77px;">文件服务器</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/13/可视化面板/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/邮箱找回密码与二次认证/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/特权用户访问策略控制/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/md列表/">markdown任务列表语法checkbox</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/CS应用配置/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Joe Tong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

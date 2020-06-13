@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>es查询代理sql用法 | Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、图表数据接口参数格式说明 12345678&amp;#123;	&quot;datasource&quot;: &quot;`res-*`&quot;,	&quot;metrics&quot;: [],	&quot;buckets&quot;: [],	&quot;timeRange&quot;: &amp;#123; from : &quot;&quot;, to: &quot;&quot;, now: &quot;&quot; &amp;#125;,	&quot;queryString&quot;: &amp;#123;&amp;#125;,	&quot;filters&quot;: []&amp;#125;  注意事项:  前端传">
+<meta name="keywords" content="ES,SQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="es查询代理sql用法">
+<meta property="og:url" content="/blog/2019/06/25/esagent-sql/index.html">
+<meta property="og:site_name" content="Learning">
+<meta property="og:description" content="一、图表数据接口参数格式说明 12345678&amp;#123;	&quot;datasource&quot;: &quot;`res-*`&quot;,	&quot;metrics&quot;: [],	&quot;buckets&quot;: [],	&quot;timeRange&quot;: &amp;#123; from : &quot;&quot;, to: &quot;&quot;, now: &quot;&quot; &amp;#125;,	&quot;queryString&quot;: &amp;#123;&amp;#125;,	&quot;filters&quot;: []&amp;#125;  注意事项:  前端传">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:updated_time" content="2020-06-13T07:49:08.203Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="es查询代理sql用法">
+<meta name="twitter:description" content="一、图表数据接口参数格式说明 12345678&amp;#123;	&quot;datasource&quot;: &quot;`res-*`&quot;,	&quot;metrics&quot;: [],	&quot;buckets&quot;: [],	&quot;timeRange&quot;: &amp;#123; from : &quot;&quot;, to: &quot;&quot;, now: &quot;&quot; &amp;#125;,	&quot;queryString&quot;: &amp;#123;&amp;#125;,	&quot;filters&quot;: []&amp;#125;  注意事项:  前端传">
+  
+    <link rel="alternate" href="/atom.xml" title="Learning" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Learning</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Joe&#39;s Blog</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-esagent-sql" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/25/esagent-sql/" class="article-date">
+  <time datetime="2019-06-25T02:30:00.000Z" itemprop="datePublished">2019-06-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      es查询代理sql用法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一、图表数据接口参数格式说明</p>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="string">"datasource"</span>: <span class="string">"`res-*`"</span>,</span><br><span class="line">	<span class="string">"metrics"</span>: [],</span><br><span class="line">	<span class="string">"buckets"</span>: [],</span><br><span class="line">	<span class="string">"timeRange"</span>: &#123; from : <span class="string">""</span>, to: <span class="string">""</span>, now: <span class="string">""</span> &#125;,</span><br><span class="line">	<span class="string">"queryString"</span>: &#123;&#125;,</span><br><span class="line">	<span class="string">"filters"</span>: []</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意事项:</p>
+<ol>
+<li>前端传递的所有字段名、数据源名称、别名都需要使用``引起来。</li>
+<li>所有需要传别名的位置，前端默认添加别名字段，默认值：函数名 + “_” + 参数字段</li>
+</ol>
+<p>二、图表数据接口参数格式说明</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> datasource: <span class="string">"`res-*`"</span> ==<span class="variable">&amp;gt</span>; FROM</span><br><span class="line"><span class="number">2.</span> metrics: [&#123;  ==<span class="variable">&amp;gt</span>; SELECT</span><br><span class="line"><span class="symbol">		func:</span> <span class="string">"count"</span>,</span><br><span class="line"><span class="symbol">		params:</span> [* || `a` || UNIQUE `@timestamp`]</span><br><span class="line"><span class="symbol">		as:</span> <span class="string">"aliasA"</span></span><br><span class="line">	&#125;, &#123;</span><br><span class="line"><span class="symbol">		func:</span> <span class="string">"cardinality"</span>,</span><br><span class="line"><span class="symbol">		params:</span> [`a`]</span><br><span class="line"><span class="symbol">		alias:</span> <span class="string">"aliasA"</span></span><br><span class="line">	&#125;,</span><br><span class="line">	......</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>metrics中params允许接收多个字段，但是只有func为空时有效；count、cardinality等函数时默认取第一个值。</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3.</span> buckets: [  ==<span class="variable">&amp;gt</span>; GROUP BY</span><br><span class="line">	&#123;</span><br><span class="line"><span class="symbol">		func:</span> <span class="string">"date_histogram"</span>,</span><br><span class="line"><span class="symbol">		filed:</span> <span class="string">"@timestamp"</span>,</span><br><span class="line"><span class="symbol">		range:</span> [<span class="number">12</span>d, <span class="number">0</span>d],</span><br><span class="line"><span class="symbol">		alias:</span> <span class="string">"per12day"</span>,</span><br><span class="line"><span class="symbol">		orderBy:</span> <span class="string">""</span>, ==<span class="variable">&amp;gt</span>; orderBy字段为metrics中的字段别名(alias)</span><br><span class="line"><span class="symbol">		limit:</span> <span class="number">5</span></span><br><span class="line">	&#125;, &#123;</span><br><span class="line"><span class="symbol">		func:</span> <span class="string">"date_histogram"</span></span><br><span class="line"><span class="symbol">		filed:</span> <span class="string">"@timestamp"</span>,</span><br><span class="line"><span class="symbol">		range:</span> [<span class="number">12</span>d, <span class="number">0</span>d],</span><br><span class="line"><span class="symbol">		alias:</span> <span class="string">"per12day"</span></span><br><span class="line"><span class="symbol">		orderBy:</span> <span class="string">""</span>,</span><br><span class="line"><span class="symbol">		limit:</span> <span class="number">5</span></span><br><span class="line">	&#125;,</span><br><span class="line">	......</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4.</span> <span class="string">timeRange:</span> &#123; <span class="string">from :</span> <span class="string">""</span>, <span class="string">to:</span> <span class="string">""</span>, <span class="string">now:</span> <span class="string">""</span> &#125; ==&amp;gt; WHERE</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">5.</span> queryString: &#123; <span class="keyword">type</span>: <span class="string">"sql/dsl"</span>, value: <span class="string">""</span> &#125;</span><br><span class="line">当使用dsl时，使用如下内容：<span class="string">"status:200 AND extension:PHP"</span>, ==&amp;gt; <span class="keyword">WHERE</span>( query_string(<span class="string">`QueryString`</span>))</span><br><span class="line">例如：<span class="keyword">select</span> * from <span class="string">`res-*`</span> <span class="keyword">where</span> query_string(<span class="string">`bytes:3133 AND bytes_in:1387`</span>) limit <span class="number">100</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">6.</span> filters: &#123;</span><br><span class="line"><span class="built_in">alias</span>: <span class="string">""</span>,</span><br><span class="line">filters: [&#123;  ==&amp;gt; WHERE</span><br><span class="line">	field: <span class="string">"@timestamp"</span>,</span><br><span class="line">	operator: <span class="string">""</span>,</span><br><span class="line">	opValue: [],</span><br><span class="line">	<span class="built_in">alias</span>: <span class="string">"2"</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">	field: <span class="string">"@timestamp"</span>,</span><br><span class="line">	operator: <span class="string">""</span>,</span><br><span class="line">	opValue: [],</span><br><span class="line">	<span class="built_in">alias</span>: <span class="string">"2"</span></span><br><span class="line">&#125;,</span><br><span class="line">......</span><br><span class="line">]</span><br><span class="line">&#125;</span><br><span class="line">应支持：range（&amp;lt;、&amp;lt;=、&amp;gt;、&amp;gt;=）、term（=）、must_not + term（!=）、terms（<span class="keyword">in</span>）、wildcard（like/unlike）</span><br><span class="line">对应operators：<span class="keyword">is</span> <span class="keyword">between</span>/<span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">between</span>、<span class="keyword">is</span>/<span class="keyword">is</span> <span class="keyword">not</span>、<span class="keyword">is</span> one <span class="keyword">of</span>/<span class="keyword">is</span> <span class="keyword">not</span> one <span class="keyword">of</span>、exists/<span class="keyword">does</span> <span class="keyword">not</span> exists</span><br><span class="line">注意：</span><br><span class="line">	<span class="number">1</span>）第<span class="number">6</span>项中，只有当为范围和terms时，opValue中存在多个值；</span><br><span class="line">	<span class="number">2</span>）范围值判断，必须有两个值，第一个为<span class="keyword">from</span>，第二个为<span class="keyword">to</span>。</span><br><span class="line">	<span class="number">3</span>）以上需要别名的时，请前端创建参数时指定，默认为函数名_字段名，若用户指定了标签，则需要结果返回后，页面中替换为用户指定标签。</span><br></pre></td></tr></table></figure>
+
+<p>三、ESAgent模块提供SQL支持的函数及功能<br>SELECT<br>    所有字段 *
+    指定字段 field1 as f1, field2 as f2, field3 as f3, ‘field4’ –一般不建议使用字符串作为字段名。<br>    脚本字段 select bytes_in, bytes_in + bytes_out &gt; 1000 AS gt1000, bytes from <code>res-*</code><br>    函数：<br>    count(name) - 统计文档或值的个数<br>        参数：<br>        *                统计文档个数<br>        标识符（name)    name为桶时，返回每个桶内文档个数；name不为桶时，表示为值统计，等同于value_count()函数。<br>        UNIQUE name      唯一值（势）统计，等同于函数cardinality()。</p>
+<pre><code>cardinality(name) - 唯一值（势）统计，参数为：字段name
+
+value_count(name) - 值统计，参数为：字段name
+
+max(name) - 最大值
+min(name) - 最小值
+sum(name) - 和
+avg(name) - 均值
+
+sum_of_squares(name) - 平方和
+variance(name) - 方差
+
+stdev(name) - 标准差
+stdev_upper(name) - 标准差上限
+stdev_lower(name) - 标准差下限
+
+len(name) - 指定字段值的长度
+script(scripts) - 该函数将给定的参数直接当做脚本交由ES处理，默认为painless脚本。
+    参数：scripts - 脚本字段
+    示例：select script(`doc[&quot;bytes_in&quot;].value + doc[&quot;bytes_out&quot;].value`) as c from `res-*`
+    注意：1）脚本字段中所有请使用双引号。
+          2）脚本字段作为script函数的参数时，使用``符号引起来。</code></pre><figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">FROM</span><br><span class="line">	"res-*"，'res-*'，`res-*`</span><br><span class="line">WHERE</span><br><span class="line">```	</span><br><span class="line">	last(interval) - 该函数用于设置”过去一段时间“的时间范围限制条件，过去是相对于当前时间而言。如果RDL中设置了全局变量”__now__“时，函数last()读取的当前时间为__now__所指定的时间，否则其读取的当前时间为系统当前时间。</span><br><span class="line">		参数：interval - 时间间隔，支持天(d)、小时(h)、分钟(m)、秒(s)，不支持所列单位以外的单位。</span><br><span class="line">	</span><br><span class="line">	last_days(days, interval) - 该函数设置类似于“按天环比”的时间范围条件。</span><br><span class="line">		参数: days - 整数类型，指定“环比”的天数。</span><br><span class="line">			  interval - 时间间隔，支持天(d)、小时(h)、分钟(m)、秒(s)，不支持所列单位以外的单位。</span><br><span class="line">		示例：<span class="keyword">SELECT</span> <span class="built_in">avg</span>(bytes) <span class="keyword">AS</span> <span class="built_in">avg</span> <span class="keyword">FROM</span> <span class="string">'res-*'</span> <span class="keyword">WHERE</span> last_days(<span class="number">30</span>, <span class="number">1</span>m)</span><br><span class="line">	</span><br><span class="line">	last_workdays(days, interval) - 该函数提供搞得功能与last_days()类似，不同的是，last_workdays()函数将跳过用户在__workdays__全局变量以外的日期。</span><br><span class="line">		参数: days - 整数类型，指定“环比”的天数。</span><br><span class="line">		      interval - 时间间隔，支持天(d)、小时(h)、分钟(m)、秒(s)，不支持所列单位以外的单位。</span><br><span class="line">			  </span><br><span class="line">    last_weeks(weeks, interval) - 该函数提供另一个时间环比模型，按周环比。</span><br><span class="line">		参数: days - 整数类型，指定“环比”的周数。</span><br><span class="line">		      interval - 时间间隔，支持天(d)、小时(h)、分钟(m)、秒(s)，不支持所列单位以外的单位。</span><br><span class="line">	</span><br><span class="line">	ip_range(field, range[, range ....]) - 该函数提供对IP地址进行过滤的功能。</span><br><span class="line">	    参数：field - 指定IP地址字段名。</span><br><span class="line">		      range - IP地址范围，支持格式有：<span class="string">"192.168.0.0/24"</span>、<span class="string">"192.168.0.0 TO 192.168.0.255"</span>、[<span class="string">"192.168.0.0"</span>, <span class="string">"192.168.0.255"</span>]</span><br><span class="line">	    示例：</span><br><span class="line">			<span class="keyword">SELECT</span> <span class="built_in">avg</span>(bytes) <span class="keyword">AS</span> byte <span class="keyword">FROM</span> <span class="symbol">`res-*`</span> <span class="keyword">WHERE</span> <span class="keyword">last</span>(<span class="number">30</span>d) <span class="keyword">AND</span> ip_range(client_ip, [<span class="symbol">`192.168.32.0`</span>, <span class="symbol">`192.168.32.255`</span>]) <span class="keyword">GROUP</span> <span class="keyword">BY</span> client_ip <span class="keyword">LIMIT</span> <span class="number">10</span></span><br><span class="line">			<span class="keyword">SELECT</span> <span class="built_in">avg</span>(bytes) <span class="keyword">AS</span> byte <span class="keyword">FROM</span> <span class="symbol">`res-*`</span> <span class="keyword">WHERE</span> <span class="keyword">last</span>(<span class="number">30</span>d) <span class="keyword">AND</span> ip_range(client_ip, <span class="symbol">`192.168.32.0/24`</span>) <span class="keyword">GROUP</span> <span class="keyword">BY</span> client_ip <span class="keyword">LIMIT</span> <span class="number">10</span></span><br><span class="line">			<span class="keyword">SELECT</span> <span class="built_in">avg</span>(bytes) <span class="keyword">AS</span> byte <span class="keyword">FROM</span> <span class="symbol">`res-*`</span> <span class="keyword">WHERE</span> <span class="keyword">last</span>(<span class="number">30</span>d) <span class="keyword">AND</span> ip_range(client_ip, <span class="symbol">`192.168.32.0 TO 192.168.32.255`</span>) <span class="keyword">GROUP</span> <span class="keyword">BY</span> client_ip <span class="keyword">LIMIT</span> <span class="number">10</span></span><br><span class="line">	</span><br><span class="line">	ip_ranges(field, range_list[, range_list ....]) - 该函数提供IP地址进行过滤的功能，与ip_range()函数功能类似，但是参数不一致。</span><br><span class="line">		参数：field - 指定IP地址字段名。</span><br><span class="line">		      range_list - IP地址范围列表，该列表每一个元素为一个IP地址范围，IP地址范围支持格式有：<span class="string">"192.168.0.0/24"</span>、<span class="string">"192.168.0.0 TO 192.168.0.255"</span>、[<span class="string">"192.168.0.0"</span>, <span class="string">"192.168.0.255"</span>]</span><br><span class="line">		示例：<span class="keyword">SELECT</span> <span class="built_in">avg</span>(bytes) <span class="keyword">AS</span> byte <span class="keyword">FROM</span> <span class="symbol">`res-*`</span> <span class="keyword">WHERE</span> <span class="keyword">last</span>(<span class="number">30</span>d) <span class="keyword">AND</span> ip_ranges(client_ip, [<span class="symbol">`183.206.20.0/24`</span>, <span class="symbol">`192.168.32.0/24`</span>]) <span class="keyword">GROUP</span> <span class="keyword">BY</span> client_ip <span class="keyword">LIMIT</span> <span class="number">10</span></span><br><span class="line">		</span><br><span class="line">	query_string(text) - 该函数用于支持ES支持的<span class="string">"迷你"</span>查询语言（mini-language），将用户提供的参数当做<span class="string">"迷你"</span>查询语言交由ES进行查询。</span><br><span class="line">		参数：text - 字符串类型，该参数即为用户输出的<span class="string">"迷你"</span>查询语言表达式。</span><br><span class="line">		示例：<span class="keyword">SELECT</span> <span class="built_in">avg</span>(bytes) <span class="keyword">AS</span> byte <span class="keyword">FROM</span> <span class="symbol">`res-*`</span> <span class="keyword">WHERE</span> <span class="keyword">last</span>(<span class="number">30</span>d) <span class="keyword">AND</span> query_string(<span class="symbol">`client_ip: 192.168.32.181`</span>) <span class="keyword">GROUP</span> <span class="keyword">BY</span> client_ip <span class="keyword">LIMIT</span> <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span></span><br></pre></td></tr></table></figure>
+
+<p>range(filed, range [, range, …]) - 桶函数，根据某字段的范围创建桶。<br>        参数：field - 字段名<br>              range - 指定数值范围，支持的格式有：”from TO to”, [from , to]<br>        示例：SELECT avg(bytes) AS byte FROM <code>res-*</code> WHERE last(30d) group by range(bytes, <code>1 TO 100</code>, [100, 1000], [1000, 2000], [2000, 10000]) as range</p>
+<pre><code>ip_range(field, range[, range ....]) - 该函数提供对IP地址进行过滤的功能。
+    参数：field - 指定IP地址字段名。
+          range - IP地址范围，支持格式有：&quot;192.168.0.0/24&quot;、&quot;192.168.0.0 TO 192.168.0.255&quot;、[&quot;192.168.0.0&quot;, &quot;192.168.0.255&quot;]
+    示例：
+        SELECT avg(bytes) AS byte FROM `res-*` WHERE last(30d) group by ip_range(client_ip, `192.168.0.0/24`, `192.168.32.0 TO 192.168.32.100`, [`192.168.32.100`, `192.168.32.255`]) as range
+
+date_range(field, fmt, range[, range ....])
+    参数：field - （可选）指定日志范围的字段，默认为：@timestamp。
+          fmt - （可选）字符串类型，指定返回的时间格式。如果函数在调用时，只指定了一个字符串类型的参数，则认为是fmt。
+          range - 列表类型, [from, to]。 from与to支持的时间格式如下：
+          时间表达式格式：&amp;lt;参考时间&amp;gt; +/- &amp;lt;间隔&amp;gt;/&amp;lt;单位&amp;gt;
+          &amp;lt;参考时间&amp;gt; 可以是now或任意以双竖线（||）结尾的时间字符串；
+          &amp;lt;间隔&amp;gt;为有带单位的数字;
+          &amp;lt;单位&amp;gt;可以是：y(年)、M(月)、w(周)、d(天)、h(时)、m(分)、s(秒)
+          时间格式可以解释为：参考时间加（减）时间间隔，再四舍五入到某个时间单位，示例如下：
+          1. now+1h  ==&amp;gt; 当前时间加上1小时，精确到毫秒。
+          2. now+1h+1m ==&amp;gt; 当前时间加上1小时，再加上1分钟，精确到毫秒。
+          3. now+1h/d ==&amp;gt; 当前时间加上1小时，并四舍五入到最近的天。
+          4. 2018-12-01||+1M/d ==&amp;gt; 2018年12月1日加上1个月，并四舍五入到最近的天。
+    示例：SELECT avg(bytes) AS byte FROM `res-*` WHERE last(30d) group by date_range(`@timestamp`, `yyyy-MM-dd`, [`2018-12-01||+1M/d`, `now-1m/m`]) as range
+
+histogram(field, interval) - 该函数按照指定字段，创建等分（直方）桶，又名直方图、柱状图等。
+    参数：field - 标识符，字段名；
+          interval - 数值类型，指定等分间隔。
+    示例：SELECT avg(bytes) AS sum FROM `res-*` WHERE last(5m) GROUP BY histogram(bytes, 1000) AS bytes1
+
+date_histogram(field, interval) - 
+    参数：field - 标识符，字段名；
+          interval - 数值类型，指定等分时间间隔。支持的单位：天（d）、小时（h）、分钟（m）、秒（s），不支持所列单位以外的时间间隔。
+    示例：SELECT avg(bytes) AS sum FROM `res-*` WHERE last(30d) GROUP BY date_histogram(`@timestamp`, 1d) AS bytes1
+
+filters(filter[, filter, ...])
+    参数：filter - SQL 表达式。必须为 &amp;lt;expr&amp;gt; AS &amp;lt;name&amp;gt; 的格式。例如：0 &amp;lt; byte &amp;lt; 10000 AS &apos;lt10000&apos;。
+    示例：SELECT avg(bytes) AS sum FROM `res-*` WHERE last(30d) 
+        GROUP BY filters(
+                        ip_range(client_ip, `192.168.32.0 TO 192.168.32.100`) AS server, 
+                        ip_range(client_ip, `192.168.32.101 TO 192.168.32.200`) AS pc, 
+                        ip_range(client_ip, `192.168.32.201 TO 192.168.32.255`) AS cellphone) 
+                        AS machine</code></pre><pre><code>
+ORDER BY
+
+    1. 按照查询字段进行排序。
+        示例：select * from `res-*` order by bytes_in asc
+
+    2. 按照桶分组进行排序
+        示例：SELECT sum(bytes_in + bytes_out) AS bytes, sum(response_time) AS packets FROM `res-*` WHERE last(5m) GROUP BY user_group, user_type ORDER BY bytes DESC, packets DESC LIMIT 3, 3
+        注意：
+            1）默认按照文档个数进行倒序排列；
+            2）默认排序方式为降序
+            3）使用多个桶，只指定一个排序值时，所有桶都按照这个值进行排序；例如：order by a, b desc
+            4）使用多个桶，且指定多个排序值，返回结果只在桶内有序，全部结果来看是无序的。
+            5）指定排序值多于桶个数时，将被忽略。
+
+LIMIT
+    1. 限制查询数量
+        示例：select * from `res-*` limit 30
+    2. 限制桶内查询数量
+        示例：SELECT sum(bytes_in + bytes_out) AS bytes, sum(response_time) AS packets FROM `res-*` WHERE last(5m) GROUP BY user_group, user_type ORDER BY bytes DESC, packets DESC LIMIT 3, 3
+        注意:
+            1）需要对每个桶内返回结果数进行限制；
+            2）SQL中LIMIT指定的限制值，与桶之间按顺序一一对应。
+
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/06/25/esagent-sql/" data-id="ckbdc9v0b00ov24u2re1g56r6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES/">ES</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/">SQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/06/26/DAO和DTO/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          DAO和DTO
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/06/24/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIT/">GIT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IT/">IT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVAEE/">JAVAEE</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVAEE/MYSQL/">MYSQL</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/OFFICE/">OFFICE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SYSTEM/">SYSTEM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VIM/">VIM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/分类1/">分类1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/电商/">电商</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ANNOTATION/">ANNOTATION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BAZEL/">BAZEL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BEANUTILS/">BEANUTILS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CENTOS/">CENTOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI-CD/">CI/CD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CLASSLOADER/">CLASSLOADER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CRONTAB/">CRONTAB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DEBUG/">DEBUG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DESIGN-PATTERNS/">DESIGN PATTERNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DNS/">DNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOCKER/">DOCKER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DRUID/">DRUID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ENLINK/">ENLINK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EUREKA/">EUREKA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EXCEL/">EXCEL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/">Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FASTJSON/">FASTJSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIT/">GIT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GITLAB/">GITLAB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GLOBALEXCEPTION/">GLOBALEXCEPTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO/">GO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HEXO/">HEXO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/INTERCEPTOR/">INTERCEPTOR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IT/">IT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVADOC/">JAVADOC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASCRIPT/">JAVASCRIPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASE/">JAVASE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JETTY/">JETTY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPA/">JPA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSONUTILS/">JSONUTILS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KARAF/">KARAF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KEEPALIVED/">KEEPALIVED</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LINUX/">LINUX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LISTENER/">LISTENER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOADBALANCED/">LOADBALANCED</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOG/">LOG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOGBACK/">LOGBACK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOGIN/">LOGIN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOMBOK/">LOMBOK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MARKDOWN/">MARKDOWN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIME-TYPE/">MIME-TYPE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQ/">MQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYBATIS/">MYBATIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYCAT/">MYCAT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/">MYSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NETWORK/">NETWORK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OAUTH2/">OAUTH2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ONOS/">ONOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSGI/">OSGI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSI/">OSI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAGEHELPER/">PAGEHELPER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POSTMAN/">POSTMAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PYTHON/">PYTHON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RABBITMQ/">RABBITMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REDIS/">REDIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REDISTEMPLATE/">REDISTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REFLECTION/">REFLECTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REGISTRY-CENTER/">REGISTRY CENTER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REPO/">REPO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTTEMPLATE/">RESTTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RIBBON/">RIBBON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPM/">RPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SECURITY/">SECURITY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SERIALVERSIONUID/">SERIALVERSIONUID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SERVLET/">SERVLET</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SESSION/">SESSION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SHELL/">SHELL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPINTBOOT/">SPINTBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING/">SPRING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-MVC/">SPRING MVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-STREAM/">SPRING STREAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGBBOT/">SPRINGBBOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGBOOT/">SPRINGBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGQUARTZ/">SPRINGQUARTZ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGTASK/">SPRINGTASK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGTBOOT/">SPRINGTBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPTING/">SPTING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLAlert/">SQLAlert</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSO/">SSO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STRINGREDISTEMPLATE/">STRINGREDISTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWAGGER/">SWAGGER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SYSTEM/">SYSTEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP-IP/">TCP/IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TERMUX/">TERMUX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TK-MYBATIS/">TK.MYBATIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TRANSECTION/">TRANSECTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UBUNTU/">UBUNTU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UDP/">UDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEBClIENT/">WEBClIENT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YAML/">YAML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rabbitMq/">rabbitMq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/抖音/">抖音</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件服务器/">文件服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间转化/">时间转化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标签1/">标签1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/淘宝/">淘宝</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高可用/">高可用</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ANNOTATION/" style="font-size: 14.62px;">ANNOTATION</a> <a href="/tags/AOP/" style="font-size: 10.77px;">AOP</a> <a href="/tags/BAZEL/" style="font-size: 10px;">BAZEL</a> <a href="/tags/BEANUTILS/" style="font-size: 10px;">BEANUTILS</a> <a href="/tags/CENTOS/" style="font-size: 10px;">CENTOS</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/CLASSLOADER/" style="font-size: 10px;">CLASSLOADER</a> <a href="/tags/CRONTAB/" style="font-size: 10.77px;">CRONTAB</a> <a href="/tags/DEBUG/" style="font-size: 10px;">DEBUG</a> <a href="/tags/DESIGN-PATTERNS/" style="font-size: 10px;">DESIGN PATTERNS</a> <a href="/tags/DNS/" style="font-size: 10px;">DNS</a> <a href="/tags/DOCKER/" style="font-size: 11.54px;">DOCKER</a> <a href="/tags/DRUID/" style="font-size: 10px;">DRUID</a> <a href="/tags/ENLINK/" style="font-size: 10px;">ENLINK</a> <a href="/tags/ES/" style="font-size: 16.15px;">ES</a> <a href="/tags/EUREKA/" style="font-size: 10px;">EUREKA</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10px;">Eureka</a> <a href="/tags/FASTJSON/" style="font-size: 10px;">FASTJSON</a> <a href="/tags/GIT/" style="font-size: 10px;">GIT</a> <a href="/tags/GITLAB/" style="font-size: 10px;">GITLAB</a> <a href="/tags/GLOBALEXCEPTION/" style="font-size: 10px;">GLOBALEXCEPTION</a> <a href="/tags/GO/" style="font-size: 10.77px;">GO</a> <a href="/tags/HEXO/" style="font-size: 12.31px;">HEXO</a> <a href="/tags/IDEA/" style="font-size: 12.31px;">IDEA</a> <a href="/tags/INTERCEPTOR/" style="font-size: 11.54px;">INTERCEPTOR</a> <a href="/tags/IT/" style="font-size: 11.54px;">IT</a> <a href="/tags/JAVADOC/" style="font-size: 10px;">JAVADOC</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.54px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.77px;">JAVASE</a> <a href="/tags/JETTY/" style="font-size: 10px;">JETTY</a> <a href="/tags/JPA/" style="font-size: 10.77px;">JPA</a> <a href="/tags/JSONUTILS/" style="font-size: 10px;">JSONUTILS</a> <a href="/tags/KARAF/" style="font-size: 11.54px;">KARAF</a> <a href="/tags/KEEPALIVED/" style="font-size: 10px;">KEEPALIVED</a> <a href="/tags/LINUX/" style="font-size: 16.92px;">LINUX</a> <a href="/tags/LISTENER/" style="font-size: 10px;">LISTENER</a> <a href="/tags/LOADBALANCED/" style="font-size: 10px;">LOADBALANCED</a> <a href="/tags/LOG/" style="font-size: 10px;">LOG</a> <a href="/tags/LOGBACK/" style="font-size: 10px;">LOGBACK</a> <a href="/tags/LOGIN/" style="font-size: 10px;">LOGIN</a> <a href="/tags/LOMBOK/" style="font-size: 11.54px;">LOMBOK</a> <a href="/tags/MAC/" style="font-size: 15.38px;">MAC</a> <a href="/tags/MARKDOWN/" style="font-size: 11.54px;">MARKDOWN</a> <a href="/tags/MIME-TYPE/" style="font-size: 10px;">MIME-TYPE</a> <a href="/tags/MQ/" style="font-size: 12.31px;">MQ</a> <a href="/tags/MYBATIS/" style="font-size: 17.69px;">MYBATIS</a> <a href="/tags/MYCAT/" style="font-size: 10.77px;">MYCAT</a> <a href="/tags/MYSQL/" style="font-size: 16.15px;">MYSQL</a> <a href="/tags/NETWORK/" style="font-size: 10px;">NETWORK</a> <a href="/tags/OAUTH2/" style="font-size: 10.77px;">OAUTH2</a> <a href="/tags/ONOS/" style="font-size: 14.62px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 13.85px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PAGEHELPER/" style="font-size: 10px;">PAGEHELPER</a> <a href="/tags/POSTMAN/" style="font-size: 10px;">POSTMAN</a> <a href="/tags/PYTHON/" style="font-size: 13.08px;">PYTHON</a> <a href="/tags/RABBITMQ/" style="font-size: 10.77px;">RABBITMQ</a> <a href="/tags/REDIS/" style="font-size: 11.54px;">REDIS</a> <a href="/tags/REDISTEMPLATE/" style="font-size: 10px;">REDISTEMPLATE</a> <a href="/tags/REFLECTION/" style="font-size: 11.54px;">REFLECTION</a> <a href="/tags/REGISTRY-CENTER/" style="font-size: 10px;">REGISTRY CENTER</a> <a href="/tags/REPO/" style="font-size: 10px;">REPO</a> <a href="/tags/RESTTEMPLATE/" style="font-size: 10px;">RESTTEMPLATE</a> <a href="/tags/RIBBON/" style="font-size: 10.77px;">RIBBON</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/SECURITY/" style="font-size: 12.31px;">SECURITY</a> <a href="/tags/SERIALVERSIONUID/" style="font-size: 10px;">SERIALVERSIONUID</a> <a href="/tags/SERVLET/" style="font-size: 10.77px;">SERVLET</a> <a href="/tags/SESSION/" style="font-size: 12.31px;">SESSION</a> <a href="/tags/SHELL/" style="font-size: 14.62px;">SHELL</a> <a href="/tags/SPINTBOOT/" style="font-size: 10px;">SPINTBOOT</a> <a href="/tags/SPRING/" style="font-size: 13.08px;">SPRING</a> <a href="/tags/SPRING-MVC/" style="font-size: 10px;">SPRING MVC</a> <a href="/tags/SPRING-STREAM/" style="font-size: 10px;">SPRING STREAM</a> <a href="/tags/SPRINGBBOT/" style="font-size: 10px;">SPRINGBBOT</a> <a href="/tags/SPRINGBOOT/" style="font-size: 19.23px;">SPRINGBOOT</a> <a href="/tags/SPRINGQUARTZ/" style="font-size: 10px;">SPRINGQUARTZ</a> <a href="/tags/SPRINGTASK/" style="font-size: 12.31px;">SPRINGTASK</a> <a href="/tags/SPRINGTBOOT/" style="font-size: 10px;">SPRINGTBOOT</a> <a href="/tags/SPTING/" style="font-size: 10px;">SPTING</a> <a href="/tags/SQL/" style="font-size: 12.31px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.46px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/STRINGREDISTEMPLATE/" style="font-size: 10px;">STRINGREDISTEMPLATE</a> <a href="/tags/SWAGGER/" style="font-size: 10px;">SWAGGER</a> <a href="/tags/SYSTEM/" style="font-size: 10px;">SYSTEM</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TCP-IP/" style="font-size: 11.54px;">TCP/IP</a> <a href="/tags/TERMUX/" style="font-size: 10.77px;">TERMUX</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/TRANSECTION/" style="font-size: 10px;">TRANSECTION</a> <a href="/tags/UBUNTU/" style="font-size: 10px;">UBUNTU</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/WEBClIENT/" style="font-size: 10px;">WEBClIENT</a> <a href="/tags/YAML/" style="font-size: 10.77px;">YAML</a> <a href="/tags/rabbitMq/" style="font-size: 10px;">rabbitMq</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.77px;">文件服务器</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/13/可视化面板/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/邮箱找回密码与二次认证/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/特权用户访问策略控制/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/md列表/">markdown任务列表语法checkbox</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/CS应用配置/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Joe Tong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="private learning">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Learning">
+<meta property="og:url" content="/blog/page/20/index.html">
+<meta property="og:site_name" content="Learning">
+<meta property="og:description" content="private learning">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Learning">
+<meta name="twitter:description" content="private learning">
+  
+    <link rel="alternate" href="/atom.xml" title="Learning" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Learning</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Joe&#39;s Blog</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-casb-server" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/15/casb-server/" class="article-date">
+  <time datetime="2019-07-15T14:24:00.000Z" itemprop="datePublished">2019-07-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/15/casb-server/">casb server</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="CASB-后台管理（管理端）-nbsp"><a href="#CASB-后台管理（管理端）-nbsp" class="headerlink" title="CASB 后台管理（管理端） &nbsp;"></a>CASB 后台管理（管理端） &nbsp;</h5><p>Java项目结构</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">-src</span><br><span class="line"> - java</span><br><span class="line">   - com</span><br><span class="line">     - enlink</span><br><span class="line">       - admin</span><br><span class="line">         - aop</span><br><span class="line">         - config</span><br><span class="line">           - druid</span><br><span class="line">         - constraint</span><br><span class="line">         - core</span><br><span class="line">           - dao</span><br><span class="line">           - feature</span><br><span class="line">           - pojos</span><br><span class="line">           - service</span><br><span class="line">           - timer</span><br><span class="line">         - util</span><br><span class="line">           - excel</span><br><span class="line">         - web</span><br><span class="line">           - controller</span><br><span class="line">             - apps</span><br><span class="line">             - auditmanage</span><br><span class="line">             - auth</span><br><span class="line">             - chargingsystem</span><br><span class="line">             - external</span><br><span class="line">             - firewall</span><br><span class="line">             - ipsec</span><br><span class="line">             - netconfig</span><br><span class="line">             - rule</span><br><span class="line">             - s2s</span><br><span class="line">             - signaturemanage</span><br><span class="line">             - sms</span><br><span class="line">             - sysconfig</span><br><span class="line">             - usermanager</span><br><span class="line">             - BaseController</span><br><span class="line">           - filter</span><br><span class="line">         - ElinkAdminBackApplication </span><br><span class="line"> -libs</span><br><span class="line">   - cn</span><br><span class="line">   - com</span><br><span class="line">   - org</span><br><span class="line"> -resources</span><br><span class="line"> &amp;nbsp;- backup</span><br><span class="line">  - mapper</span><br><span class="line">  - sql </span><br><span class="line">  - application.properties</span><br><span class="line">  - generatorConfig.xml</span><br><span class="line">  - logback-spring.xml</span><br><span class="line">  - mybatis-generator.xml</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/07/15/casb-server/" data-id="ckbdc9utc006v24u2lq8qi6p3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ENLINK/">ENLINK</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-springboot-aop" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/15/springboot-aop/" class="article-date">
+  <time datetime="2019-07-15T13:32:00.000Z" itemprop="datePublished">2019-07-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/15/springboot-aop/">springboot aop</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>【SpringBoot】SpingBoot整合AOP<br>Spring的AOP是通过JDK的动态代理和CGLIB实现的。  </p>
+<p>说起spring，我们知道其最核心的两个功能就是AOP（面向切面）和IOC（控制反转），这边文章来总结一下SpringBoot如何整合使用AOP。</p>
+<p>一、AOP的术语：<br>aop 有一堆术语，非常难以理解，简单说一下  </p>
+<p>通知(有的地方叫增强)(Advice)<br>需要完成的工作叫做通知，就是你写的业务逻辑中需要比如事务、日志等先定义好，然后需要的地方再去用  </p>
+<p>连接点(Join point)<br>就是spring中允许使用通知的地方，基本上每个方法前后抛异常时都可以是连接点  </p>
+<p>切点(Poincut)<br>其实就是筛选出的连接点，一个类中的所有方法都是连接点，但又不全需要，会筛选出某些作为连接点做为切点。如果说通知定义了切面的动作或者执行时机的话，切点则定义了执行的地点  </p>
+<p>切面(Aspect)<br>其实就是通知和切点的结合，通知和切点共同定义了切面的全部内容，它是干什么的，什么时候在哪执行<br>引入(Introduction)<br>在不改变一个现有类代码的情况下，为该类添加属性和方法,可以在无需修改现有类的前提下，让它们具有新的行为和状态。其实就是把切面（也就是新方法属性：通知定义的）用到目标类中去  </p>
+<p>目标(target)<br>被通知的对象。也就是需要加入额外代码的对象，也就是真正的业务逻辑被组织织入切面。  </p>
+<p>织入(Weaving)<br>把切面加入程序代码的过程。切面在指定的连接点被织入到目标对象中，在目标对象的生命周期里有多个点可以进行织入：  </p>
+<p>编译期：切面在目标类编译时被织入，这种方式需要特殊的编译器<br>类加载期：切面在目标类加载到JVM时被织入，这种方式需要特殊的类加载器，它可以在目标类被引入应用之前增强该目标类的字节码<br>运行期：切面在应用运行的某个时刻被织入，一般情况下，在织入切面时，AOP容器会为目标对象动态创建一个代理对象，Spring AOP就是以这种方式织入切面的。 </p>
+<p>例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService</span>&#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">save</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="function">List <span class="title">list</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    ....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在UserService中的save()方法前需要开启事务，在方法后关闭事务，在抛异常时回滚事务。<br>那么,UserService中的所有方法都是连接点(JoinPoint),save()方法就是切点(Poincut)。需要在save()方法前后执行的方法就是通知(Advice)，切点和通知合起来就是一个切面(Aspect)。save()方法就是目标(target)。把想要执行的代码动态的加入到save()方法前后就是织入(Weaving)。<br>有的地方把通知称作增强是有道理的，在业务方法前后加上其它方法，其实就是对该方法的增强。</p>
+<p>二、常用AOP通知(增强)类型  </p>
+<p>before(前置通知)：  在方法开始执行前执行<br>after(后置通知)：  在方法执行后执行<br>afterReturning(返回后通知)：   在方法返回后执行<br>afterThrowing(异常通知)： 在抛出异常时执行<br>around(环绕通知)：  在方法执行前和执行后都会执行  </p>
+<p>三、执行顺序<br>around &gt; before &gt; around &gt; after &gt; afterReturning</p>
+<p>四、先说一下SpringAop非常霸道又用的非常少的功能 –引入(Introduction)  </p>
+<p>配置类:</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@Aspect</span></span><br><span class="line"><span class="variable">@Component</span></span><br><span class="line">public class IntroductionAop &#123;</span><br><span class="line"></span><br><span class="line">    <span class="variable">@DeclareParents</span>(value = <span class="string">"com.jiuxian..service..*"</span>, defaultImpl = DoSthServiceImpl.class)</span><br><span class="line">    public DoSthService doSthService;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>service代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">DoSthService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">doSth</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DoSthServiceImpl</span> <span class="keyword">implements</span> <span class="title">DoSthService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSth</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"do sth ...."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">testIntroduction</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testIntroduction</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"do testIntroduction"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试代码  </p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">testIntroduction</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    userService.testIntroduction();</span><br><span class="line">    <span class="comment">//Aop 让UserService方法拥有 DoSthService的方法</span></span><br><span class="line">    DoSthService doSthService = (DoSthService) userService;</span><br><span class="line">    doSthService.doSth();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span> testIntroduction</span><br><span class="line"><span class="keyword">do</span> sth <span class="built_in">..</span><span class="built_in">..</span></span><br></pre></td></tr></table></figure>
+
+<p>五、五种通知（增强）代码实现  </p>
+<p>配置类<br>(1) 对方法</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@Aspect</span></span><br><span class="line"><span class="variable">@Component</span></span><br><span class="line">public class TransactionAop &#123;</span><br><span class="line"></span><br><span class="line">    <span class="variable">@Pointcut</span>(<span class="string">"execution(* com.jiuxian..service.*.*(..))"</span>)</span><br><span class="line">    public void pointcut() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="variable">@Before</span>(<span class="string">"pointcut()"</span>)</span><br><span class="line">    public void beginTransaction() &#123;</span><br><span class="line">        <span class="selector-tag">System</span><span class="selector-class">.out</span><span class="selector-class">.println</span>(<span class="string">"before beginTransaction"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @<span class="selector-tag">After</span>(<span class="string">"pointcut()"</span>)</span><br><span class="line">    <span class="selector-tag">public</span> <span class="selector-tag">void</span> <span class="selector-tag">commit</span>() &#123;</span><br><span class="line">        <span class="selector-tag">System</span><span class="selector-class">.out</span><span class="selector-class">.println</span>(<span class="string">"after commit"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @<span class="selector-tag">AfterReturning</span>(<span class="string">"pointcut()"</span>, returning = <span class="string">"returnObject"</span>)</span><br><span class="line">    <span class="selector-tag">public</span> <span class="selector-tag">void</span> <span class="selector-tag">afterReturning</span>(JoinPoint joinPoint, Object returnObject) &#123;</span><br><span class="line">        <span class="selector-tag">System</span><span class="selector-class">.out</span><span class="selector-class">.println</span>(<span class="string">"afterReturning"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @<span class="selector-tag">AfterThrowing</span>(<span class="string">"pointcut()"</span>)</span><br><span class="line">    <span class="selector-tag">public</span> <span class="selector-tag">void</span> <span class="selector-tag">afterThrowing</span>() &#123;</span><br><span class="line">        <span class="selector-tag">System</span><span class="selector-class">.out</span><span class="selector-class">.println</span>(<span class="string">"afterThrowing afterThrowing  rollback"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @<span class="selector-tag">Around</span>(<span class="string">"pointcut()"</span>)</span><br><span class="line">    <span class="selector-tag">public</span> <span class="selector-tag">Object</span> <span class="selector-tag">around</span>(ProceedingJoinPoint joinPoint) <span class="selector-tag">throws</span> <span class="selector-tag">Throwable</span> &#123;</span><br><span class="line">        <span class="selector-tag">try</span> &#123;</span><br><span class="line">            <span class="selector-tag">System</span><span class="selector-class">.out</span><span class="selector-class">.println</span>(<span class="string">"around"</span>);</span><br><span class="line">            <span class="selector-tag">return</span> <span class="selector-tag">joinPoint</span><span class="selector-class">.proceed</span>();</span><br><span class="line">        &#125; <span class="selector-tag">catch</span> (Throwable e) &#123;</span><br><span class="line">            <span class="selector-tag">e</span><span class="selector-class">.printStackTrace</span>();</span><br><span class="line">            <span class="selector-tag">throw</span> <span class="selector-tag">e</span>;</span><br><span class="line">        &#125; <span class="selector-tag">finally</span> &#123;</span><br><span class="line">            <span class="selector-tag">System</span><span class="selector-class">.out</span><span class="selector-class">.println</span>(<span class="string">"around"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>(2) 对注解</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Target(ElementType.METHOD)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Log &#123;</span><br><span class="line">    String value() <span class="keyword">default</span> <span class="string">""</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnotationAop</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Pointcut(value = <span class="meta-string">"@annotation(log)"</span>, argNames = <span class="meta-string">"log"</span>)</span></span><br><span class="line">    <span class="keyword">public</span> void pointcut(Log log) &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Around(value = <span class="meta-string">"pointcut(log)"</span>, argNames = <span class="meta-string">"joinPoint,log"</span>)</span></span><br><span class="line">    <span class="keyword">public</span> Object around(ProceedingJoinPoint joinPoint, Log log) throws Throwable &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.<span class="keyword">out</span>.println(log.value());</span><br><span class="line">            System.<span class="keyword">out</span>.println(<span class="string">"around"</span>);</span><br><span class="line">            <span class="keyword">return</span> joinPoint.proceed();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable throwable) &#123;</span><br><span class="line">            <span class="keyword">throw</span> throwable;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            System.<span class="keyword">out</span>.println(<span class="string">"around"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Before(<span class="meta-string">"@annotation(com.jiuxian.annotation.Log)"</span>)</span></span><br><span class="line">    <span class="keyword">public</span> void before(JoinPoint joinPoint) &#123;</span><br><span class="line">        MethodSignature signature = (MethodSignature) joinPoint.getSignature();</span><br><span class="line">        Method method = signature.getMethod();</span><br><span class="line">        Log log = method.getAnnotation(Log.<span class="keyword">class</span>);</span><br><span class="line">        System.<span class="keyword">out</span>.println(<span class="string">"注解式拦截 "</span> + log.value());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>service 方法实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function">String <span class="title">save</span><span class="params">(String user)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">testAnnotationAop</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">save</span><span class="params">(String user)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"保存用户信息"</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"a"</span>.equals(user)) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> user;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Log</span>(value = <span class="string">"test"</span>)</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAnnotationAop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"testAnnotationAop"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringbootAopApplicationTests</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> UserService userService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAop1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        userService.save(<span class="string">"张三"</span>);</span><br><span class="line">        Assert.assertTrue(<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAop2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        userService.save(<span class="string">"a"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAop3</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        userService.testAnnotationAop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果<br>执行testAop1时</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">around</span></span><br><span class="line"><span class="keyword">before</span> beginTransaction</span><br><span class="line">保存用户信息</span><br><span class="line"><span class="keyword">around</span></span><br><span class="line"><span class="keyword">after</span> commit</span><br><span class="line">afterReturning :: 张三</span><br></pre></td></tr></table></figure>
+
+<p>执行testAop2时</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">around</span></span><br><span class="line"><span class="keyword">before</span> beginTransaction</span><br><span class="line">保存用户信息</span><br><span class="line"><span class="keyword">around</span></span><br><span class="line"><span class="keyword">after</span> commit</span><br><span class="line">afterThrowing  rollback</span><br></pre></td></tr></table></figure>
+
+<p>执行testAop3时</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">test</span><br><span class="line">around</span><br><span class="line">testAnnotationAop</span><br><span class="line">around</span><br></pre></td></tr></table></figure>
+
+<p>pom文件</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> &amp;<span class="keyword">lt</span>;dependency&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;groupId&amp;<span class="keyword">gt</span>;org.springframework.boot&amp;<span class="keyword">lt</span>;/groupId&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;artifactId&amp;<span class="keyword">gt</span>;spring-boot-starter-web&amp;<span class="keyword">lt</span>;/artifactId&amp;<span class="keyword">gt</span>;</span><br><span class="line">&amp;<span class="keyword">lt</span>;/dependency&amp;<span class="keyword">gt</span>;</span><br><span class="line"></span><br><span class="line">&amp;<span class="keyword">lt</span>;dependency&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;groupId&amp;<span class="keyword">gt</span>;org.springframework.boot&amp;<span class="keyword">lt</span>;/groupId&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;artifactId&amp;<span class="keyword">gt</span>;spring-boot-starter-aop&amp;<span class="keyword">lt</span>;/artifactId&amp;<span class="keyword">gt</span>;</span><br><span class="line">&amp;<span class="keyword">lt</span>;/dependency&amp;<span class="keyword">gt</span>;</span><br><span class="line"></span><br><span class="line">&amp;<span class="keyword">lt</span>;dependency&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;groupId&amp;<span class="keyword">gt</span>;org.springframework.boot&amp;<span class="keyword">lt</span>;/groupId&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;artifactId&amp;<span class="keyword">gt</span>;spring-boot-starter-test&amp;<span class="keyword">lt</span>;/artifactId&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;scope&amp;<span class="keyword">gt</span>;test&amp;<span class="keyword">lt</span>;/scope&amp;<span class="keyword">gt</span>;</span><br><span class="line">&amp;<span class="keyword">lt</span>;/dependency&amp;<span class="keyword">gt</span>;</span><br></pre></td></tr></table></figure>
+
+<p>六、最常用的execution解释  </p>
+<p><code>例: execution(* com.jiuxian..service.*.*(..))</code></p>
+<p>execution 表达式的主体<br>第一个* 代表任意的返回值<br>com.jiuxian aop所横切的包名<br>包后面.. 表示当前包及其子包<br>第二个* 表示类名，代表所有类<br>.*(..) 表示任何方法,括号代表参数 .. 表示任意参数  </p>
+<p>例:<code>execution(* com.jiuxian..service.*Service.add*(String))</code>   </p>
+<p>表示： com.jiuxian 包及其子包下的service包下，类名以Service结尾，方法以add开头，参数类型为String的方法的切点。</p>
+<p>七、特别的用法  </p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@Pointcut</span>(<span class="string">"execution(public * *(..))"</span>)</span><br><span class="line">private void anyPublicOperation() &#123;&#125; </span><br><span class="line"></span><br><span class="line"><span class="variable">@Pointcut</span>(<span class="string">"within(com.xyz.someapp.trading..*)"</span>)</span><br><span class="line">private void inTrading() &#123;&#125; </span><br><span class="line"></span><br><span class="line"><span class="variable">@Pointcut</span>(<span class="string">"anyPublicOperation() &amp;amp;&amp;amp; inTrading()"</span>)</span><br><span class="line">private void tradingOperation() &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以使用 &amp;&amp;, ||, ! 运算符来定义切点</p>
+<p>八、更多详细介绍请参阅官网<br><a href="https://link.juejin.im/?target=https%3A%2F%2Fdocs.spring.io%2Fspring%2Fdocs%2Fcurrent%2Fspring-framework-reference%2Fcore.html%23aop-pointcuts" target="_blank" rel="noopener">springAOP官网地址</a></p>
+<p>一、示例应用场景：对所有的web请求做切面来记录日志。</p>
+<ul>
+<li>1、pom中引入SpringBoot的web模块和使用AOP相关的依赖： <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> &amp;<span class="keyword">lt</span>;dependency&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;groupId&amp;<span class="keyword">gt</span>;org.springframework.boot&amp;<span class="keyword">lt</span>;/groupId&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;artifactId&amp;<span class="keyword">gt</span>;spring-boot-starter-web&amp;<span class="keyword">lt</span>;/artifactId&amp;<span class="keyword">gt</span>;</span><br><span class="line">&amp;<span class="keyword">lt</span>;/dependency&amp;<span class="keyword">gt</span>;</span><br><span class="line">&amp;<span class="keyword">lt</span>;dependency&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;groupId&amp;<span class="keyword">gt</span>;org.aspectj&amp;<span class="keyword">lt</span>;/groupId&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;artifactId&amp;<span class="keyword">gt</span>;aspectjrt&amp;<span class="keyword">lt</span>;/artifactId&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;<span class="keyword">version</span>&amp;<span class="keyword">gt</span>;<span class="number">1.6</span>.<span class="number">11</span>&amp;<span class="keyword">lt</span>;/<span class="keyword">version</span>&amp;<span class="keyword">gt</span>;</span><br><span class="line">&amp;<span class="keyword">lt</span>;/dependency&amp;<span class="keyword">gt</span>;</span><br><span class="line">&amp;<span class="keyword">lt</span>;dependency&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;groupId&amp;<span class="keyword">gt</span>;org.aspectj&amp;<span class="keyword">lt</span>;/groupId&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;artifactId&amp;<span class="keyword">gt</span>;aspectjweaver&amp;<span class="keyword">lt</span>;/artifactId&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;<span class="keyword">version</span>&amp;<span class="keyword">gt</span>;<span class="number">1.6</span>.<span class="number">11</span>&amp;<span class="keyword">lt</span>;/<span class="keyword">version</span>&amp;<span class="keyword">gt</span>;</span><br><span class="line">&amp;<span class="keyword">lt</span>;/dependency&amp;<span class="keyword">gt</span>;</span><br><span class="line">&amp;<span class="keyword">lt</span>;dependency&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;groupId&amp;<span class="keyword">gt</span>;cglib&amp;<span class="keyword">lt</span>;/groupId&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;artifactId&amp;<span class="keyword">gt</span>;cglib&amp;<span class="keyword">lt</span>;/artifactId&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;<span class="keyword">version</span>&amp;<span class="keyword">gt</span>;<span class="number">2.1</span>&amp;<span class="keyword">lt</span>;/<span class="keyword">version</span>&amp;<span class="keyword">gt</span>;</span><br><span class="line">&amp;<span class="keyword">lt</span>;/dependency&amp;<span class="keyword">gt</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<p>其中：<br>cglib包是用来动态代理用的,基于类的代理；<br>aspectjrt和aspectjweaver是与aspectj相关的包,用来支持切面编程的；<br>aspectjrt包是aspectj的runtime包；<br>aspectjweaver是aspectj的织入包；  </p>
+<ul>
+<li>2、实现一个简单的web请求入口（实现传入name参数，返回“hello xxx”的功能）： </li>
+</ul>
+<p>注意：在完成了引入AOP依赖包后，一般来说并不需要去做其他配置。使用过Spring注解配置方式的人会问是否需要在程序主类中增加@EnableAspectJAutoProxy来启用，实际并不需要。<br>因为在AOP的默认配置属性中，spring.aop.auto属性默认是开启的，也就是说只要引入了AOP依赖后，默认已经增加了@EnableAspectJAutoProxy。  </p>
+<ul>
+<li>3、定义切面类，实现web层的日志切面   </li>
+</ul>
+<p>** 要想把一个类变成切面类，需要两步 **  </p>
+<p>① 在类上使用 @Component 注解 把切面类加入到IOC容器中<br>② 在类上使用 @Aspect 注解 使之成为切面类  </p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">package com.example.aop;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.JoinPoint;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.AfterReturning;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Aspect;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Before;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Pointcut;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.context.request.RequestContextHolder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.context.request.ServletRequestAttributes;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by lmb on 2018/9/5.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">@<span class="type">Aspect</span></span><br><span class="line">@<span class="type">Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebLogAcpect</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">Logger</span> logger = <span class="type">LoggerFactory</span>.getLogger(<span class="type">WebLogAcpect</span>.<span class="keyword">class</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 定义切入点，切入点为com.example.aop下的所有函数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    @<span class="type">Pointcut</span>(<span class="string">"execution(public * com.example.aop..*.*(..))"</span>)</span><br><span class="line">    <span class="keyword">public</span> void webLog()&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 前置通知：在连接点之前执行的通知</span></span><br><span class="line"><span class="comment">     * @param joinPoint</span></span><br><span class="line"><span class="comment">     * @throws Throwable</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    @<span class="type">Before</span>(<span class="string">"webLog()"</span>)</span><br><span class="line">    <span class="keyword">public</span> void doBefore(<span class="type">JoinPoint</span> joinPoint) <span class="keyword">throws</span> <span class="type">Throwable</span> &#123;</span><br><span class="line">        <span class="comment">// 接收到请求，记录请求内容</span></span><br><span class="line">        <span class="type">ServletRequestAttributes</span> attributes = (<span class="type">ServletRequestAttributes</span>) <span class="type">RequestContextHolder</span>.getRequestAttributes();</span><br><span class="line">        <span class="type">HttpServletRequest</span> request = attributes.getRequest();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 记录下请求内容</span></span><br><span class="line">        logger.info(<span class="string">"URL : "</span> + request.getRequestURL().<span class="built_in">toString</span>());</span><br><span class="line">        logger.info(<span class="string">"HTTP_METHOD : "</span> + request.getMethod());</span><br><span class="line">        logger.info(<span class="string">"IP : "</span> + request.getRemoteAddr());</span><br><span class="line">        logger.info(<span class="string">"CLASS_METHOD : "</span> + joinPoint.getSignature().getDeclaringTypeName() + <span class="string">"."</span> + joinPoint.getSignature().getName());</span><br><span class="line">        logger.info(<span class="string">"ARGS : "</span> + <span class="type">Arrays</span>.<span class="built_in">toString</span>(joinPoint.getArgs()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @<span class="type">AfterReturning</span>(returning = <span class="string">"ret"</span>,pointcut = <span class="string">"webLog()"</span>)</span><br><span class="line">    <span class="keyword">public</span> void doAfterReturning(<span class="type">Object</span> ret) <span class="keyword">throws</span> <span class="type">Throwable</span> &#123;</span><br><span class="line">        <span class="comment">// 处理完请求，返回内容</span></span><br><span class="line">        logger.info(<span class="string">"RESPONSE : "</span> + ret);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上的切面类通过 @Pointcut定义的切入点为com.example.aop包下的所有函数做切入，通过 @Before实现切入点的前置通知，通过 @AfterReturning记录请求返回的对象。<br>访问<a href="http://localhost:8004/hello?name=lmb得到控制台输出如下：" target="_blank" rel="noopener">http://localhost:8004/hello?name=lmb得到控制台输出如下：</a> </p>
+<p><a href="https://github.com/LiuMengBing/demo-web/tree/master/src/main/java/com/example/aop" target="_blank" rel="noopener">https://github.com/LiuMengBing/demo-web/tree/master/src/main/java/com/example/aop</a><br>二、AOP支持的通知   </p>
+<ul>
+<li>1、前置通知@Before：在某连接点之前执行的通知，除非抛出一个异常，否则这个通知不能阻止连接点之前的执行流程。  </li>
+</ul>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment"> * 前置通知，方法调用前被调用 </span></span><br><span class="line"><span class="comment"> * @param joinPoint/null</span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line">@Before(value = POINT_CUT)</span><br><span class="line">public <span class="keyword">void</span> before(JoinPoint joinPoint)&#123;</span><br><span class="line">    logger.info(<span class="string">"前置通知"</span>);</span><br><span class="line">    <span class="comment">//获取目标方法的参数信息  </span></span><br><span class="line">    <span class="built_in">Object</span>[] obj = joinPoint.getArgs();  </span><br><span class="line">    <span class="comment">//AOP代理类的信息  </span></span><br><span class="line">    joinPoint.getThis();  </span><br><span class="line">    <span class="comment">//代理的目标对象  </span></span><br><span class="line">    joinPoint.getTarget();  </span><br><span class="line">    <span class="comment">//用的最多 通知的签名  </span></span><br><span class="line">    Signature signature = joinPoint.getSignature();  </span><br><span class="line">    <span class="comment">//代理的是哪一个方法  </span></span><br><span class="line">    logger.info(<span class="string">"代理的是哪一个方法"</span>+signature.getName());  </span><br><span class="line">    <span class="comment">//AOP代理类的名字  </span></span><br><span class="line">    logger.info(<span class="string">"AOP代理类的名字"</span>+signature.getDeclaringTypeName());  </span><br><span class="line">    <span class="comment">//AOP代理类的类（class）信息  </span></span><br><span class="line">    signature.getDeclaringType();  </span><br><span class="line">    <span class="comment">//获取RequestAttributes  </span></span><br><span class="line">    RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();  </span><br><span class="line">    <span class="comment">//从获取RequestAttributes中获取HttpServletRequest的信息  </span></span><br><span class="line">    HttpServletRequest request = (HttpServletRequest) requestAttributes.resolveReference(RequestAttributes.REFERENCE_REQUEST);  </span><br><span class="line">    <span class="comment">//如果要获取Session信息的话，可以这样写：  </span></span><br><span class="line">    <span class="comment">//HttpSession session = (HttpSession) requestAttributes.resolveReference(RequestAttributes.REFERENCE_SESSION);  </span></span><br><span class="line">    <span class="comment">//获取请求参数</span></span><br><span class="line">    Enumeration&amp;lt;<span class="built_in">String</span>&amp;gt; <span class="built_in">enumeration</span> = request.getParameterNames();  </span><br><span class="line">    <span class="built_in">Map</span>&amp;lt;<span class="built_in">String</span>,<span class="built_in">String</span>&amp;gt; parameterMap = Maps.newHashMap();  </span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">enumeration</span>.hasMoreElements())&#123;  </span><br><span class="line">        <span class="built_in">String</span> parameter = <span class="built_in">enumeration</span>.nextElement();  </span><br><span class="line">        parameterMap.put(parameter,request.getParameter(parameter));  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="built_in">String</span> str = <span class="built_in">JSON</span>.toJSONString(parameterMap);  </span><br><span class="line">    <span class="keyword">if</span>(obj.length &amp;gt; <span class="number">0</span>) &#123;  </span><br><span class="line">        logger.info(<span class="string">"请求的参数信息为："</span>+str);</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：这里用到了JoinPoint和RequestContextHolder。<br>1）通过JoinPoint可以获得通知的签名信息，如目标方法名、目标方法参数信息等；<br>2）通过RequestContextHolder来获取请求信息，Session信息；</p>
+<ul>
+<li>2、后置通知@AfterReturning：在某连接点之后执行的通知，通常在一个匹配的方法返回的时候执行（可以在后置通知中绑定返回值）。</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="markdown">/** </span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="bullet"> * </span>后置返回通知 </span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="bullet"> * </span>这里需要注意的是: </span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="bullet"> *      </span>如果参数中的第一个参数为JoinPoint，则第二个参数为返回值的信息 </span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="bullet"> *      </span>如果参数中的第一个参数不为JoinPoint，则第一个参数为returning中对应的参数 </span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="bullet"> *       </span>returning：限定了只有目标方法返回值与通知方法相应参数类型时才能执行后置返回通知，否则不执行，</span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="bullet"> *       </span>对于returning对应的通知方法参数为Object类型将匹配任何目标返回值 </span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="bullet"> * </span>@param joinPoint </span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="bullet"> * </span>@param keys </span></span></span><br><span class="line"><span class="comment"><span class="markdown"> */</span></span>  </span><br><span class="line"><span class="meta">@AfterReturning</span>(value = POINT_CUT,returning = <span class="string">"keys"</span>)  </span><br><span class="line">public <span class="keyword">void</span> doAfterReturningAdvice1(JoinPoint joinPoint,<span class="built_in">Object</span> keys)&#123;  </span><br><span class="line">    logger.info(<span class="string">"第一个后置返回通知的返回值："</span>+keys);  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="meta">@AfterReturning</span>(value = POINT_CUT,returning = <span class="string">"keys"</span>,argNames = <span class="string">"keys"</span>)  </span><br><span class="line">public <span class="keyword">void</span> doAfterReturningAdvice2(<span class="built_in">String</span> keys)&#123;  </span><br><span class="line">    logger.info(<span class="string">"第二个后置返回通知的返回值："</span>+keys);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>3、后置异常通知@AfterThrowing：在方法抛出异常退出时执行的通知。</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="markdown">/** </span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="bullet"> * </span>后置异常通知 </span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="bullet"> *  </span>定义一个名字，该名字用于匹配通知实现方法的一个参数名，当目标方法抛出异常返回后，将把目标方法抛出的异常传给通知方法； </span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="bullet"> *  </span>throwing:限定了只有目标方法抛出的异常与通知方法相应参数异常类型时才能执行后置异常通知，否则不执行， </span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="bullet"> *           </span>对于throwing对应的通知方法参数为Throwable类型将匹配任何异常。 </span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="bullet"> * </span>@param joinPoint </span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="bullet"> * </span>@param exception </span></span></span><br><span class="line"><span class="comment"><span class="markdown"> */</span></span>  </span><br><span class="line"><span class="meta">@AfterThrowing</span>(value = POINT_CUT,throwing = <span class="string">"exception"</span>)  </span><br><span class="line">public <span class="keyword">void</span> doAfterThrowingAdvice(JoinPoint joinPoint,Throwable exception)&#123;  </span><br><span class="line">    <span class="comment">//目标方法名：  </span></span><br><span class="line">    logger.info(joinPoint.getSignature().getName());  </span><br><span class="line">    <span class="keyword">if</span>(exception instanceof NullPointerException)&#123;  </span><br><span class="line">        logger.info(<span class="string">"发生了空指针异常!!!!!"</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>4、后置最终通知@After：当某连接点退出时执行的通知（不论是正常返回还是异常退出）。</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment"> * 后置最终通知（目标方法只要执行完了就会执行后置通知方法） </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> joinPoint </span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="meta">@After</span>(value = POINT_CUT)  </span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">doAfterAdvice</span><span class="params">(JoinPoint joinPoint)</span></span>&#123; </span><br><span class="line">    logger.info(<span class="string">"后置最终通知执行了!!!!"</span>);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>5、环绕通知@Around：包围一个连接点的通知，如方法调用等。这是最强大的一种通知类型。环绕通知可以在方法调用前后完成自定义的行为，它也会选择是否继续执行连接点或者直接返回它自己的返回值或抛出异常来结束执行。</p>
+</li>
+</ul>
+<p>环绕通知最强大，也最麻烦，是一个对方法的环绕，具体方法会通过代理传递到切面中去，切面中可选择执行方法与否，执行几次方法等。环绕通知使用一个代理ProceedingJoinPoint类型的对象来管理目标对象，所以此通知的第一个参数必须是ProceedingJoinPoint类型。在通知体内调用ProceedingJoinPoint的proceed()方法会导致后台的连接点方法执行。proceed()方法也可能会被调用并且传入一个<code>Object[]</code>对象，该数组中的值将被作为方法执行时的入参。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="markdown">/** </span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="bullet"> * </span>环绕通知： </span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="bullet"> *   </span>环绕通知非常强大，可以决定目标方法是否执行，什么时候执行，执行时是否需要替换方法参数，执行完毕是否需要替换返回值。 </span></span></span><br><span class="line"><span class="comment"><span class="markdown"><span class="bullet"> *   </span>环绕通知第一个参数必须是org.aspectj.lang.ProceedingJoinPoint类型 </span></span></span><br><span class="line"><span class="comment"><span class="markdown"> */</span></span>  </span><br><span class="line"><span class="meta">@Around</span>(value = POINT_CUT)  </span><br><span class="line">public <span class="built_in">Object</span> doAroundAdvice(ProceedingJoinPoint proceedingJoinPoint)&#123;  </span><br><span class="line">    logger.info(<span class="string">"环绕通知的目标方法名："</span>+proceedingJoinPoint.getSignature().getName());  </span><br><span class="line">    <span class="keyword">try</span> &#123;  </span><br><span class="line">        <span class="built_in">Object</span> obj = proceedingJoinPoint.proceed();  </span><br><span class="line">        <span class="keyword">return</span> obj;  </span><br><span class="line">    &#125; <span class="keyword">catch</span> (Throwable throwable) &#123;  </span><br><span class="line">        throwable.printStackTrace();  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>6、有时候我们定义切面的时候，切面中需要使用到目标对象的某个参数，如何使切面能得到目标对象的参数呢？可以使用args来绑定。如果在一个args表达式中应该使用类型名字的地方使用一个参数名字，那么当通知执行的时候对象的参数值将会被传递进来。</li>
+</ul>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Before</span>(<span class="string">"execution(* findById*(..)) &amp;amp;&amp;amp;"</span> + <span class="string">"args(id,..)"</span>)</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">twiceAsOld1</span><span class="params">(Long id)</span></span>&#123;</span><br><span class="line">        System.err.println (<span class="string">"切面before执行了。。。。id=="</span> + id);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>** 注意：任何通知方法都可以将第一个参数定义为org.aspectj.lang.JoinPoint类型（环绕通知需要定义第一个参数为ProceedingJoinPoint类型，它是 JoinPoint 的一个子类）。 **  
+JoinPoint接口提供了一系列有用的方法，比如: </p>
+<ul>
+<li>[] getArgs()（返回方法参数）、</li>
+<li>[] getThis()（返回代理对象）、</li>
+<li>[] getTarget()（返回目标）、</li>
+<li>[] getSignature()（返回正在被通知的方法相关信息）和 </li>
+<li>[] toString()（打印出正在被通知的方法的有用信息）。</li>
+</ul>
+<p>三、切入点表达式<br>定义切入点的时候需要一个包含名字和任意参数的签名，还有一个切入点表达式，如:  execution(public * com.example.aop…(..))<br>** 切入点表达式的格式：execution([可见性]返回类型[声明类型].方法名(参数)[异常]) **   
+其中<code>[]</code>内的是可选的，其它的还支持通配符的使用：   </p>
+<p>1) *：匹配所有字符<br>2) ..：一般用于匹配多个包，多个参数<br>3) +：表示类及其子类<br>4)运算符有：&amp;&amp;,||,!  </p>
+<p>切入点表达式关键词用例： </p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">1</span>）<span class="selector-tag">execution</span>：用于匹配子表达式。 </span><br><span class="line"><span class="comment">//匹配com.cjm.model包及其子包中所有类中的所有方法，返回类型任意，方法参数任意 </span></span><br><span class="line">@<span class="selector-tag">Pointcut</span>(“execution(* com.cjm.model...(..))”) </span><br><span class="line"><span class="selector-tag">public</span> <span class="selector-tag">void</span> <span class="selector-tag">before</span>()&#123;&#125;</span><br><span class="line"><span class="selector-tag">2</span>）<span class="selector-tag">within</span>：用于匹配连接点所在的<span class="selector-tag">Java</span>类或者包。 </span><br><span class="line"><span class="comment">//匹配Person类中的所有方法 </span></span><br><span class="line">@<span class="selector-tag">Pointcut</span>(“within(com.cjm.model.Person)”) </span><br><span class="line"><span class="selector-tag">public</span> <span class="selector-tag">void</span> <span class="selector-tag">before</span>()&#123;&#125; </span><br><span class="line"><span class="comment">//匹配com.cjm包及其子包中所有类中的所有方法 </span></span><br><span class="line"><span class="variable">@Pointcut</span>(“within(com.cjm..*)”) </span><br><span class="line">public void before()&#123;&#125;</span><br><span class="line"><span class="number">3</span>） this：用于向通知方法中传入代理对象的引用。 </span><br><span class="line"><span class="variable">@Before</span>(“before() &amp;amp;&amp;amp; this(proxy)”) </span><br><span class="line">public void beforeAdvide(JoinPoint point, Object proxy)&#123; </span><br><span class="line"><span class="comment">//处理逻辑 </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="number">4</span>）target：用于向通知方法中传入目标对象的引用。 </span><br><span class="line"><span class="variable">@Before</span>(“before() &amp;amp;&amp;amp; target(target) </span><br><span class="line">public void beforeAdvide(JoinPoint point, Object proxy)&#123; </span><br><span class="line"><span class="comment">//处理逻辑 </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="number">5</span>）args：用于将参数传入到通知方法中。 </span><br><span class="line"><span class="variable">@Before</span>(“before() &amp;amp;&amp;amp; args(age,username)”) </span><br><span class="line">public void beforeAdvide(JoinPoint point, int age, String username)&#123; </span><br><span class="line"><span class="comment">//处理逻辑 </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="number">6</span>）<span class="variable">@within</span> ：用于匹配在类一级使用了参数确定的注解的类，其所有方法都将被匹配。 </span><br><span class="line"><span class="variable">@Pointcut</span>(“<span class="variable">@within</span>(com.cjm.annotation.AdviceAnnotation)”) </span><br><span class="line">－ 所有被<span class="variable">@AdviceAnnotation</span>标注的类都将匹配 </span><br><span class="line">public void before()&#123;&#125;</span><br><span class="line"><span class="number">7</span>）<span class="variable">@target</span> ：和<span class="variable">@within</span>的功能类似，但必须要指定注解接口的保留策略为RUNTIME。 </span><br><span class="line"><span class="variable">@Pointcut</span>(“<span class="variable">@target</span>(com.cjm.annotation.AdviceAnnotation)”) </span><br><span class="line">public void before()&#123;&#125;</span><br><span class="line"><span class="number">8</span>）<span class="variable">@args</span> ：传入连接点的对象对应的Java类必须被<span class="variable">@args</span>指定的Annotation注解标注。 </span><br><span class="line"><span class="variable">@Before</span>(“<span class="variable">@args</span>(com.cjm.annotation.AdviceAnnotation)”) </span><br><span class="line">public void beforeAdvide(JoinPoint point)&#123; </span><br><span class="line"><span class="comment">//处理逻辑 </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="number">9</span>）<span class="variable">@annotation</span> ：匹配连接点被它参数指定的Annotation注解的方法。也就是说，所有被指定注解标注的方法都将匹配。 </span><br><span class="line"><span class="variable">@Pointcut</span>(“<span class="variable">@annotation</span>(com.cjm.annotation.AdviceAnnotation)”) </span><br><span class="line">public void before()&#123;&#125;</span><br><span class="line"><span class="number">10</span>）bean：通过受管Bean的名字来限定连接点所在的Bean。该关键词是Spring2.<span class="number">5</span>新增的。 </span><br><span class="line"><span class="variable">@Pointcut</span>(“bean(person)”) </span><br><span class="line">public void before()&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/07/15/springboot-aop/" data-id="ckbdc9v1d00r424u22f3jfxof" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AOP/">AOP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SPRINGBOOT/">SPRINGBOOT</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-handleintercepertor" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/15/handleintercepertor/" class="article-date">
+  <time datetime="2019-07-15T11:33:00.000Z" itemprop="datePublished">2019-07-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/15/handleintercepertor/">HandlerInterceptor</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Spring Boot使用处理器拦截器HandlerInterceptor</p>
+<p>首先我们说说什么是处理器拦截器，SpringWebMVC的处理器拦截器，类似于Servlet开发中的过滤器Filter，用于处理器进行预处理和后处理。</p>
+<table>
+<thead>
+<tr>
+<th align="left">使用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1、日志记录：记录请求信息的日志，以便进行信息监控、信息统计、计算PV（Page View）等.</td>
+</tr>
+<tr>
+<td align="left">2、权限检查：如登录检测，进入处理器检测检测是否登录，如果没有直接返回到登录页面；</td>
+</tr>
+<tr>
+<td align="left">3、性能监控：有时候系统在某段时间莫名其妙的慢，可以通过拦截器在进入处理器之前记录开始时间，在处理完后记录结束时间，从而得到该请求的处理时间（如果有反向代理，如apache可以自动记录）；</td>
+</tr>
+<tr>
+<td align="left">4、通用行为：读取cookie得到用户信息并将用户对象放入请求，从而方便后续流程使用，还有如提取Locale、Theme信息等，只要是多个处理器都需要的即可使用拦截器实现。</td>
+</tr>
+<tr>
+<td align="left">5、OpenSessionInView：如Hibernate，在进入处理器打开Session，在完成后关闭Session。…………本质也是AOP（面向切面编程），也就是说符合横切关注点的所有功能都可以放入拦截器实现。</td>
+</tr>
+</tbody></table>
+<p>实现方式  </p>
+<ul>
+<li><p>1、引入spring-boot-starter-web<br>在pom.xml 中引入spring-boot-starter-web包。</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&amp;<span class="keyword">lt</span>;dependency&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;groupId&amp;<span class="keyword">gt</span>;org.springframework.boot&amp;<span class="keyword">lt</span>;/groupId&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;artifactId&amp;<span class="keyword">gt</span>;spring-boot-starter-web&amp;<span class="keyword">lt</span>;/artifactId&amp;<span class="keyword">gt</span>;</span><br><span class="line">&amp;<span class="keyword">lt</span>;/dependency&amp;<span class="keyword">gt</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2、建立拦截器<br>preHandle ：在DispatcherServlet之前执行。<br>postHandle：在controller执行之后的DispatcherServlet之后执行。<br>afterCompletion：在页面渲染完成返回给客户端之前执行。</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PiceaInterceptor</span> <span class="keyword">implements</span> <span class="title">HandlerInterceptor</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *在DispatcherServlet之前执行</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> response</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> handler</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object <span class="keyword">handler</span>)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"我是在DispatcherServlet之前执行的方法"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 在controller执行之后的DispatcherServlet之后执行</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> response</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> handler</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> modelAndView</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">postHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object <span class="keyword">handler</span>, ModelAndView modelAndView)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"在controller执行之后的DispatcherServlet之后执行"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 在页面渲染完成返回给客户端之前执行</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> response</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> handler</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> ex</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">afterCompletion</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object <span class="keyword">handler</span>, Exception ex)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"在页面渲染完成返回给客户端之前执行"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3、建立WebAppConfigurer类<br>这个类的主要作用是注册上我们配置的拦截器。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PiceaWebAppConfigurer</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> </span>&#123;</span><br><span class="line">        registry.addInterceptor(authenticationInterceptor())<span class="comment">//增加过滤的方法类</span></span><br><span class="line">                .addPathPatterns(<span class="string">"/**"</span>);<span class="comment">//定义过滤的范围</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> PiceaInterceptor <span class="title">authenticationInterceptor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> PiceaInterceptor();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>4、建立Contoller类<br>这个类比较简单，不做特别说明</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PiceaContoller</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/query"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">asyncTask</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"我是控制类里面的方法，我正在思考..............."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>5、测试结果<br>在浏览中输入：<a href="http://localhost:2001/query" target="_blank" rel="noopener">http://localhost:2001/query</a><br>这个时候控制台的输入为如下图片。</p>
+</li>
+</ul>
+<p>Spring-boot-fi-interceptor.png</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/07/15/handleintercepertor/" data-id="ckbdc9uua008w24u2qbkzvih7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SPRINGBOOT/">SPRINGBOOT</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-类加载器读取配置文件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/14/类加载器读取配置文件/" class="article-date">
+  <time datetime="2019-07-14T16:32:00.000Z" itemprop="datePublished">2019-07-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/14/类加载器读取配置文件/">类加载器读取配置文件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>用类加载器的5种方式读取.properties文件</p>
+<p>用类加载器的5中形式读取.properties文件（这个.properties文件一般放在src的下面）</p>
+<p>用类加载器进行读取：这里采取先向大家讲读取类加载器的几种方法；然后写一个例子把几种方法融进去，让大家直观感受。最后分析原理。（主要是结合所牵涉的方法的源代码的角度进行分析）</p>
+<p>这里先介绍用类加载器读取的几种方法:</p>
+<p>1.任意类名.class.getResourceAsStream(“/文件所在的位置”);【文件所在的位置从包名开始写】</p>
+<p>2.和.properties文件在同一个目录下的类名.class.getResourceAsStream(“文件所在的位置”);【文件所在的位置从包名开始写，注意这里和上面的相比较少了一个斜杠/】</p>
+<p>　　当然你也可以写成跟1一样的形式即：任意类名.class.getResourceAsStream(“/文件所在的位置”);</p>
+<p>3.任意类名.class.getClassLoader().getResourceAsStream(“文件所在的位置”);【文件所在的位置从包名开始写】</p>
+<p>4.任意类名.class.getClassLoader().getResource(“文件所在的位置”).openStream();【文件所在的位置从包名开始写】</p>
+<p>5.任意类名.class.getClassLoader().getResource(“文件所在的位置”)..openConnection().getInputStream();【文件所在的位置从包名开始写】</p>
+<p>//一个例子，说明上述5中方法的用法。</p>
+<p>上面图片中的各个红色矩形就是我要读取的properties文件。主要是两类。一类直接放在src下面。另一类是放在某个文件夹下面.</p>
+<p>//f.properties文件的内容如下图所示；</p>
+<p>//上述五种情况说明的代码如下：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">1</span> package com.qls.commonclass;</span><br><span class="line"> <span class="number">2</span> </span><br><span class="line"> <span class="number">3</span> import java.io.IOException;</span><br><span class="line"> <span class="number">4</span> import java.io.InputStream;</span><br><span class="line"> <span class="number">5</span> import java.util.Properties;</span><br><span class="line"> <span class="number">6</span> </span><br><span class="line"> <span class="number">7</span> import com.qls.counter.Ok;</span><br><span class="line"> <span class="number">8</span> </span><br><span class="line"> <span class="number">9</span> <span class="comment">/**</span></span><br><span class="line"><span class="comment">10  * 分别用类加载器的5种方法读取f.properties文件。</span></span><br><span class="line"><span class="comment">11  * @author 秦林森</span></span><br><span class="line"><span class="comment">12  *</span></span><br><span class="line"><span class="comment">13  */</span></span><br><span class="line"><span class="number">14</span> public class Test6 &#123;</span><br><span class="line"><span class="number">15</span> </span><br><span class="line"><span class="number">16</span>     public static void main(String[] args) throws IOException &#123;</span><br><span class="line"><span class="number">17</span>         <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line"><span class="number">18</span>         <span class="comment">/**第一种情形获取输入流。</span></span><br><span class="line"><span class="comment">19          * 任意类名.class.getResourceAsStream("/文件所在的位置");【文件所在的位置从包名开始写】</span></span><br><span class="line"><span class="comment">20          * @param args</span></span><br><span class="line"><span class="comment">21          */</span></span><br><span class="line"><span class="number">22</span>         <span class="comment">//获取输入流</span></span><br><span class="line"><span class="number">23</span>         InputStream in = Test.class.getResourceAsStream(<span class="string">"/com/qls/counter/f.properties"</span>);</span><br><span class="line"><span class="number">24</span>         <span class="comment">/**</span></span><br><span class="line"><span class="comment">25          * 第二种情形获取输入流。</span></span><br><span class="line"><span class="comment">26          * 和.properties文件在同一个目录下的类名.class.getResourceAsStream("文件所在的位置");</span></span><br><span class="line"><span class="comment">27          * 【文件所在的位置从包名开始写，注意这里和上面的相比较少了一个斜杠/】</span></span><br><span class="line"><span class="comment">28          * 这里随便选择一个与：f.properties在同一个目录下的类比如Ok这个类吧！</span></span><br><span class="line"><span class="comment">29          * 这里你自然也可以写成跟第一种情况一样的形式：</span></span><br><span class="line"><span class="comment">30          * 即：</span></span><br><span class="line"><span class="comment">31          * InputStream in2 = Ok.class.getResourceAsStream("/com/qls/counter/f.properties");</span></span><br><span class="line"><span class="comment">32          * 因为第一种情况是针对任意一个类而言的公式。</span></span><br><span class="line"><span class="comment">33          */</span></span><br><span class="line"><span class="number">34</span>         InputStream in2 = Ok.class.getResourceAsStream(<span class="string">"f.properties"</span>);</span><br><span class="line"><span class="number">35</span>         <span class="comment">/**</span></span><br><span class="line"><span class="comment">36          * 第三种情形获取输入流：</span></span><br><span class="line"><span class="comment">37          * 任意类名.class.getClassLoader().getResourceAsStream("文件所在的位置");</span></span><br><span class="line"><span class="comment">38          * 【文件所在的位置从包名开始写】</span></span><br><span class="line"><span class="comment">39          */</span></span><br><span class="line"><span class="number">40</span>         InputStream in3 = Test2.class.getClassLoader().getResourceAsStream(<span class="string">"com/qls/counter/f.properties"</span>);</span><br><span class="line"><span class="number">41</span>         <span class="comment">/**</span></span><br><span class="line"><span class="comment">42          * 第四中情形获取输入流：</span></span><br><span class="line"><span class="comment">43          * 任意类名.class.getClassLoader().getResource("文件所在的位置").openStream();</span></span><br><span class="line"><span class="comment">44          * 【文件所在的位置从包名开始写】</span></span><br><span class="line"><span class="comment">45          */</span></span><br><span class="line"><span class="number">46</span>         InputStream in4 = Test4.class.getClassLoader().getResource(<span class="string">"com/qls/counter/f.properties"</span>).openStream();</span><br><span class="line"><span class="number">47</span>         <span class="comment">/**</span></span><br><span class="line"><span class="comment">48          * 第五种情形获取输入流：</span></span><br><span class="line"><span class="comment">49          * .任意类名.class.getClassLoader().getResource("文件所在的位置").openConnection().getInputStream();</span></span><br><span class="line"><span class="comment">50          * 【文件所在的位置从包名开始写】</span></span><br><span class="line"><span class="comment">51          */</span></span><br><span class="line"><span class="number">52</span>         InputStream in5 = Test5.class.getClassLoader().getResource(<span class="string">"com/qls/counter/f.properties"</span>).openConnection().getInputStream();</span><br><span class="line"><span class="number">53</span>         <span class="comment">//创建Properties</span></span><br><span class="line"><span class="number">54</span>         Properties prop=new Properties();</span><br><span class="line"><span class="number">55</span>         <span class="comment">//把输入流in加载到prop中</span></span><br><span class="line"><span class="number">56</span>         <span class="comment">/*</span></span><br><span class="line"><span class="comment">57          * 验证上述5中输入流是否成立。只需带入prop.load(InputStream inputStream);验证即可。</span></span><br><span class="line"><span class="comment">58          * 也就是：</span></span><br><span class="line"><span class="comment">59          * prop.load(in);</span></span><br><span class="line"><span class="comment">60          * prop.load(in2);</span></span><br><span class="line"><span class="comment">61          * prop.load(in3);</span></span><br><span class="line"><span class="comment">62          * prop.load(in4);</span></span><br><span class="line"><span class="comment">63          * prop.load(in5);</span></span><br><span class="line"><span class="comment">64          */</span></span><br><span class="line"><span class="number">65</span>         prop.load(in5);</span><br><span class="line"><span class="number">66</span>         System.out.println(<span class="string">"sixi="</span>+prop.getProperty(<span class="string">"sixi"</span>));</span><br><span class="line"><span class="number">67</span>         System.out.println(<span class="string">"ouyangfeng="</span>+prop.getProperty(<span class="string">"ouyangfeng"</span>));</span><br><span class="line"><span class="number">68</span>         System.out.println(<span class="string">"rape="</span>+prop.getProperty(<span class="string">"farm"</span>));</span><br><span class="line"><span class="number">69</span>     &#125;</span><br><span class="line"><span class="number">70</span> </span><br><span class="line"><span class="number">71</span> &#125;<span class="comment">/*</span></span><br><span class="line"><span class="comment">72 Output:</span></span><br><span class="line"><span class="comment">73 sixi=river</span></span><br><span class="line"><span class="comment">74 ouyangfeng=masses</span></span><br><span class="line"><span class="comment">75 farm=flower</span></span><br><span class="line"><span class="comment">76 **/</span><span class="comment">//:~</span></span><br></pre></td></tr></table></figure>
+
+<p>上述5中方法的原理分析。</p>
+<p>首先看看Class中的resolveName(String name)究竟是干什么的。源码如下所示：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">1</span>  private String resolveName(String name) &#123;</span><br><span class="line"> <span class="number">2</span>         if (name == null) &#123;</span><br><span class="line"> <span class="number">3</span>             return name;</span><br><span class="line"> <span class="number">4</span>         &#125;</span><br><span class="line"> <span class="number">5</span>         if (!name.startsWith(<span class="string">"/"</span>)) &#123;</span><br><span class="line"> <span class="number">6</span>             Class&amp;lt;?&amp;gt; c = this;</span><br><span class="line"> <span class="number">7</span>             while (c.isArray()) &#123;</span><br><span class="line"> <span class="number">8</span>                 c = c.getComponentType();</span><br><span class="line"> <span class="number">9</span>             &#125;</span><br><span class="line"><span class="number">10</span>             String baseName = c.getName();</span><br><span class="line"><span class="number">11</span>             int index = baseName.lastIndexOf('.');</span><br><span class="line"><span class="number">12</span>             if (index != <span class="number">-1</span>) &#123;</span><br><span class="line"><span class="number">13</span>                 name = baseName.substring(<span class="number">0</span>, index).replace('.', '/')</span><br><span class="line"><span class="number">14</span>                     +<span class="string">"/"</span>+name;</span><br><span class="line"><span class="number">15</span>             &#125;</span><br><span class="line"><span class="number">16</span>         &#125; else &#123;</span><br><span class="line"><span class="number">17</span>             name = name.substring(<span class="number">1</span>);</span><br><span class="line"><span class="number">18</span>         &#125;</span><br><span class="line"><span class="number">19</span>         return name;</span><br><span class="line"><span class="number">20</span>     &#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面我把这个源码讲的内容翻译人类语言：</p>
+<p>给任意一个字符串name，如果该name是以/开始的，则该函数返回的是：去掉/这个字符的字符串。（如name=”/ouyangfeng” 则调用该函数之后得到的结果是：name=ouyangfeng）。<br>如果该name这个字符串不是以/开始的，则该函数返回的结果是调用这个函数类所在的包名+name组成的字符串（例如假设Test5所在的包名是：com.qls.mount 。则：Test5.class.resolveName(“ouyangfeng”);返回结果是：com/qls/mount/ouyangfeng）</p>
+<p>也就是帮助文档讲述的：</p>
+<p>If the name begins with a ‘/‘ (‘\u002f’), then the absolute name of the resource is the portion of the name following the ‘/‘.<br>Otherwise, the absolute name is of the following form:<br>modified_package_name/name<br>Where the modified_package_name is the package name of this object with ‘/‘ substituted for ‘.’ (‘\u002e’). </p>
+<p>上述英文我简要翻译一下：如果name是以一个/开头，则这个资源的绝对name就是：name中/之后的部分内容。<br>否则：这这个绝对name就是如下形式。包名/name,把这里包名中的.用/代替掉。【如：com.qls.river把.用/代替掉就是：com/qls/river】<br>然后我们再看看Class类中的getResourceAsStream(String name)的源码和ClassLoader中的getResourceAsStream(String name)中的源码。</p>
+<p>Class类中的getResourceAsStream(String name)的源码如下：</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">1 </span> public InputStream getResourceAsStream(String <span class="keyword">name</span>) &#123;</span><br><span class="line"><span class="symbol">2 </span>        <span class="keyword">name</span> = resolveName(<span class="keyword">name</span>);//注意这里有一个resolveName(String <span class="keyword">name</span>)方法，根据上述的分析，易知道这个源码的意思.</span><br><span class="line"><span class="symbol">3 </span>        ClassLoader cl = getClassLoader0();</span><br><span class="line"><span class="symbol">4 </span>        <span class="keyword">if</span> (cl==null) &#123;</span><br><span class="line"><span class="symbol">5 </span>            // A <span class="keyword">system</span> class.</span><br><span class="line"><span class="symbol">6 </span>            <span class="keyword">return</span> ClassLoader.getSystemResourceAsStream(<span class="keyword">name</span>);</span><br><span class="line"><span class="symbol">7 </span>        &#125;</span><br><span class="line"><span class="symbol">8 </span>        <span class="keyword">return</span> cl.getResourceAsStream(<span class="keyword">name</span>);</span><br><span class="line"><span class="symbol">9 </span>    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>ClassLoader中的getResourceAsStream(String name)中的源码如下：</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">1 </span> public InputStream getResourceAsStream(String <span class="keyword">name</span>) &#123;</span><br><span class="line"><span class="symbol">2 </span>        URL url = getResource(<span class="keyword">name</span>);</span><br><span class="line"><span class="symbol">3 </span>        try &#123;</span><br><span class="line"><span class="symbol">4 </span>            <span class="keyword">return</span> url != null ? url.openStream() : null;//这句代码的意思是：如果url不是null时返回的是：url.openStream()，反之如果url为null则返回null.</span><br><span class="line"><span class="symbol">5 </span>        &#125; catch (IOException e) &#123;</span><br><span class="line"><span class="symbol">6 </span>            <span class="keyword">return</span> null;</span><br><span class="line"><span class="symbol">7 </span>        &#125;</span><br><span class="line"><span class="symbol">8 </span>    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过这Class.resolveName(String name)中的源代码和ClassLoader.getResourceAsStream(String name)中的源代码以及Class.getResourceAsStream（String name）中的原代码我们易知道上述五种情况是怎么来的。无需记忆。</p>
+<p>只需学会数学推理即可。</p>
+<p>大家在看源码是：发现Class.resolveName(String name)这个方法是private的，你用普通方法根本调用不了，下面我顺便提一下：如何调用这个方法。以便大家可以更好的理解这个方法所讲的意思。</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">1</span> package com.qls.commonclass;</span><br><span class="line"> <span class="number">2</span> </span><br><span class="line"> <span class="number">3</span> import java.lang.reflect.InvocationTargetException;</span><br><span class="line"> <span class="number">4</span> import java.lang.reflect.Method;</span><br><span class="line"> <span class="number">5</span> </span><br><span class="line"> <span class="number">6</span> <span class="comment">/**</span></span><br><span class="line"><span class="comment"> 7  * 用反射调用ClassLoade中的 private String resolveName(String name)</span></span><br><span class="line"><span class="comment"> 8  * 验证这个方法所讲的意思。</span></span><br><span class="line"><span class="comment"> 9  * @author 秦林森</span></span><br><span class="line"><span class="comment">10  *</span></span><br><span class="line"><span class="comment">11  */</span></span><br><span class="line"><span class="number">12</span> public class Test7 &#123;</span><br><span class="line"><span class="number">13</span> </span><br><span class="line"><span class="number">14</span>     public static void main(String[] args) throws Exception&#123;</span><br><span class="line"><span class="number">15</span>         <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line"><span class="number">16</span>         <span class="comment">//得到这个方法。</span></span><br><span class="line"><span class="number">17</span>         Method method = Class.class.getDeclaredMethod(<span class="string">"resolveName"</span>, new Class[]&#123;String.class&#125;);</span><br><span class="line"><span class="number">18</span>         <span class="comment">//由于这个方法是private,所以要获取这个方法的访问权限</span></span><br><span class="line"><span class="number">19</span>         method.setAccessible(true);</span><br><span class="line"><span class="number">20</span>         <span class="comment">//写一个实例，以便调用这个方法。</span></span><br><span class="line"><span class="number">21</span>         </span><br><span class="line"><span class="number">22</span>         Object obj = Test7.class;<span class="comment">//Test这个类所在的包是:com.qls.commonclass</span></span><br><span class="line"><span class="number">23</span>         <span class="comment">//调用这个方法</span></span><br><span class="line"><span class="number">24</span>         String invoke = (String) method.invoke(obj, new Object[]&#123;<span class="string">"ouyangfeng"</span>&#125;);</span><br><span class="line"><span class="number">25</span>         String invoke2 = (String) method.invoke(obj, new Object[]&#123;<span class="string">"/ouyangfeng"</span>&#125;);</span><br><span class="line"><span class="number">26</span>         System.out.println(<span class="string">"invoke="</span>+invoke);</span><br><span class="line"><span class="number">27</span>         System.out.println(<span class="string">"invoke2="</span>+invoke2);</span><br><span class="line"><span class="number">28</span>         </span><br><span class="line"><span class="number">29</span>     &#125;</span><br><span class="line"><span class="number">30</span> </span><br><span class="line"><span class="number">31</span> &#125;<span class="comment">/*</span></span><br><span class="line"><span class="comment">32 Output:</span></span><br><span class="line"><span class="comment">33 invoke=com/qls/commonclass/ouyangfeng</span></span><br><span class="line"><span class="comment">34 invoke2=ouyangfeng</span></span><br><span class="line"><span class="comment">35 由此可以证明了:以/开头的字符串"/ouyangfeng"调用resolveName(String name)</span></span><br><span class="line"><span class="comment">36 这个方法之后返回的结果是：ouyangfeng</span></span><br><span class="line"><span class="comment">37 不以/开头的字符串："ouyangfeng"返回的结果是：调用这个方法的包名/name</span></span><br><span class="line"><span class="comment">38 【在本例中是Test7调用resolveName(String name),而Test7所在的包是：com.qls.commonclass</span></span><br><span class="line"><span class="comment">39 所以返回结果是：com/qls/commonclass/ouyangfeng】</span></span><br><span class="line"><span class="comment">40 </span></span><br><span class="line"><span class="comment">41 */</span><span class="comment">//:~</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/07/14/类加载器读取配置文件/" data-id="ckbdc9v0900oo24u2ak9tr4y2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CLASSLOADER/">CLASSLOADER</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-yaml" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/12/yaml/" class="article-date">
+  <time datetime="2019-07-12T17:01:00.000Z" itemprop="datePublished">2019-07-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/12/yaml/">yaml</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>yaml 是什么？</p>
+<p>在 github 一些开源项目里经常可以看到 .travis.yml 文件，后来接触持续集成这个概念时发现很多文件都是 .yml 后缀的文件。我在 阮一峰-YAML 语言教程 里了解了它的作用以及基本写法，他的那篇文章描述的略微有点啰嗦，实际看到的大多数配置文件还是及其简单的，而我们要做的是能读懂它们，就像读懂 .json 一样。</p>
+<p>yaml 语言（或者说是一种规范吧）可以编写 .yml 文件，和 json 一样是配置文件。也许是有人认为 json 的写法不爽，于是乎发明了这玩意，通过下面的例子，可以看到 yaml 写的配置文件确实要比 json 方便很多。</p>
+<p>编写规则</p>
+<h6 id="大小写敏感-nbsp"><a href="#大小写敏感-nbsp" class="headerlink" title="大小写敏感 &nbsp;"></a>大小写敏感 &nbsp;</h6><p><strong>json 里也是大小写敏感的，这点二者一样。</strong></p>
+<p>使用缩进表示层级关系<br>json 中使用 {} 的嵌套表示层级，而 yaml 使用缩进，后者更方便一些。</p>
+<h5 id="表示注释"><a href="#表示注释" class="headerlink" title="表示注释"></a>表示注释</h5><p>json 文件中不允许写注释，对于很长配置文件全靠字面意思猜挺痛苦的，yaml 可以写注释</p>
+<p>数据结构</p>
+<p>配置文件理应十分简洁，与 json 相比，不用频繁的写 {} 和 []，毕竟换行和 - 符号更加简洁，字符串也不需要频繁的加引号（无论是单引号还是双引号）。</p>
+<p>对象</p>
+<h5 id="conf-yml"><a href="#conf-yml" class="headerlink" title="conf.yml"></a>conf.yml</h5><p>animal: pets<br>hash: { name: Steve, foo: bar }<br>转换为 json 为：</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123; </span><br><span class="line">  &#123; <span class="string">"animal"</span>: <span class="string">"pets"</span> &#125;,  </span><br><span class="line">  &#123; <span class="string">"hash"</span>: &#123; <span class="string">"name"</span>: <span class="string">"Steve"</span>, <span class="string">"foo"</span>: <span class="string">"bar"</span> &#125; &#125;  </span><br><span class="line">&#125; <span class="meta">&amp;nbsp;</span></span><br></pre></td></tr></table></figure>
+
+<p>数组</p>
+<h5 id="conf-yml-1"><a href="#conf-yml-1" class="headerlink" title="conf.yml"></a>conf.yml</h5><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Animal:</span><br><span class="line"><span class="bullet"> - </span>Cat</span><br><span class="line"><span class="bullet"> - </span>Dog</span><br><span class="line"><span class="bullet"> - </span>Goldfish</span><br></pre></td></tr></table></figure>
+
+<p>转换为 json 为：</p>
+<p>{ “Animal”: [ “Cat”, “Dog”, “Goldfish” ] }<br>字符串</p>
+<h5 id="conf-yml-2"><a href="#conf-yml-2" class="headerlink" title="conf.yml"></a>conf.yml</h5><h5 id="正常情况下字符串不用写引号"><a href="#正常情况下字符串不用写引号" class="headerlink" title="正常情况下字符串不用写引号"></a>正常情况下字符串不用写引号</h5><p>str: 这是一行字符串</p>
+<h5 id="字符串内有空格或者特殊字符时需要加引号"><a href="#字符串内有空格或者特殊字符时需要加引号" class="headerlink" title="字符串内有空格或者特殊字符时需要加引号"></a>字符串内有空格或者特殊字符时需要加引号</h5><p>str: ‘内容： 字符串’<br>null</p>
+<h5 id="conf-yml-3"><a href="#conf-yml-3" class="headerlink" title="conf.yml"></a>conf.yml</h5><p>parent: ~  
+.yml 中 ~ 表示 null，转换为 json 为：</p>
+<p>{ “parent”: null }</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/07/12/yaml/" data-id="ckbdc9uwq00fg24u20zqqeprk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/YAML/">YAML</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ParseYaml" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/11/ParseYaml/" class="article-date">
+  <time datetime="2019-07-11T23:08:00.000Z" itemprop="datePublished">2019-07-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/11/ParseYaml/">ParseYaml</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>yaml解析</p>
+<p>1、使用spring自带的yaml解析工具：</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">YamlUtils</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> final Logger logger = LogManager.getLogger(YamlUtils.class);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Map&amp;lt;<span class="keyword">String</span>, Object&amp;gt; yaml2Map(<span class="keyword">String</span> yamlSource) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            YamlMapFactoryBean yaml = <span class="keyword">new</span> <span class="type">YamlMapFactoryBean</span>();</span><br><span class="line">            yaml.setResources(<span class="keyword">new</span> <span class="type">ClassPathResource</span>(yamlSource));</span><br><span class="line">            <span class="keyword">return</span> yaml.getObject();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            logger.error(<span class="string">"Cannot read yaml"</span>, e);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Properties yaml2Properties(<span class="keyword">String</span> yamlSource) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            YamlPropertiesFactoryBean yaml = <span class="keyword">new</span> <span class="type">YamlPropertiesFactoryBean</span>();</span><br><span class="line">            yaml.setResources(<span class="keyword">new</span> <span class="type">ClassPathResource</span>(yamlSource));</span><br><span class="line">            <span class="keyword">return</span> yaml.getObject();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            logger.error(<span class="string">"Cannot read yaml"</span>, e);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>spring提供的yaml工具只能够解析出map和properties，如果想解析生成java bean就有点力不从心，不方便。</strong><br>2、使用snakeyaml </p>
+<p>在maven中引入</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&amp;<span class="keyword">lt</span>;dependency&amp;<span class="keyword">gt</span>;</span><br><span class="line">            &amp;<span class="keyword">lt</span>;groupId&amp;<span class="keyword">gt</span>;org.yaml&amp;<span class="keyword">lt</span>;/groupId&amp;<span class="keyword">gt</span>;</span><br><span class="line">            &amp;<span class="keyword">lt</span>;artifactId&amp;<span class="keyword">gt</span>;snakeyaml&amp;<span class="keyword">lt</span>;/artifactId&amp;<span class="keyword">gt</span>;</span><br><span class="line">            &amp;<span class="keyword">lt</span>;<span class="keyword">version</span>&amp;<span class="keyword">gt</span>;<span class="number">1.17</span>&amp;<span class="keyword">lt</span>;/<span class="keyword">version</span>&amp;<span class="keyword">gt</span>;</span><br><span class="line">        &amp;<span class="keyword">lt</span>;/dependency&amp;<span class="keyword">gt</span>;</span><br></pre></td></tr></table></figure>
+
+<p>Yaml yaml = new Yaml();<br>LibraryPolicyDto libraryPolicyDto = yaml.loadAs(inputStream, LibraryPolicyDto.class);</p>
+<p>附yaml文件：</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">systemLibraryId:</span> <span class="number">1</span> </span><br><span class="line"><span class="symbol">relativeLibraryId:</span> xxx </span><br><span class="line"><span class="symbol">readerPolicyIndex:</span> <span class="number">1</span> </span><br><span class="line"><span class="symbol">bookPolicyIndex:</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>otherPublicApi: </p>
+<ul>
+<li><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">name:</span> showApi </span><br><span class="line"><span class="string">desc:</span> 查看api </span><br><span class="line"><span class="string">url:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8080</span><span class="regexp">/api/</span>showApi </span><br><span class="line"><span class="string">port:</span> <span class="number">8080</span> </span><br><span class="line"><span class="string">inputParams:</span> </span><br><span class="line">- <span class="string">id:</span><span class="keyword">int</span> </span><br><span class="line">- <span class="string">libraryId:</span>String </span><br><span class="line"><span class="string">outputParams:</span> </span><br><span class="line">- <span class="string">name:</span>String </span><br><span class="line">- <span class="string">desc:</span>String </span><br><span class="line">- <span class="string">url:</span>String </span><br><span class="line">- <span class="string">inputParams:</span>String </span><br><span class="line">- <span class="string">ouputParams:</span>String</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>附LibraryPolicyDto</p>
+<figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LibraryPolicyDto</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> systemLibraryId;</span><br><span class="line">    <span class="keyword">private</span> String relativeLibraryId;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> readerPolicyIndex;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> bookPolicyIndex;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">List</span>&amp;lt;ApiDto&amp;gt; otherPublicApi;</span><br><span class="line">    <span class="comment">//getter</span></span><br><span class="line">    <span class="comment">//setter</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/07/11/ParseYaml/" data-id="ckbdc9usp005f24u2qp7don3y" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SPRING/">SPRING</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/YAML/">YAML</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-DatabaseProxySearch" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/10/DatabaseProxySearch/" class="article-date">
+  <time datetime="2019-07-10T21:38:00.000Z" itemprop="datePublished">2019-07-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/10/DatabaseProxySearch/">DatabaseProxySearch</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h6 id="mybatis学习心得-nbsp"><a href="#mybatis学习心得-nbsp" class="headerlink" title="mybatis学习心得 &nbsp;"></a>mybatis学习心得 &nbsp;</h6><p>1.What do I have? &nbsp;<br>我有什么 </p>
+<p>2.SqlMapCofing.xml<br>(1)从配置文件中的property中我们能知道数据库连接信息，有了这些信息就可以创建&lt;font color=”red”&gt;Connection对象&lt;/font&gt; &nbsp;<br>(2)mappers &nbsp;<br>有了mapper就有了映射配置信息,就能读到下面IUserDao.xml文件</p>
+<p>3.IUserDao.xml &nbsp;<br>有了namespace的全限定类名   &nbsp;<br>和   
+有了id的方法名   &nbsp;<br>能唯一确定执行哪条sql<br>有了sql语句就可以获取PreparedStatement<br>有了resultType就可以知道结果封装到哪里</p>
+<p>读取配置文件：用到的技术就是解析XML的技术<br>我们此处用到的技术是dom4j解析xml技术</p>
+<p>接下来<br>1.根据配置文件的信息创建Connection对象<br>注册驱动，获取链接<br>2.获取预处理对象PreparedStatement<br>此时需要sql语句 &nbsp;<br>conn.preparedStatement(sql);得到PreparedStatement<br><strong>sql就从配置文件中来</strong><br>3.执行查询<br>preparedStatement.execute();得到ResultSet<br>4.遍历结果集用于封装<br>List&lt;E&gt; list = new ArrayList();<br>while（resultSet.next()）{<br>    E element = xxx; &nbsp;<br>    xxx怎么得到？这里用到的技术是反射 &nbsp;<br>    是根据全限定类名resultType通过反射得到的<br>    实例化一个对象出来<br>    即:<br>    E element = （E）Class.forName(配置的全限定类名).newInstance(); &nbsp;<br>    这里需要强转一下，因为得到的是一个obj对象 &nbsp;<br>    进行封装，把每个xx的内容都添加到element中<br>    我们的实体类属性和表中的列名是一致的，<br>    于是我们就可以把表的列名看成是实体类的属性名称<br>    就可以使用反射的方式根据名称获取每个属性，并把值赋进去。<br>    把element加到list中<br>    list.add(element);<br>};  </p>
+<p>5.返回list<br> &nbsp;return list;<br> &nbsp;<br><strong>注意配置文件位置使用绝对路径或相对路径都不好</strong><br>文件位置只能使用两种方式<br>第一个：使用类加载器，它只能读取类路径的配置文件Resources.getResourceAsStream(配置文件)得到输入流InputStream<br>第二个：使用servletContext对象的getRealPath()获取部署在环境里的真实路径<br>&lt;font color=”gree”&gt;创建工厂&lt;/font&gt;mybatis使用了&lt;font color=”blue”&gt;<strong>构建者模式</strong>&lt;/font&gt;&lt;u&gt;SqlSessionFactoryBuilder&lt;/u&gt;<br>把输入流给构建者builder会给我们建好工厂sqlsessionfactory &nbsp;<br>工厂给我们产生SqlSession这里使用的是工厂模式降低类之间的依赖关系即解藕 &nbsp;<br>通过sqlsession代理模式getMapper创建Dao接口实现类<br>getMapper 都做了什么？<br>类加载器它使用的和被代理的对象是相同的类加载器<br>代理对象要实现的接口：和被代理对象实现相同的接口 &nbsp;<br>如何代理：它就是增强的方法，我们需要自己来提供<br>此处是一个InvocationHandler的接口，我们需要些一个该接口的实现类在实现类中调用selectList方法<br>Proxy.newProxyInstance(类加载器，代理对象要实现的接口字节码数组，如何代理)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/07/10/DatabaseProxySearch/" data-id="ckbdc9uq5001w24u2jv6u4x8o" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MYBATIS/">MYBATIS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-IUserDao-xml-mapper" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/10/IUserDao-xml-mapper/" class="article-date">
+  <time datetime="2019-07-10T05:39:00.000Z" itemprop="datePublished">2019-07-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/10/IUserDao-xml-mapper/">IUserDao.xml(mapper)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&amp;<span class="keyword">lt</span>;?<span class="keyword">xml</span> <span class="title">version</span>=<span class="string">"1.0"</span> <span class="attr">encoding=</span><span class="string">"UTF-8"</span>?&amp;<span class="keyword">gt</span>;</span><br><span class="line">&amp;<span class="keyword">lt</span>;!DOCTYPE mapper</span><br><span class="line">        PUBLIC <span class="string">"-//mybatis.org//DTD Mapper 3.0//EN"</span></span><br><span class="line">        <span class="string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span>&amp;<span class="keyword">gt</span>;</span><br><span class="line">&amp;<span class="keyword">lt</span>;mapper <span class="attr">namespace=</span><span class="string">"com.enlink.dao.IUserDao"</span>&amp;<span class="keyword">gt</span>;</span><br><span class="line"> &amp;nbsp; &amp;nbsp;&amp;<span class="keyword">lt</span>;!--配置查询所有--&amp;<span class="keyword">gt</span>;  &amp;<span class="keyword">lt</span>;!--返回类型封装到哪里--&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;select <span class="attr">id=</span><span class="string">"findAll"</span> <span class="attr">resultType=</span><span class="string">"com.enlink.domain.User"</span>&amp;<span class="keyword">gt</span>;</span><br><span class="line">        select * from user</span><br><span class="line">    &amp;<span class="keyword">lt</span>;/select&amp;<span class="keyword">gt</span>;</span><br><span class="line">&amp;<span class="keyword">lt</span>;/mapper&amp;<span class="keyword">gt</span>;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/07/10/IUserDao-xml-mapper/" data-id="ckbdc9uqa002h24u25t9h0ast" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MYBATIS/">MYBATIS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-SqlMapConfig-xml" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/10/SqlMapConfig-xml/" class="article-date">
+  <time datetime="2019-07-10T05:06:00.000Z" itemprop="datePublished">2019-07-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/10/SqlMapConfig-xml/">SqlMapConfig.xml</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&amp;<span class="keyword">lt</span>;?<span class="keyword">xml</span> <span class="title">version</span>=<span class="string">"1.0"</span> <span class="attr">encoding=</span><span class="string">"UTF-8"</span>?&amp;<span class="keyword">gt</span>;</span><br><span class="line">&amp;<span class="keyword">lt</span>;!DOCTYPE configuration  </span><br><span class="line">  PUBLIC <span class="string">"-//mybatis.org//DTD Config 3.0//EN"</span>  </span><br><span class="line">  <span class="string">"http://mybatis.org/dtd/mybatis-3-config.dtd"</span>&amp;<span class="keyword">gt</span>;</span><br><span class="line">  &amp;<span class="keyword">lt</span>;!-- mybatis的主配置文件 --&amp;<span class="keyword">gt</span>;</span><br><span class="line">&amp;<span class="keyword">lt</span>;configuration&amp;<span class="keyword">gt</span>;</span><br><span class="line"> &amp;nbsp; &amp;nbsp;&amp;<span class="keyword">lt</span>;!-- 配置环境 (可以随便起个名但约定成俗就叫mysql)--&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;environments <span class="attr">default=</span><span class="string">"mysql"</span>&amp;<span class="keyword">gt</span>;</span><br><span class="line">        &amp;<span class="keyword">lt</span>;!-- 配置mysql的环境--&amp;<span class="keyword">gt</span>;</span><br><span class="line">        &amp;<span class="keyword">lt</span>;environment <span class="attr">id=</span><span class="string">"mysql"</span>&amp;<span class="keyword">gt</span>;</span><br><span class="line">            &amp;<span class="keyword">lt</span>;!-- 配置事务的类型--&amp;<span class="keyword">gt</span>;</span><br><span class="line">            &amp;<span class="keyword">lt</span>;transactionManager <span class="attr">type=</span><span class="string">"JDBC"</span>&amp;<span class="keyword">gt</span>;&amp;<span class="keyword">lt</span>;/transactionManager&amp;<span class="keyword">gt</span>;</span><br><span class="line">            &amp;<span class="keyword">lt</span>;!-- 配置数据源（连接池） --&amp;<span class="keyword">gt</span>;</span><br><span class="line">            &amp;<span class="keyword">lt</span>;dataSource <span class="attr">type=</span><span class="string">"POOLED"</span>&amp;<span class="keyword">gt</span>;</span><br><span class="line">                &amp;<span class="keyword">lt</span>;!-- 配置连接数据库的<span class="number">4</span>个基本信息 --&amp;<span class="keyword">gt</span>;</span><br><span class="line">                &amp;<span class="keyword">lt</span>;<span class="keyword">property</span><span class="title"> </span><span class="attr">name=</span><span class="string">"driver"</span> <span class="attr">value=</span><span class="string">"com.mysql.jdbc.Driver"</span>/&amp;<span class="keyword">gt</span>;</span><br><span class="line">                &amp;<span class="keyword">lt</span>;<span class="keyword">property</span><span class="title"> </span><span class="attr">name=</span><span class="string">"url"</span> <span class="attr">value=</span><span class="string">"jdbc:mysql://localhost:3306/my_mybatis"</span>/&amp;<span class="keyword">gt</span>;</span><br><span class="line">                &amp;<span class="keyword">lt</span>;<span class="keyword">property</span><span class="title"> </span><span class="attr">name=</span><span class="string">"username"</span> <span class="attr">value=</span><span class="string">"root"</span>/&amp;<span class="keyword">gt</span>;</span><br><span class="line">                &amp;<span class="keyword">lt</span>;<span class="keyword">property</span><span class="title"> </span><span class="attr">name=</span><span class="string">"password"</span> <span class="attr">value=</span><span class="string">"1234"</span>/&amp;<span class="keyword">gt</span>;</span><br><span class="line">            &amp;<span class="keyword">lt</span>;/dataSource&amp;<span class="keyword">gt</span>;</span><br><span class="line">        &amp;<span class="keyword">lt</span>;/environment&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;/environments&amp;<span class="keyword">gt</span>;</span><br><span class="line"></span><br><span class="line">    &amp;<span class="keyword">lt</span>;!-- 指定映射配置文件的位置，映射配置文件指的是每个dao独立的配置文件 --&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;mappers&amp;<span class="keyword">gt</span>;</span><br><span class="line">        &amp;<span class="keyword">lt</span>;mapper <span class="attr">resource=</span><span class="string">"com/enlink/dao/IUserDao.xml"</span>/&amp;<span class="keyword">gt</span>;</span><br><span class="line">        &amp;<span class="keyword">lt</span>;!--  通过resource或者class来区分判断用的是配置文件还是注解方式  </span><br><span class="line">        &amp;<span class="keyword">lt</span>;mapper <span class="attr">class=</span><span class="string">"com.enlink.dao.IUserDao"</span>/&amp;<span class="keyword">gt</span>;</span><br><span class="line">        --&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;/mappers&amp;<span class="keyword">gt</span>; </span><br><span class="line">&amp;<span class="keyword">lt</span>;/configuration&amp;<span class="keyword">gt</span>;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/07/10/SqlMapConfig-xml/" data-id="ckbdc9usv005x24u2ba5lexpp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MYBATIS/">MYBATIS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-mybatis" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/10/mybatis/" class="article-date">
+  <time datetime="2019-07-10T01:03:00.000Z" itemprop="datePublished">2019-07-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/10/mybatis/">mybatis</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="1、mybatis的概述"><a href="#1、mybatis的概述" class="headerlink" title="1、mybatis的概述"></a>1、mybatis的概述</h5><pre><code>mybatis是一个持久层框架，用java编写的。
+它封装了jdbc操作的很多细节，使开发者只需要关注sql语句本身，而无需关注注册驱动，创建连接等繁杂过程
+它使用了ORM思想实现了结果集的封装。
+
+ORM：
+    Object Relational Mappging 对象关系映射
+    简单的说：
+        就是把数据库表和实体类及实体类的属性对应起来
+        让我们可以操作实体类就实现操作数据库表。
+
+        user            User
+        id              userId
+        user_name        userName
+今天我们需要做到
+    实体类中的属性和数据库表的字段名称保持一致。
+        user            User
+        id                id
+        user_name        user_name</code></pre><h5 id="2、mybatis的入门"><a href="#2、mybatis的入门" class="headerlink" title="2、mybatis的入门"></a>2、mybatis的入门</h5><pre><code>mybatis的环境搭建
+    第一步：创建maven工程并导入坐标
+    第二步：创建实体类和dao的接口
+    第三步：创建Mybatis的主配置文件
+            SqlMapConifg.xml
+    第四步：创建映射配置文件
+            IUserDao.xml
+环境搭建的注意事项：
+    第一个：创建IUserDao.xml 和 IUserDao.java时名称相同是为了和我们之前的知识保持一致。
+        在Mybatis中它把持久层的操作接口名称和映射文件也叫做：Mapper
+        所以：IUserDao 和 IUserMapper是一样的
+    第二个：在idea中创建目录的时候，它和包是不一样的
+        包在创建时：com.enlink.dao它是三级结构
+        目录在创建时：com.enlink.dao是一级目录
+    第三个：mybatis的映射配置文件位置必须和dao接口的包结构相同
+    第四个：映射配置文件的mapper标签namespace属性的取值必须是dao接口的全限定类名
+    第五个：映射配置文件的操作配置（select），id属性的取值必须是dao接口的方法名
+
+    当我们遵从了第三，四，五点之后，我们在开发中就无须再写dao的实现类。
+mybatis的入门案例
+    第一步：读取配置文件
+    第二步：创建SqlSessionFactory工厂
+    第三步：创建SqlSession
+    第四步：创建Dao接口的代理对象
+    第五步：执行dao中的方法
+    第六步：释放资源
+
+    注意事项：
+        不要忘记在映射配置中告知mybatis要封装到哪个实体类中
+        配置的方式：指定实体类的全限定类名
+
+    mybatis基于注解的入门案例：
+        把IUserDao.xml移除，在dao接口的方法上使用@Select注解，并且指定SQL语句
+        同时需要在SqlMapConfig.xml中的mapper配置时，使用class属性指定dao接口的全限定类名。
+明确：
+    我们在实际开发中，都是越简便越好，所以都是采用不写dao实现类的方式。
+    不管使用XML还是注解配置。
+    但是Mybatis它是支持写dao实现类的。</code></pre><h5 id="3、自定义Mybatis的分析："><a href="#3、自定义Mybatis的分析：" class="headerlink" title="3、自定义Mybatis的分析："></a>3、自定义Mybatis的分析：</h5><pre><code>mybatis在使用代理dao的方式实现增删改查时做什么事呢？
+    只有两件事：
+        第一：创建代理对象
+        第二：在代理对象中调用selectList
+
+自定义mybatis能通过入门案例看到类
+    class Resources
+    class SqlSessionFactoryBuilder
+    interface SqlSessionFactory
+    interface SqlSession</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/07/10/mybatis/" data-id="ckbdc9uv100ba24u25md1ozmn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MYBATIS/">MYBATIS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/19/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/21/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIT/">GIT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IT/">IT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVAEE/">JAVAEE</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVAEE/MYSQL/">MYSQL</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/OFFICE/">OFFICE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SYSTEM/">SYSTEM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VIM/">VIM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/分类1/">分类1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/电商/">电商</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ANNOTATION/">ANNOTATION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BAZEL/">BAZEL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BEANUTILS/">BEANUTILS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CENTOS/">CENTOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI-CD/">CI/CD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CLASSLOADER/">CLASSLOADER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CRONTAB/">CRONTAB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DEBUG/">DEBUG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DESIGN-PATTERNS/">DESIGN PATTERNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DNS/">DNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOCKER/">DOCKER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DRUID/">DRUID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ENLINK/">ENLINK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EUREKA/">EUREKA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EXCEL/">EXCEL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/">Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FASTJSON/">FASTJSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIT/">GIT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GITLAB/">GITLAB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GLOBALEXCEPTION/">GLOBALEXCEPTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO/">GO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HEXO/">HEXO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/INTERCEPTOR/">INTERCEPTOR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IT/">IT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVADOC/">JAVADOC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASCRIPT/">JAVASCRIPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASE/">JAVASE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JETTY/">JETTY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPA/">JPA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSONUTILS/">JSONUTILS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KARAF/">KARAF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KEEPALIVED/">KEEPALIVED</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LINUX/">LINUX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LISTENER/">LISTENER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOADBALANCED/">LOADBALANCED</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOG/">LOG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOGBACK/">LOGBACK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOGIN/">LOGIN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOMBOK/">LOMBOK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MARKDOWN/">MARKDOWN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIME-TYPE/">MIME-TYPE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQ/">MQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYBATIS/">MYBATIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYCAT/">MYCAT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/">MYSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NETWORK/">NETWORK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OAUTH2/">OAUTH2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ONOS/">ONOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSGI/">OSGI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSI/">OSI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAGEHELPER/">PAGEHELPER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POSTMAN/">POSTMAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PYTHON/">PYTHON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RABBITMQ/">RABBITMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REDIS/">REDIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REDISTEMPLATE/">REDISTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REFLECTION/">REFLECTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REGISTRY-CENTER/">REGISTRY CENTER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REPO/">REPO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTTEMPLATE/">RESTTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RIBBON/">RIBBON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPM/">RPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SECURITY/">SECURITY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SERIALVERSIONUID/">SERIALVERSIONUID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SERVLET/">SERVLET</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SESSION/">SESSION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SHELL/">SHELL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPINTBOOT/">SPINTBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING/">SPRING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-MVC/">SPRING MVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-STREAM/">SPRING STREAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGBBOT/">SPRINGBBOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGBOOT/">SPRINGBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGQUARTZ/">SPRINGQUARTZ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGTASK/">SPRINGTASK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGTBOOT/">SPRINGTBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPTING/">SPTING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLAlert/">SQLAlert</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSO/">SSO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STRINGREDISTEMPLATE/">STRINGREDISTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWAGGER/">SWAGGER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SYSTEM/">SYSTEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP-IP/">TCP/IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TERMUX/">TERMUX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TK-MYBATIS/">TK.MYBATIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TRANSECTION/">TRANSECTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UBUNTU/">UBUNTU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UDP/">UDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEBClIENT/">WEBClIENT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YAML/">YAML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rabbitMq/">rabbitMq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/抖音/">抖音</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件服务器/">文件服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间转化/">时间转化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标签1/">标签1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/淘宝/">淘宝</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高可用/">高可用</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ANNOTATION/" style="font-size: 14.62px;">ANNOTATION</a> <a href="/tags/AOP/" style="font-size: 10.77px;">AOP</a> <a href="/tags/BAZEL/" style="font-size: 10px;">BAZEL</a> <a href="/tags/BEANUTILS/" style="font-size: 10px;">BEANUTILS</a> <a href="/tags/CENTOS/" style="font-size: 10px;">CENTOS</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/CLASSLOADER/" style="font-size: 10px;">CLASSLOADER</a> <a href="/tags/CRONTAB/" style="font-size: 10.77px;">CRONTAB</a> <a href="/tags/DEBUG/" style="font-size: 10px;">DEBUG</a> <a href="/tags/DESIGN-PATTERNS/" style="font-size: 10px;">DESIGN PATTERNS</a> <a href="/tags/DNS/" style="font-size: 10px;">DNS</a> <a href="/tags/DOCKER/" style="font-size: 11.54px;">DOCKER</a> <a href="/tags/DRUID/" style="font-size: 10px;">DRUID</a> <a href="/tags/ENLINK/" style="font-size: 10px;">ENLINK</a> <a href="/tags/ES/" style="font-size: 16.15px;">ES</a> <a href="/tags/EUREKA/" style="font-size: 10px;">EUREKA</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10px;">Eureka</a> <a href="/tags/FASTJSON/" style="font-size: 10px;">FASTJSON</a> <a href="/tags/GIT/" style="font-size: 10px;">GIT</a> <a href="/tags/GITLAB/" style="font-size: 10px;">GITLAB</a> <a href="/tags/GLOBALEXCEPTION/" style="font-size: 10px;">GLOBALEXCEPTION</a> <a href="/tags/GO/" style="font-size: 10.77px;">GO</a> <a href="/tags/HEXO/" style="font-size: 12.31px;">HEXO</a> <a href="/tags/IDEA/" style="font-size: 12.31px;">IDEA</a> <a href="/tags/INTERCEPTOR/" style="font-size: 11.54px;">INTERCEPTOR</a> <a href="/tags/IT/" style="font-size: 11.54px;">IT</a> <a href="/tags/JAVADOC/" style="font-size: 10px;">JAVADOC</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.54px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.77px;">JAVASE</a> <a href="/tags/JETTY/" style="font-size: 10px;">JETTY</a> <a href="/tags/JPA/" style="font-size: 10.77px;">JPA</a> <a href="/tags/JSONUTILS/" style="font-size: 10px;">JSONUTILS</a> <a href="/tags/KARAF/" style="font-size: 11.54px;">KARAF</a> <a href="/tags/KEEPALIVED/" style="font-size: 10px;">KEEPALIVED</a> <a href="/tags/LINUX/" style="font-size: 16.92px;">LINUX</a> <a href="/tags/LISTENER/" style="font-size: 10px;">LISTENER</a> <a href="/tags/LOADBALANCED/" style="font-size: 10px;">LOADBALANCED</a> <a href="/tags/LOG/" style="font-size: 10px;">LOG</a> <a href="/tags/LOGBACK/" style="font-size: 10px;">LOGBACK</a> <a href="/tags/LOGIN/" style="font-size: 10px;">LOGIN</a> <a href="/tags/LOMBOK/" style="font-size: 11.54px;">LOMBOK</a> <a href="/tags/MAC/" style="font-size: 15.38px;">MAC</a> <a href="/tags/MARKDOWN/" style="font-size: 11.54px;">MARKDOWN</a> <a href="/tags/MIME-TYPE/" style="font-size: 10px;">MIME-TYPE</a> <a href="/tags/MQ/" style="font-size: 12.31px;">MQ</a> <a href="/tags/MYBATIS/" style="font-size: 17.69px;">MYBATIS</a> <a href="/tags/MYCAT/" style="font-size: 10.77px;">MYCAT</a> <a href="/tags/MYSQL/" style="font-size: 16.15px;">MYSQL</a> <a href="/tags/NETWORK/" style="font-size: 10px;">NETWORK</a> <a href="/tags/OAUTH2/" style="font-size: 10.77px;">OAUTH2</a> <a href="/tags/ONOS/" style="font-size: 14.62px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 13.85px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PAGEHELPER/" style="font-size: 10px;">PAGEHELPER</a> <a href="/tags/POSTMAN/" style="font-size: 10px;">POSTMAN</a> <a href="/tags/PYTHON/" style="font-size: 13.08px;">PYTHON</a> <a href="/tags/RABBITMQ/" style="font-size: 10.77px;">RABBITMQ</a> <a href="/tags/REDIS/" style="font-size: 11.54px;">REDIS</a> <a href="/tags/REDISTEMPLATE/" style="font-size: 10px;">REDISTEMPLATE</a> <a href="/tags/REFLECTION/" style="font-size: 11.54px;">REFLECTION</a> <a href="/tags/REGISTRY-CENTER/" style="font-size: 10px;">REGISTRY CENTER</a> <a href="/tags/REPO/" style="font-size: 10px;">REPO</a> <a href="/tags/RESTTEMPLATE/" style="font-size: 10px;">RESTTEMPLATE</a> <a href="/tags/RIBBON/" style="font-size: 10.77px;">RIBBON</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/SECURITY/" style="font-size: 12.31px;">SECURITY</a> <a href="/tags/SERIALVERSIONUID/" style="font-size: 10px;">SERIALVERSIONUID</a> <a href="/tags/SERVLET/" style="font-size: 10.77px;">SERVLET</a> <a href="/tags/SESSION/" style="font-size: 12.31px;">SESSION</a> <a href="/tags/SHELL/" style="font-size: 14.62px;">SHELL</a> <a href="/tags/SPINTBOOT/" style="font-size: 10px;">SPINTBOOT</a> <a href="/tags/SPRING/" style="font-size: 13.08px;">SPRING</a> <a href="/tags/SPRING-MVC/" style="font-size: 10px;">SPRING MVC</a> <a href="/tags/SPRING-STREAM/" style="font-size: 10px;">SPRING STREAM</a> <a href="/tags/SPRINGBBOT/" style="font-size: 10px;">SPRINGBBOT</a> <a href="/tags/SPRINGBOOT/" style="font-size: 19.23px;">SPRINGBOOT</a> <a href="/tags/SPRINGQUARTZ/" style="font-size: 10px;">SPRINGQUARTZ</a> <a href="/tags/SPRINGTASK/" style="font-size: 12.31px;">SPRINGTASK</a> <a href="/tags/SPRINGTBOOT/" style="font-size: 10px;">SPRINGTBOOT</a> <a href="/tags/SPTING/" style="font-size: 10px;">SPTING</a> <a href="/tags/SQL/" style="font-size: 12.31px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.46px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/STRINGREDISTEMPLATE/" style="font-size: 10px;">STRINGREDISTEMPLATE</a> <a href="/tags/SWAGGER/" style="font-size: 10px;">SWAGGER</a> <a href="/tags/SYSTEM/" style="font-size: 10px;">SYSTEM</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TCP-IP/" style="font-size: 11.54px;">TCP/IP</a> <a href="/tags/TERMUX/" style="font-size: 10.77px;">TERMUX</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/TRANSECTION/" style="font-size: 10px;">TRANSECTION</a> <a href="/tags/UBUNTU/" style="font-size: 10px;">UBUNTU</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/WEBClIENT/" style="font-size: 10px;">WEBClIENT</a> <a href="/tags/YAML/" style="font-size: 10.77px;">YAML</a> <a href="/tags/rabbitMq/" style="font-size: 10px;">rabbitMq</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.77px;">文件服务器</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/13/可视化面板/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/邮箱找回密码与二次认证/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/特权用户访问策略控制/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/md列表/">markdown任务列表语法checkbox</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/CS应用配置/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Joe Tong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="private learning">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Learning">
+<meta property="og:url" content="/blog/page/4/index.html">
+<meta property="og:site_name" content="Learning">
+<meta property="og:description" content="private learning">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Learning">
+<meta name="twitter:description" content="private learning">
+  
+    <link rel="alternate" href="/atom.xml" title="Learning" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Learning</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Joe&#39;s Blog</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-spring security" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/29/spring security/" class="article-date">
+  <time datetime="2020-02-29T14:27:35.000Z" itemprop="datePublished">2020-02-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/29/spring security/">spring security</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>摘自<br><a href="https://blog.csdn.net/liushangzaibeijing/article/details/81220610" target="_blank" rel="noopener">https://blog.csdn.net/liushangzaibeijing/article/details/81220610</a></p>
+<p>最近在公司的项目中使用了spring security框架，所以有机会来学习一下，公司的项目是使用springboot搭建 springBoot版本1.59</p>
+<p>spring security 版本4.2.3</p>
+<p>   （个人理解可能会有偏差，希望有不正确之处，大家能够指出来，共同探讨交流。）</p>
+<p>[TOCM]</p>
+<h2 id="一、Spring-security框架简介"><a href="#一、Spring-security框架简介" class="headerlink" title="一、Spring security框架简介"></a>一、Spring security框架简介</h2><h3 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h3><pre><code>一个能够为基于Spring的企业应用系统提供声明式的安全訪问控制解决方式的安全框架（简单说是对访问权限进行控制嘛），应用的安全性包括用户认证（Authentication）和用户授权（Authorization）两个部分。用户认证指的是验证某个用户是否为系统中的合法主体，也就是说用户能否访问该系统。用户认证一般要求用户提供用户名和密码。系统通过校验用户名和密码来完成认证过程。用户授权指的是验证某个用户是否有权限执行某个操作。在一个系统中，不同用户所具有的权限是不同的。比如对一个文件来说，有的用户只能进行读取，而有的用户可以进行修改。一般来说，系统会为不同的用户分配不同的角色，而每个角色则对应一系列的权限。   spring security的主要核心功能为 认证和授权，所有的架构也是基于这两个核心功能去实现的。</code></pre><h3 id="2、框架原理"><a href="#2、框架原理" class="headerlink" title="2、框架原理"></a>2、框架原理</h3><pre><code>众所周知 想要对对Web资源进行保护，最好的办法莫过于Filter，要想对方法调用进行保护，最好的办法莫过于AOP。所以springSecurity在我们进行用户认证以及授予权限的时候，通过各种各样的拦截器来控制权限的访问，从而实现安全。
+   如下为其主要过滤器  
+
+   WebAsyncManagerIntegrationFilter 
+   SecurityContextPersistenceFilter 
+   HeaderWriterFilter 
+   CorsFilter 
+   LogoutFilter
+   RequestCacheAwareFilter
+   SecurityContextHolderAwareRequestFilter
+   AnonymousAuthenticationFilter
+   SessionManagementFilter
+   ExceptionTranslationFilter
+   FilterSecurityInterceptor
+   UsernamePasswordAuthenticationFilter
+   BasicAuthenticationFilter</code></pre><h3 id="3、框架的核心组件"><a href="#3、框架的核心组件" class="headerlink" title="3、框架的核心组件"></a>3、框架的核心组件</h3><pre><code> SecurityContextHolder：提供对SecurityContext的访问
+ SecurityContext,：持有Authentication对象和其他可能需要的信息
+ AuthenticationManager 其中可以包含多个AuthenticationProvider
+ ProviderManager对象为AuthenticationManager接口的实现类
+ AuthenticationProvider 主要用来进行认证操作的类 调用其中的authenticate()方法去进行认证操作
+ Authentication：Spring Security方式的认证主体
+ GrantedAuthority：对认证主题的应用层面的授权，含当前用户的权限信息，通常使用角色表示
+UserDetails：构建Authentication对象必须的信息，可以自定义，可能需要访问DB得到
+ UserDetailsService：通过username构建UserDetails对象，通过loadUserByUsername根据userName获取UserDetail对象 （可以在这里基于自身业务进行自定义的实现  如通过数据库，xml,缓存获取等）           </code></pre><h2 id="二、自定义安全配置的加载机制"><a href="#二、自定义安全配置的加载机制" class="headerlink" title="二、自定义安全配置的加载机制"></a>二、自定义安全配置的加载机制</h2><h3 id="1、前提-基于自身业务需要"><a href="#1、前提-基于自身业务需要" class="headerlink" title="1、前提 基于自身业务需要"></a>1、前提 基于自身业务需要</h3><p>有关springSecrity安全框架的理解参考：springSecurity安全框架介绍</p>
+<p>自定义了一个springSecurity安全框架的配置类 继承WebSecurityConfigurerAdapter，重写其中的方法configure，但是并不清楚自定义的类是如何被加载并起到作用，这里一步步通过debug来了解其中的加载原理。</p>
+<p>其实在我们实现该类后，在web容器启动的过程中该类实例对象会被WebSecurityConfiguration类处理。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@Configuration</span></span><br><span class="line">public class SpringSecurityConfig extends WebSecurityConfigurerAdapter &#123;</span><br><span class="line"> </span><br><span class="line">    <span class="variable">@Autowired</span></span><br><span class="line">    private AccessDeniedHandler accessDeniedHandler;</span><br><span class="line"> </span><br><span class="line">    <span class="variable">@Autowired</span></span><br><span class="line">    private CustAuthenticationProvider custAuthenticationProvider;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// roles admin allow to access /admin/**</span></span><br><span class="line">    <span class="comment">// roles user allow to access /user/**</span></span><br><span class="line">    <span class="comment">// custom 403 access denied handler</span></span><br><span class="line">    <span class="comment">//重写了其中的configure（）方法设置了不同url的不同访问权限</span></span><br><span class="line">    <span class="variable">@Override</span></span><br><span class="line">    protected void configure(HttpSecurity http) throws Exception &#123;</span><br><span class="line">        <span class="selector-tag">http</span><span class="selector-class">.csrf</span>()<span class="selector-class">.disable</span>()</span><br><span class="line">                <span class="selector-class">.authorizeRequests</span>()</span><br><span class="line">                <span class="selector-class">.antMatchers</span>(<span class="string">"/home"</span>, <span class="string">"/about"</span>,<span class="string">"/img/*"</span>)<span class="selector-class">.permitAll</span>()</span><br><span class="line">                <span class="selector-class">.antMatchers</span>(<span class="string">"/admin/**"</span>,<span class="string">"/upload/**"</span>)<span class="selector-class">.hasAnyRole</span>(<span class="string">"ADMIN"</span>)</span><br><span class="line">                <span class="selector-class">.antMatchers</span>(<span class="string">"/order/**"</span>)<span class="selector-class">.hasAnyRole</span>(<span class="string">"USER"</span>,<span class="string">"ADMIN"</span>)</span><br><span class="line">                <span class="selector-class">.antMatchers</span>(<span class="string">"/room/**"</span>)<span class="selector-class">.hasAnyRole</span>(<span class="string">"USER"</span>,<span class="string">"ADMIN"</span>)</span><br><span class="line">                <span class="selector-class">.anyRequest</span>()<span class="selector-class">.authenticated</span>()</span><br><span class="line">                <span class="selector-class">.and</span>()</span><br><span class="line">                <span class="selector-class">.formLogin</span>()</span><br><span class="line">                <span class="selector-class">.loginPage</span>(<span class="string">"/login"</span>)</span><br><span class="line">                <span class="selector-class">.permitAll</span>()</span><br><span class="line">                <span class="selector-class">.and</span>()</span><br><span class="line">                <span class="selector-class">.logout</span>()</span><br><span class="line">                <span class="selector-class">.permitAll</span>()</span><br><span class="line">                <span class="selector-class">.and</span>()</span><br><span class="line">                <span class="selector-class">.exceptionHandling</span>()<span class="selector-class">.accessDeniedHandler</span>(accessDeniedHandler);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// create two users, admin and user</span></span><br><span class="line">    @<span class="selector-tag">Autowired</span></span><br><span class="line">    <span class="selector-tag">public</span> <span class="selector-tag">void</span> <span class="selector-tag">configureGlobal</span>(AuthenticationManagerBuilder auth) <span class="selector-tag">throws</span> <span class="selector-tag">Exception</span> &#123;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//        auth.inMemoryAuthentication()</span></span><br><span class="line"><span class="comment">//                .withUser("user").password("user").roles("USER")</span></span><br><span class="line"><span class="comment">//                .and()</span></span><br><span class="line"><span class="comment">//                .withUser("admin").password("admin").roles("ADMIN");</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//        auth.jdbcAuthentication()</span></span><br><span class="line"> </span><br><span class="line">        <span class="selector-tag">auth</span><span class="selector-class">.authenticationProvider</span>(custAuthenticationProvider);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>  2、WebSecurityConfiguration类<br>  <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebSecurityConfiguration</span> <span class="title">implements</span> <span class="title">ImportAware</span>, <span class="type">BeanClassLoaderAware &#123;</span></span></span><br><span class="line">    <span class="keyword">private</span> WebSecurity webSecurity;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">Boolean</span> debugEnabled;</span><br><span class="line">    <span class="keyword">private</span> List&lt;SecurityConfigurer&lt;Filter, WebSecurity&gt;&gt; webSecurityConfigurers;</span><br><span class="line">    <span class="keyword">private</span> ClassLoader beanClassLoader;</span><br><span class="line">   </span><br><span class="line">   ...省略部分代码</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Bean(</span></span><br><span class="line"><span class="meta">        name = &#123;<span class="meta-string">"springSecurityFilterChain"</span>&#125;</span></span><br><span class="line"><span class="meta">    )</span></span><br><span class="line">    <span class="keyword">public</span> Filter springSecurityFilterChain() throws Exception &#123;</span><br><span class="line">        boolean hasConfigurers = <span class="keyword">this</span>.webSecurityConfigurers != <span class="literal">null</span></span><br><span class="line">         &amp;&amp; !<span class="keyword">this</span>.webSecurityConfigurers.isEmpty();</span><br><span class="line">        <span class="keyword">if</span>(!hasConfigurers) &#123;</span><br><span class="line">            WebSecurityConfigurerAdapter adapter = (WebSecurityConfigurerAdapter)</span><br><span class="line">            <span class="keyword">this</span>.objectObjectPostProcessor</span><br><span class="line">              .postProcess(new WebSecurityConfigurerAdapter() &#123;</span><br><span class="line">            &#125;);</span><br><span class="line">            <span class="keyword">this</span>.webSecurity.apply(adapter);</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">return</span> (Filter)<span class="keyword">this</span>.webSecurity.build();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*1、先执行该方法将我们自定义springSecurity配置实例</span></span><br><span class="line"><span class="comment">       （可能还有系统默认的有关安全的配置实例 ） 配置实例中含有我们自定义业务的权限控制配置信息</span></span><br><span class="line"><span class="comment">       放入到该对象的list数组中webSecurityConfigurers中</span></span><br><span class="line"><span class="comment">       使用@Value注解来将实例对象作为形参注入</span></span><br><span class="line"><span class="comment">     */</span>   </span><br><span class="line"> <span class="meta">@Autowired(</span></span><br><span class="line"><span class="meta">        required = false</span></span><br><span class="line"><span class="meta">    )</span></span><br><span class="line">    <span class="keyword">public</span> void setFilterChainProxySecurityConfigurer(ObjectPostProcessor&lt;Object&gt; </span><br><span class="line">    objectPostProcessor,</span><br><span class="line">   <span class="meta">@Value(<span class="meta-string">"#&#123;@autowiredWebSecurityConfigurersIgnoreParents.getWebSecurityConfigurers()&#125;"</span>)</span> </span><br><span class="line">  List&lt;SecurityConfigurer&lt;Filter, WebSecurity&gt;&gt; webSecurityConfigurers) </span><br><span class="line">throws Exception &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//创建一个webSecurity对象    </span></span><br><span class="line">    <span class="keyword">this</span>.webSecurity = (WebSecurity)objectPostProcessor.postProcess(new WebSecurity(objectPostProcessor));</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.debugEnabled != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">this</span>.webSecurity.debug(<span class="keyword">this</span>.debugEnabled.booleanValue());</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="comment">//对所有配置类的实例进行排序</span></span><br><span class="line">        Collections.sort(webSecurityConfigurers, WebSecurityConfiguration.AnnotationAwareOrderComparator.INSTANCE);</span><br><span class="line">        Integer previousOrder = <span class="literal">null</span>;</span><br><span class="line">        Object previousConfig = <span class="literal">null</span>;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">        <span class="comment">//迭代所有配置类的实例 判断其order必须唯一</span></span><br><span class="line">        Iterator var5;</span><br><span class="line">        SecurityConfigurer config;</span><br><span class="line">        <span class="keyword">for</span>(var5 = webSecurityConfigurers.iterator(); var5.hasNext(); previousConfig = config) &#123;</span><br><span class="line">            config = (SecurityConfigurer)var5.next();</span><br><span class="line">            Integer order = Integer.valueOf(WebSecurityConfiguration.AnnotationAwareOrderComparator.lookupOrder(config));</span><br><span class="line">            <span class="keyword">if</span>(previousOrder != <span class="literal">null</span> &amp;&amp; previousOrder.equals(order)) &#123;</span><br><span class="line">                <span class="keyword">throw</span> new IllegalStateException(<span class="string">"@Order on WebSecurityConfigurers must be unique. Order of "</span> + order + <span class="string">" was already used on "</span> + previousConfig + <span class="string">", so it cannot be used on "</span> + config + <span class="string">" too."</span>);</span><br><span class="line">            &#125;</span><br><span class="line"> </span><br><span class="line">            previousOrder = order;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">        <span class="comment">//将所有的配置实例添加到创建的webSecutity对象中</span></span><br><span class="line">        var5 = webSecurityConfigurers.iterator();</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">while</span>(var5.hasNext()) &#123;</span><br><span class="line">            config = (SecurityConfigurer)var5.next();</span><br><span class="line">            <span class="keyword">this</span>.webSecurity.apply(config);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//将webSercurityConfigures 实例放入该对象的webSecurityConfigurers属性中</span></span><br><span class="line">        <span class="keyword">this</span>.webSecurityConfigurers = webSecurityConfigurers;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  <span class="number">2.1</span>、 setFilterChainProxySecurityConfigurer（）方法</span><br><span class="line"></span><br><span class="line"><span class="meta">@Value(<span class="meta-string">"#&#123;@autowiredWebSecurityConfigurersIgnoreParents.getWebSecurityConfigurers()&#125;"</span>)</span> List&lt;SecurityConfigurer&lt;Filter, WebSecurity&gt;&gt; webSecurityConfigurers</span><br><span class="line"></span><br><span class="line">   该参数webSecurityConfigurers会将所有的配置实例放入该形参中</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">该方法中 主要执行如下</span><br><span class="line"></span><br><span class="line">     <span class="number">1</span>、创建webSecurity对象</span><br><span class="line"></span><br><span class="line">     <span class="number">2</span>、主要检验了配置实例的order顺序（order唯一 否则会报错）</span><br><span class="line"></span><br><span class="line">     <span class="number">3</span>、将所有的配置实例存放进入到webSecurity对象中，其中配置实例中含有我们自定义业务的权限控制配置信息</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="number">2.2</span>、springSecurityFilterChain()方法</span><br><span class="line"></span><br><span class="line">   调用springSecurityFilterChain()方法，这个方法会判断我们上一个方法中有没有获取到webSecurityConfigurers，没有的话这边会创建一个WebSecurityConfigurerAdapter实例，并追加到websecurity中。接着调用websecurity的build方法。实际调用的是websecurity的父类AbstractSecurityBuilder的build方法 ，最终返回一个名称为springSecurityFilterChain的过滤器链。里面有众多Filter(springSecurity其实就是依靠很多的Filter来拦截url从而实现权限的控制的安全框架)</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>、AbstractSecurityBuilder类</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractSecurityBuilder</span>&lt;<span class="type">O</span>&gt; <span class="title">implements</span> <span class="title">SecurityBuilder</span>&lt;<span class="type">O</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> AtomicBoolean building = new AtomicBoolean();</span><br><span class="line">    <span class="keyword">private</span> O <span class="keyword">object</span>;</span><br><span class="line"> </span><br><span class="line">  </span><br><span class="line"> </span><br><span class="line">    <span class="comment">//调用build方法来返回过滤器链，还是调用SecurityBuilder的dobuild()方法</span></span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> O build() throws Exception &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.building.compareAndSet(<span class="literal">false</span>, <span class="literal">true</span>)) &#123;</span><br><span class="line">            <span class="keyword">this</span>.<span class="keyword">object</span> = <span class="keyword">this</span>.doBuild();</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.<span class="keyword">object</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">throw</span> new AlreadyBuiltException(<span class="string">"This object has already been built"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">   <span class="comment">//...省略部分代码</span></span><br><span class="line">&#125;</span><br><span class="line">  <span class="number">3.1</span> 调用子类的doBuild()方法</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractConfiguredSecurityBuilder</span>&lt;<span class="type">O, B extends SecurityBuilder&lt;O</span>&gt;&gt; <span class="title">extends</span> <span class="title">AbstractSecurityBuilder</span>&lt;<span class="type">O</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Log logger;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> LinkedHashMap&lt;Class&lt;? extends SecurityConfigurer&lt;O, B&gt;&gt;, List&lt;SecurityConfigurer&lt;O, B&gt;&gt;&gt; configurers;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> List&lt;SecurityConfigurer&lt;O, B&gt;&gt; configurersAddedInInitializing;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Map&lt;Class&lt;? extends Object&gt;, Object&gt; sharedObjects;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> boolean allowConfigurersOfSameType;</span><br><span class="line">    <span class="keyword">private</span> AbstractConfiguredSecurityBuilder.BuildState buildState;</span><br><span class="line">    <span class="keyword">private</span> ObjectPostProcessor&lt;Object&gt; objectPostProcessor;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">    <span class="comment">//doBuild()核心方法 init(),configure(),perFormBuild()</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">final</span> O doBuild() throws Exception &#123;</span><br><span class="line">        LinkedHashMap var1 = <span class="keyword">this</span>.configurers;</span><br><span class="line">        synchronized(<span class="keyword">this</span>.configurers) &#123;</span><br><span class="line">            <span class="keyword">this</span>.buildState = AbstractConfiguredSecurityBuilder.BuildState.INITIALIZING;</span><br><span class="line">            <span class="keyword">this</span>.beforeInit();</span><br><span class="line">            <span class="keyword">this</span>.<span class="keyword">init</span>();</span><br><span class="line">            <span class="keyword">this</span>.buildState = AbstractConfiguredSecurityBuilder.BuildState.CONFIGURING;</span><br><span class="line">            <span class="keyword">this</span>.beforeConfigure();</span><br><span class="line">            <span class="keyword">this</span>.configure();</span><br><span class="line">            <span class="keyword">this</span>.buildState = AbstractConfiguredSecurityBuilder.BuildState.BUILDING;</span><br><span class="line">            O result = <span class="keyword">this</span>.performBuild();</span><br><span class="line">            <span class="keyword">this</span>.buildState = AbstractConfiguredSecurityBuilder.BuildState.BUILT;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">abstract</span> O performBuild() throws Exception;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//调用init方法 调用配置类WebSecurityConfigurerAdapter的init()方法</span></span><br><span class="line">    <span class="keyword">private</span> void <span class="keyword">init</span>() throws Exception &#123;</span><br><span class="line">        Collection&lt;SecurityConfigurer&lt;O, B&gt;&gt; configurers = <span class="keyword">this</span>.getConfigurers();</span><br><span class="line">        Iterator var2 = configurers.iterator();</span><br><span class="line"> </span><br><span class="line">        SecurityConfigurer configurer;</span><br><span class="line">        <span class="keyword">while</span>(var2.hasNext()) &#123;</span><br><span class="line">            configurer = (SecurityConfigurer)var2.next();</span><br><span class="line">            configurer.<span class="keyword">init</span>(<span class="keyword">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        var2 = <span class="keyword">this</span>.configurersAddedInInitializing.iterator();</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">while</span>(var2.hasNext()) &#123;</span><br><span class="line">            configurer = (SecurityConfigurer)var2.next();</span><br><span class="line">            configurer.<span class="keyword">init</span>(<span class="keyword">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> void configure() throws Exception &#123;</span><br><span class="line">        Collection&lt;SecurityConfigurer&lt;O, B&gt;&gt; configurers = <span class="keyword">this</span>.getConfigurers();</span><br><span class="line">        Iterator var2 = configurers.iterator();</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">while</span>(var2.hasNext()) &#123;</span><br><span class="line">            SecurityConfigurer&lt;O, B&gt; configurer = (SecurityConfigurer)var2.next();</span><br><span class="line">            configurer.configure(<span class="keyword">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> Collection&lt;SecurityConfigurer&lt;O, B&gt;&gt; getConfigurers() &#123;</span><br><span class="line">        List&lt;SecurityConfigurer&lt;O, B&gt;&gt; result = new ArrayList();</span><br><span class="line">        Iterator var2 = <span class="keyword">this</span>.configurers.values().iterator();</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">while</span>(var2.hasNext()) &#123;</span><br><span class="line">            List&lt;SecurityConfigurer&lt;O, B&gt;&gt; configs = (List)var2.next();</span><br><span class="line">            result.addAll(configs);</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">//...省略部分代码</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="number">3.2</span> 先调用本类的<span class="keyword">init</span>()方法</span><br><span class="line"></span><br><span class="line">build过程主要分三步，<span class="keyword">init</span>-&gt;configure-&gt;peformBuild </span><br><span class="line"></span><br><span class="line"><span class="number">1</span>  <span class="keyword">init</span>方法做了两件事，一个就是调用getHttp()方法获取一个http实例，并通过web.addSecurityFilterChainBuilder方法把获取到的实例赋值给WebSecurity的securityFilterChainBuilders属性，这个属性在我们执行build的时候会用到，第二个就是为WebSecurity追加了一个postBuildAction，在build都完成后从http中拿出FilterSecurityInterceptor对象并赋值给WebSecurity。 </span><br><span class="line"><span class="number">2</span>  getHttp()方法，这个方法在当我们使用默认配置时（大多数情况下）会为我们追加各种SecurityConfigurer的具体实现类到httpSecurity中，如exceptionHandling()方法会追加一个ExceptionHandlingConfigurer，sessionManagement()方法会追加一个SessionManagementConfigurer,securityContext()方法会追加一个SecurityContextConfigurer对象，这些SecurityConfigurer的具体实现类最终会为我们配置各种具体的filter。</span><br><span class="line"><span class="number">3</span> 另外getHttp()方法的最后会调用configure(http)，这个方法也是我们继承WebSecurityConfigurerAdapter类后最可能会重写的方法 。</span><br><span class="line"><span class="number">4</span> configure(HttpSecurity http)方法，默认的configure(HttpSecurity http)方法继续向httpSecurity类中追加SecurityConfigurer的具体实现类，如authorizeRequests()方法追加一个ExpressionUrlAuthorizationConfigurer，formLogin()方法追加一个FormLoginConfigurer。 其中ExpressionUrlAuthorizationConfigurer这个实现类比较重要，因为他会给我们创建一个非常重要的对象FilterSecurityInterceptor对象，FormLoginConfigurer对象比较简单，但是也会为我们提供一个在安全认证过程中经常用到会用的一个Filter：UsernamePasswordAuthenticationFilter。 </span><br><span class="line">以上三个方法就是WebSecurityConfigurerAdapter类中<span class="keyword">init</span>方法的主要逻辑，</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">WebSecurityConfigurerAdapter</span> <span class="title">implements</span> </span></span><br><span class="line">   WebSecurityConfigurer&lt;WebSecurity&gt; &#123;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> void <span class="keyword">init</span>(<span class="keyword">final</span> WebSecurity web) throws Exception &#123;</span><br><span class="line">        <span class="keyword">final</span> HttpSecurity http = <span class="keyword">this</span>.getHttp();</span><br><span class="line">        web.addSecurityFilterChainBuilder(http).postBuildAction(new Runnable() &#123;</span><br><span class="line">            <span class="keyword">public</span> void run() &#123;</span><br><span class="line">                FilterSecurityInterceptor securityInterceptor = (FilterSecurityInterceptor)http.getSharedObject(FilterSecurityInterceptor.<span class="keyword">class</span>);</span><br><span class="line">                web.securityInterceptor(securityInterceptor);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> <span class="keyword">protected</span> <span class="keyword">final</span> HttpSecurity getHttp() throws Exception &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.http != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.http;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            DefaultAuthenticationEventPublisher eventPublisher = (DefaultAuthenticationEventPublisher)<span class="keyword">this</span>.objectPostProcessor.postProcess(new DefaultAuthenticationEventPublisher());</span><br><span class="line">       </span><br><span class="line"> </span><br><span class="line"><span class="comment">//添加认证的事件的发布者</span></span><br><span class="line"><span class="keyword">this</span>.localConfigureAuthenticationBldr.authenticationEventPublisher(eventPublisher);</span><br><span class="line"><span class="comment">//获取AuthenticationManager对象其中一至多个进行认证处理的对象实例，后面会进行讲解          </span></span><br><span class="line">AuthenticationManager authenticationManager = <span class="keyword">this</span>.authenticationManager();</span><br><span class="line">            <span class="keyword">this</span>.authenticationBuilder.parentAuthenticationManager(authenticationManager);</span><br><span class="line">            Map&lt;Class&lt;? extends Object&gt;, Object&gt; sharedObjects = <span class="keyword">this</span>.createSharedObjects();</span><br><span class="line">            <span class="keyword">this</span>.http = new HttpSecurity(<span class="keyword">this</span>.objectPostProcessor, <span class="keyword">this</span>.authenticationBuilder, sharedObjects);</span><br><span class="line">            <span class="keyword">if</span>(!<span class="keyword">this</span>.disableDefaults) &#123;</span><br><span class="line">                ((HttpSecurity)((DefaultLoginPageConfigurer)((HttpSecurity)((HttpSecurity)((HttpSecurity)((HttpSecurity)((HttpSecurity)((HttpSecurity)((HttpSecurity)((HttpSecurity)<span class="keyword">this</span>.http.csrf().and()).addFilter(new WebAsyncManagerIntegrationFilter()).exceptionHandling().and()).headers().and()).sessionManagement().and()).securityContext().and()).requestCache().and()).anonymous().and()).servletApi().and()).apply(new DefaultLoginPageConfigurer())).and()).logout();</span><br><span class="line">                ClassLoader classLoader = <span class="keyword">this</span>.context.getClassLoader();</span><br><span class="line">                List&lt;AbstractHttpConfigurer&gt; defaultHttpConfigurers = SpringFactoriesLoader.loadFactories(AbstractHttpConfigurer.<span class="keyword">class</span>, classLoader);</span><br><span class="line">                Iterator var6 = defaultHttpConfigurers.iterator();</span><br><span class="line"> </span><br><span class="line">                <span class="keyword">while</span>(var6.hasNext()) &#123;</span><br><span class="line">                    AbstractHttpConfigurer configurer = (AbstractHttpConfigurer)var6.next();</span><br><span class="line">                    <span class="keyword">this</span>.http.apply(configurer);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"> </span><br><span class="line">            <span class="comment">//最终调用我们的继承的WebSecurityConfigurerAdapter中重写的configure()</span></span><br><span class="line">            <span class="comment">//将我们业务相关的权限配置规则信息进行初始化操作</span></span><br><span class="line">            <span class="keyword">this</span>.configure(<span class="keyword">this</span>.http);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.http;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> <span class="keyword">protected</span> AuthenticationManager authenticationManager() throws Exception &#123;</span><br><span class="line">        <span class="keyword">if</span>(!<span class="keyword">this</span>.authenticationManagerInitialized) &#123;</span><br><span class="line">            <span class="keyword">this</span>.configure(<span class="keyword">this</span>.localConfigureAuthenticationBldr);</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">this</span>.disableLocalConfigureAuthenticationBldr) &#123;</span><br><span class="line">                <span class="keyword">this</span>.authenticationManager = <span class="keyword">this</span>.authenticationConfiguration.getAuthenticationManager();</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">this</span>.authenticationManager = (AuthenticationManager)<span class="keyword">this</span>.localConfigureAuthenticationBldr.build();</span><br><span class="line">            &#125;</span><br><span class="line"> </span><br><span class="line">            <span class="keyword">this</span>.authenticationManagerInitialized = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.authenticationManager;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3.3、第二步configure</p>
+<p>configure方法最终也调用到了WebSecurityConfigurerAdapter的configure(WebSecurity web)方法，默认实现中这个是一个空方法，具体应用中也经常重写这个方法来实现特定需求。<br>3.4、第三步 peformBuild</p>
+<p>具体的实现逻辑在WebSecurity类中<br>这个方法中最主要的任务就是遍历securityFilterChainBuilders属性中的SecurityBuilder对象，并调用他的build方法。<br>这个securityFilterChainBuilders属性我们前面也有提到过，就是在WebSecurityConfigurerAdapter类的init方法中获取http后赋值给了WebSecurity。因此这个地方就是调用httpSecurity的build方法。<br> httpSecurity的build方式向其中追加一个个过滤器</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">public <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">WebSecurity</span> <span class="keyword">extends</span> <span class="title">AbstractConfiguredSecurityBuilder&lt;Filter</span>, <span class="title">WebSecurity&gt;</span> <span class="title">implements</span> <span class="title">SecurityBuilder&lt;Filter&gt;</span>, <span class="title">ApplicationContextAware</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">  ...省略部分代码</span><br><span class="line"> </span><br><span class="line">    <span class="comment">//调用该方法通过securityFilterChainBuilder.build()方法来创建securityFilter过滤器</span></span><br><span class="line">    <span class="comment">//并添加到securityFilterChains对象中，包装成FilterChainProxy 返回</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="type">Filter</span> performBuild() <span class="keyword">throws</span> <span class="type">Exception</span> &#123;</span><br><span class="line">        <span class="type">Assert</span>.state(!<span class="keyword">this</span>.securityFilterChainBuilders.isEmpty(), <span class="string">"At least one SecurityBuilder&lt;? extends SecurityFilterChain&gt; needs to be specified. Typically this done by adding a @Configuration that extends WebSecurityConfigurerAdapter. More advanced users can invoke "</span> + <span class="type">WebSecurity</span>.<span class="keyword">class</span>.getSimpleName() + <span class="string">".addSecurityFilterChainBuilder directly"</span>);</span><br><span class="line">        int chainSize = <span class="keyword">this</span>.ignoredRequests.size() + <span class="keyword">this</span>.securityFilterChainBuilders.size();</span><br><span class="line">        <span class="type">List</span>&lt;<span class="type">SecurityFilterChain</span>&gt; securityFilterChains = <span class="keyword">new</span> <span class="type">ArrayList</span>(chainSize);</span><br><span class="line">        <span class="type">Iterator</span> var3 = <span class="keyword">this</span>.ignoredRequests.iterator();</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">while</span>(var3.hasNext()) &#123;</span><br><span class="line">            <span class="type">RequestMatcher</span> ignoredRequest = (<span class="type">RequestMatcher</span>)var3.next();</span><br><span class="line">            securityFilterChains.add(<span class="keyword">new</span> <span class="type">DefaultSecurityFilterChain</span>(ignoredRequest, <span class="keyword">new</span> <span class="type">Filter</span>[<span class="number">0</span>]));</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        var3 = <span class="keyword">this</span>.securityFilterChainBuilders.iterator();</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">while</span>(var3.hasNext()) &#123;</span><br><span class="line">            <span class="type">SecurityBuilder</span>&lt;? <span class="keyword">extends</span> <span class="type">SecurityFilterChain</span>&gt; securityFilterChainBuilder = (<span class="type">SecurityBuilder</span>)var3.next();</span><br><span class="line">            securityFilterChains.add(securityFilterChainBuilder.build());</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="type">FilterChainProxy</span> filterChainProxy = <span class="keyword">new</span> <span class="type">FilterChainProxy</span>(securityFilterChains);</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.httpFirewall != <span class="literal">null</span>) &#123;</span><br><span class="line">            filterChainProxy.setFirewall(<span class="keyword">this</span>.httpFirewall);</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        filterChainProxy.afterPropertiesSet();</span><br><span class="line">        <span class="type">Filter</span> result = filterChainProxy;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.debugEnabled) &#123;</span><br><span class="line">            <span class="keyword">this</span>.logger.warn(<span class="string">"\n\n********************************************************************\n**********        Security debugging is enabled.       *************\n**********    This may include sensitive information.  *************\n**********      Do not use in a production system!     *************\n********************************************************************\n\n"</span>);</span><br><span class="line">            result = <span class="keyword">new</span> <span class="type">DebugFilter</span>(filterChainProxy);</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">this</span>.postBuildAction.run();</span><br><span class="line">        <span class="keyword">return</span> (<span class="type">Filter</span>)result;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 4、举例说明如何将一个Configurer转换为filter<br>ExpressionUrlAuthorizationConfigurer的继承关系<br>ExpressionUrlAuthorizationConfigurer-&gt;AbstractInterceptUrlConfigurer-&gt;AbstractHttpConfigurer-&gt;SecurityConfigurerAdapter-&gt;SecurityConfigurer<br>对应的init方法在SecurityConfigurerAdapter类中，是个空实现，什么也没有做，configure方法在SecurityConfigurerAdapter类中也有一个空实现，在AbstractInterceptUrlConfigurer类中进行了重写 </p>
+<p>Abstractintercepturlconfigurer.java代码 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(H http)</span> <span class="keyword">throws</span> Exception </span>&#123;  </span><br><span class="line">        FilterInvocationSecurityMetadataSource metadataSource = createMetadataSource(http);  </span><br><span class="line">        <span class="keyword">if</span> (metadataSource == <span class="keyword">null</span>) &#123;  </span><br><span class="line">            <span class="keyword">return</span>;  </span><br><span class="line">        &#125;  </span><br><span class="line">        FilterSecurityInterceptor securityInterceptor = createFilterSecurityInterceptor(  </span><br><span class="line">                http, metadataSource, http.getSharedObject(AuthenticationManager.class));  </span><br><span class="line">        <span class="keyword">if</span> (filterSecurityInterceptorOncePerRequest != <span class="keyword">null</span>) &#123;  </span><br><span class="line">            securityInterceptor  </span><br><span class="line">                    .setObserveOncePerRequest(filterSecurityInterceptorOncePerRequest);  </span><br><span class="line">        &#125;  </span><br><span class="line">        securityInterceptor = postProcess(securityInterceptor);  </span><br><span class="line">        http.addFilter(securityInterceptor);  </span><br><span class="line">        http.setSharedObject(FilterSecurityInterceptor.class, securityInterceptor);  </span><br><span class="line">    &#125;  </span><br><span class="line">...  </span><br><span class="line"><span class="function"><span class="keyword">private</span> AccessDecisionManager <span class="title">createDefaultAccessDecisionManager</span><span class="params">(H http)</span> </span>&#123;  </span><br><span class="line">        AffirmativeBased result = <span class="keyword">new</span> AffirmativeBased(getDecisionVoters(http));  </span><br><span class="line">        <span class="keyword">return</span> postProcess(result);  </span><br><span class="line">    &#125;  </span><br><span class="line">...  </span><br><span class="line"><span class="function"><span class="keyword">private</span> FilterSecurityInterceptor <span class="title">createFilterSecurityInterceptor</span><span class="params">(H http,  </span></span></span><br><span class="line"><span class="function"><span class="params">            FilterInvocationSecurityMetadataSource metadataSource,  </span></span></span><br><span class="line"><span class="function"><span class="params">            AuthenticationManager authenticationManager)</span> <span class="keyword">throws</span> Exception </span>&#123;  </span><br><span class="line">        FilterSecurityInterceptor securityInterceptor = <span class="keyword">new</span> FilterSecurityInterceptor();  </span><br><span class="line">        securityInterceptor.setSecurityMetadataSource(metadataSource);  </span><br><span class="line">        securityInterceptor.setAccessDecisionManager(getAccessDecisionManager(http));  </span><br><span class="line">        securityInterceptor.setAuthenticationManager(authenticationManager);  </span><br><span class="line">        securityInterceptor.afterPropertiesSet();  </span><br><span class="line">        <span class="keyword">return</span> securityInterceptor;  </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>4.1、 在这个类的configure中创建了一个FilterSecurityInterceptor，并且也可以明确看到spring security默认给我们创建的AccessDecisionManager是AffirmativeBased。 </p>
+<p>4.2、.最后再看下HttpSecurity类执行build的最后一步 performBuild，这个方法就是在HttpSecurity中实现的 </p>
+<p>Httpsecurity.java代码 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> DefaultSecurityFilterChain <span class="title">performBuild</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;  </span><br><span class="line">        Collections.sort(filters, comparator);  </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> DefaultSecurityFilterChain(requestMatcher, filters);  </span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line">可以看到，这个类只是把我们追加到HttpSecurity中的security进行了排序，用的排序类是FilterComparator，从而保证我们的filter按照正确的顺序执行。接着将filters构建成filterChian返回。在前面WebSecurity的performBuild方法中，这个返回值会被包装成FilterChainProxy，并作为WebSecurity的build方法的放回值。从而以springSecurityFilterChain这个名称注册到springContext中（在WebSecurityConfiguration中做的） </span><br><span class="line"></span><br><span class="line"><span class="number">4.3</span>.在WebSecurity的performBuild方法的最后一步还执行了一个postBuildAction.run，这个方法也是spring security给我们提供的一个hooks，可以在build完成后再做一些事情，比如我们在WebSecurityConfigurerAdapter类的init方法中我们利用这个hook在构建完成后将FilterSecurityInterceptor赋值给了webSecurity类的filterSecurityInterceptor属性</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、用户登录的验证和授权过程"><a href="#三、用户登录的验证和授权过程" class="headerlink" title="三、用户登录的验证和授权过程"></a>三、用户登录的验证和授权过程</h2><p>1、用户一次完整的登录验证和授权，是一个请求经过 层层拦截器从而实现权限控制，整个web端配置为DelegatingFilterProxy（springSecurity的委托过滤其代理类 ），它并不实现真正的过滤，而是所有过滤器链的代理类，真正执行拦截处理的是由spring 容器管理的个个filter bean组成的filterChain.</p>
+<p>调用实际的FilterChainProxy 的doFilterInternal()方法 去获取所有的拦截器并进行过滤处理如下是DelegatingFilterProxy的doFilter（）方法</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws ServletException, IOException &#123;</span><br><span class="line">        Filter delegateToUse = <span class="keyword">this</span>.delegate;</span><br><span class="line">        <span class="keyword">if</span>(delegateToUse == <span class="literal">null</span>) &#123;</span><br><span class="line">            Object var5 = <span class="keyword">this</span>.delegateMonitor;</span><br><span class="line">            synchronized(<span class="keyword">this</span>.delegateMonitor) &#123;</span><br><span class="line">                delegateToUse = <span class="keyword">this</span>.delegate;</span><br><span class="line">                <span class="keyword">if</span>(delegateToUse == <span class="literal">null</span>) &#123;</span><br><span class="line">                    WebApplicationContext wac = <span class="keyword">this</span>.findWebApplicationContext();</span><br><span class="line">                    <span class="keyword">if</span>(wac == <span class="literal">null</span>) &#123;</span><br><span class="line">                        <span class="keyword">throw</span> new IllegalStateException(<span class="string">"No WebApplicationContext found: no ContextLoaderListener or DispatcherServlet registered?"</span>);</span><br><span class="line">                    &#125;</span><br><span class="line"> </span><br><span class="line">                    delegateToUse = <span class="keyword">this</span>.initDelegate(wac);</span><br><span class="line">                &#125;</span><br><span class="line"> </span><br><span class="line">                <span class="keyword">this</span>.delegate = delegateToUse;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//调用实际的FilterChainProxy 的doFilterInternal()方法 去获取所有的拦截器并进行过滤处理</span></span><br><span class="line">        <span class="keyword">this</span>.invokeDelegate(delegateToUse, request, response, filterChain);</span><br><span class="line">    &#125;</span><br><span class="line">调用实际的FilterChainProxy 的doFilter()方法 去获取所有的拦截器并进行过滤处理。</span><br></pre></td></tr></table></figure>
+
+<p>2、FilterChainProxy类<br>最终调用FilterChainProxy 的doFilterInternal()方法，获取所有的过滤器实例</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> doFilter(ServletRequest request, ServletResponse response, FilterChain chain) <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line">        <span class="keyword">boolean</span> clearContext = request.getAttribute(FILTER_APPLIED) == <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span>(clearContext) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                request.setAttribute(FILTER_APPLIED, <span class="keyword">Boolean</span>.<span class="keyword">TRUE</span>);</span><br><span class="line">                <span class="comment">//doFilter 调用doFilterInternal方法</span></span><br><span class="line">                <span class="keyword">this</span>.doFilterInternal(request, response, chain);</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                SecurityContextHolder.clearContext();</span><br><span class="line">                request.removeAttribute(FILTER_APPLIED);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.doFilterInternal(request, response, chain);</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> doFilterInternal(ServletRequest request, ServletResponse response, FilterChain chain) <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line">        FirewalledRequest fwRequest = <span class="keyword">this</span>.firewall.getFirewalledRequest((HttpServletRequest)request);</span><br><span class="line">        HttpServletResponse fwResponse = <span class="keyword">this</span>.firewall.getFirewalledResponse((HttpServletResponse)response);</span><br><span class="line">         <span class="comment">//过去所有的过滤器</span></span><br><span class="line">        List&lt;Filter&gt; filters = <span class="keyword">this</span>.getFilters((HttpServletRequest)fwRequest);</span><br><span class="line">        <span class="keyword">if</span>(filters != <span class="keyword">null</span> &amp;&amp; filters.<span class="keyword">size</span>() != <span class="number">0</span>) &#123;</span><br><span class="line">            FilterChainProxy.VirtualFilterChain vfc = <span class="keyword">new</span> FilterChainProxy.VirtualFilterChain(fwRequest, chain, filters);</span><br><span class="line">            vfc.doFilter(fwRequest, fwResponse);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(logger.isDebugEnabled()) &#123;</span><br><span class="line">                logger.debug(UrlUtils.buildRequestUrl(fwRequest) + (filters == <span class="keyword">null</span>?<span class="string">" has no matching filters"</span>:<span class="string">" has an empty filter list"</span>));</span><br><span class="line">            &#125;</span><br><span class="line"> </span><br><span class="line">            fwRequest.reset();</span><br><span class="line">            chain.doFilter(fwRequest, fwResponse);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">  <span class="keyword">private</span> List&lt;Filter&gt; getFilters(HttpServletRequest request) &#123;</span><br><span class="line">       <span class="comment">//遍历所有的matcher类 如果支持就继续获取</span></span><br><span class="line">        Iterator var2 = <span class="keyword">this</span>.filterChains.iterator();</span><br><span class="line"> </span><br><span class="line">        SecurityFilterChain chain;</span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(!var2.hasNext()) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line"> </span><br><span class="line">            chain = (SecurityFilterChain)var2.<span class="keyword">next</span>();</span><br><span class="line">        &#125; <span class="keyword">while</span>(!chain.matches(request));</span><br><span class="line">        <span class="comment">//后去匹配中的所有过滤器</span></span><br><span class="line">        <span class="keyword">return</span> chain.getFilters();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>如上 其实是获取到本次请求的所有filter 并安装指定顺序进行执行doFilter()方法<br>这是笔者本次业务请求所要执行的所有过滤器 </p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">     <span class="attribute">W</span><span class="attribute">e</span><span class="attribute">b</span><span class="attribute">A</span><span class="attribute">s</span><span class="attribute">y</span><span class="attribute">n</span><span class="attribute">c</span><span class="attribute">M</span><span class="attribute">a</span><span class="attribute">n</span><span class="attribute">a</span><span class="attribute">g</span><span class="attribute">e</span><span class="attribute">r</span><span class="attribute">I</span><span class="attribute">n</span><span class="attribute">t</span><span class="attribute">e</span><span class="attribute">g</span><span class="attribute">r</span><span class="attribute">a</span><span class="attribute">t</span><span class="attribute">i</span><span class="attribute">o</span><span class="attribute">n</span><span class="attribute">F</span><span class="attribute">i</span><span class="attribute">l</span><span class="attribute">t</span><span class="attribute">e</span><span class="attribute">r</span></span><br><span class="line">     <span class="attribute">S</span><span class="attribute">e</span><span class="attribute">c</span><span class="attribute">u</span><span class="attribute">r</span><span class="attribute">i</span><span class="attribute">t</span><span class="attribute">y</span><span class="attribute">C</span><span class="attribute">o</span><span class="attribute">n</span><span class="attribute">t</span><span class="attribute">e</span><span class="attribute">x</span><span class="attribute">t</span><span class="attribute">P</span><span class="attribute">e</span><span class="attribute">r</span><span class="attribute">s</span><span class="attribute">i</span><span class="attribute">s</span><span class="attribute">t</span><span class="attribute">e</span><span class="attribute">n</span><span class="attribute">c</span><span class="attribute">e</span><span class="attribute">F</span><span class="attribute">i</span><span class="attribute">l</span><span class="attribute">t</span><span class="attribute">e</span><span class="attribute">r</span></span><br><span class="line">     <span class="attribute">H</span><span class="attribute">e</span><span class="attribute">a</span><span class="attribute">d</span><span class="attribute">e</span><span class="attribute">r</span><span class="attribute">W</span><span class="attribute">r</span><span class="attribute">i</span><span class="attribute">t</span><span class="attribute">e</span><span class="attribute">r</span><span class="attribute">F</span><span class="attribute">i</span><span class="attribute">l</span><span class="attribute">t</span><span class="attribute">e</span><span class="attribute">r</span>     </span><br><span class="line">     <span class="attribute">L</span><span class="attribute">o</span><span class="attribute">g</span><span class="attribute">o</span><span class="attribute">u</span><span class="attribute">t</span><span class="attribute">F</span><span class="attribute">i</span><span class="attribute">l</span><span class="attribute">t</span><span class="attribute">e</span><span class="attribute">r</span></span><br><span class="line">     <span class="attribute">U</span><span class="attribute">s</span><span class="attribute">e</span><span class="attribute">r</span><span class="attribute">n</span><span class="attribute">a</span><span class="attribute">m</span><span class="attribute">e</span><span class="attribute">P</span><span class="attribute">a</span><span class="attribute">s</span><span class="attribute">s</span><span class="attribute">w</span><span class="attribute">o</span><span class="attribute">r</span><span class="attribute">d</span><span class="attribute">A</span><span class="attribute">u</span><span class="attribute">t</span><span class="attribute">h</span><span class="attribute">e</span><span class="attribute">n</span><span class="attribute">t</span><span class="attribute">i</span><span class="attribute">c</span><span class="attribute">a</span><span class="attribute">t</span><span class="attribute">i</span><span class="attribute">o</span><span class="attribute">n</span><span class="attribute">F</span><span class="attribute">i</span><span class="attribute">l</span><span class="attribute">t</span><span class="attribute">e</span><span class="attribute">r</span></span><br><span class="line">     <span class="attribute">R</span><span class="attribute">e</span><span class="attribute">q</span><span class="attribute">u</span><span class="attribute">e</span><span class="attribute">s</span><span class="attribute">t</span><span class="attribute">C</span><span class="attribute">a</span><span class="attribute">c</span><span class="attribute">h</span><span class="attribute">e</span><span class="attribute">A</span><span class="attribute">w</span><span class="attribute">a</span><span class="attribute">r</span><span class="attribute">e</span><span class="attribute">F</span><span class="attribute">i</span><span class="attribute">l</span><span class="attribute">t</span><span class="attribute">e</span><span class="attribute">r</span></span><br><span class="line">     <span class="attribute">S</span><span class="attribute">e</span><span class="attribute">c</span><span class="attribute">u</span><span class="attribute">r</span><span class="attribute">i</span><span class="attribute">t</span><span class="attribute">y</span><span class="attribute">C</span><span class="attribute">o</span><span class="attribute">n</span><span class="attribute">t</span><span class="attribute">e</span><span class="attribute">x</span><span class="attribute">t</span><span class="attribute">H</span><span class="attribute">o</span><span class="attribute">l</span><span class="attribute">d</span><span class="attribute">e</span><span class="attribute">r</span><span class="attribute">A</span><span class="attribute">w</span><span class="attribute">a</span><span class="attribute">r</span><span class="attribute">e</span><span class="attribute">R</span><span class="attribute">e</span><span class="attribute">q</span><span class="attribute">u</span><span class="attribute">e</span><span class="attribute">s</span><span class="attribute">t</span><span class="attribute">F</span><span class="attribute">i</span><span class="attribute">l</span><span class="attribute">t</span><span class="attribute">e</span><span class="attribute">r</span></span><br><span class="line">     <span class="attribute">A</span><span class="attribute">n</span><span class="attribute">o</span><span class="attribute">n</span><span class="attribute">y</span><span class="attribute">m</span><span class="attribute">o</span><span class="attribute">u</span><span class="attribute">s</span><span class="attribute">A</span><span class="attribute">u</span><span class="attribute">t</span><span class="attribute">h</span><span class="attribute">e</span><span class="attribute">n</span><span class="attribute">t</span><span class="attribute">i</span><span class="attribute">c</span><span class="attribute">a</span><span class="attribute">t</span><span class="attribute">i</span><span class="attribute">o</span><span class="attribute">n</span><span class="attribute">F</span><span class="attribute">i</span><span class="attribute">l</span><span class="attribute">t</span><span class="attribute">e</span><span class="attribute">r</span></span><br><span class="line">     <span class="attribute">S</span><span class="attribute">e</span><span class="attribute">s</span><span class="attribute">s</span><span class="attribute">i</span><span class="attribute">o</span><span class="attribute">n</span><span class="attribute">M</span><span class="attribute">a</span><span class="attribute">n</span><span class="attribute">a</span><span class="attribute">g</span><span class="attribute">e</span><span class="attribute">m</span><span class="attribute">e</span><span class="attribute">n</span><span class="attribute">t</span><span class="attribute">F</span><span class="attribute">i</span><span class="attribute">l</span><span class="attribute">t</span><span class="attribute">e</span><span class="attribute">r</span></span><br><span class="line">     <span class="attribute">E</span><span class="attribute">x</span><span class="attribute">c</span><span class="attribute">e</span><span class="attribute">p</span><span class="attribute">t</span><span class="attribute">i</span><span class="attribute">o</span><span class="attribute">n</span><span class="attribute">T</span><span class="attribute">r</span><span class="attribute">a</span><span class="attribute">n</span><span class="attribute">s</span><span class="attribute">l</span><span class="attribute">a</span><span class="attribute">t</span><span class="attribute">i</span><span class="attribute">o</span><span class="attribute">n</span><span class="attribute">F</span><span class="attribute">i</span><span class="attribute">l</span><span class="attribute">t</span><span class="attribute">e</span><span class="attribute">r</span></span><br><span class="line">     <span class="attribute">F</span><span class="attribute">i</span><span class="attribute">l</span><span class="attribute">t</span><span class="attribute">e</span><span class="attribute">r</span><span class="attribute">S</span><span class="attribute">e</span><span class="attribute">c</span><span class="attribute">u</span><span class="attribute">r</span><span class="attribute">i</span><span class="attribute">t</span><span class="attribute">y</span><span class="attribute">I</span><span class="attribute">n</span><span class="attribute">t</span><span class="attribute">e</span><span class="attribute">r</span><span class="attribute">c</span><span class="attribute">e</span><span class="attribute">p</span><span class="attribute">t</span><span class="attribute">o</span><span class="attribute">r</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="关于springSecutity拦截器的介绍请参考如下链接地址"><a href="#关于springSecutity拦截器的介绍请参考如下链接地址" class="headerlink" title="关于springSecutity拦截器的介绍请参考如下链接地址"></a>关于springSecutity拦截器的介绍请参考如下链接地址</h2><p><a href="https://blog.csdn.net/dushiwodecuo/article/details/78913113" target="_blank" rel="noopener">https://blog.csdn.net/dushiwodecuo/article/details/78913113</a></p>
+<p><a href="http://blog.didispace.com/xjf-spring-security-4/" target="_blank" rel="noopener">http://blog.didispace.com/xjf-spring-security-4/</a></p>
+<p><a href="https://www.cnblogs.com/HHR-SUN/p/7095720.html" target="_blank" rel="noopener">https://www.cnblogs.com/HHR-SUN/p/7095720.html</a></p>
+<p><a href="https://blog.csdn.net/zheng963/article/details/50427320" target="_blank" rel="noopener">https://blog.csdn.net/zheng963/article/details/50427320</a></p>
+<p><a href="https://blog.csdn.net/m0_37834471/article/details/81142246" target="_blank" rel="noopener">https://blog.csdn.net/m0_37834471/article/details/81142246</a></p>
+<p><a href="https://www.cnblogs.com/mingluosunshan/p/5485259.html" target="_blank" rel="noopener">https://www.cnblogs.com/mingluosunshan/p/5485259.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2020/02/29/spring security/" data-id="ckbdc9v1c00r224u2qujvp1mb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java获取IP" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/28/java获取IP/" class="article-date">
+  <time datetime="2020-02-28T15:34:43.000Z" itemprop="datePublished">2020-02-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/28/java获取IP/">java获取IP</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>2.NetworkInterface.getNetworkInterfaces();可以获取本地所有的ip地址，如docker服务相关的ip等。<br>//all ip</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Enumeration&lt;NetworkInterface&gt; n = NetworkInterface.getNetworkInterfaces()<span class="comment">;</span></span><br><span class="line">for (<span class="comment">; n.hasMoreElements(); ) &#123;</span></span><br><span class="line">    NetworkInterface e = n.nextElement()<span class="comment">;</span></span><br><span class="line">    System.out.println(<span class="string">"Interface: "</span> + e.getName())<span class="comment">;</span></span><br><span class="line">    Enumeration&lt;InetAddress&gt; a = e.getInetAddresses()<span class="comment">;</span></span><br><span class="line">    for (<span class="comment">; a.hasMoreElements(); ) &#123;</span></span><br><span class="line">        InetAddress <span class="keyword">addr </span>= a.nextElement()<span class="comment">;</span></span><br><span class="line">        System.out.println(<span class="string">"  "</span> + <span class="keyword">addr.getHostAddress());</span></span><br><span class="line"><span class="keyword"> </span>   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>过滤回环网卡、点对点网卡、非活动网卡、虚拟网卡并要求网卡名字是eth或ens开头；再过滤回环地址，并要求是内网地址（非外网）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;Inet4Address&gt; <span class="title">getLocalIp4AddressFromNetworkInterface</span><span class="params">()</span> <span class="keyword">throws</span> SocketException </span>&#123;</span><br><span class="line">    List&lt;Inet4Address&gt; addresses = <span class="keyword">new</span> ArrayList&lt;&gt;(<span class="number">1</span>);</span><br><span class="line">    Enumeration e = NetworkInterface.getNetworkInterfaces();</span><br><span class="line">    <span class="keyword">if</span> (e == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> addresses;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (e.hasMoreElements()) &#123;</span><br><span class="line">        NetworkInterface n = (NetworkInterface) e.nextElement();</span><br><span class="line">        <span class="keyword">if</span> (!isValidInterface(n)) &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Enumeration ee = n.getInetAddresses();</span><br><span class="line">        <span class="keyword">while</span> (ee.hasMoreElements()) &#123;</span><br><span class="line">            InetAddress i = (InetAddress) ee.nextElement();</span><br><span class="line">            <span class="keyword">if</span> (isValidAddress(i)) &#123;</span><br><span class="line">                addresses.add((Inet4Address) i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> addresses;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 过滤回环网卡、点对点网卡、非活动网卡、虚拟网卡并要求网卡名字是eth或ens开头</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> ni 网卡</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 如果满足要求则true，否则false</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isValidInterface</span><span class="params">(NetworkInterface ni)</span> <span class="keyword">throws</span> SocketException </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> !ni.isLoopback() &amp;&amp; !ni.isPointToPoint() &amp;&amp; ni.isUp() &amp;&amp; !ni.isVirtual()</span><br><span class="line">            &amp;&amp; (ni.getName().startsWith(<span class="string">"eth"</span>) || ni.getName().startsWith(<span class="string">"ens"</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 判断是否是IPv4，并且内网地址并过滤回环地址.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isValidAddress</span><span class="params">(InetAddress address)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> address <span class="keyword">instanceof</span> Inet4Address &amp;&amp; address.isSiteLocalAddress() &amp;&amp; !address.isLoopbackAddress();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.通过建立UDP连接，让系统通过路由表自己选择一个主要的ip地址的方式。来获取ip地址</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">try(final DatagramSocket socket = new DatagramSocket())&#123;</span><br><span class="line">  socket.connect(InetAddress.getByName(<span class="string">"8.8.8.8"</span>), 10002);</span><br><span class="line"> <span class="built_in"> ip </span>= socket.getLocalAddress().getHostAddress();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>另一种写法</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Optional&lt;Inet4Address&gt; getIpBySocket() <span class="keyword">throws</span> SocketException &#123;</span><br><span class="line">    <span class="keyword">try</span> (<span class="keyword">final</span> DatagramSocket socket = <span class="keyword">new</span> DatagramSocket()) &#123;</span><br><span class="line">        socket.connect(InetAddress.getByName(<span class="string">"8.8.8.8"</span>), <span class="number">10002</span>);</span><br><span class="line">        <span class="keyword">if</span> (socket.getLocalAddress() <span class="keyword">instanceof</span> Inet4Address) &#123;</span><br><span class="line">            <span class="keyword">return</span> Optional.of((Inet4Address) socket.getLocalAddress());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (UnknownHostException e) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">return</span> Optional.<span class="title">empty</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2020/02/28/java获取IP/" data-id="ckbdc9uuk009u24u2jq6gc3ot" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-MIMETYPE" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/22/MIMETYPE/" class="article-date">
+  <time datetime="2020-02-22T16:24:01.000Z" itemprop="datePublished">2020-02-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/22/MIMETYPE/">MIME TYPE</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>网页下载文件时，设置content-type</p>
+<table>
+<thead>
+<tr>
+<th align="left">Ext</th>
+<th align="left">MIME Type</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">.caj</td>
+<td align="left">application/caj</td>
+</tr>
+<tr>
+<td align="left">.pdf</td>
+<td align="left">application/pdf</td>
+</tr>
+<tr>
+<td align="left">.doc</td>
+<td align="left">application/msword</td>
+</tr>
+<tr>
+<td align="left">.dot</td>
+<td align="left">application/msword</td>
+</tr>
+<tr>
+<td align="left">.docx</td>
+<td align="left">application/vnd.openxmlformats-officedocument.wordprocessingml.document</td>
+</tr>
+<tr>
+<td align="left">.dotx</td>
+<td align="left">application/vnd.openxmlformats-officedocument.wordprocessingml.template</td>
+</tr>
+<tr>
+<td align="left">.docm</td>
+<td align="left">application/vnd.ms-word.document.macroEnabled.12</td>
+</tr>
+<tr>
+<td align="left">.dotm</td>
+<td align="left">application/vnd.ms-word.template.macroEnabled.12</td>
+</tr>
+<tr>
+<td align="left">.xls</td>
+<td align="left">application/vnd.ms-excel</td>
+</tr>
+<tr>
+<td align="left">.xlt</td>
+<td align="left">application/vnd.ms-excel</td>
+</tr>
+<tr>
+<td align="left">.xla</td>
+<td align="left">application/vnd.ms-excel</td>
+</tr>
+<tr>
+<td align="left">.xlsx</td>
+<td align="left">application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</td>
+</tr>
+<tr>
+<td align="left">.xltx</td>
+<td align="left">application/vnd.openxmlformats-officedocument.spreadsheetml.template</td>
+</tr>
+<tr>
+<td align="left">.xlsm</td>
+<td align="left">application/vnd.ms-excel.sheet.macroEnabled.12</td>
+</tr>
+<tr>
+<td align="left">.xltm</td>
+<td align="left">application/vnd.ms-excel.template.macroEnabled.12</td>
+</tr>
+<tr>
+<td align="left">.xlam</td>
+<td align="left">application/vnd.ms-excel.addin.macroEnabled.12</td>
+</tr>
+<tr>
+<td align="left">.xlsb</td>
+<td align="left">application/vnd.ms-excel.sheet.binary.macroEnabled.12</td>
+</tr>
+<tr>
+<td align="left">.ppt</td>
+<td align="left">application/vnd.ms-powerpoint</td>
+</tr>
+<tr>
+<td align="left">.pot</td>
+<td align="left">application/vnd.ms-powerpoint</td>
+</tr>
+<tr>
+<td align="left">.pps</td>
+<td align="left">application/vnd.ms-powerpoint</td>
+</tr>
+<tr>
+<td align="left">.ppa</td>
+<td align="left">application/vnd.ms-powerpoint</td>
+</tr>
+<tr>
+<td align="left">.pptx</td>
+<td align="left">application/vnd.openxmlformats-officedocument.presentationml.presentation</td>
+</tr>
+<tr>
+<td align="left">.potx</td>
+<td align="left">application/vnd.openxmlformats-officedocument.presentationml.template</td>
+</tr>
+<tr>
+<td align="left">.ppsx</td>
+<td align="left">application/vnd.openxmlformats-officedocument.presentationml.slideshow</td>
+</tr>
+<tr>
+<td align="left">.ppam</td>
+<td align="left">application/vnd.ms-powerpoint.addin.macroEnabled.12</td>
+</tr>
+<tr>
+<td align="left">.pptm</td>
+<td align="left">application/vnd.ms-powerpoint.presentation.macroEnabled.12</td>
+</tr>
+<tr>
+<td align="left">.potm</td>
+<td align="left">application/vnd.ms-powerpoint.presentation.macroEnabled.12</td>
+</tr>
+<tr>
+<td align="left">.ppsm</td>
+<td align="left">application/vnd.ms-powerpoint.slideshow.macroEnabled.12</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2020/02/22/MIMETYPE/" data-id="ckbdc9uqi002y24u2n2vyrifa" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MIME-TYPE/">MIME-TYPE</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-pip安装" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/22/pip安装/" class="article-date">
+  <time datetime="2020-02-22T10:43:00.000Z" itemprop="datePublished">2020-02-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/22/pip安装/">pip安装</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">wget </span><span class="string">https:</span>//<span class="string">bootstrap.</span><span class="string">pypa.</span><span class="string">io/</span><span class="built_in">get-pip.py</span></span><br><span class="line"><span class="built_in">python</span> <span class="built_in">get-pip.py</span></span><br><span class="line"><span class="built_in">pip</span> -V</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>get-pip.py 已下载到了resource下<br>/data/data/com.termux/files/home/storage/downloads/resource/</p>
+</blockquote>
+<p>pip版本<code>pip-20.0.2 wheel-0.34.2</code></p>
+<p>点击下载：<a href="http://tong.com:8080/index.php?user/publicLink&fid=83e1qeAvyi6t3s5yS9PvxzbYpKHa1_LdsgQa-_WP5Zz_pQ1AOqtsdcYPt9ZGE2bGq3DMbqO-iRrdBtDi2pYXrtMSIyGgEgNHny3KRvXlJqDQuXlToJ3H5yI9rffLaFIxhY3x&file_name=/get-pip.py" title="get-pip.py" target="_blank" rel="noopener"><a href="http://tong.com:8080/index.php?user/publicLink&fid=83e1qeAvyi6t3s5yS9PvxzbYpKHa1_LdsgQa-_WP5Zz_pQ1AOqtsdcYPt9ZGE2bGq3DMbqO-iRrdBtDi2pYXrtMSIyGgEgNHny3KRvXlJqDQuXlToJ3H5yI9rffLaFIxhY3x&file_name=/get-pip.py" title="get-pip.py" target="_blank" rel="noopener">get-pip</a></a></p>
+<p>下载地址：</p>
+<blockquote>
+<p><a href="http://tong.com:8080/index.php?user/publicLink&amp;fid=83e1qeAvyi6t3s5yS9PvxzbYpKHa1_LdsgQa-_WP5Zz_pQ1AOqtsdcYPt9ZGE2bGq3DMbqO-iRrdBtDi2pYXrtMSIyGgEgNHny3KRvXlJqDQuXlToJ3H5yI9rffLaFIxhY3x&amp;file_name=/get-pip.py" target="_blank" rel="noopener">http://tong.com:8080/index.php?user/publicLink&amp;fid=83e1qeAvyi6t3s5yS9PvxzbYpKHa1_LdsgQa-_WP5Zz_pQ1AOqtsdcYPt9ZGE2bGq3DMbqO-iRrdBtDi2pYXrtMSIyGgEgNHny3KRvXlJqDQuXlToJ3H5yI9rffLaFIxhY3x&amp;file_name=/get-pip.py</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2020/02/22/pip安装/" data-id="ckbdc9uv500bo24u2h0rk1bcx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PYTHON/">PYTHON</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ali系统" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/01/17/ali系统/" class="article-date">
+  <time datetime="2020-01-17T14:18:19.000Z" itemprop="datePublished">2020-01-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/17/ali系统/">ali系统</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>双十一大概会产生多大的数据量呢，可能大家没概念，举个例子央视拍了这么多年电视新闻节目，几十年下来他存了大概80P的数据。而今年双11一天，阿里要处理970P的数据，做为一个IT人，笔者认为今年”双十一“阿里最大的技术看点有有以下两个：</p>
+<p>阿里的数据库，也就是刚刚拿下TPC冠军的OcceanBase，处理峰值也达到了骇人听闻的6100万次/秒，<br>阿里核心系统百分百上云了。<br>如果把信息系统比做一个武林高手，那么如此之大的交易量代表了他的刚猛威武，而全面触云又代表他灵动飘逸。而能把刚猛和灵活完美结合是简直是神才能达到的境界。</p>
+<p>上云虽好，但不适合大规模计算，由于底层与用户之间多了一个虚拟化层，所以云计算平台一般都会产生10%左右的调度损耗，而这10%的损耗也让很多密集计算型的应用场景不太合适使用云平台。所以站在IT视角，云计算也不太合适双十一的场景。那么阿里刚猛兼顾灵活的武功是如何练成的呢？</p>
+<p>乾坤大挪移-Tair</p>
+<p>通过阿里的官宣来看在Tair之前还有一个LVS的负载均衡层，不过那些都不是国产的自研技术，也不细表了。</p>
+<p>Tair是阿里自研的开源缓存服务中间件（Github地址：。<a href="https://github.com/alibaba/tair）提供快速访问的内存（MDB引擎）/持久化（LDB引擎）存储服务，基于高性能、高可用的分布式集群架构，满足读写性能要求高及容量可弹性伸缩的业务需求，在双十一秒杀的体系内完成乾坤大挪移般的加速工作。" target="_blank" rel="noopener">https://github.com/alibaba/tair）提供快速访问的内存（MDB引擎）/持久化（LDB引擎）存储服务，基于高性能、高可用的分布式集群架构，满足读写性能要求高及容量可弹性伸缩的业务需求，在双十一秒杀的体系内完成乾坤大挪移般的加速工作。</a></p>
+<p>通常情况下，一个 Tair 集群中包含2台 Configserver 及多台 DataServer。其中两台 Configserver 互为主备。通过和 Dataserver 之间的心跳检测获取集群中存活可用的 Dataserver，构建数据在集群中的分布信息。Dataserver 负责数据的存储，并按照 Configserver 的指示完成数据的复制和迁移工作。Client 在启动的时候，从 Configserver 获取数据分布信息，根据数据分布信息，和相应的 Dataserver 进行交互，完成用户的请求。</p>
+<p><img src="/images/dataserver.png" alt></p>
+<p>其核心的模块就是Configserver，具体的代码在</p>
+<p><a href="https://github.com/alibaba/tair/blob/master/src/configserver/conf_server_table_manager.cpp" target="_blank" rel="noopener">https://github.com/alibaba/tair/blob/master/src/configserver/conf_server_table_manager.cpp</a></p>
+<p>以初始化函数为例：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">using namespace std;</span><br><span class="line"> </span><br><span class="line">void <span class="symbol">conf_server_table_manager::</span>init()</span><br><span class="line"> </span><br><span class="line">&#123; flag = client_version = server_version = server_bucket_count = server_copy_count = plugins_version = area_capacity_version = last_load_config_time = NULL;<span class="comment">//初始化标志位</span></span><br><span class="line"> </span><br><span class="line"><span class="variable">&amp;nbsp</span>;migrate_block_count = NULL;</span><br><span class="line"> </span><br><span class="line"><span class="variable">&amp;nbsp</span>;hash_table = m_hash_table = d_hash_table = NULL;</span><br><span class="line"> </span><br><span class="line"><span class="variable">&amp;nbsp</span>;file_name = <span class="string">""</span>;</span><br><span class="line"> </span><br><span class="line"><span class="variable">&amp;nbsp</span>;hash_table_deflate_data_for_client = hash_table_deflate_data_for_data_server = NULL;</span><br><span class="line"> </span><br><span class="line"><span class="variable">&amp;nbsp</span>;hash_table_deflate_data_for_client_size = hash_table_deflate_data_for_data_server_size = <span class="number">0</span>;</span><br><span class="line"> </span><br><span class="line"><span class="variable">&amp;nbsp</span>;file_opened = false;</span><br><span class="line"> </span><br><span class="line"><span class="variable">&amp;nbsp</span>;if(transition_version != NULL)<span class="comment">//如不为空，则删除</span></span><br><span class="line"> </span><br><span class="line"><span class="variable">&amp;nbsp</span>;&#123;</span><br><span class="line"> </span><br><span class="line"><span class="variable">&amp;nbsp</span>;<span class="variable">&amp;nbsp</span>;<span class="variable">&amp;nbsp</span>; delete transition_version;</span><br><span class="line"> </span><br><span class="line"><span class="variable">&amp;nbsp</span>;&#125;</span><br><span class="line"> </span><br><span class="line"><span class="variable">&amp;nbsp</span>;if(recovery_version != NULL)<span class="comment">//如不为空，则删除</span></span><br><span class="line"> </span><br><span class="line"><span class="variable">&amp;nbsp</span>;&#123;</span><br><span class="line"> </span><br><span class="line"><span class="variable">&amp;nbsp</span>;<span class="variable">&amp;nbsp</span>; delete recovery_version;</span><br><span class="line"> </span><br><span class="line"><span class="variable">&amp;nbsp</span>;&#125;</span><br><span class="line"> </span><br><span class="line"><span class="variable">&amp;nbsp</span>;if(recovery_block_count != NULL) <span class="comment">//如不为空，则删除</span></span><br><span class="line"> </span><br><span class="line"><span class="variable">&amp;nbsp</span>;&#123;</span><br><span class="line"> </span><br><span class="line"><span class="variable">&amp;nbsp</span>;<span class="variable">&amp;nbsp</span>;<span class="variable">&amp;nbsp</span>; delete recovery_block_count;</span><br><span class="line"> </span><br><span class="line"><span class="variable">&amp;nbsp</span>;&#125;</span><br><span class="line"> </span><br><span class="line"><span class="variable">&amp;nbsp</span>;transition_version = new uint32_t();</span><br><span class="line"> </span><br><span class="line"><span class="variable">&amp;nbsp</span>;recovery_version = new uint32_t();</span><br><span class="line"> </span><br><span class="line"><span class="variable">&amp;nbsp</span>;recovery_block_count = new int32_t();</span><br><span class="line"> </span><br><span class="line"><span class="variable">&amp;nbsp</span>;*transition_version = <span class="number">0</span>;</span><br><span class="line"> </span><br><span class="line"><span class="variable">&amp;nbsp</span>;*recovery_version = <span class="number">0</span>;</span><br><span class="line"> </span><br><span class="line"><span class="variable">&amp;nbsp</span>;*recovery_block_count = <span class="number">-1</span>;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>凌波微步–SOFAStack：SOFAStack（Scalable Open Financial Architecture Stack）是阿里研发的一套开源的用于构建微服务的分布式中间件（Github地址：<a href="https://github.com/sofastack），微服务最大的优势就是方便灵活，与凌波微步的武功有异曲同工之妙。它包含了构建微服务体系的众多组件，包括研发框架、RPC" target="_blank" rel="noopener">https://github.com/sofastack），微服务最大的优势就是方便灵活，与凌波微步的武功有异曲同工之妙。它包含了构建微服务体系的众多组件，包括研发框架、RPC</a> 框架，服务注册中心，分布式链路追踪，Metrics监控度量、分布式事务框架、服务治理平台等，结合社区优秀的开源产品，可以快速搭建一套完善的微服务体系。<br>：<a href="https://blog.csdn.net/BEYONDMA/article/details/103213493" target="_blank" rel="noopener">https://blog.csdn.net/BEYONDMA/article/details/103213493</a></p>
+<p>使用SOFAStack可以快速的构建出架构完整的微服务体系：</p>
+<p><img src="/images/sofastack.png" alt></p>
+<p>九阳神功-OceanBase:勇夺TPC冠军的OceanBase也是阿里自研的金融级关系型数据库，由于是其集群化的特性使其具备了有如九阳神功般取之不尽，用之不竭的内力。</p>
+<p><img src="/images/occeanbase.jpeg" alt></p>
+<p>笔者在前文《200行代码解读国产数据库阿里OceanBase的速度之源》 《揭秘OceanBase的王者攻略》已经对于这个数据库做了详尽的介绍，这里不再赘述。</p>
+<p>武穆遗书-飞天操作系统：飞天（Apsara）是由阿里云自主研发、服务全球的超大规模通用计算操作系统。正所谓韩信点兵，多多益善，飞天能将百万级服务器连成一台超级计算机，还能有条不紊的通过云计算向用户提供计算能力。</p>
+<p>我们看到在飞天的基础公共模块之上，有两个最核心的服务，一个是盘古，另一个是伏羲。盘古是存储管理服务，伏羲是资源调度服务，飞天内核之上应用的存储和资源的分配都是由盘古和伏羲管理。具体见下图：</p>
+<p><img src="/images/feitian.jpeg" alt></p>
+<p>飞天最底层是遍布全球的几十个数据中心，成百上千万台服务器，把这么多服务器连成一片变成一个整体，绝对是上乘的兵法才能做到的，所以飞天堪称是阿里“双十一“的武穆兵法。</p>
+<p>真武七截阵-神龙云服务器: 在《倚天屠龙记》中真武七截阵是由张三丰创始的阵法，人数越多威力越强，而神龙云服务器也其最大的特点就是把虚拟化层的损耗几乎为零，随着物理服务数量的增多，性能却一点也不打折，堪称IT界的真武七截阵。</p>
+<p>其最大亮点是阿里自研的MOC芯片，MOC是专门用于虚拟化层的调度服务，将宝贵的CPU与内存资源由复杂的云调度中解放出来，开创了一种新型的云服务器形式，神龙能与阿里云产品家族中的其他计算产品无缝对接。比如存储、网络、数据库等产品，完全兼容ECS云服务器实例的镜像系统，可以自由地在普通ECS实例以及神龙云服务器实例间变配，从而更多元化地结合客户的业务场景进行资源构建。</p>
+<p>所以阿里的“双十一”既有顶级的武学又有强悍的阵法、兵法加持，所以才能达到如此的高度，不久前阿里的平头哥芯片公司发布了无剑平台，这可能也代表着阿里的技术体系已经到了既刚且灵的境界。不仅如此纵阿里的技术体系最令人惊喜的是这些技术全部出于国产自研，甚至大部分已经开源，相信今后国产的底层软件也会在阿里等龙头的带领下迎来爆发。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2020/01/17/ali系统/" data-id="ckbdc9ut5006h24u2jbnbn8wp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ES返回值数量" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/01/16/ES返回值数量/" class="article-date">
+  <time datetime="2020-01-16T18:57:02.000Z" itemprop="datePublished">2020-01-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/16/ES返回值数量/">ES返回值数量</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>ES返回值数量超过10000条解决方式<br>&gt; ES默认返回数据量为10000条， 当分页的from超过10000条的时候，es就会如下报错：</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Result</span> window <span class="keyword">is</span> too large, <span class="keyword">from</span> + size must be less than <span class="keyword">or</span> equal <span class="keyword">to</span>:[<span class="number">10000</span>] but was [<span class="number">10500</span>]. See the scroll api <span class="keyword">for</span> a more efficient way <span class="keyword">to</span> requestlarge data sets. This limit can be <span class="keyword">set</span> <span class="keyword">by</span> changing the[<span class="keyword">index</span>.max_result_window] <span class="keyword">index</span> level parameter</span><br></pre></td></tr></table></figure>
+
+<p>解决方案:<br>&gt;通过设置index 的设置参数max_result_window的值<br>eg：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -XPUT http:<span class="string">//es-ip</span><span class="function">:9200</span>/_settings -d '&#123; <span class="string">"index"</span> : &#123; <span class="string">"max_result_window"</span> : 100000000&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.修改集群配置config/elasticsearch.yml 文件<br>增加如下配置</p>
+<p>max_result_window: 100000</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2020/01/16/ES返回值数量/" data-id="ckbdc9uq7002324u2dpz09lpk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES/">ES</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Gson" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/01/09/Gson/" class="article-date">
+  <time datetime="2020-01-09T20:26:16.000Z" itemprop="datePublished">2020-01-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/09/Gson/">Gson</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Gson处理json数据，转换javaBean的时候，替换输出字段名，解析日期的坑</p>
+<p>有的时候，我们输出的json数据可能跟原始javabean不一样。为了说明这个问题，举例如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zhdw.mgrclient.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">private</span> Date birthday;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Date <span class="title">getBirthday</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> birthday;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBirthday</span><span class="params">(Date birthday)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.birthday = birthday;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>javabean对象，比较简单，以下是测试类：</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zhdw.mgrclient.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.google.gson.Gson;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JSONTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> void main(<span class="keyword">String</span>[] args) &#123;</span><br><span class="line">        Person hbk = <span class="keyword">new</span> <span class="type">Person</span>();</span><br><span class="line">        hbk.setAge(<span class="number">30</span>);</span><br><span class="line">        hbk.setName(<span class="string">"黄宝康"</span>);</span><br><span class="line">        hbk.setBirthday(<span class="keyword">new</span> <span class="type">Date</span>());</span><br><span class="line">        Gson gson = <span class="keyword">new</span> <span class="type">Gson</span>();</span><br><span class="line">        <span class="keyword">String</span> result = gson.toJson(hbk);</span><br><span class="line">        System.out.println(result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行输出</p>
+<blockquote>
+<p>{“name”:”黄宝康”,”age”:30,”birthday”:”May 21, 2018 11:50:23 AM”}</p>
+</blockquote>
+<p>需求，我需要输出NAME，而不是小写的name，第二，日期格式不是我想要的。</p>
+<p>Gson针对这两个问题，提供了相关注解，只需要在Person的name字段加入相关注解即可。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SerializedName(<span class="meta-string">"NAME"</span>)</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br></pre></td></tr></table></figure>
+
+<p>再次运行输出如下：可以看出name已经输出成NAME了，第一个问题解决。</p>
+<blockquote>
+<p>{“NAME”:”黄宝康”,”age”:30,”birthday”:”May 21, 2018 11:53:25 AM”}</p>
+</blockquote>
+<p>针对第二个问题，查看了相关博客，在不同环境中由于返回的Local字符串不同，在不同环境日期格式输出会不一样。</p>
+<p>Gson默认处理Date对象的序列化/反序列化是通过一个SimpleDateFormat对象来实现的，通过下面的代码去获取实例：</p>
+<blockquote>
+<p>DateFormat.getDateTimeInstance() </p>
+</blockquote>
+<p>在不同的locale环境中，这样获取到的SimpleDateFormat的模式字符串会不一样。</p>
+<blockquote>
+<p>Gson gson = new GsonBuilder().setDateFormat(“yyyy-MM-dd HH:mm:ss”).create();</p>
+</blockquote>
+<p>使用GsonBuilder()构建Gson对象，而不是之前的new Gson();<br>这样运行输出了我们想要的格式。</p>
+<blockquote>
+<p>{“NAME”:”黄宝康”,”age”:30,”birthday”:”2018-05-21 11:57:16”}</p>
+</blockquote>
+<p>其他设置：</p>
+<p>如打印美化的json格式数据等</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GsonBuilder builder = new GsonBuilder()<span class="comment">;</span></span><br><span class="line">builder.setPrettyPrinting()<span class="comment">;</span></span><br><span class="line">Gson gson = builder.create()<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<p>通过上面的设置，控制台输出的json格式是带有缩进的。</p>
+<p>上面为了解决大小写需求是通过注解的方式解决的，其实Gson还可以通过如下方式解决。（先去掉注解@SerializedName(“NAME”)）</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> void main(<span class="keyword">String</span>[] args) &#123;</span><br><span class="line">        Person hbk = <span class="keyword">new</span> <span class="type">Person</span>();</span><br><span class="line">        hbk.setAge(<span class="number">30</span>);</span><br><span class="line">        hbk.setName(<span class="string">"黄宝康"</span>);</span><br><span class="line">        hbk.setBirthday(<span class="keyword">new</span> <span class="type">Date</span>());</span><br><span class="line">        GsonBuilder builder = <span class="keyword">new</span> <span class="type">GsonBuilder</span>();</span><br><span class="line">        builder.setPrettyPrinting();</span><br><span class="line">        <span class="comment">// 设置字段名称策略</span></span><br><span class="line">        builder.setFieldNamingStrategy(<span class="keyword">new</span> <span class="type">FieldNamingStrategy</span>() &#123;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">String</span> translateName(Field field) &#123;</span><br><span class="line">                <span class="comment">// 业务规则可以自定义，实际项目可能会比较复杂</span></span><br><span class="line">                <span class="keyword">if</span>(field.getName().equals(<span class="string">"name"</span>))&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="string">"NAME"</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> field.getName();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        Gson gson = builder.setDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>).create();</span><br><span class="line">        <span class="keyword">String</span> result = gson.toJson(hbk);</span><br><span class="line">        System.out.println(result);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>默认Gson输出json，会把javabean的所有字段都输出，有的时候，业务上需要隐藏敏感字段。<br>适应，给Person增加ignore属性，同时生成getter和setter方法。</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">String</span> ignore;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">String</span> getIgnore() &#123;</span><br><span class="line">    <span class="built_in">return</span> ignore;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> setIgnore(<span class="keyword">String</span> ignore) &#123;</span><br><span class="line">    <span class="keyword">this</span>.ignore = ignore;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试类：</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> void main(<span class="keyword">String</span>[] args) &#123;</span><br><span class="line">        Person hbk = <span class="keyword">new</span> <span class="type">Person</span>();</span><br><span class="line">        hbk.setAge(<span class="number">30</span>);</span><br><span class="line">        hbk.setName(<span class="string">"黄宝康"</span>);</span><br><span class="line">        hbk.setBirthday(<span class="keyword">new</span> <span class="type">Date</span>());</span><br><span class="line">        hbk.setIgnore(<span class="string">"不要看见我"</span>);</span><br><span class="line">        Gson gson = <span class="keyword">new</span> <span class="type">Gson</span>();</span><br><span class="line">        System.out.println(gson.toJson(hbk));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>控制台会输出ignore字段</p>
+<blockquote>
+<p>{“name”:”黄宝康”,”age”:30,”birthday”:”May 23, 2018 4:08:04 PM”,”ignore”:”不要看见我”}</p>
+</blockquote>
+<p>为了不看见ignore字段，我们只需要在ignore属性前加上transient修饰符即可。</p>
+<blockquote>
+<p>private transient String ignore;</p>
+</blockquote>
+<p>再次运行测试类，输出</p>
+<blockquote>
+<p>{“name”:”黄宝康”,”age”:30,”birthday”:”May 23, 2018 4:12:41 PM”}</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2020/01/09/Gson/" data-id="ckbdc9uq8002724u24ms829sg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-es_sql聚合" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/31/es_sql聚合/" class="article-date">
+  <time datetime="2019-12-31T14:54:16.000Z" itemprop="datePublished">2019-12-31</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/31/es_sql聚合/">ES聚合</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>HISTOGRAMedit<br>Synopsis:</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HISTOGRAM(</span><br><span class="line">    numeric_exp,        </span><br><span class="line">    numeric_interval)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HISTOGRAM(</span><br><span class="line">    date_exp,           </span><br><span class="line">    date_time_interval)</span><br></pre></td></tr></table></figure>
+
+<p>Input:</p>
+<p>numeric expression (typically a field)</p>
+<p>numeric interval</p>
+<p>date/time expression (typically a field)</p>
+<p>date/time interval</p>
+<p>Output: non-empty buckets or groups of the given expression divided according to the given interval</p>
+<p>DescriptionThe histogram function takes all matching values and divides them into buckets with fixed size matching the given interval, using (roughly) the following formula:</p>
+<p>bucket_key = Math.floor(value / interval) * interval<br>NOTE<br>The histogram in SQL does NOT return empty buckets for missing intervals as the traditional histogram and date histogram. Such behavior does not fit conceptually in SQL which treats all missing values as NULL; as such the histogram places all missing values in the NULL group.<br>Histogram can be applied on either numeric fields:</p>
+<p><code>SELECT HISTOGRAM(salary, 5000) AS h FROM emp GROUP BY h;</code></p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="code"> h</span></span><br><span class="line">---------------</span><br><span class="line">25000</span><br><span class="line">30000</span><br><span class="line">35000</span><br><span class="line">40000</span><br><span class="line">45000</span><br><span class="line">50000</span><br><span class="line">55000</span><br><span class="line">60000</span><br><span class="line">65000</span><br><span class="line">70000</span><br></pre></td></tr></table></figure>
+
+<p>or date/time fields:</p>
+<p><code>SELECT HISTOGRAM(birth_date, INTERVAL 1 YEAR) AS h, COUNT(*) AS c FROM emp GROUP BY h;</code></p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">           <span class="selector-tag">h</span>            |       <span class="selector-tag">c</span></span><br><span class="line"><span class="selector-tag">------------------------</span>+<span class="selector-tag">---------------</span></span><br><span class="line"><span class="selector-tag">null</span>                    |<span class="selector-tag">10</span></span><br><span class="line"><span class="selector-tag">1952-01-01T00</span><span class="selector-pseudo">:00</span><span class="selector-pseudo">:00.000Z</span>|<span class="selector-tag">8</span></span><br><span class="line"><span class="selector-tag">1953-01-01T00</span><span class="selector-pseudo">:00</span><span class="selector-pseudo">:00.000Z</span>|<span class="selector-tag">11</span></span><br><span class="line"><span class="selector-tag">1954-01-01T00</span><span class="selector-pseudo">:00</span><span class="selector-pseudo">:00.000Z</span>|<span class="selector-tag">8</span></span><br><span class="line"><span class="selector-tag">1955-01-01T00</span><span class="selector-pseudo">:00</span><span class="selector-pseudo">:00.000Z</span>|<span class="selector-tag">4</span></span><br><span class="line"><span class="selector-tag">1956-01-01T00</span><span class="selector-pseudo">:00</span><span class="selector-pseudo">:00.000Z</span>|<span class="selector-tag">5</span></span><br><span class="line"><span class="selector-tag">1957-01-01T00</span><span class="selector-pseudo">:00</span><span class="selector-pseudo">:00.000Z</span>|<span class="selector-tag">4</span></span><br><span class="line"><span class="selector-tag">1958-01-01T00</span><span class="selector-pseudo">:00</span><span class="selector-pseudo">:00.000Z</span>|<span class="selector-tag">7</span></span><br><span class="line"><span class="selector-tag">1959-01-01T00</span><span class="selector-pseudo">:00</span><span class="selector-pseudo">:00.000Z</span>|<span class="selector-tag">9</span></span><br><span class="line"><span class="selector-tag">1960-01-01T00</span><span class="selector-pseudo">:00</span><span class="selector-pseudo">:00.000Z</span>|<span class="selector-tag">8</span></span><br><span class="line"><span class="selector-tag">1961-01-01T00</span><span class="selector-pseudo">:00</span><span class="selector-pseudo">:00.000Z</span>|<span class="selector-tag">8</span></span><br><span class="line"><span class="selector-tag">1962-01-01T00</span><span class="selector-pseudo">:00</span><span class="selector-pseudo">:00.000Z</span>|<span class="selector-tag">6</span></span><br><span class="line"><span class="selector-tag">1963-01-01T00</span><span class="selector-pseudo">:00</span><span class="selector-pseudo">:00.000Z</span>|<span class="selector-tag">7</span></span><br><span class="line"><span class="selector-tag">1964-01-01T00</span><span class="selector-pseudo">:00</span><span class="selector-pseudo">:00.000Z</span>|<span class="selector-tag">4</span></span><br><span class="line"><span class="selector-tag">1965-01-01T00</span><span class="selector-pseudo">:00</span><span class="selector-pseudo">:00.000Z</span>|<span class="selector-tag">1</span></span><br></pre></td></tr></table></figure>
+
+<p>Expressions inside the histogram are also supported as long as the return type is numeric:</p>
+<p><code>SELECT HISTOGRAM(salary % 100, 10) AS h, COUNT(*) AS c FROM emp GROUP BY h;</code></p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">       h       |       c</span><br><span class="line">---------------+---------------</span><br><span class="line"><span class="number">0</span>              |<span class="number">10</span></span><br><span class="line"><span class="number">10</span>             |<span class="number">15</span></span><br><span class="line"><span class="number">20</span>             |<span class="number">10</span></span><br><span class="line"><span class="number">30</span>             |<span class="number">14</span></span><br><span class="line"><span class="number">40</span>             |<span class="number">9</span></span><br><span class="line"><span class="number">50</span>             |<span class="number">9</span></span><br><span class="line"><span class="number">60</span>             |<span class="number">8</span></span><br><span class="line"><span class="number">70</span>             |<span class="number">13</span></span><br><span class="line"><span class="number">80</span>             |<span class="number">3</span></span><br><span class="line"><span class="number">90</span>             |<span class="number">9</span></span><br></pre></td></tr></table></figure>
+
+<p>Do note that histograms (and grouping functions in general) allow custom expressions but cannot have any functions applied to them in the GROUP BY. In other words, the following statement is NOT allowed:</p>
+<p>SELECT MONTH(HISTOGRAM(birth_date), 2)) AS h, COUNT(*) as c FROM emp GROUP BY h ORDER BY h DESC;<br>as it requires two groupings (one for histogram followed by a second for applying the function on top of the histogram groups).</p>
+<p>Instead one can rewrite the query to move the expression on the histogram inside of it:</p>
+<p><code>SELECT HISTOGRAM(MONTH(birth_date), 2) AS h, COUNT(*) as c FROM emp GROUP BY h ORDER BY h DESC;</code></p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">       h       |       c</span><br><span class="line">---------------+---------------</span><br><span class="line"><span class="number">12</span>             |<span class="number">7</span></span><br><span class="line"><span class="number">10</span>             |<span class="number">17</span></span><br><span class="line"><span class="number">8</span>              |<span class="number">16</span></span><br><span class="line"><span class="number">6</span>              |<span class="number">16</span></span><br><span class="line"><span class="number">4</span>              |<span class="number">18</span></span><br><span class="line"><span class="number">2</span>              |<span class="number">10</span></span><br><span class="line"><span class="number">0</span>              |<span class="number">6</span></span><br><span class="line">null           |<span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/12/31/es_sql聚合/" data-id="ckbdc9uu1008424u2rclune9x" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES/">ES</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-es_sql" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/30/es_sql/" class="article-date">
+  <time datetime="2019-12-30T14:05:01.000Z" itemprop="datePublished">2019-12-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/30/es_sql/">es_sql</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>通过 elasticsearch-sql 使用 SQL 语句聚合查询 Elasticsearch 获取各种 metrics 度量值</p>
+<p>Elasticsearch 的 metrics（度量）包含 count、sum、avg、max、min、percentiles (百分位数)、Unique count（基数 || 去重计数）、Median（中位数）、扩展度量（含方差、平方和、标准差、标准差界限）、Percentile ranks（百分位等级）</p>
+<h2 id="count（数量）："><a href="#count（数量）：" class="headerlink" title="count（数量）："></a>count（数量）：</h2><p><code>SELECT count(log_date.d) AS Count FROM INDEX-2017-12</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"from"</span> : <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"size"</span> : <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"_source"</span> : &#123;</span><br><span class="line">    <span class="attr">"includes"</span> : [ <span class="string">"COUNT"</span> ],</span><br><span class="line">    <span class="attr">"excludes"</span> : [ ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"aggregations"</span> : &#123;</span><br><span class="line">    <span class="attr">"Count"</span> : &#123;</span><br><span class="line">      <span class="attr">"value_count"</span> : &#123;</span><br><span class="line">        <span class="attr">"field"</span> : <span class="string">"log_date.d"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="sum（和）："><a href="#sum（和）：" class="headerlink" title="sum（和）："></a>sum（和）：</h2><p><code>SELECT sum(log_date.d) AS SUM FROM INDEX-2017-12</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"from"</span> : <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"size"</span> : <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"_source"</span> : &#123;</span><br><span class="line">    <span class="attr">"includes"</span> : [ <span class="string">"SUM"</span> ],</span><br><span class="line">    <span class="attr">"excludes"</span> : [ ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"aggregations"</span> : &#123;</span><br><span class="line">    <span class="attr">"SUM"</span> : &#123;</span><br><span class="line">      <span class="attr">"sum"</span> : &#123;</span><br><span class="line">        <span class="attr">"field"</span> : <span class="string">"log_date.d"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="avg（平均数）："><a href="#avg（平均数）：" class="headerlink" title="avg（平均数）："></a>avg（平均数）：</h2><p><code>SELECT avg(log_date.d) AS AVG FROM INDEX-2017-12</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"from"</span> : <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"size"</span> : <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"_source"</span> : &#123;</span><br><span class="line">    <span class="attr">"includes"</span> : [ <span class="string">"AVG"</span> ],</span><br><span class="line">    <span class="attr">"excludes"</span> : [ ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"aggregations"</span> : &#123;</span><br><span class="line">    <span class="attr">"AVG"</span> : &#123;</span><br><span class="line">      <span class="attr">"avg"</span> : &#123;</span><br><span class="line">        <span class="attr">"field"</span> : <span class="string">"log_date.d"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>max（最大值）：<br><code>SELECT max(log_date.d) AS MAX FROM INDEX-2017-12</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"from"</span> : <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"size"</span> : <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"_source"</span> : &#123;</span><br><span class="line">    <span class="attr">"includes"</span> : [ <span class="string">"MAX"</span> ],</span><br><span class="line">    <span class="attr">"excludes"</span> : [ ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"aggregations"</span> : &#123;</span><br><span class="line">    <span class="attr">"MAX"</span> : &#123;</span><br><span class="line">      <span class="attr">"max"</span> : &#123;</span><br><span class="line">        <span class="attr">"field"</span> : <span class="string">"log_date.d"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="min（最小值）："><a href="#min（最小值）：" class="headerlink" title="min（最小值）："></a>min（最小值）：</h2><p><code>SELECT min(log_date.d) AS MIN FROM INDEX-2017-12</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"from"</span> : <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"size"</span> : <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"_source"</span> : &#123;</span><br><span class="line">    <span class="attr">"includes"</span> : [ <span class="string">"MIN"</span> ],</span><br><span class="line">    <span class="attr">"excludes"</span> : [ ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"aggregations"</span> : &#123;</span><br><span class="line">    <span class="attr">"MIN"</span> : &#123;</span><br><span class="line">      <span class="attr">"min"</span> : &#123;</span><br><span class="line">        <span class="attr">"field"</span> : <span class="string">"log_date.d"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="percentiles（百分位数）："><a href="#percentiles（百分位数）：" class="headerlink" title="percentiles（百分位数）："></a>percentiles（百分位数）：</h2><p><code>SELECT percentiles(log_date.d,1.0,15.0,31.0) AS Percentiles FROM INDEX-2017-12</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"from"</span> : <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"size"</span> : <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"_source"</span> : &#123;</span><br><span class="line">    <span class="attr">"includes"</span> : [ <span class="string">"percentiles"</span> ],</span><br><span class="line">    <span class="attr">"excludes"</span> : [ ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"aggregations"</span> : &#123;</span><br><span class="line">    <span class="attr">"Percentiles"</span> : &#123;</span><br><span class="line">      <span class="attr">"percentiles"</span> : &#123;</span><br><span class="line">        <span class="attr">"field"</span> : <span class="string">"log_date.d"</span>,</span><br><span class="line">        <span class="attr">"percents"</span> : [ <span class="number">1.0</span>, <span class="number">15.0</span>, <span class="number">31.0</span> ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Unique-count（基数-去重计数，就是-SQL-中的-distinct-）："><a href="#Unique-count（基数-去重计数，就是-SQL-中的-distinct-）：" class="headerlink" title="Unique count（基数 || 去重计数，就是 SQL 中的 distinct ）："></a>Unique count（基数 || 去重计数，就是 SQL 中的 distinct ）：</h2><p><code>SELECT count(distinct(log_date.d)) AS UniqueCount FROM INDEX-2017-12</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"from"</span> : <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"size"</span> : <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"_source"</span> : &#123;</span><br><span class="line">    <span class="attr">"includes"</span> : [ <span class="string">"COUNT"</span> ],</span><br><span class="line">    <span class="attr">"excludes"</span> : [ ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"aggregations"</span> : &#123;</span><br><span class="line">    <span class="attr">"UniqueCount"</span> : &#123;</span><br><span class="line">      <span class="attr">"cardinality"</span> : &#123;</span><br><span class="line">        <span class="attr">"field"</span> : <span class="string">"log_date.d"</span>,</span><br><span class="line">        <span class="attr">"precision_threshold"</span> : <span class="number">40000</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Median（中位数）："><a href="#Median（中位数）：" class="headerlink" title="Median（中位数）："></a>Median（中位数）：</h2><p>中位数没找到单独的获取方法，不过在 Kibana 中看到获取中位数时请求中的参数，其实就是获取的某个字段50的百分位数，所以可能有：中位数=50的百分位数<br><code>SELECT percentiles(log_date.d,50.0) AS percentiles FROM INDEX-2017-12</code></p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"from"</span> : 0,</span><br><span class="line">  <span class="string">"size"</span> : 0,</span><br><span class="line">  <span class="string">"_source"</span> : &#123;</span><br><span class="line">    <span class="string">"includes"</span> : [ "<span class="type">percentiles</span><span class="string">" ],</span></span><br><span class="line"><span class="string">    "</span>excludes<span class="string">" : [ ]</span></span><br><span class="line"><span class="string">  &#125;,</span></span><br><span class="line"><span class="string">  "</span>aggregations<span class="string">" : &#123;</span></span><br><span class="line"><span class="string">    "</span>percentiles<span class="string">" : &#123;</span></span><br><span class="line"><span class="string">      "</span>percentiles<span class="string">" : &#123;</span></span><br><span class="line"><span class="string">        "</span>field<span class="string">" : "</span>log_date.d<span class="string">",</span></span><br><span class="line"><span class="string">        "</span>percents<span class="string">" : [ 50.0 ]</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">`</span></span><br></pre></td></tr></table></figure>
+
+<p>方差、平方和、标准差、标准差界限：<br>这几个度量没有单独方法去获取，都是用 EXTENDED_STATS 一个请求全部获取下来，然后从中取自己需要的结果<br><code>SELECT EXTENDED_STATS(log_date.d) AS EXTENDED_STATS FROM INDEX-2017-12</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"from"</span> : <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"size"</span> : <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"_source"</span> : &#123;</span><br><span class="line">    <span class="attr">"includes"</span> : [ <span class="string">"EXTENDED_STATS"</span> ],</span><br><span class="line">    <span class="attr">"excludes"</span> : [ ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"aggregations"</span> : &#123;</span><br><span class="line">    <span class="attr">"EXTENDED_STATS"</span> : &#123;</span><br><span class="line">      <span class="attr">"extended_stats"</span> : &#123;</span><br><span class="line">        <span class="attr">"field"</span> : <span class="string">"log_date.d"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>EXTENDED_STATS 查询结果包含：方差、平方和、标准差、标准差界限以及最大值、平均数等基础度量，具体如下：</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"aggregations"</span>: &#123;</span><br><span class="line">    <span class="string">"1"</span>: &#123;</span><br><span class="line">      <span class="string">"count"</span>: <span class="number">15304326</span>,</span><br><span class="line">      <span class="string">"min"</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="string">"max"</span>: <span class="number">31</span>,</span><br><span class="line">      <span class="string">"avg"</span>: <span class="number">15.068216202399244</span>,</span><br><span class="line">      <span class="string">"sum"</span>: <span class="number">230608893</span>,</span><br><span class="line">      <span class="string">"sum_of_squares"</span>: <span class="number">4588588661</span>,</span><br><span class="line">      <span class="string">"variance"</span>: <span class="number">72.7718426201877</span>,</span><br><span class="line">      <span class="string">"std_deviation"</span>: <span class="number">8.530641395591992</span>,</span><br><span class="line">      <span class="string">"std_deviation_bounds"</span>: &#123;</span><br><span class="line">        <span class="string">"upper"</span>: <span class="number">32.129498993583226</span>,</span><br><span class="line">        <span class="string">"lower"</span>: -<span class="number">1.9930665887847407</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Percentile-ranks（百分位等级）"><a href="#Percentile-ranks（百分位等级）" class="headerlink" title="Percentile ranks（百分位等级）"></a>Percentile ranks（百分位等级）</h2><p>暂时没找到求百分位等级的 SQL 语句，只能用原生 ES 查询语句获取了；<br>ES原生查询语句如下：</p>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"size"</span>: <span class="number">0</span>,</span><br><span class="line">  ......</span><br><span class="line">  <span class="string">"aggs"</span>: &#123;</span><br><span class="line">    <span class="string">"1"</span>: &#123;</span><br><span class="line">      <span class="string">"percentile_ranks"</span>: &#123;</span><br><span class="line">        <span class="string">"field"</span>: <span class="string">"log_date.d"</span>,</span><br><span class="line">        <span class="string">"values"</span>: [</span><br><span class="line">          <span class="number">6</span>,</span><br><span class="line">          <span class="number">15</span>,</span><br><span class="line">          <span class="number">31</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"keyed"</span>: <span class="literal">false</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/12/30/es_sql/" data-id="ckbdc9uu0008124u22upjyk5c" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES/">ES</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-更换yum源" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/26/更换yum源/" class="article-date">
+  <time datetime="2019-12-26T19:12:18.000Z" itemprop="datePublished">2019-12-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/SYSTEM/">SYSTEM</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/26/更换yum源/">更换yum源rpmbuild包制作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>更换yum源<br>163yum源：<br>1）备份当前yum源防止出现意外还可以还原回来</p>
+<p>cd /etc/yum.repos.d/<br>cp /CentOS-Base.repo /CentOS-Base-repo.bak<br>2）使用wget下载163yum源repo文件</p>
+<p>wget <a href="http://mirrors.163.com/.help/CentOS7-Base-163.repo" target="_blank" rel="noopener">http://mirrors.163.com/.help/CentOS7-Base-163.repo</a><br>3) 清理旧包</p>
+<p>yum clean all<br>4）把下载下来163repo文件设置成为默认源</p>
+<p>mv CentOS7-Base-163.repo CentOS-Base.repo<br>5）生成163yum源缓存并更新yum源</p>
+<p>yum makecache<br>yum update<br>阿里云yum源：<br>1）备份当前yum源防止出现意外还可以还原回来</p>
+<p>cd /etc/yum.repos.d/<br>cp /CentOS-Base.repo /CentOS-Base-repo.bak<br>2）使用wget下载阿里yum源repo文件</p>
+<p>wget <a href="http://mirrors.aliyun.com/repo/Centos-7.repo" target="_blank" rel="noopener">http://mirrors.aliyun.com/repo/Centos-7.repo</a><br>3) 清理旧包</p>
+<p>yum clean all<br>4）把下载下来阿里云repo文件设置成为默认源</p>
+<p>mv Centos-7.repo CentOS-Base.repo<br>5）生成阿里云yum源缓存并更新yum源</p>
+<p>yum makecache<br>yum update</p>
+<p>1,查找rpm-build，并安装</p>
+<p>1）yum 安装</p>
+<p>yum list |grep rpm-build 查找合适的rpm-build包<br>yum install -y&nbsp;rpm-build.x86_64&nbsp;</p>
+<p>2）非yum 安装&nbsp;<br>如果没有yum源，可以先将rpm-build.rpm 下载到本地，下载rpm-build的时候，需要安装和操作系统版本一致的。否则会提示错误。比如我的系统如下：&nbsp;</p>
+<p>Linux sjs_78_213 2.6.32-220.17.1.el6.x86_64 #1 SMP Thu Apr 26 13:37:13 EDT 2012 x86_64 x86_64 x86_64 GNU/Linux&nbsp;</p>
+<p>对应的rpm包是 ：rpm-build-4.8.0-19.el6_2.1.x86_64.rpm &nbsp;。<br>查找rpm包可以到 <a href="http://rpm.pbone.net/" target="_blank" rel="noopener">http://rpm.pbone.net/</a> &nbsp;</p>
+<p>下载rpm包 ：&nbsp;<br>wget&nbsp;<a href="ftp://ftp.pbone.net/mirror/ftp.scientificlinux.org/linux/scientific/6.0/x86_64/updates/security/rpm-build-4.8.0-19.el6_2.1.x86_64.rpm" target="_blank" rel="noopener">ftp://ftp.pbone.net/mirror/ftp.scientificlinux.org/linux/scientific/6.0/x86_64/updates/security/rpm-build-4.8.0-19.el6_2.1.x86_64.rpm</a>&nbsp;</p>
+<p>安装 &nbsp; rpm -ivh&nbsp;rpm-build-4.8.0-19.el6_2.1.x86_64.rpm&nbsp;&nbsp;</p>
+<p>2,创建一个普通用户，以普通用户打包<br>最好以普通用户打包，否则会有一些稀奇古怪的问题。<br>adduser wang&nbsp;<br>su - wang<br>mkdir -p /home/wang/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}</p>
+<p>echo “%_topdir&nbsp; /home/wang/rpmbuild” &gt;~/.rpmmacros&nbsp;&nbsp;</p>
+<p>rpmbuild –showrc|grep _topdir</p>
+<p>cd&nbsp;&nbsp;/home/wang/rpmbuild/SPECS&nbsp;<br>rpmbuild -ba&nbsp; dteworker-client.spec &nbsp;</p>
+<p>一个完整的rpmbuild目录可以下载<a href="http://download.csdn.net/detail/wisgood/8384763，然后解压,打包即可。" target="_blank" rel="noopener">http://download.csdn.net/detail/wisgood/8384763，然后解压,打包即可。</a></p>
+<p>rpmbuild用法<br>利用rpmbuild打包，需要两类文件：1、源码，源码以tar归档进行压缩的源码包，以及一些.patch文件，存放于目录./SOURCES下；2、.spec文件，定义了打包的动作，以及依赖，是打包的最主要类容。</p>
+<p>首先介绍SPEC文件：</p>
+<p>SPEC文件的一些语法： </p>
+<p>.spec中的条件判断语句有两种：<br>1、if结构<br>引用<br>%if %{str}<br>%else<br>       动作<br>%endif<br>其中%{str}是条件，0为假，非0为真。<br>2、?:结构<br>引用<br>%{?变量:动作1}动作2<br>其中{}用于控制范围，而“？”号和“：”号是分割符，如果要判断条件是非的情况，可以在“？”号前加“！”号。<br>此条件与前面的%if有点不同，其只判断变量是否定义，定义了就为真，否则就为假，即使变量定义为0，也为真，并运行后面的语句。</p>
+<p>spec文件的一些定义：  </p>
+<p>Name:　　#软件包的名称</p>
+<p>Version:　　#软件包的版本号</p>
+<p>Release:　　#发布的序列</p>
+<p>Epoch:　　#发布的序列</p>
+<p>Summary:　　#摘要</p>
+<p>Group:　　#组描述</p>
+<p>License:　　发行许可证</p>
+<p>Sources[0-n]:　　#打包的源码包</p>
+<p>Patch0:  *.patch      #补丁文件</p>
+<p>BuildRequires:　　#打包时依赖的软件</p>
+<p>Requires:　　#安装此rpm包时依赖的软件包</p>
+<p>BuildRoot:　　#安装此软件的虚拟根目录</p>
+<p>以上是描述性的元素，其中Epoch:Version:Release表示了rpm包的新旧，优先级依次降低，打出的rpm包也是以${package}-${Version}-${Release}命名。</p>
+<p>spec文件主体内容：</p>
+<p>spec文件中引用的一些宏变量主要定义在/usr/lib/rpm/macros中</p>
+<p>主要有三个阶段：</p>
+<p>%pre</p>
+<p>#预处理阶段，解压缩软件包</p>
+<p>%setup </p>
+<p>%setup 不加任何选项，仅将软件包打开。<br>%setup -n newdir 将软件包解压在newdir目录。<br>%setup -c 解压缩之前先产生目录。<br>%setup -b num 将第num个source文件解压缩。<br>%setup -T 不使用default的解压缩操作。<br>%setup -T -b 0 将第0个源代码文件解压缩。<br>%setup -c -n newdir 指定目录名称newdir，并在此目录产生rpm套件。<br>%patch 最简单的补丁方式，自动指定patch level。<br>%patch0 -p0 打第1个补丁，利用当前相对路径名称<br>%pacth1 -p2 打第2个补丁，忽略补丁文件第一层目录<br>%patch 0 使用第0个补丁文件，相当于%patch ?p 0。<br>%patch -s 不显示打补丁时的信息。<br>%patch -T 将所有打补丁时产生的输出文件删除。
+　　</p>
+<p>%build 编译阶段</p>
+<p>./configure  –prefix=$RPM_BUILD_ROOT/usr<br>make<br>or<br>%configure            #可以用rpm –eval ‘%configure’命令查看该宏<br>make</p>
+<p>在openstack项目中直接是:python setup.py build</p>
+<p>%install 将软件安装到虚拟根目录</p>
+<p>常用命令：</p>
+<p>make DESTDIR=$RPM_BUILD_ROOT install</p>
+<p>install [options] src ${RPM_BUILD_ROOT}/${dst} #安装配置文件至指定目录,相当于cp</p>
+<p>建立连接关系等。</p>
+<p>在openstack 项目中：</p>
+<p>%{_python2} setup.py install -01 –skip-build –root %{buildroot}</p>
+<p>%clean</p>
+<p>清理一些临时文件，或是生产中不需要的文件</p>
+<p>%files [name]</p>
+<p>文件和目录的归档，rpm包真正包含的内容，$name 与package name对应，一个package生成一个rpm包,名字${name}-￥{version}-${release}.rpm。若没有name，则即是spec Name项。</p>
+<p>files是相对路径，应用宏或变量表示相对路径：</p>
+<p>如果描述为目录，表示目录中除%exclude外的所有文件。<br>%defattr (-,root,root) 指定包装文件的属性，分别是(mode,owner,group)，-表示默认值，对文本文件是0644，可执行文件是0755</p>
+<p>%changelog 变更日志</p>
+<p>一般会把git log记录输入，openstack文件中记录的日志：</p>
+<p>git rev-parse –abbrev-ref HEAD &gt;&gt; *.spec</p>
+<p>git log –pretty=oneline –abbrev-commit | head -n +1 &gt;&gt; *.spec</p>
+<p> #生成patch的命令</p>
+<p>diff -Naur path/to/A_Project  path/to/B_Project &gt; Project.patch （A是原始项目）</p>
+<p>或者利用 git命令:</p>
+<p>#new 是有更改的分支，old是没有更改的分支<br>git checkout new<br>git format-patch -M old</p>
+<p>生成：000-*.patch<br>git打patch的命令：</p>
+<p>git am 000-*.patch</p>
+<p>#解析rpm包</p>
+<p>rpm -qpl *.rpm #列出rpm包包含的内容</p>
+<p>rpm2cpio *.rpm | cpio -div  #解压缩出rpm包</p>
+<p>yum-duilddep *.spec 安装spec文件中的所有编译依赖软件，BuidRequires。</p>
+<p>rpmbuild –define “_topdir ${dir:-/home/rpmbuild}” -bb *.spec</p>
+<p>_topdir指定打包的目录，rpmbuild/{SURCES,BUILD,BUILDROOT,SPECS,RPMS,SRPMS}。</p>
+<p>也可以向spec文件传入参数，也是利用–define</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/12/26/更换yum源/" data-id="ckbdc9uxg00gu24u2wy666emb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CENTOS/">CENTOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/REPO/">REPO</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIT/">GIT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IT/">IT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVAEE/">JAVAEE</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVAEE/MYSQL/">MYSQL</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/OFFICE/">OFFICE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SYSTEM/">SYSTEM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VIM/">VIM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/分类1/">分类1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/电商/">电商</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ANNOTATION/">ANNOTATION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BAZEL/">BAZEL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BEANUTILS/">BEANUTILS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CENTOS/">CENTOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI-CD/">CI/CD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CLASSLOADER/">CLASSLOADER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CRONTAB/">CRONTAB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DEBUG/">DEBUG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DESIGN-PATTERNS/">DESIGN PATTERNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DNS/">DNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOCKER/">DOCKER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DRUID/">DRUID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ENLINK/">ENLINK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EUREKA/">EUREKA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EXCEL/">EXCEL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/">Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FASTJSON/">FASTJSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIT/">GIT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GITLAB/">GITLAB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GLOBALEXCEPTION/">GLOBALEXCEPTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO/">GO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HEXO/">HEXO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/INTERCEPTOR/">INTERCEPTOR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IT/">IT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVADOC/">JAVADOC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASCRIPT/">JAVASCRIPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASE/">JAVASE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JETTY/">JETTY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPA/">JPA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSONUTILS/">JSONUTILS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KARAF/">KARAF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KEEPALIVED/">KEEPALIVED</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LINUX/">LINUX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LISTENER/">LISTENER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOADBALANCED/">LOADBALANCED</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOG/">LOG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOGBACK/">LOGBACK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOGIN/">LOGIN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOMBOK/">LOMBOK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MARKDOWN/">MARKDOWN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIME-TYPE/">MIME-TYPE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQ/">MQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYBATIS/">MYBATIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYCAT/">MYCAT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/">MYSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NETWORK/">NETWORK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OAUTH2/">OAUTH2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ONOS/">ONOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSGI/">OSGI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSI/">OSI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAGEHELPER/">PAGEHELPER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POSTMAN/">POSTMAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PYTHON/">PYTHON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RABBITMQ/">RABBITMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REDIS/">REDIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REDISTEMPLATE/">REDISTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REFLECTION/">REFLECTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REGISTRY-CENTER/">REGISTRY CENTER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REPO/">REPO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTTEMPLATE/">RESTTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RIBBON/">RIBBON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPM/">RPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SECURITY/">SECURITY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SERIALVERSIONUID/">SERIALVERSIONUID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SERVLET/">SERVLET</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SESSION/">SESSION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SHELL/">SHELL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPINTBOOT/">SPINTBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING/">SPRING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-MVC/">SPRING MVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-STREAM/">SPRING STREAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGBBOT/">SPRINGBBOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGBOOT/">SPRINGBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGQUARTZ/">SPRINGQUARTZ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGTASK/">SPRINGTASK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGTBOOT/">SPRINGTBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPTING/">SPTING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLAlert/">SQLAlert</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSO/">SSO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STRINGREDISTEMPLATE/">STRINGREDISTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWAGGER/">SWAGGER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SYSTEM/">SYSTEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP-IP/">TCP/IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TERMUX/">TERMUX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TK-MYBATIS/">TK.MYBATIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TRANSECTION/">TRANSECTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UBUNTU/">UBUNTU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UDP/">UDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEBClIENT/">WEBClIENT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YAML/">YAML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rabbitMq/">rabbitMq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/抖音/">抖音</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件服务器/">文件服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间转化/">时间转化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标签1/">标签1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/淘宝/">淘宝</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高可用/">高可用</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ANNOTATION/" style="font-size: 14.62px;">ANNOTATION</a> <a href="/tags/AOP/" style="font-size: 10.77px;">AOP</a> <a href="/tags/BAZEL/" style="font-size: 10px;">BAZEL</a> <a href="/tags/BEANUTILS/" style="font-size: 10px;">BEANUTILS</a> <a href="/tags/CENTOS/" style="font-size: 10px;">CENTOS</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/CLASSLOADER/" style="font-size: 10px;">CLASSLOADER</a> <a href="/tags/CRONTAB/" style="font-size: 10.77px;">CRONTAB</a> <a href="/tags/DEBUG/" style="font-size: 10px;">DEBUG</a> <a href="/tags/DESIGN-PATTERNS/" style="font-size: 10px;">DESIGN PATTERNS</a> <a href="/tags/DNS/" style="font-size: 10px;">DNS</a> <a href="/tags/DOCKER/" style="font-size: 11.54px;">DOCKER</a> <a href="/tags/DRUID/" style="font-size: 10px;">DRUID</a> <a href="/tags/ENLINK/" style="font-size: 10px;">ENLINK</a> <a href="/tags/ES/" style="font-size: 16.15px;">ES</a> <a href="/tags/EUREKA/" style="font-size: 10px;">EUREKA</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10px;">Eureka</a> <a href="/tags/FASTJSON/" style="font-size: 10px;">FASTJSON</a> <a href="/tags/GIT/" style="font-size: 10px;">GIT</a> <a href="/tags/GITLAB/" style="font-size: 10px;">GITLAB</a> <a href="/tags/GLOBALEXCEPTION/" style="font-size: 10px;">GLOBALEXCEPTION</a> <a href="/tags/GO/" style="font-size: 10.77px;">GO</a> <a href="/tags/HEXO/" style="font-size: 12.31px;">HEXO</a> <a href="/tags/IDEA/" style="font-size: 12.31px;">IDEA</a> <a href="/tags/INTERCEPTOR/" style="font-size: 11.54px;">INTERCEPTOR</a> <a href="/tags/IT/" style="font-size: 11.54px;">IT</a> <a href="/tags/JAVADOC/" style="font-size: 10px;">JAVADOC</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.54px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.77px;">JAVASE</a> <a href="/tags/JETTY/" style="font-size: 10px;">JETTY</a> <a href="/tags/JPA/" style="font-size: 10.77px;">JPA</a> <a href="/tags/JSONUTILS/" style="font-size: 10px;">JSONUTILS</a> <a href="/tags/KARAF/" style="font-size: 11.54px;">KARAF</a> <a href="/tags/KEEPALIVED/" style="font-size: 10px;">KEEPALIVED</a> <a href="/tags/LINUX/" style="font-size: 16.92px;">LINUX</a> <a href="/tags/LISTENER/" style="font-size: 10px;">LISTENER</a> <a href="/tags/LOADBALANCED/" style="font-size: 10px;">LOADBALANCED</a> <a href="/tags/LOG/" style="font-size: 10px;">LOG</a> <a href="/tags/LOGBACK/" style="font-size: 10px;">LOGBACK</a> <a href="/tags/LOGIN/" style="font-size: 10px;">LOGIN</a> <a href="/tags/LOMBOK/" style="font-size: 11.54px;">LOMBOK</a> <a href="/tags/MAC/" style="font-size: 15.38px;">MAC</a> <a href="/tags/MARKDOWN/" style="font-size: 11.54px;">MARKDOWN</a> <a href="/tags/MIME-TYPE/" style="font-size: 10px;">MIME-TYPE</a> <a href="/tags/MQ/" style="font-size: 12.31px;">MQ</a> <a href="/tags/MYBATIS/" style="font-size: 17.69px;">MYBATIS</a> <a href="/tags/MYCAT/" style="font-size: 10.77px;">MYCAT</a> <a href="/tags/MYSQL/" style="font-size: 16.15px;">MYSQL</a> <a href="/tags/NETWORK/" style="font-size: 10px;">NETWORK</a> <a href="/tags/OAUTH2/" style="font-size: 10.77px;">OAUTH2</a> <a href="/tags/ONOS/" style="font-size: 14.62px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 13.85px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PAGEHELPER/" style="font-size: 10px;">PAGEHELPER</a> <a href="/tags/POSTMAN/" style="font-size: 10px;">POSTMAN</a> <a href="/tags/PYTHON/" style="font-size: 13.08px;">PYTHON</a> <a href="/tags/RABBITMQ/" style="font-size: 10.77px;">RABBITMQ</a> <a href="/tags/REDIS/" style="font-size: 11.54px;">REDIS</a> <a href="/tags/REDISTEMPLATE/" style="font-size: 10px;">REDISTEMPLATE</a> <a href="/tags/REFLECTION/" style="font-size: 11.54px;">REFLECTION</a> <a href="/tags/REGISTRY-CENTER/" style="font-size: 10px;">REGISTRY CENTER</a> <a href="/tags/REPO/" style="font-size: 10px;">REPO</a> <a href="/tags/RESTTEMPLATE/" style="font-size: 10px;">RESTTEMPLATE</a> <a href="/tags/RIBBON/" style="font-size: 10.77px;">RIBBON</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/SECURITY/" style="font-size: 12.31px;">SECURITY</a> <a href="/tags/SERIALVERSIONUID/" style="font-size: 10px;">SERIALVERSIONUID</a> <a href="/tags/SERVLET/" style="font-size: 10.77px;">SERVLET</a> <a href="/tags/SESSION/" style="font-size: 12.31px;">SESSION</a> <a href="/tags/SHELL/" style="font-size: 14.62px;">SHELL</a> <a href="/tags/SPINTBOOT/" style="font-size: 10px;">SPINTBOOT</a> <a href="/tags/SPRING/" style="font-size: 13.08px;">SPRING</a> <a href="/tags/SPRING-MVC/" style="font-size: 10px;">SPRING MVC</a> <a href="/tags/SPRING-STREAM/" style="font-size: 10px;">SPRING STREAM</a> <a href="/tags/SPRINGBBOT/" style="font-size: 10px;">SPRINGBBOT</a> <a href="/tags/SPRINGBOOT/" style="font-size: 19.23px;">SPRINGBOOT</a> <a href="/tags/SPRINGQUARTZ/" style="font-size: 10px;">SPRINGQUARTZ</a> <a href="/tags/SPRINGTASK/" style="font-size: 12.31px;">SPRINGTASK</a> <a href="/tags/SPRINGTBOOT/" style="font-size: 10px;">SPRINGTBOOT</a> <a href="/tags/SPTING/" style="font-size: 10px;">SPTING</a> <a href="/tags/SQL/" style="font-size: 12.31px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.46px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/STRINGREDISTEMPLATE/" style="font-size: 10px;">STRINGREDISTEMPLATE</a> <a href="/tags/SWAGGER/" style="font-size: 10px;">SWAGGER</a> <a href="/tags/SYSTEM/" style="font-size: 10px;">SYSTEM</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TCP-IP/" style="font-size: 11.54px;">TCP/IP</a> <a href="/tags/TERMUX/" style="font-size: 10.77px;">TERMUX</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/TRANSECTION/" style="font-size: 10px;">TRANSECTION</a> <a href="/tags/UBUNTU/" style="font-size: 10px;">UBUNTU</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/WEBClIENT/" style="font-size: 10px;">WEBClIENT</a> <a href="/tags/YAML/" style="font-size: 10.77px;">YAML</a> <a href="/tags/rabbitMq/" style="font-size: 10px;">rabbitMq</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.77px;">文件服务器</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/13/可视化面板/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/邮箱找回密码与二次认证/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/特权用户访问策略控制/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/md列表/">markdown任务列表语法checkbox</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/CS应用配置/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Joe Tong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="private learning">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Learning">
+<meta property="og:url" content="/blog/page/5/index.html">
+<meta property="og:site_name" content="Learning">
+<meta property="og:description" content="private learning">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Learning">
+<meta name="twitter:description" content="private learning">
+  
+    <link rel="alternate" href="/atom.xml" title="Learning" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Learning</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Joe&#39;s Blog</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-elasticsearchSQL" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/18/elasticsearchSQL/" class="article-date">
+  <time datetime="2019-12-18T17:01:34.000Z" itemprop="datePublished">2019-12-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/18/elasticsearchSQL/">elasticsearch x_pack</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>SHOW FUNCTIONS;</p>
+<table>
+<thead>
+<tr>
+<th align="left">name</th>
+<th align="left">type</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">AVG</td>
+<td align="left">AGGREGATE</td>
+</tr>
+<tr>
+<td align="left">COUNT</td>
+<td align="left">AGGREGATE</td>
+</tr>
+<tr>
+<td align="left">FIRST</td>
+<td align="left">AGGREGATE</td>
+</tr>
+<tr>
+<td align="left">FIRST_VALUE</td>
+<td align="left">AGGREGATE</td>
+</tr>
+<tr>
+<td align="left">LAST</td>
+<td align="left">AGGREGATE</td>
+</tr>
+<tr>
+<td align="left">LAST_VALUE</td>
+<td align="left">AGGREGATE</td>
+</tr>
+<tr>
+<td align="left">MAX</td>
+<td align="left">AGGREGATE</td>
+</tr>
+<tr>
+<td align="left">MIN</td>
+<td align="left">AGGREGATE</td>
+</tr>
+<tr>
+<td align="left">SUM</td>
+<td align="left">AGGREGATE</td>
+</tr>
+<tr>
+<td align="left">KURTOSIS</td>
+<td align="left">AGGREGATE</td>
+</tr>
+<tr>
+<td align="left">MAD</td>
+<td align="left">AGGREGATE</td>
+</tr>
+<tr>
+<td align="left">PERCENTILE</td>
+<td align="left">AGGREGATE</td>
+</tr>
+<tr>
+<td align="left">PERCENTILE_RANK</td>
+<td align="left">AGGREGATE</td>
+</tr>
+<tr>
+<td align="left">SKEWNESS</td>
+<td align="left">AGGREGATE</td>
+</tr>
+<tr>
+<td align="left">STDDEV_POP</td>
+<td align="left">AGGREGATE</td>
+</tr>
+<tr>
+<td align="left">SUM_OF_SQUARES</td>
+<td align="left">AGGREGATE</td>
+</tr>
+<tr>
+<td align="left">VAR_POP</td>
+<td align="left">AGGREGATE</td>
+</tr>
+<tr>
+<td align="left">HISTOGRAM</td>
+<td align="left">GROUPING</td>
+</tr>
+<tr>
+<td align="left">CASE</td>
+<td align="left">CONDITIONAL</td>
+</tr>
+<tr>
+<td align="left">COALESCE</td>
+<td align="left">CONDITIONAL</td>
+</tr>
+<tr>
+<td align="left">GREATEST</td>
+<td align="left">CONDITIONAL</td>
+</tr>
+<tr>
+<td align="left">IFNULL</td>
+<td align="left">CONDITIONAL</td>
+</tr>
+<tr>
+<td align="left">IIF</td>
+<td align="left">CONDITIONAL</td>
+</tr>
+<tr>
+<td align="left">ISNULL</td>
+<td align="left">CONDITIONAL</td>
+</tr>
+<tr>
+<td align="left">LEAST</td>
+<td align="left">CONDITIONAL</td>
+</tr>
+<tr>
+<td align="left">NULLIF</td>
+<td align="left">CONDITIONAL</td>
+</tr>
+<tr>
+<td align="left">NVL</td>
+<td align="left">CONDITIONAL</td>
+</tr>
+<tr>
+<td align="left">CURDATE</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">CURRENT_DATE</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">CURRENT_TIME</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">CURRENT_TIMESTAMP</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">CURTIME</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">DATEADD</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">DATEDIFF</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">DATEPART</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">DATETRUNC</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">DATE_ADD</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">DATE_DIFF</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">DATE_PART</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">DATE_TRUNC</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">DAY</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">DAYNAME</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">DAYOFMONTH</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">DAYOFWEEK</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">DAYOFYEAR</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">DAY_NAME</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">DAY_OF_MONTH</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">DAY_OF_WEEK</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">DAY_OF_YEAR</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">DOM</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">DOW</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">DOY</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">HOUR</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">HOUR_OF_DAY</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">IDOW</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">ISODAYOFWEEK</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">ISODOW</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">ISOWEEK</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">ISOWEEKOFYEAR</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">ISO_DAY_OF_WEEK</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">ISO_WEEK_OF_YEAR</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">IW</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">IWOY</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">MINUTE</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">MINUTE_OF_DAY</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">MINUTE_OF_HOUR</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">MONTH</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">MONTHNAME</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">MONTH_NAME</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">MONTH_OF_YEAR</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">NOW</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">QUARTER</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">SECOND</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">SECOND_OF_MINUTE</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">TIMESTAMPADD</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">TIMESTAMPDIFF</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">TIMESTAMP_ADD</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">TIMESTAMP_DIFF</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">TODAY</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">WEEK</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">WEEK_OF_YEAR</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">YEAR</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">ABS</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">ACOS</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">ASIN</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">ATAN</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">ATAN2</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">CBRT</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">CEIL</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">CEILING</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">COS</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">COSH</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">COT</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">DEGREES</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">E</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">EXP</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">EXPM1</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">FLOOR</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">LOG</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">LOG10</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">MOD</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">PI</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">POWER</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">RADIANS</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">RAND</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">RANDOM</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">ROUND</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">SIGN</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">SIGNUM</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">SIN</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">SINH</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">SQRT</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">TAN</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">TRUNCATE</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">ASCII</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">BIT_LENGTH</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">CHAR</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">CHARACTER_LENGTH</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">CHAR_LENGTH</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">CONCAT</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">INSERT</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">LCASE</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">LEFT</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">LENGTH</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">LOCATE</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">LTRIM</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">OCTET_LENGTH</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">POSITION</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">REPEAT</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">REPLACE</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">RIGHT</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">RTRIM</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">SPACE</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">SUBSTRING</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">UCASE</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">CAST</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">CONVERT</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">DATABASE</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">USER</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">ST_ASTEXT</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">ST_ASWKT</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">ST_DISTANCE</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">ST_GEOMETRYTYPE</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">ST_GEOMFROMTEXT</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">ST_WKTTOSQL</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">ST_X</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">ST_Y</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">ST_Z</td>
+<td align="left">SCALAR</td>
+</tr>
+<tr>
+<td align="left">SCORE</td>
+<td align="left">SCORE</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/12/18/elasticsearchSQL/" data-id="ckbdc9utx007q24u2r46g8c88" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES/">ES</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/">SQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-IP段计算" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/12/IP段计算/" class="article-date">
+  <time datetime="2019-12-12T20:15:58.000Z" itemprop="datePublished">2019-12-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/12/IP段计算/">IP段计算</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Java根据网段计算子网掩码，起始IP，结束IP</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * IP的相关计算</span></span><br><span class="line"><span class="comment"> * @author zengchaowang</span></span><br><span class="line"><span class="comment"> * @version 1.0</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> class IpCaculate &#123;</span><br><span class="line"> </span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 根据掩码位数计算掩码</span></span><br><span class="line"><span class="comment">	 * @param maskIndex 掩码位</span></span><br><span class="line"><span class="comment">	 * @return 子网掩码</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">String</span> getNetMask(<span class="keyword">String</span> maskIndex) &#123;</span><br><span class="line">		StringBuilder mask = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">		Integer inetMask = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			inetMask = Integer.parseInt(maskIndex);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (NumberFormatException e) &#123;</span><br><span class="line">			System.out.<span class="built_in">println</span>(e.getMessage());</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (inetMask &gt; <span class="number">32</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 子网掩码为1占了几个字节</span></span><br><span class="line">		<span class="built_in">int</span> num1 = inetMask / <span class="number">8</span>;</span><br><span class="line">		<span class="comment">// 子网掩码的补位位数</span></span><br><span class="line">		<span class="built_in">int</span> num2 = inetMask % <span class="number">8</span>;</span><br><span class="line">		<span class="built_in">int</span> array[] = <span class="keyword">new</span> <span class="built_in">int</span>[<span class="number">4</span>];</span><br><span class="line">		<span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; num1; i++) &#123;</span><br><span class="line">			array[i] = <span class="number">255</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="built_in">int</span> i = num1; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">			array[i] = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; num2; num2--) &#123;</span><br><span class="line">			array[num1] += <span class="number">1</span> &lt;&lt; <span class="number">8</span> - num2;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (i == <span class="number">3</span>) &#123;</span><br><span class="line">				mask.<span class="built_in">append</span>(array[i]);</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				mask.<span class="built_in">append</span>(array[i] + <span class="string">"."</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> mask.toString();</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 根据网段计算起始IP 网段格式:x.x.x.x/x</span></span><br><span class="line"><span class="comment">	 * 一个网段0一般为网络地址,255一般为广播地址.</span></span><br><span class="line"><span class="comment">	 * 起始IP计算:网段与掩码相与之后加一的IP地址</span></span><br><span class="line"><span class="comment">	 * @param segment  网段</span></span><br><span class="line"><span class="comment">	 * @return 起始IP</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">String</span> getStartIp(<span class="keyword">String</span> segment) &#123;</span><br><span class="line">		StringBuffer startIp = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">		<span class="keyword">if</span> (segment == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">String</span> arr[] = segment.<span class="built_in">split</span>(<span class="string">"/"</span>);</span><br><span class="line">		<span class="keyword">String</span> ip = arr[<span class="number">0</span>];</span><br><span class="line">		<span class="keyword">String</span> maskIndex = arr[<span class="number">1</span>];</span><br><span class="line">		<span class="keyword">String</span> mask = IpCaculate.getNetMask(maskIndex);</span><br><span class="line">		<span class="keyword">if</span> (<span class="number">4</span> != ip.<span class="built_in">split</span>(<span class="string">"\\."</span>).length || mask == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">int</span> ipArray[] = <span class="keyword">new</span> <span class="built_in">int</span>[<span class="number">4</span>];</span><br><span class="line">		<span class="built_in">int</span> netMaskArray[] = <span class="keyword">new</span> <span class="built_in">int</span>[<span class="number">4</span>];</span><br><span class="line">		<span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				ipArray[i] = Integer.parseInt(ip.<span class="built_in">split</span>(<span class="string">"\\."</span>)[i]);</span><br><span class="line">				netMaskArray[i] = Integer.parseInt(mask.<span class="built_in">split</span>(<span class="string">"\\."</span>)[i]);</span><br><span class="line">				<span class="keyword">if</span> (ipArray[i] &gt; <span class="number">255</span> || ipArray[i] &lt; <span class="number">0</span> || netMaskArray[i] &gt; <span class="number">255</span> || netMaskArray[i] &lt; <span class="number">0</span>) &#123;</span><br><span class="line">					<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				ipArray[i] = ipArray[i] &amp; netMaskArray[i];</span><br><span class="line">				<span class="keyword">if</span>(i==<span class="number">3</span>)&#123;</span><br><span class="line">					startIp.<span class="built_in">append</span>(ipArray[i]+<span class="number">1</span>);</span><br><span class="line">				&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">					startIp.<span class="built_in">append</span>(ipArray[i]+<span class="string">"."</span>);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125; <span class="keyword">catch</span> (NumberFormatException e) &#123;</span><br><span class="line">				System.out.<span class="built_in">println</span>(e.getMessage());</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		 <span class="keyword">return</span> startIp.toString();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 根据网段计算结束IP</span></span><br><span class="line"><span class="comment">	 * @param segment</span></span><br><span class="line"><span class="comment">	 * @return 结束IP</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">String</span> getEndIp(<span class="keyword">String</span> segment) &#123;    </span><br><span class="line">		StringBuffer endIp=<span class="keyword">new</span> StringBuffer();</span><br><span class="line">		<span class="keyword">String</span> startIp = getStartIp(segment);    </span><br><span class="line">		<span class="keyword">if</span> (segment == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">String</span> arr[] = segment.<span class="built_in">split</span>(<span class="string">"/"</span>);</span><br><span class="line">		<span class="keyword">String</span> maskIndex = arr[<span class="number">1</span>];</span><br><span class="line">		<span class="comment">//实际需要的IP个数</span></span><br><span class="line">	    <span class="built_in">int</span> hostNumber = <span class="number">0</span>;</span><br><span class="line">	    <span class="built_in">int</span> startIpArray[] = <span class="keyword">new</span> <span class="built_in">int</span>[<span class="number">4</span>];</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			hostNumber=<span class="number">1</span>&lt;&lt;<span class="number">32</span>-(Integer.parseInt(maskIndex));</span><br><span class="line">			<span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt;<span class="number">4</span>; i++) &#123;    </span><br><span class="line">				startIpArray[i] = Integer.parseInt(startIp.<span class="built_in">split</span>(<span class="string">"\\."</span>)[i]);    </span><br><span class="line">		        <span class="keyword">if</span>(i == <span class="number">3</span>)&#123;    </span><br><span class="line">		        	startIpArray[i] = startIpArray[i] - <span class="number">1</span>;    </span><br><span class="line">		            <span class="keyword">break</span>;</span><br><span class="line">		        &#125;    </span><br><span class="line">		    &#125;    </span><br><span class="line">			startIpArray[<span class="number">3</span>] = startIpArray[<span class="number">3</span>] + (hostNumber - <span class="number">1</span>); </span><br><span class="line">		&#125; <span class="keyword">catch</span> (NumberFormatException e) &#123;</span><br><span class="line">			System.out.<span class="built_in">println</span>(e.getMessage());</span><br><span class="line">		&#125;</span><br><span class="line">	   </span><br><span class="line">		<span class="keyword">if</span>(startIpArray[<span class="number">3</span>] &gt;<span class="number">255</span>)&#123;    </span><br><span class="line">	        <span class="built_in">int</span> k = startIpArray[<span class="number">3</span>] / <span class="number">256</span>;    </span><br><span class="line">	        startIpArray[<span class="number">3</span>] = startIpArray[<span class="number">3</span>] % <span class="number">256</span>;    </span><br><span class="line">	        startIpArray[<span class="number">2</span>] = startIpArray[<span class="number">2</span>] + k;    </span><br><span class="line">	    &#125;    </span><br><span class="line">	    <span class="keyword">if</span>(startIpArray[<span class="number">2</span>] &gt; <span class="number">255</span>)&#123;    </span><br><span class="line">	        <span class="built_in">int</span>  j = startIpArray[<span class="number">2</span>] / <span class="number">256</span>;    </span><br><span class="line">	        startIpArray[<span class="number">2</span>] = startIpArray[<span class="number">2</span>] % <span class="number">256</span>;    </span><br><span class="line">	        startIpArray[<span class="number">1</span>] = startIpArray[<span class="number">1</span>] + j;    </span><br><span class="line">	           <span class="keyword">if</span>(startIpArray[<span class="number">1</span>] &gt; <span class="number">255</span>)&#123;    </span><br><span class="line">	               <span class="built_in">int</span>  k = startIpArray[<span class="number">1</span>] / <span class="number">256</span>;    </span><br><span class="line">	               startIpArray[<span class="number">1</span>] = startIpArray[<span class="number">1</span>] % <span class="number">256</span>;    </span><br><span class="line">	               startIpArray[<span class="number">0</span>] = startIpArray[<span class="number">0</span>] + k;    </span><br><span class="line">	           &#125;    </span><br><span class="line">	       &#125;    </span><br><span class="line">	    <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)&#123;    </span><br><span class="line">	        <span class="keyword">if</span>(i == <span class="number">3</span>)&#123;    </span><br><span class="line">	        	startIpArray[i] = startIpArray[i] - <span class="number">1</span>;    </span><br><span class="line">	        &#125;    </span><br><span class="line">	        <span class="keyword">if</span>(<span class="string">""</span> == endIp.toString()||endIp.length()==<span class="number">0</span>)&#123;    </span><br><span class="line">	        	endIp.<span class="built_in">append</span>(startIpArray[i]);    </span><br><span class="line">	        &#125;<span class="keyword">else</span>&#123;    </span><br><span class="line">	        	endIp.<span class="built_in">append</span>(<span class="string">"."</span> + startIpArray[i]);    </span><br><span class="line">	        &#125;    </span><br><span class="line">	    &#125;    </span><br><span class="line">		<span class="keyword">return</span> endIp.toString();</span><br><span class="line">	&#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>根据网段计算起始IP 网段格式:x.x.x.x/x</p>
+<p>网段内需要的IP数量为：2的（32-掩码位）次方个。</p>
+<p>因为一个网段0一般为网络地址,255一般为广播地址， 所以第一个可用IP起始IP计算:网段与掩码相与之后加一的IP地址，结束IP为通过计算需要的所有IP数然后做累加运算，超过256则进位进行运算。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/12/12/IP段计算/" data-id="ckbdc9uq9002e24u2m3ba28ep" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-多种方式实现Spring的Bean注入" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/12/多种方式实现Spring的Bean注入/" class="article-date">
+  <time datetime="2019-12-12T15:27:49.000Z" itemprop="datePublished">2019-12-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/12/多种方式实现Spring的Bean注入/">多种方式实现Spring的Bean注入</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>多种方式实现Spring的Bean注入<br>2019.03.24 15:54 2093浏览<br>Spring的核心是控制反转（IoC）和面向切面（AOP）。</p>
+<p>Spring就是一个大工厂（容器），可以将所有对象创建和依赖关系维护，交给Spring管理 。</p>
+<p>Spring工厂是用于生成Bean，对Bean进行管理。</p>
+<p>在Spring中，所有Bean的生命周期都交给Ioc容器管理。</p>
+<p>Spring中，Spring可以通过Xml形式或注解的形式来管理Bean 。</p>
+<p>下面基于注解的形式，采用多种方式实现Spring的Bean注入。具体如下：</p>
+<p>一、通过方法注入Bean</p>
+<ol>
+<li>通过构造方法注入Bean</li>
+</ol>
+<p>实例代码：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component(<span class="meta-string">"anotherBean1"</span>)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnotherBean</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyBean1</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> AnotherBean anotherBean1;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> MyBean1(AnotherBean anotherBean1) &#123;</span><br><span class="line">        <span class="keyword">this</span>.anotherBean1 = anotherBean1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String toString() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"MyBean1&#123;"</span> +</span><br><span class="line">                <span class="string">"anotherBean1="</span> + anotherBean1 +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.通过Set方法注入Bean</p>
+<p>实例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyBean2</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> AnotherBean anotherBean2;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAnotherBean2</span><span class="params">(AnotherBean anotherBean2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.anotherBean2 = anotherBean2;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"MyBean2&#123;"</span> +</span><br><span class="line">                <span class="string">"anotherBean2="</span> + anotherBean2 +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>二、通过属性注入Bean</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyBean3</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> AnotherBean anotherBean3;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"MyBean3&#123;"</span> +</span><br><span class="line">                <span class="string">"anotherBean3="</span> + anotherBean3 +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>三、通过集合类型注入Bean</p>
+<ol>
+<li>直接注入集合实例   </li>
+</ol>
+<p>List集合注入Bean</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> MyBean4 &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&amp;lt;<span class="built_in">String</span>&amp;gt; stringList;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> List&amp;lt;<span class="built_in">String</span>&amp;gt; getStringList() &#123;</span><br><span class="line">        <span class="keyword">return</span> stringList;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">void</span> setStringList(List&amp;lt;<span class="built_in">String</span>&amp;gt; stringList) &#123;</span><br><span class="line">        <span class="keyword">this</span>.stringList = stringList;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&amp;lt;<span class="built_in">String</span>&amp;gt; stringList1;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> List&amp;lt;<span class="built_in">String</span>&amp;gt; getStringList1() &#123;</span><br><span class="line">        <span class="keyword">return</span> stringList1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="meta">@Qualifier</span>(<span class="string">"stringList1"</span>)   <span class="comment">//使用@Qualifier注解指定bean的Id，此处的Id与BeanConfiguration类中的stringList1方法的Bean 的Id要一致</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">void</span> setStringList1(List&amp;lt;<span class="built_in">String</span>&amp;gt; stringList1) &#123;</span><br><span class="line">        <span class="keyword">this</span>.stringList1 = stringList1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">String</span> toString() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"MyBean4&#123;"</span> +</span><br><span class="line">                <span class="string">"stringList="</span> + stringList +</span><br><span class="line">                <span class="string">", stringList1="</span> + stringList1 +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Map集合注入Bean</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line"><span class="keyword">public</span> class MyBean5 &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">Map</span>&amp;lt;<span class="built_in">String</span>, <span class="built_in">Integer</span>&amp;gt; integerMap;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">Map</span>&amp;lt;<span class="built_in">String</span>, <span class="built_in">Integer</span>&amp;gt; getIntegerMap() &#123;</span><br><span class="line">        <span class="keyword">return</span> integerMap;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Autowired  <span class="comment">//加上@Autowired 注解是希望Spring帮我们完成注入</span></span><br><span class="line">    <span class="keyword">public</span> <span class="literal">void</span> setIntegerMap(<span class="built_in">Map</span>&amp;lt;<span class="built_in">String</span>, <span class="built_in">Integer</span>&amp;gt; integerMap) &#123;</span><br><span class="line">        this.integerMap = integerMap;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">String</span> toString() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"MyBean5&#123;"</span> +</span><br><span class="line">                <span class="string">"integerMap="</span> + integerMap +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>将多个泛型的实例注入到集合     </li>
+</ol>
+<p>(1)将多个泛型的实例注入到List     </p>
+<p>(2)控制泛型实例在List中的顺序     </p>
+<p>(3)将多个泛型的实例注入到Map</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@ComponentScan(<span class="string">"com.lhf.spring.bean"</span>)</span><br><span class="line"><span class="keyword">public</span> class BeanConfiguration &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//方式一： List集合注入Bean</span></span><br><span class="line">    @Bean   <span class="comment">//告知这个Bean将会交给Spring进行管理</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">List</span>&amp;lt;<span class="built_in">String</span>&amp;gt; stringList()&#123;</span><br><span class="line">        <span class="comment">//List集合有序可重复</span></span><br><span class="line">        <span class="built_in">List</span>&amp;lt;<span class="built_in">String</span>&amp;gt; <span class="built_in">list</span> = <span class="literal">new</span> ArrayList&amp;lt;<span class="built_in">String</span>&amp;gt;();</span><br><span class="line">        <span class="built_in">list</span>.add(<span class="string">"111"</span>);</span><br><span class="line">        <span class="built_in">list</span>.add(<span class="string">"222"</span>);</span><br><span class="line">        <span class="built_in">list</span>.add(<span class="string">"333"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">list</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean(<span class="string">"stringList1"</span>)   <span class="comment">//告知这个Bean将会交给Spring进行管理, 指定Bean的Id</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">List</span>&amp;lt;<span class="built_in">String</span>&amp;gt; stringList1()&#123;</span><br><span class="line">        <span class="comment">//List集合有序可重复</span></span><br><span class="line">        <span class="built_in">List</span>&amp;lt;<span class="built_in">String</span>&amp;gt; <span class="built_in">list</span> = <span class="literal">new</span> ArrayList&amp;lt;<span class="built_in">String</span>&amp;gt;();</span><br><span class="line">        <span class="built_in">list</span>.add(<span class="string">"1111"</span>);</span><br><span class="line">        <span class="built_in">list</span>.add(<span class="string">"2222"</span>);</span><br><span class="line">        <span class="built_in">list</span>.add(<span class="string">"3333"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">list</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//方式二：List集合注入Bean，   注意类型一定要与List集合的类型一致</span></span><br><span class="line">    @Bean</span><br><span class="line">    @<span class="keyword">Order</span>(<span class="number">100</span>)  <span class="comment">//@Order注解指定顺序</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">String</span> string1()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"444"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean</span><br><span class="line">    @<span class="keyword">Order</span>(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">String</span> string2()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"555"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean</span><br><span class="line">    @<span class="keyword">Order</span>(<span class="number">50</span>)</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">String</span> string3()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"666"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//----------------------------------------------------------------//</span></span><br><span class="line">    <span class="comment">//方式一：Map集合注入Bean</span></span><br><span class="line">    @Bean</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">Map</span>&amp;lt;<span class="built_in">String</span>, <span class="built_in">Integer</span>&amp;gt; integerMap()&#123;</span><br><span class="line">        <span class="built_in">Map</span>&amp;lt;<span class="built_in">String</span>, <span class="built_in">Integer</span>&amp;gt; <span class="built_in">map</span> = <span class="literal">new</span> HashMap&amp;lt;&amp;gt;();</span><br><span class="line">        <span class="built_in">map</span>.put(<span class="string">"aaa"</span>, <span class="number">1111</span>);</span><br><span class="line">        <span class="built_in">map</span>.put(<span class="string">"bbb"</span>, <span class="number">2222</span>);</span><br><span class="line">        <span class="built_in">map</span>.put(<span class="string">"ccc"</span>, <span class="number">3333</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">map</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//方式二：Map集合注入Bean,  注意类型一定要与Map集合的类型一致</span></span><br><span class="line">    @Bean(<span class="string">"int1"</span>)</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">Integer</span> integer1()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10001</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean(<span class="string">"int2"</span>)</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">Integer</span> integer2()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10002</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>四、简单类型（String、Integer)直接注入Bean</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line"><span class="keyword">public</span> class MyBean6 &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">String</span> <span class="built_in">string</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">Integer</span> <span class="built_in">integer</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">String</span> getString() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">string</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Value(<span class="string">"没有了你，万杯觥筹只不是是提醒寂寞罢了"</span>)  <span class="comment">//使用@Value注解直接注入值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="literal">void</span> setString(<span class="built_in">String</span> <span class="built_in">string</span>) &#123;</span><br><span class="line">        this.<span class="built_in">string</span> = <span class="built_in">string</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">Integer</span> getInteger() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">integer</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Value(<span class="string">"1314"</span>)</span><br><span class="line">    <span class="keyword">public</span> <span class="literal">void</span> setInteger(<span class="built_in">Integer</span> <span class="built_in">integer</span>) &#123;</span><br><span class="line">        this.<span class="built_in">integer</span> = <span class="built_in">integer</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">String</span> toString() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"MyBean6&#123;"</span> +</span><br><span class="line">                <span class="string">"string='"</span> + <span class="built_in">string</span> + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", integer="</span> + <span class="built_in">integer</span> +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>五、SpringIoc容器内置接口注入Bean</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyBean7</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ApplicationContext context;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ApplicationContext <span class="title">getContext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> context;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setContext</span><span class="params">(ApplicationContext context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.context = context;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Mybean7&#123;"</span> +</span><br><span class="line">                <span class="string">"context="</span> + context +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这里，除了可以直接将ApplicationContext注入进来之外，还可以注入BeanFactory、Environment、ResourceLoader、ApplicationEventPublisher、MessageSource及其实现类。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/12/12/多种方式实现Spring的Bean注入/" data-id="ckbdc9ux700gc24u23whnrh4v" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SPRING/">SPRING</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Spring Cloud Stream与RabbitMQ集成" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/09/Spring Cloud Stream与RabbitMQ集成/" class="article-date">
+  <time datetime="2019-12-09T18:57:47.000Z" itemprop="datePublished">2019-12-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/09/Spring Cloud Stream与RabbitMQ集成/">Spring Cloud Stream与RabbitMQ集成</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOCM]</p>
+<p>[TOC]</p>
+<h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>Spring Cloud Stream是一个建立在Spring Boot和Spring Integration之上的框架，有助于创建事件驱动或消息驱动的微服务。在本文中，我们将通过一些简单的例子来介绍Spring Cloud Stream的概念和构造。</p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="1-Maven依赖"><a href="#1-Maven依赖" class="headerlink" title="1 Maven依赖"></a>1 Maven依赖</h3><p>在开始之前，我们需要添加Spring Cloud Stream与RabbitMQ消息中间件的依赖。</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&amp;<span class="keyword">lt</span>;dependency&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;groupId&amp;<span class="keyword">gt</span>;org.springframework.cloud&amp;<span class="keyword">lt</span>;/groupId&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;artifactId&amp;<span class="keyword">gt</span>;spring-cloud-starter-stream-rabbit&amp;<span class="keyword">lt</span>;/artifactId&amp;<span class="keyword">gt</span>;</span><br><span class="line">&amp;<span class="keyword">lt</span>;/dependency&amp;<span class="keyword">gt</span>;</span><br></pre></td></tr></table></figure>
+
+<p>同时为支持Junit单元测试，在pom.xml文件中添加</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&amp;<span class="keyword">lt</span>;dependency&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;groupId&amp;<span class="keyword">gt</span>;org.springframework.cloud&amp;<span class="keyword">lt</span>;/groupId&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;artifactId&amp;<span class="keyword">gt</span>;spring-cloud-stream-test-support&amp;<span class="keyword">lt</span>;/artifactId&amp;<span class="keyword">gt</span>;</span><br><span class="line">    &amp;<span class="keyword">lt</span>;scope&amp;<span class="keyword">gt</span>;test&amp;<span class="keyword">lt</span>;/scope&amp;<span class="keyword">gt</span>;</span><br><span class="line">&amp;<span class="keyword">lt</span>;/dependency&amp;<span class="keyword">gt</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-主要概念"><a href="#2-主要概念" class="headerlink" title="2 主要概念"></a>2 主要概念</h3><p>微服务架构遵循“智能端点和哑管道”的原则。端点之间的通信由消息中间件（如RabbitMQ或Apache Kafka）驱动。服务通过这些端点或信道发布事件来进行通信。</p>
+<p>让我们通过下面这个构建消息驱动服务的基本范例，来看看Spring Cloud Stream框架的一些主要概念。</p>
+<h4 id="2-1-服务类"><a href="#2-1-服务类" class="headerlink" title="2.1 服务类"></a>2.1 服务类</h4><p>通过Spring Cloud Stream建立一个简单的应用，从Input通道监听消息然后返回应答到Output通道。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@SpringBootApplication</span></span><br><span class="line"><span class="variable">@EnableBinding</span>(Processor.class)</span><br><span class="line">public class MyLoggerServiceApplication &#123;</span><br><span class="line">    <span class="selector-tag">public</span> <span class="selector-tag">static</span> <span class="selector-tag">void</span> <span class="selector-tag">main</span>(String[] args) &#123;</span><br><span class="line">        <span class="selector-tag">SpringApplication</span><span class="selector-class">.run</span>(MyLoggerServiceApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @<span class="selector-tag">StreamListener</span>(Processor.INPUT)</span><br><span class="line">    @<span class="selector-tag">SendTo</span>(Processor.OUTPUT)</span><br><span class="line">    <span class="selector-tag">public</span> <span class="selector-tag">LogMessage</span> <span class="selector-tag">enrichLogMessage</span>(LogMessage log) &#123;</span><br><span class="line">        <span class="selector-tag">return</span> <span class="selector-tag">new</span> <span class="selector-tag">LogMessage</span>(String.format(<span class="string">"[1]: %s"</span>, log.getMessage()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注解@EnableBinding声明了这个应用程序绑定了2个通道：INPUT和OUTPUT。这2个通道是在接口Processor中定义的（Spring Cloud Stream默认设置）。所有通道都是配置在一个具体的消息中间件或绑定器中。</p>
+<p>让我们来看下这些概念的定义：</p>
+<p>Bindings — 声明输入和输出通道的接口集合。<br>Binder — 消息中间件的实现，如Kafka或RabbitMQ<br>Channel — 表示消息中间件和应用程序之间的通信管道<br>StreamListeners — bean中的消息处理方法，在中间件的MessageConverter特定事件中进行对象序列化/反序列化之后，将在信道上的消息上自动调用消息处理方法。<br>Message Schemas — 用于消息的序列化和反序列化，这些模式可以静态读取或者动态加载，支持对象类型的演变。<br>将消息发布到指定目的地是由发布订阅消息模式传递。发布者将消息分类为主题，每个主题由名称标识。订阅方对一个或多个主题表示兴趣。中间件过滤消息，将感兴趣的主题传递给订阅服务器。订阅方可以分组，消费者组是由组ID标识的一组订户或消费者，其中从主题或主题的分区中的消息以负载均衡的方式递送。</p>
+<h4 id="2-2-测试类"><a href="#2-2-测试类" class="headerlink" title="2.2 测试类"></a>2.2 测试类</h4><p>测试类是一个绑定器的实现，允许与通道交互和检查消息。让我们向上面的enrichLogMessage 服务发送一条消息，并检查响应中是否包含文本“[ 1 ]：”：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringJUnit4ClassRunner.<span class="keyword">class</span>)</span><br><span class="line"><span class="meta">@ContextConfiguration</span>(classes = MyLoggerServiceApplication.<span class="keyword">class</span>)</span><br><span class="line"><span class="meta">@DirtiesContext</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyLoggerApplicationIntegrationTest</span> &#123;</span></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Processor pipe;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MessageCollector messageCollector;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> whenSendMessage_thenResponseShouldUpdateText() &#123;</span><br><span class="line">        pipe.input().send(MessageBuilder.withPayload(<span class="keyword">new</span> LogMessage(<span class="string">"This is my message"</span>)).build());</span><br><span class="line"></span><br><span class="line">        Object payload = messageCollector.forChannel(pipe.output()).poll().getPayload();</span><br><span class="line"></span><br><span class="line">        assertEquals(<span class="string">"[1]: This is my message"</span>, payload.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.3 RabbitMQ配置<br>我们需要在工程src/main/resources目录下的application.yml文件里增加RabbitMQ绑定器的配置。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">spring</span>:</span><br><span class="line">  <span class="attribute">cloud</span>:</span><br><span class="line">    <span class="attribute">stream</span>:</span><br><span class="line">      <span class="attribute">bindings</span>:</span><br><span class="line">        <span class="attribute">input</span>:</span><br><span class="line">          <span class="attribute">destination</span>: queue.log.messages</span><br><span class="line">          <span class="attribute">binder</span>: local_rabbit</span><br><span class="line">          <span class="attribute">group</span>: logMessageConsumers</span><br><span class="line">        <span class="attribute">output</span>:</span><br><span class="line">          <span class="attribute">destination</span>: queue.pretty.log.messages</span><br><span class="line">          <span class="attribute">binder</span>: local_rabbit</span><br><span class="line">      <span class="attribute">binders</span>:</span><br><span class="line">        <span class="attribute">local_rabbit</span>:</span><br><span class="line">          <span class="attribute">type</span>: rabbit</span><br><span class="line">          <span class="attribute">environment</span>:</span><br><span class="line">            <span class="attribute">spring</span>:</span><br><span class="line">              <span class="attribute">rabbitmq</span>:</span><br><span class="line">                <span class="attribute">host</span>: localhost</span><br><span class="line">                <span class="attribute">port</span>: <span class="number">5672</span></span><br><span class="line">                <span class="attribute">username</span>: guest</span><br><span class="line">                <span class="attribute">password</span>: guest</span><br><span class="line">                <span class="attribute">virtual-host</span>: /</span><br></pre></td></tr></table></figure>
+
+<p>input绑定使用名为queue.log.messages的消息交换机，output绑定使用名为queue.pretty.log.messages的消息交换机。所有的绑定都使用名为local_rabbit的绑定器。<br>请注意，我们不需要预先创建RabbitmQ交换机或队列。运行应用程序时，两个交换机都会自动创建。</p>
+<h3 id="3-自定义通道"><a href="#3-自定义通道" class="headerlink" title="3 自定义通道"></a>3 自定义通道</h3><p>在上面的例子里，我们使用Spring Cloud提供的Processor接口，这个接口有一个input通道和一个output通道。</p>
+<p>如果我们想创建一些不同，比如说一个input通道和两个output通道，可以新建一个自定义处理器。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public<span class="built_in"> interface </span>MyProcessor &#123;</span><br><span class="line">    String INPUT = <span class="string">"myInput"</span>;</span><br><span class="line"></span><br><span class="line">    @Input</span><br><span class="line">    SubscribableChannel myInput();</span><br><span class="line"></span><br><span class="line">    @Output(<span class="string">"myOutput"</span>)</span><br><span class="line">    MessageChannel anOutput();</span><br><span class="line"></span><br><span class="line">    @Output</span><br><span class="line">    MessageChannel anotherOutput();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-1-服务类"><a href="#3-1-服务类" class="headerlink" title="3.1 服务类"></a>3.1 服务类</h4><p>Spring将为我们提供这个接口的实现。通道的名称可以通过使用注解来设定，比如@Output(“myOutput”)。如果没有设置的话，Spring将使用方法名来作为通道名称。因此这里有三个通道：myInput， myOutput， anotherOutput。</p>
+<p>现在我们可以增加一些路由规则，如果接收到的值小于10则走一个output通道；如果接收到的值大于等于10则走另一个output通道。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> MyProcessor processor;</span><br><span class="line"></span><br><span class="line"><span class="meta">@StreamListener(MyProcessor.INPUT)</span></span><br><span class="line"><span class="keyword">public</span> void routeValues(Integer <span class="keyword">val</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">val</span> &amp;lt; <span class="number">10</span>) &#123;</span><br><span class="line">        processor.anOutput().send(message(<span class="keyword">val</span>));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        processor.anotherOutput().send(message(<span class="keyword">val</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> static <span class="keyword">final</span> &amp;lt;T&amp;gt; Message&amp;lt;T&amp;gt; message(T <span class="keyword">val</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> MessageBuilder.withPayload(<span class="keyword">val</span>).build();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.2 测试类<br>发送不同的消息，判断返回值是否是通过不同的通道获得。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringJUnit4ClassRunner.class)</span><br><span class="line"><span class="meta">@ContextConfiguration</span>(classes = MultipleOutputsServiceApplication.class)</span><br><span class="line"><span class="meta">@DirtiesContext</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MultipleOutputsServiceApplicationIntegrationTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MyProcessor pipe;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MessageCollector messageCollector;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whenSendMessage_thenResponseIsInAOutput</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        whenSendMessage(<span class="number">1</span>);</span><br><span class="line">        thenPayloadInChannelIs(pipe.anOutput(), <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whenSendMessage_thenResponseIsInAnotherOutput</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        whenSendMessage(<span class="number">11</span>);</span><br><span class="line">        thenPayloadInChannelIs(pipe.anotherOutput(), <span class="number">11</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">whenSendMessage</span><span class="params">(Integer val)</span> </span>&#123;</span><br><span class="line">        pipe.myInput().send(MessageBuilder.withPayload(val).build());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">thenPayloadInChannelIs</span><span class="params">(MessageChannel channel, Integer expectedValue)</span> </span>&#123;</span><br><span class="line">        Object payload = messageCollector.forChannel(channel).poll().getPayload();</span><br><span class="line">        assertEquals(expectedValue, payload);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-根据条件分派"><a href="#4-根据条件分派" class="headerlink" title="4 根据条件分派"></a>4 根据条件分派</h3><p>使用@StreamListener 注释，我们还可以使用自定义的SpEL表达式来过滤用户期望的消息。下面这个例子，我们使用条件调度将消息路由到不同的输出。</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> MyProcessor processor;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@StreamListener</span>(</span><br><span class="line">  <span class="keyword">target</span> = MyProcessor.INPUT, </span><br><span class="line">  condition = <span class="string">"payload &amp;lt; 10"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">routeValuesToAnOutput</span><span class="params">(Integer val)</span> </span>&#123;</span><br><span class="line">    processor.anOutput().send(message(val));</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@StreamListener</span>(</span><br><span class="line">  <span class="keyword">target</span> = MyProcessor.INPUT, </span><br><span class="line">  condition = <span class="string">"payload &amp;gt;= 10"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">routeValuesToAnotherOutput</span><span class="params">(Integer val)</span> </span>&#123;</span><br><span class="line">    processor.anotherOutput().send(message(val));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-总结"><a href="#5-总结" class="headerlink" title="5 总结"></a>5 总结</h3><p>在本教程中，我们介绍了Spring Cloud Stream的主要概念，并展示了如何通过RabbitMQ上的一些简单示例来使用它。工程代码可参看</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/12/09/Spring Cloud Stream与RabbitMQ集成/" data-id="ckbdc9uzf00ml24u22e7hg3b3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MQ/">MQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RABBITMQ/">RABBITMQ</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post- Spring Boot——RabbitMQ入门" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/06/ Spring Boot——RabbitMQ入门/" class="article-date">
+  <time datetime="2019-12-06T15:38:55.000Z" itemprop="datePublished">2019-12-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/06/ Spring Boot——RabbitMQ入门/">Spring Boot——RabbitMQ</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Spring Boot——RabbitMQ</p>
+<p>[TOCM]</p>
+<p>[TOC]</p>
+<h2 id="使用配置"><a href="#使用配置" class="headerlink" title="使用配置"></a>使用配置</h2><h4 id="1、老规矩，先在pom-xml中添加相关依赖："><a href="#1、老规矩，先在pom-xml中添加相关依赖：" class="headerlink" title="1、老规矩，先在pom.xml中添加相关依赖："></a>1、老规矩，先在pom.xml中添加相关依赖：</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--消息队列模块--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-amqp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2、在application-properties添加rabbitmq的相关信息："><a href="#2、在application-properties添加rabbitmq的相关信息：" class="headerlink" title="2、在application.properties添加rabbitmq的相关信息："></a>2、在application.properties添加rabbitmq的相关信息：</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spring<span class="selector-class">.application</span><span class="selector-class">.name</span>=spirng-boot-rabbitmq</span><br><span class="line">spring<span class="selector-class">.rabbitmq</span><span class="selector-class">.host</span>=<span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line">spring<span class="selector-class">.rabbitmq</span><span class="selector-class">.port</span>=<span class="number">5672</span></span><br><span class="line">spring<span class="selector-class">.rabbitmq</span><span class="selector-class">.username</span>=guest</span><br><span class="line">spring<span class="selector-class">.rabbitmq</span><span class="selector-class">.password</span>=guest</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、配置队列："><a href="#3、配置队列：" class="headerlink" title="3、配置队列："></a>3、配置队列：</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">import</span> <span class="selector-tag">org</span><span class="selector-class">.springframework</span><span class="selector-class">.amqp</span><span class="selector-class">.core</span><span class="selector-class">.Queue</span>;</span><br><span class="line"><span class="selector-tag">import</span> <span class="selector-tag">org</span><span class="selector-class">.springframework</span><span class="selector-class">.context</span><span class="selector-class">.annotation</span><span class="selector-class">.Bean</span>;</span><br><span class="line"><span class="selector-tag">import</span> <span class="selector-tag">org</span><span class="selector-class">.springframework</span><span class="selector-class">.context</span><span class="selector-class">.annotation</span><span class="selector-class">.Configuration</span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @Author:</span></span><br><span class="line"><span class="comment"> * @Description:队列配置，队列的名称，发送者和接受者的名称必须一致，否则接收不到消息</span></span><br><span class="line"><span class="comment"> * @Date:2017/12/11 14:50</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">@<span class="keyword">Configuration</span></span><br><span class="line"><span class="keyword">public</span> class RabbitMqConfig &#123;</span><br><span class="line">    @<span class="keyword">Bean</span></span><br><span class="line">    public Queue Queue1() &#123;</span><br><span class="line">        <span class="selector-tag">return</span> <span class="selector-tag">new</span> <span class="selector-tag">Queue</span>("队列名");</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4、发送者通过Controller类发送消息："><a href="#4、发送者通过Controller类发送消息：" class="headerlink" title="4、发送者通过Controller类发送消息："></a>4、发送者通过Controller类发送消息：</h4><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.AmqpTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.<span class="keyword">annotation</span>.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.<span class="keyword">annotation</span>.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.<span class="keyword">annotation</span>.RestController; </span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SendController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> AmqpTemplate amqpTemplate;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@RequestMapping(<span class="meta-string">"/send"</span>)</span></span><br><span class="line">    <span class="keyword">public</span> String send()&#123;</span><br><span class="line">        String content=<span class="string">"Date:"</span>+new Date();</span><br><span class="line">        amqpTemplate.convertAndSend(<span class="string">"队列名"</span>,content);</span><br><span class="line">        <span class="keyword">return</span> content;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5、创建接受者Receiver1，新建类："><a href="#5、创建接受者Receiver1，新建类：" class="headerlink" title="5、创建接受者Receiver1，新建类："></a>5、创建接受者Receiver1，新建类：</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">import</span> <span class="selector-tag">org</span><span class="selector-class">.springframework</span><span class="selector-class">.amqp</span><span class="selector-class">.rabbit</span><span class="selector-class">.annotation</span><span class="selector-class">.RabbitHandler</span>;</span><br><span class="line"><span class="selector-tag">import</span> <span class="selector-tag">org</span><span class="selector-class">.springframework</span><span class="selector-class">.amqp</span><span class="selector-class">.rabbit</span><span class="selector-class">.annotation</span><span class="selector-class">.RabbitListener</span>;</span><br><span class="line"><span class="selector-tag">import</span> <span class="selector-tag">org</span><span class="selector-class">.springframework</span><span class="selector-class">.stereotype</span><span class="selector-class">.Component</span>;</span><br><span class="line"> </span><br><span class="line">@<span class="keyword">Component</span></span><br><span class="line">@<span class="keyword">RabbitListener</span>(<span class="keyword">queues</span> = <span class="string">"队列名"</span>)</span><br><span class="line">public class Receiver1 &#123;</span><br><span class="line"> </span><br><span class="line">    @<span class="keyword">RabbitHandler</span></span><br><span class="line">    public void receiver(String msg)&#123;</span><br><span class="line">        <span class="selector-tag">System</span><span class="selector-class">.out</span><span class="selector-class">.println</span>("队列名 <span class="selector-tag">receiver1</span><span class="selector-pseudo">:"+msg)</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>6、测试<br>浏览器访问地址：<a href="http://localhost:8080/send，如下图：" target="_blank" rel="noopener">http://localhost:8080/send，如下图：</a></p>
+<p><img src="/images/send.png" alt="send" title="send"></p>
+<p>查看RabbitMQ的Web客户端<a href="http://localhost:15672，需要自己安装RabbitMQ的客户端，可以自己上网查阅相关教程。帐号密码和配置文件一样，如下图：可以在列表里看到之前创建的队列。" target="_blank" rel="noopener">http://localhost:15672，需要自己安装RabbitMQ的客户端，可以自己上网查阅相关教程。帐号密码和配置文件一样，如下图：可以在列表里看到之前创建的队列。</a></p>
+<p><img src="/images/jiemian.png" alt="jiemian" title="jiemian"></p>
+<h2 id="一对多的使用配置"><a href="#一对多的使用配置" class="headerlink" title="一对多的使用配置"></a>一对多的使用配置</h2><h3 id="1、一对多，一个发送者发送消息，多个接受者接受同一个消息，添加新的接收者Receiver2："><a href="#1、一对多，一个发送者发送消息，多个接受者接受同一个消息，添加新的接收者Receiver2：" class="headerlink" title="1、一对多，一个发送者发送消息，多个接受者接受同一个消息，添加新的接收者Receiver2："></a>1、一对多，一个发送者发送消息，多个接受者接受同一个消息，添加新的接收者Receiver2：</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">import</span> <span class="selector-tag">org</span><span class="selector-class">.springframework</span><span class="selector-class">.amqp</span><span class="selector-class">.rabbit</span><span class="selector-class">.annotation</span><span class="selector-class">.RabbitHandler</span>;</span><br><span class="line"><span class="selector-tag">import</span> <span class="selector-tag">org</span><span class="selector-class">.springframework</span><span class="selector-class">.amqp</span><span class="selector-class">.rabbit</span><span class="selector-class">.annotation</span><span class="selector-class">.RabbitListener</span>;</span><br><span class="line"><span class="selector-tag">import</span> <span class="selector-tag">org</span><span class="selector-class">.springframework</span><span class="selector-class">.stereotype</span><span class="selector-class">.Component</span>;</span><br><span class="line"> </span><br><span class="line">@<span class="keyword">Component</span></span><br><span class="line">@<span class="keyword">RabbitListener</span>(<span class="keyword">queues</span> = <span class="string">"队列名"</span>)</span><br><span class="line">public class Receiver2 &#123;</span><br><span class="line"> </span><br><span class="line">    @<span class="keyword">RabbitHandler</span></span><br><span class="line">    public void receiver(String msg)&#123;</span><br><span class="line">        <span class="selector-tag">System</span><span class="selector-class">.out</span><span class="selector-class">.println</span>("队列名 <span class="selector-tag">receiver2</span><span class="selector-pseudo">:"+msg)</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、发送者循环发送10个消息，在SendController添加一对多发送方法："><a href="#2、发送者循环发送10个消息，在SendController添加一对多发送方法：" class="headerlink" title="2、发送者循环发送10个消息，在SendController添加一对多发送方法："></a>2、发送者循环发送10个消息，在SendController添加一对多发送方法：</h3><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(<span class="string">"/multiSend"</span>)</span><br><span class="line">    <span class="keyword">public</span> String multiSend()&#123;</span><br><span class="line">        StringBuilder <span class="keyword">times</span>=<span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">long</span> time=System.nanoTime();</span><br><span class="line">            amqpTemplate.convertAndSend(<span class="string">"队列名"</span>,<span class="string">"第"</span>+i+<span class="string">"次发送的时间："</span>+time);</span><br><span class="line">            <span class="keyword">times</span>.<span class="keyword">append</span>(time+<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">times</span>.toString();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、测试，浏览器访问http-localhost-8080-multiSend，如下图："><a href="#3、测试，浏览器访问http-localhost-8080-multiSend，如下图：" class="headerlink" title="3、测试，浏览器访问http://localhost:8080/multiSend，如下图："></a>3、测试，浏览器访问<a href="http://localhost:8080/multiSend，如下图：" target="_blank" rel="noopener">http://localhost:8080/multiSend，如下图：</a></h3><p><img src="/images/multiSend.png" alt="mutilSend" title="mutilSend"></p>
+<h3 id="4、终端输出接收数据："><a href="#4、终端输出接收数据：" class="headerlink" title="4、终端输出接收数据："></a>4、终端输出接收数据：</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Test1 <span class="string">receiver2:</span>第<span class="number">1</span>次发送的时间：<span class="number">25953655163399</span></span><br><span class="line">Test1 <span class="string">receiver1:</span>第<span class="number">0</span>次发送的时间：<span class="number">25953641137213</span></span><br><span class="line">Test1 <span class="string">receiver2:</span>第<span class="number">2</span>次发送的时间：<span class="number">25953655403734</span></span><br><span class="line">Test1 <span class="string">receiver1:</span>第<span class="number">3</span>次发送的时间：<span class="number">25953655591967</span></span><br><span class="line">Test1 <span class="string">receiver1:</span>第<span class="number">5</span>次发送的时间：<span class="number">25953655949458</span></span><br><span class="line">Test1 <span class="string">receiver2:</span>第<span class="number">4</span>次发送的时间：<span class="number">25953655772971</span></span><br><span class="line">Test1 <span class="string">receiver1:</span>第<span class="number">6</span>次发送的时间：<span class="number">25953656111790</span></span><br><span class="line">Test1 <span class="string">receiver1:</span>第<span class="number">8</span>次发送的时间：<span class="number">25953656492471</span></span><br><span class="line">Test1 <span class="string">receiver1:</span>第<span class="number">9</span>次发送的时间：<span class="number">25953656687330</span></span><br><span class="line">Test1 <span class="string">receiver2:</span>第<span class="number">7</span>次发送的时间：<span class="number">25953656277133</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到发送者发送一个消息被多个接收者接收，注意这里的消息只能被消费一次</p>
+<h2 id="多对多的使用配置"><a href="#多对多的使用配置" class="headerlink" title="多对多的使用配置"></a>多对多的使用配置</h2><h3 id="1、在配置类RabbbitMqConfig添加新的队列名："><a href="#1、在配置类RabbbitMqConfig添加新的队列名：" class="headerlink" title="1、在配置类RabbbitMqConfig添加新的队列名："></a>1、在配置类RabbbitMqConfig添加新的队列名：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RabbitMqConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Queue <span class="title">Queue1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Queue(<span class="string">"队列名"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Queue <span class="title">Queue2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Queue(<span class="string">"队列名2"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、修改Receiver2接收队列名为队列名2："><a href="#2、修改Receiver2接收队列名为队列名2：" class="headerlink" title="2、修改Receiver2接收队列名为队列名2："></a>2、修改Receiver2接收队列名为队列名2：</h3> <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> <span class="variable">@Component</span></span><br><span class="line"><span class="variable">@RabbitListener</span>(queues = <span class="string">"队列名2"</span>)</span><br><span class="line"><span class="comment">//这里的lyhTest2是多对多，如果要测试一对多改成lyhTest1</span></span><br><span class="line">public class Receiver2 &#123;</span><br><span class="line">    <span class="variable">@RabbitHandler</span></span><br><span class="line">    public void receiver(String msg)&#123;</span><br><span class="line">        <span class="selector-tag">System</span><span class="selector-class">.out</span><span class="selector-class">.println</span>(<span class="string">"队列名2 receiver2:"</span>+msg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、在SendController添加多对多发送消息的方法："><a href="#3、在SendController添加多对多发送消息的方法：" class="headerlink" title="3、在SendController添加多对多发送消息的方法："></a>3、在SendController添加多对多发送消息的方法：</h3><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(<span class="string">"/multi2MultiSend"</span>)</span><br><span class="line">    <span class="keyword">public</span> String mutil2MutilSend()&#123;</span><br><span class="line">        StringBuilder <span class="keyword">times</span>=<span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">long</span> time=System.nanoTime();</span><br><span class="line">            amqpTemplate.convertAndSend(<span class="string">"lyhTest1"</span>,<span class="string">"第"</span>+i+<span class="string">"次发送的时间："</span>+time);</span><br><span class="line">            amqpTemplate.convertAndSend(<span class="string">"lyhTest2"</span>,<span class="string">"第"</span>+i+<span class="string">"次发送的时间："</span>+time);</span><br><span class="line">            <span class="keyword">times</span>.<span class="keyword">append</span>(time+<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">times</span>.toString();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、测试，浏览器访问：http-localhost-8080-multi2MultiSend，如下图："><a href="#4、测试，浏览器访问：http-localhost-8080-multi2MultiSend，如下图：" class="headerlink" title="4、测试，浏览器访问：http://localhost:8080/multi2MultiSend，如下图："></a>4、测试，浏览器访问：<a href="http://localhost:8080/multi2MultiSend，如下图：" target="_blank" rel="noopener">http://localhost:8080/multi2MultiSend，如下图：</a></h3><p><img src="/images/send2.png" alt="send2" title="send2"></p>
+<h3 id="5、终端输出接收数据："><a href="#5、终端输出接收数据：" class="headerlink" title="5、终端输出接收数据："></a>5、终端输出接收数据：</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Test1 <span class="string">receiver1:</span>第<span class="number">0</span>次发送的时间：<span class="number">27607875773748</span></span><br><span class="line">Test2 <span class="string">receiver2:</span>第<span class="number">0</span>次发送的时间：<span class="number">27607875773748</span></span><br><span class="line">Test2 <span class="string">receiver2:</span>第<span class="number">1</span>次发送的时间：<span class="number">27607882272138</span></span><br><span class="line">Test2 <span class="string">receiver2:</span>第<span class="number">2</span>次发送的时间：<span class="number">27607882429049</span></span><br><span class="line">Test1 <span class="string">receiver1:</span>第<span class="number">1</span>次发送的时间：<span class="number">27607882272138</span></span><br><span class="line">Test2 <span class="string">receiver2:</span>第<span class="number">3</span>次发送的时间：<span class="number">27607882594693</span></span><br><span class="line">Test1 <span class="string">receiver1:</span>第<span class="number">2</span>次发送的时间：<span class="number">27607882429049</span></span><br><span class="line">Test2 <span class="string">receiver2:</span>第<span class="number">4</span>次发送的时间：<span class="number">27607882897371</span></span><br><span class="line">Test1 <span class="string">receiver1:</span>第<span class="number">3</span>次发送的时间：<span class="number">27607882594693</span></span><br><span class="line">Test2 <span class="string">receiver2:</span>第<span class="number">5</span>次发送的时间：<span class="number">27607883163005</span></span><br><span class="line">Test1 <span class="string">receiver1:</span>第<span class="number">4</span>次发送的时间：<span class="number">27607882897371</span></span><br><span class="line">Test2 <span class="string">receiver2:</span>第<span class="number">6</span>次发送的时间：<span class="number">27607883319916</span></span><br><span class="line">Test2 <span class="string">receiver2:</span>第<span class="number">7</span>次发送的时间：<span class="number">27607883489777</span></span><br><span class="line">Test1 <span class="string">receiver1:</span>第<span class="number">5</span>次发送的时间：<span class="number">27607883163005</span></span><br><span class="line">Test1 <span class="string">receiver1:</span>第<span class="number">6</span>次发送的时间：<span class="number">27607883319916</span></span><br><span class="line">Test2 <span class="string">receiver2:</span>第<span class="number">8</span>次发送的时间：<span class="number">27607883957798</span></span><br><span class="line">Test2 <span class="string">receiver2:</span>第<span class="number">9</span>次发送的时间：<span class="number">27607884305953</span></span><br><span class="line">Test1 <span class="string">receiver1:</span>第<span class="number">7</span>次发送的时间：<span class="number">27607883489777</span></span><br><span class="line">Test1 <span class="string">receiver1:</span>第<span class="number">8</span>次发送的时间：<span class="number">27607883957798</span></span><br><span class="line">Test1 <span class="string">receiver1:</span>第<span class="number">9</span>次发送的时间：<span class="number">27607884305953</span></span><br></pre></td></tr></table></figure>
+
+<p> 可以看到不同的接收者接收不同发送者发送的消息，消息也可以是实体对象，这里就不做演示。</p>
+<h2 id="Topic-Exchange的使用配置"><a href="#Topic-Exchange的使用配置" class="headerlink" title="Topic Exchange的使用配置"></a>Topic Exchange的使用配置</h2><p>Topic Exchange是RabbitMQ中最灵活的一种方式，它能够根据routing_key自由的绑定不同的队列，可以适用绝大部分的项目需求</p>
+<h3 id="1、新建RabbitMqTopicConfig配置类："><a href="#1、新建RabbitMqTopicConfig配置类：" class="headerlink" title="1、新建RabbitMqTopicConfig配置类："></a>1、新建RabbitMqTopicConfig配置类：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Binding;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.BindingBuilder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.Queue;</span><br><span class="line"><span class="keyword">import</span> org.springframework.amqp.core.TopicExchange;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"> </span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>:linyuanhuang</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>:Topic Exchange配置类</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>:2017/12/11 17:13</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">    <span class="comment">//只接一个topic</span></span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">static</span> String message = <span class="string">"topic.message"</span>;</span><br><span class="line">    <span class="comment">//接收多个topic</span></span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">static</span> String messages = <span class="string">"topic.messages"</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Queue <span class="title">queueMessage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Queue(RabbitMqTopicConfig.message);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Queue <span class="title">queueMessages</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Queue(RabbitMqTopicConfig.messages);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">TopicExchange <span class="title">exchange</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> TopicExchange(<span class="string">"exchange"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">Binding <span class="title">bindingExchangeMessage</span><span class="params">(Queue queueMessage, TopicExchange exchange)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> BindingBuilder.bind(queueMessage).to(exchange).with(<span class="string">"topic.message"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">Binding <span class="title">bindingExchangeMessages</span><span class="params">(Queue queueMessages, TopicExchange exchange)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//这里的#表示零个或多个词。</span></span><br><span class="line">        <span class="keyword">return</span> BindingBuilder.bind(queueMessages).to(exchange).with(<span class="string">"topic.#"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、在SendController添加发送消息方法："><a href="#2、在SendController添加发送消息方法：" class="headerlink" title="2、在SendController添加发送消息方法："></a>2、在SendController添加发送消息方法：</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(<span class="meta-string">"/topicSend1"</span>)</span></span><br><span class="line">    <span class="keyword">public</span> String  topicSend1() &#123;</span><br><span class="line">        String context = <span class="string">"my topic 1"</span>;</span><br><span class="line">        System.<span class="keyword">out</span>.println(<span class="string">"发送者说 : "</span> + context);</span><br><span class="line">        <span class="keyword">this</span>.amqpTemplate.convertAndSend(<span class="string">"exchange"</span>, <span class="string">"topic.message"</span>, context);</span><br><span class="line">        <span class="keyword">return</span> context;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@RequestMapping(<span class="meta-string">"/topicSend2"</span>)</span></span><br><span class="line">    <span class="keyword">public</span> String topicSend2() &#123;</span><br><span class="line">        String context = <span class="string">"my topic 2"</span>;</span><br><span class="line">        System.<span class="keyword">out</span>.println(<span class="string">"发送者说 : "</span> + context);</span><br><span class="line">        <span class="keyword">this</span>.amqpTemplate.convertAndSend(<span class="string">"exchange"</span>, <span class="string">"topic.messages"</span>, context);</span><br><span class="line">        <span class="keyword">return</span>  context;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、创建接收者的方法TopicReceiver1和TopicReceiver2："><a href="#3、创建接收者的方法TopicReceiver1和TopicReceiver2：" class="headerlink" title="3、创建接收者的方法TopicReceiver1和TopicReceiver2："></a>3、创建接收者的方法TopicReceiver1和TopicReceiver2：</h3><p>TopicReceiver1：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">import</span> <span class="selector-tag">org</span><span class="selector-class">.springframework</span><span class="selector-class">.amqp</span><span class="selector-class">.rabbit</span><span class="selector-class">.annotation</span><span class="selector-class">.RabbitHandler</span>;</span><br><span class="line"><span class="selector-tag">import</span> <span class="selector-tag">org</span><span class="selector-class">.springframework</span><span class="selector-class">.amqp</span><span class="selector-class">.rabbit</span><span class="selector-class">.annotation</span><span class="selector-class">.RabbitListener</span>;</span><br><span class="line"><span class="selector-tag">import</span> <span class="selector-tag">org</span><span class="selector-class">.springframework</span><span class="selector-class">.stereotype</span><span class="selector-class">.Component</span>;</span><br><span class="line">@<span class="keyword">Component</span></span><br><span class="line">@<span class="keyword">RabbitListener</span>(<span class="keyword">queues</span> = <span class="string">"topic.message"</span>)</span><br><span class="line">public class TopicReceiver1 &#123;</span><br><span class="line">    @<span class="keyword">RabbitHandler</span></span><br><span class="line">    public void process(String msg) &#123;</span><br><span class="line">        <span class="selector-tag">System</span><span class="selector-class">.out</span><span class="selector-class">.println</span>("<span class="selector-tag">TopicReceiver1</span><span class="selector-pseudo">:"</span> + <span class="selector-tag">msg</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>TopicReceiver2：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">import</span> <span class="selector-tag">org</span><span class="selector-class">.springframework</span><span class="selector-class">.amqp</span><span class="selector-class">.rabbit</span><span class="selector-class">.annotation</span><span class="selector-class">.RabbitHandler</span>;</span><br><span class="line"><span class="selector-tag">import</span> <span class="selector-tag">org</span><span class="selector-class">.springframework</span><span class="selector-class">.amqp</span><span class="selector-class">.rabbit</span><span class="selector-class">.annotation</span><span class="selector-class">.RabbitListener</span>;</span><br><span class="line"><span class="selector-tag">import</span> <span class="selector-tag">org</span><span class="selector-class">.springframework</span><span class="selector-class">.stereotype</span><span class="selector-class">.Component</span>;</span><br><span class="line">@<span class="keyword">Component</span></span><br><span class="line">@<span class="keyword">RabbitListener</span>(<span class="keyword">queues</span> = <span class="string">"topic.messages"</span>)</span><br><span class="line">public class TopicReceiver2 &#123;</span><br><span class="line">    @<span class="keyword">RabbitHandler</span></span><br><span class="line">    public void process(String msg) &#123;</span><br><span class="line">        <span class="selector-tag">System</span><span class="selector-class">.out</span><span class="selector-class">.println</span>("<span class="selector-tag">TopicReceiver2</span> <span class="selector-pseudo">:"</span> + <span class="selector-tag">msg</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、测试："><a href="#4、测试：" class="headerlink" title="4、测试："></a>4、测试：</h3><p>浏览器访问<a href="http://localhost:8080/topicSend1，终端输出：" target="_blank" rel="noopener">http://localhost:8080/topicSend1，终端输出：</a></p>
+<p>发送者说 : my topic 1<br>TopicReceiver1:my topic 1<br>TopicReceiver2 :my topic 1<br>浏览器访问<a href="http://localhost:8080/topicSend2，终端输出：" target="_blank" rel="noopener">http://localhost:8080/topicSend2，终端输出：</a></p>
+<p>发送者说 : my topic 2<br>TopicReceiver2 :my topic 2</p>
+<h3 id="5、总结："><a href="#5、总结：" class="headerlink" title="5、总结："></a>5、总结：</h3><p>这里的Topic Exchange 转发消息主要是根据通配符，队列topic.message只能匹配topic.message的路由。而topic.messages匹配路由规则是topic.#，所以它可以匹配topic.开头的全部路由。而topic.#发送的消息也只能是topic.#的接受者才能接收。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/12/06/ Spring Boot——RabbitMQ入门/" data-id="ckbdc9usj005724u21owm10i8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MQ/">MQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rabbitMq/">rabbitMq</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-RabbitMq入门" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/06/RabbitMq入门/" class="article-date">
+  <time datetime="2019-12-06T14:57:16.000Z" itemprop="datePublished">2019-12-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/06/RabbitMq入门/">RabbitMq入门以及使用教程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>RabbitMq入门以及使用教程</p>
+<p>[TOCM]</p>
+<p>[TOC]</p>
+<h2 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h2><p>MQ全称为Message Queue, 消息队列（MQ）是一种应用程序对应用程序的通信方法。应用程序通过读写出入队列的消息（针对应用程序的数据）来通信，而无需专用连接来链接它们。消息传递指的是程序之间通过在消息中发送数据进行通信，而不是通过直接调用彼此来通信，直接调用通常是用于诸如远程过程调用的技术。排队指的是应用程序通过 队列来通信。队列的使用除去了接收和发送应用程序同时执行的要求。其中较为成熟的MQ产品有IBM WEBSPHERE MQ等等…</p>
+<h2 id="二、使用场景"><a href="#二、使用场景" class="headerlink" title="二、使用场景"></a>二、使用场景</h2><p>在项目中，将一些无需即时返回且耗时的操作提取出来，进行了异步处理，而这种异步处理的方式大大的节省了服务器的请求响应时间，从而提高了系统的吞吐量。</p>
+<h2 id="三、相关名称介绍"><a href="#三、相关名称介绍" class="headerlink" title="三、相关名称介绍"></a>三、相关名称介绍</h2><h3 id="1、ConnectionFactory、Connection、Channel"><a href="#1、ConnectionFactory、Connection、Channel" class="headerlink" title="1、ConnectionFactory、Connection、Channel"></a>1、ConnectionFactory、Connection、Channel</h3><p>ConnectionFactory、Connection、Channel都是RabbitMQ对外提供的API中最基本的对象。</p>
+<p>Connection是RabbitMQ的socket链接，它封装了socket协议相关部分逻辑。</p>
+<p>ConnectionFactory为Connection的制造工厂。</p>
+<p>Channel是我们与RabbitMQ打交道的最重要的一个接口，我们大部分的业务操作是在Channel这个接口中完成的，包括定义Queue、定义Exchange、绑定Queue与Exchange、发布消息等。</p>
+<h3 id="2、Queue"><a href="#2、Queue" class="headerlink" title="2、Queue"></a>2、Queue</h3><p>Queue（队列）是RabbitMQ的内部对象，用于存储消息，用下图表示。</p>
+<p><img src="/images/queue.png" alt="queue" title="queue"></p>
+<p>RabbitMQ中的消息都只能存储在Queue中，生产者（下图中的P）生产消息并最终投递到Queue中，消费者（下图中的C）可以从Queue中获取消息并消费。</p>
+<p><img src="/images/jinguo.png" alt="消费过程" title="消费过程"></p>
+<p>多个消费者可以订阅同一个Queue，这时Queue中的消息会被平均分摊给多个消费者进行处理，而不是每个消费者都收到所有的消息并处理。</p>
+<p><a href="http://tong.com:8888/examples/" title="多消费者同时订阅一个队列" target="_blank" rel="noopener"><img src="/images/%E5%A4%9A%E6%B6%88%E8%B4%B9%E8%80%85%E5%90%8C%E6%97%B6%E8%AE%A2%E9%98%85.png" alt="多消费者同时订阅一个队列" title="多消费者同时订阅一个队列"></a></p>
+<h3 id="3、Message-acknowledgment"><a href="#3、Message-acknowledgment" class="headerlink" title="3、Message acknowledgment"></a>3、Message acknowledgment</h3><p>在实际应用中，可能会发生消费者收到Queue中的消息，但没有处理完成就宕机（或出现其他意外）的情况，这种情况下就可能会导致消息丢失。为了避免这种情况发生，我们可以要求消费者在消费完消息后发送一个回执给RabbitMQ，RabbitMQ收到消息回执（Message acknowledgment）后才将该消息从Queue中移除；如果RabbitMQ没有收到回执并检测到消费者的RabbitMQ连接断开，则RabbitMQ会将该消息发送给其他消费者（如果存在多个消费者）进行处理。这里不存在timeout概念，一个消费者处理消息时间再长也不会导致该消息被发送给其他消费者，除非它的RabbitMQ连接断开。</p>
+<p>这里会产生另外一个问题，如果我们的开发人员在处理完业务逻辑后，忘记发送回执给RabbitMQ，这将会导致严重的bug——Queue中堆积的消息会越来越多；消费者重启后会重复消费这些消息并重复执行业务逻辑…</p>
+<p>另外pub message是没有ack的。</p>
+<h3 id="4、Message-durability"><a href="#4、Message-durability" class="headerlink" title="4、Message durability"></a>4、Message durability</h3><p>如果我们希望即使在RabbitMQ服务重启的情况下，也不会丢失消息，我们可以将Queue与Message都设置为可持久化的（durable），这样可以保证绝大部分情况下我们的RabbitMQ消息不会丢失。但依然解决不了小概率丢失事件的发生（比如RabbitMQ服务器已经接收到生产者的消息，但还没来得及持久化该消息时RabbitMQ服务器就断电了），如果我们需要对这种小概率事件也要管理起来，那么我们要用到事务。由于这里仅为RabbitMQ的简单介绍，所以这里将不讲解RabbitMQ相关的事务。</p>
+<h3 id="5、Prefetch-count"><a href="#5、Prefetch-count" class="headerlink" title="5、Prefetch count"></a>5、Prefetch count</h3><p>前面我们讲到如果有多个消费者同时订阅同一个Queue中的消息，Queue中的消息会被平摊给多个消费者。这时如果每个消息的处理时间不同，就有可能会导致某些消费者一直在忙，而另外一些消费者很快就处理完手头工作并一直空闲的情况。我们可以通过设置prefetchCount来限制Queue每次发送给每个消费者的消息数，比如我们设置prefetchCount=1，则Queue每次给每个消费者发送一条消息；消费者处理完这条消息后Queue会再给该消费者发送一条消息。</p>
+<p><img src="/images/prefetch.png" alt="prefetch" title="prefetch"></p>
+<h3 id="6、Exchange"><a href="#6、Exchange" class="headerlink" title="6、Exchange"></a>6、Exchange</h3><p>在上一节我们看到生产者将消息投递到Queue中，实际上这在RabbitMQ中这种事情永远都不会发生。实际的情况是，生产者将消息发送到Exchange（交换器，下图中的X），由Exchange将消息路由到一个或多个Queue中（或者丢弃）。</p>
+<p><img src="/images/exchange.png" alt="exchange" title="exchange"></p>
+<p>Exchange是按照什么逻辑将消息路由到Queue的？这个将在下面的8、Binding中介绍。</p>
+<p>RabbitMQ中的Exchange有四种类型，不同的类型有着不同的路由策略，这将在下面的10、Exchange Types中介绍。</p>
+<h3 id="7、routing-key"><a href="#7、routing-key" class="headerlink" title="7、routing key"></a>7、routing key</h3><p>生产者在将消息发送给Exchange的时候，一般会指定一个routing key，来指定这个消息的路由规则，而这个routing key需要与Exchange Type及binding key联合使用才能最终生效。</p>
+<p>在Exchange Type与binding key固定的情况下（在正常使用时一般这些内容都是固定配置好的），我们的生产者就可以在发送消息给Exchange时，通过指定routing key来决定消息流向哪里。RabbitMQ为routing key设定的长度限制为255 bytes。</p>
+<h3 id="8、Binding"><a href="#8、Binding" class="headerlink" title="8、Binding"></a>8、Binding</h3><p>RabbitMQ中通过Binding将Exchange与Queue关联起来，这样RabbitMQ就知道如何正确地将消息路由到指定的Queue了。</p>
+<p><img src="/images/binding.png" alt="binding" title="binding"></p>
+<h3 id="9、Binding-key"><a href="#9、Binding-key" class="headerlink" title="9、Binding key"></a>9、Binding key</h3><p>在绑定（Binding）Exchange与Queue的同时，一般会指定一个binding key；消费者将消息发送给Exchange时，一般会指定一个routing key；当binding key与routing key相匹配时，消息将会被路由到对应的Queue中。这个将在Exchange Types章节会列举实际的例子加以说明。</p>
+<p>在绑定多个Queue到同一个Exchange的时候，这些Binding允许使用相同的binding key。<br>binding key 并不是在所有情况下都生效，它依赖于Exchange Type，比如fanout类型的Exchange就会无视binding key，而是将消息路由到所有绑定到该Exchange的Queue。</p>
+<p>###10、Exchange Types<br>RabbitMQ常用的Exchange Type有fanout、direct、topic、headers这四种（AMQP规范里还提到两种Exchange Type，分别为system与自定义，这里不予以描述），下面分别进行介绍。</p>
+<h4 id="fanout"><a href="#fanout" class="headerlink" title="fanout"></a>fanout</h4><p>fanout类型的Exchange路由规则非常简单，它会把所有发送到该Exchange的消息路由到所有与它绑定的Queue中。</p>
+<p><img src="/images/fanout.png" alt="fanout" title="fanout"></p>
+<p>上图中，生产者（P）发送到Exchange（X）的所有消息都会路由到图中的两个Queue，并最终被两个消费者（C1与C2）消费。</p>
+<h4 id="direct"><a href="#direct" class="headerlink" title="direct"></a>direct</h4><p>direct类型的Exchange路由规则也很简单，它会把消息路由到那些binding key与routing key完全匹配的Queue中。<br><img src="/images/direct.png" alt="direct" title="direct"></p>
+<p>以上图的配置为例，我们以routingKey=”error”发送消息到Exchange，则消息会路由到Queue1（amqp.gen-S9b…，这是由RabbitMQ自动生成的Queue名称）和Queue2（amqp.gen-Agl…）；如果我们以routingKey=”info”或routingKey=”warning”来发送消息，则消息只会路由到Queue2。如果我们以其他routingKey发送消息，则消息不会路由到这两个Queue中。</p>
+<h4 id="topic"><a href="#topic" class="headerlink" title="topic"></a>topic</h4><p>前面讲到direct类型的Exchange路由规则是完全匹配binding key与routing key，但这种严格的匹配方式在很多情况下不能满足实际业务需求。topic类型的Exchange在匹配规则上进行了扩展，它与direct类型的Exchage相似，也是将消息路由到binding key与routing key相匹配的Queue中，但这里的匹配规则有些不同，它约定：</p>
+<p>routing key为一个句点号“. ”分隔的字符串（我们将被句点号“. ”分隔开的每一段独立的字符串称为一个单词），如“stock.usd.nyse”、“nyse.vmw”、“quick.orange.rabbit”</p>
+<p>binding key与routing key一样也是句点号“. ”分隔的字符串。</p>
+<p>binding key中可以存在两种特殊字符“*”与“#”，用于做模糊匹配，其中“*”用于匹配一个单词，“#”用于匹配多个单词（可以是零个）。<br><img src="/images/topic.png" alt="topic" title="topic"></p>
+<p>以上图中的配置为例，routingKey=”quick.orange.rabbit”的消息会同时路由到Q1与Q2，routingKey=”lazy.orange.fox”的消息会路由到Q1与Q2，routingKey=”lazy.brown.fox”的消息会路由到Q2，routingKey=”lazy.pink.rabbit”的消息会路由到Q2（只会投递给Q2一次，虽然这个routingKey与Q2的两个bindingKey都匹配）；routingKey=”quick.brown.fox”、routingKey=”orange”、routingKey=”quick.orange.male.rabbit”的消息将会被丢弃，因为它们没有匹配任何bindingKey。</p>
+<h4 id="headers"><a href="#headers" class="headerlink" title="headers"></a>headers</h4><p>headers类型的Exchange不依赖于routing key与binding key的匹配规则来路由消息，而是根据发送的消息内容中的headers属性进行匹配。</p>
+<p>在绑定Queue与Exchange时指定一组键值对；当消息发送到Exchange时，RabbitMQ会取到该消息的headers（也是一个键值对的形式），对比其中的键值对是否完全匹配Queue与Exchange绑定时指定的键值对；如果完全匹配则消息会路由到该Queue，否则不会路由到该Queue。</p>
+<p>该类型的Exchange没有用到过（不过也应该很有用武之地），所以不做介绍。</p>
+<h3 id="11、RPC"><a href="#11、RPC" class="headerlink" title="11、RPC"></a>11、RPC</h3><p>MQ本身是基于异步的消息处理，前面的示例中所有的生产者（P）将消息发送到RabbitMQ后不会知道消费者（C）处理成功或者失败（甚至连有没有消费者来处理这条消息都不知道）。</p>
+<p>但实际的应用场景中，我们很可能需要一些同步处理，需要同步等待服务端将我的消息处理完成后再进行下一步处理。这相当于RPC（Remote Procedure Call，远程过程调用）。在RabbitMQ中也支持RPC。</p>
+<p><img src="/images/rpc.png" alt="rpc" title="rpc"></p>
+<p>RabbitMQ中实现RPC的机制是：</p>
+<p>客户端发送请求（消息）时，在消息的属性（MessageProperties，在AMQP协议中定义了14中properties，这些属性会随着消息一起发送）中设置两个值replyTo（一个Queue名称，用于告诉服务器处理完成后将通知我的消息发送到这个Queue中）和correlationId（此次请求的标识号，服务器处理完成后需要将此属性返还，客户端将根据这个id了解哪条请求被成功执行了或执行失败）；</p>
+<p>服务器端收到消息并处理；</p>
+<p>服务器端处理完消息后，将生成一条应答消息到replyTo指定的Queue，同时带上correlationId属性；</p>
+<p>客户端之前已订阅replyTo指定的Queue，从中收到服务器的应答消息后，根据其中的correlationId属性分析哪条请求被执行了，根据执行结果进行后续业务处理。</p>
+<h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h2><p>本文介绍了RabbitMQ中个人认为最重要的概念，充分利用RabbitMQ提供的这些功能就可以处理我们绝大部分的异步业务了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/12/06/RabbitMq入门/" data-id="ckbdc9uzd00mh24u2sgxps1yg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MQ/">MQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RABBITMQ/">RABBITMQ</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Java获取IP地址" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/04/Java获取IP地址/" class="article-date">
+  <time datetime="2019-12-04T14:23:32.000Z" itemprop="datePublished">2019-12-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/04/Java获取IP地址/">Java获取IP地址</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Java 通过Request请求获取IP地址</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">public</span> class IpAddressUtil &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取Ip地址</span></span><br><span class="line"><span class="comment">     * @param request</span></span><br><span class="line"><span class="comment">     * @return</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    private static <span class="keyword">String </span>getIpAddress(HttpServletRequest request) &#123;</span><br><span class="line">        <span class="keyword">String </span>Xip = request.getHeader(<span class="string">"X-Real-IP"</span>)<span class="comment">;</span></span><br><span class="line">        <span class="keyword">String </span>XFor = request.getHeader(<span class="string">"X-Forwarded-For"</span>)<span class="comment">;</span></span><br><span class="line">        <span class="meta">if</span>(<span class="keyword">StringUtils.isNotEmpty(XFor) </span>&amp;&amp; !<span class="string">"unKnown"</span>.equalsIgnoreCase(XFor))&#123;</span><br><span class="line">            //多次反向代理后会有多个<span class="built_in">ip</span>值，第一个<span class="built_in">ip</span>才是真实<span class="built_in">ip</span></span><br><span class="line">            int index = XFor.indexOf(<span class="string">","</span>)<span class="comment">;</span></span><br><span class="line">            <span class="meta">if</span>(index != -<span class="number">1</span>)&#123;</span><br><span class="line">                return XFor.<span class="keyword">substring(0,index);</span></span><br><span class="line"><span class="keyword"> </span>           &#125;<span class="meta">else</span>&#123;</span><br><span class="line">                return XFor<span class="comment">;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        XFor = Xip<span class="comment">;</span></span><br><span class="line">        <span class="meta">if</span>(<span class="keyword">StringUtils.isNotEmpty(XFor) </span>&amp;&amp; !<span class="string">"unKnown"</span>.equalsIgnoreCase(XFor))&#123;</span><br><span class="line">            return XFor<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="meta">if</span> (<span class="keyword">StringUtils.isBlank(XFor) </span><span class="title">||</span> <span class="string">"unknown"</span>.equalsIgnoreCase(XFor)) &#123;</span><br><span class="line">            XFor = request.getHeader(<span class="string">"Proxy-Client-IP"</span>)<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="meta">if</span> (<span class="keyword">StringUtils.isBlank(XFor) </span><span class="title">||</span> <span class="string">"unknown"</span>.equalsIgnoreCase(XFor)) &#123;</span><br><span class="line">            XFor = request.getHeader(<span class="string">"WL-Proxy-Client-IP"</span>)<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="meta">if</span> (<span class="keyword">StringUtils.isBlank(XFor) </span><span class="title">||</span> <span class="string">"unknown"</span>.equalsIgnoreCase(XFor)) &#123;</span><br><span class="line">            XFor = request.getHeader(<span class="string">"HTTP_CLIENT_IP"</span>)<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="meta">if</span> (<span class="keyword">StringUtils.isBlank(XFor) </span><span class="title">||</span> <span class="string">"unknown"</span>.equalsIgnoreCase(XFor)) &#123;</span><br><span class="line">            XFor = request.getHeader(<span class="string">"HTTP_X_FORWARDED_FOR"</span>)<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="meta">if</span> (<span class="keyword">StringUtils.isBlank(XFor) </span><span class="title">||</span> <span class="string">"unknown"</span>.equalsIgnoreCase(XFor)) &#123;</span><br><span class="line">            XFor = request.getRemoteAddr()<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        return XFor<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>详解<br>首先，我们获取 X-Forwarded-For 中第0位的IP地址，它就是在HTTP扩展协议中能表示真实的客户端IP。具体就像这样：</p>
+<blockquote>
+<p>X-Forwarded-For: client, proxy1, proxy2，proxy…</p>
+</blockquote>
+<p>所以你应该知道为什么要取第0位了吧！<br>如果 X-Forwarded-For 获取不到，就去获取X-Real-IP ，X-Real-IP 获取不到，就依次获取Proxy-Client-IP 、WL-Proxy-Client-IP 、HTTP_CLIENT_IP 、 HTTP_X_FORWARDED_FOR 。最后获取不到才通过request.getRemoteAddr()获取IP，</p>
+<p>X-Real-IP 就是记录请求的客户端真实IP。跟X-Forwarded-For 类似。</p>
+<p>Proxy-Client-IP 顾名思义就是代理客户端的IP，如果客户端真实IP获取不到的时候，就只能获取代理客户端的IP了。</p>
+<p>WL-Proxy-Client-IP 是在Weblogic下获取真实IP所用的的参数。</p>
+<p>HTTP_CLIENT_IP 与 HTTP_X_FORWARDED_FOR 可以理解为X-Forwarded-For ， 因为它们是PHP中的用法。</p>
+<p>备注：<br>StringUtils是Apache的工具类, pom.xml加依赖即可；也可以去Apache下载commons-lang3的最新包。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.commons<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-lang3<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.3.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/12/04/Java获取IP地址/" data-id="ckbdc9uqd002o24u2suo8fzqm" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-brew安装问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/03/brew安装问题/" class="article-date">
+  <time datetime="2019-12-03T16:10:29.000Z" itemprop="datePublished">2019-12-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/SYSTEM/">SYSTEM</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/03/brew安装问题/">brew安装问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOCM]</p>
+<h2 id="github下载"><a href="#github下载" class="headerlink" title="github下载"></a>github下载</h2><p><a href="https://github.com/Homebrew/brew.git" title="Homebrew for macOS " target="_blank" rel="noopener">Homebrew for macOS </a></p>
+<h2 id="替换源"><a href="#替换源" class="headerlink" title="替换源"></a>替换源</h2><p>把下载的install文件里的 BREW_REPO 替换掉<br>BREW_REPO = “<a href="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git”.freeze" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git”.freeze</a></p>
+<h2 id="然后install"><a href="#然后install" class="headerlink" title="然后install"></a>然后install</h2><p><code>./install</code></p>
+<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>brew 安装出现Checksum mismatch解决方法<br>用brew 安装APP出现Error: Checksum mismatch.说明下载的文件和期望的hashCode对不上，删掉对应的文件就行了<br>删除对应文件，然后重新执行brew安装脚本<br><code>rm -rf  /Users/tongqiao/Library/Caches/Homebrew/portable-ruby-2.6.3.mavericks.bottle.tar.gz</code></p>
+<hr>
+<h2 id="替换国内源为下载源"><a href="#替换国内源为下载源" class="headerlink" title="替换国内源为下载源"></a>替换国内源为下载源</h2><figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 执行下面这句命令，更换为中科院的镜像：</span><br><span class="line"><span class="string">git </span><span class="string">clone </span><span class="string">git:</span>//<span class="string">mirrors.</span><span class="string">ustc.</span><span class="string">edu.</span><span class="string">cn/</span><span class="string">homebrew-core.</span><span class="string">git/</span> /<span class="string">usr/</span><span class="string">local/</span><span class="string">Homebrew/</span><span class="string">Library/</span><span class="string">Taps/</span><span class="string">homebrew/</span><span class="string">homebrew-core </span><span class="built_in">--depth=1</span></span><br><span class="line"><span class="built_in"></span></span><br><span class="line"><span class="built_in">//</span> 把<span class="string">homebrew-core的</span>镜像地址也设为中科院的国内镜像</span><br><span class="line"></span><br><span class="line"><span class="string">cd </span><span class="string">"$(brew --repo)"</span> </span><br><span class="line"></span><br><span class="line"><span class="string">git </span><span class="string">remote </span><span class="built_in">set-url</span> <span class="string">origin </span><span class="string">https:</span>//<span class="string">mirrors.</span><span class="string">ustc.</span><span class="string">edu.</span><span class="string">cn/</span><span class="string">brew.</span><span class="string">git</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">cd </span><span class="string">"$(brew --repo)/Library/Taps/homebrew/homebrew-core"</span> </span><br><span class="line"></span><br><span class="line"><span class="string">git </span><span class="string">remote </span><span class="built_in">set-url</span> <span class="string">origin </span><span class="string">https:</span>//<span class="string">mirrors.</span><span class="string">ustc.</span><span class="string">edu.</span><span class="string">cn/</span><span class="string">homebrew-core.</span><span class="string">git</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">/</span>/ 更新</span><br><span class="line"><span class="string">brew </span><span class="string">update</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/12/03/brew安装问题/" data-id="ckbdc9uta006s24u27twlbdcl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MAC/">MAC</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-mac虚拟机设置ip" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/02/mac虚拟机设置ip/" class="article-date">
+  <time datetime="2019-12-02T19:48:55.000Z" itemprop="datePublished">2019-12-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/SYSTEM/">SYSTEM</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/02/mac虚拟机设置ip/">mac虚拟机设置ip</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Mac 以太网连接 报无效的服务器地址 BasicIPv6ValidationError<br>用Mac这么久，一直是用WiFi连接网络，没搞过以太网连接，我也是醉了</p>
+<p>显然 Mac 不能像 Windows 一样，插入网线就可以自动连接网络。需要设置一下IP地址</p>
+<p>然后悲伤的事情发生了，显示无效的服务器地址  BasicIPv6ValidationError </p>
+<p>解决方案：</p>
+<p>思路是这样的：先关闭IPv6，然后设置IPv4，再重新开启IPv6。</p>
+<p>update 2017.03.14  我发现其实可以直接用命令行修改IPv4，不用管IPv6，如果它没报错的话</p>
+<ol>
+<li>关闭 IPv6</li>
+</ol>
+<p>显然 ”高级“ &gt; “TCP/IP” 下 IPv6 没有提供关闭选项，所以需要用终端命令  网络命令参看这里</p>
+<p>终端输入：networksetup -setv6off Ethernet</p>
+<p>这时候系统会弹窗要求输入密码，搞定后你会发现 ”高级“ &gt; “TCP/IP” 下 IPv6 多了个关闭选项</p>
+<ol start="2">
+<li>设置IPv4地址</li>
+</ol>
+<p>终端输入：networksetup -setmanual Ethernet 192.168.31.2 255.255.255.0 192.168.1.1</p>
+<p>对应IP地址、子网掩码、路由器</p>
+<p>设置完成后，可以看到，以太网显示状态是：已连接</p>
+<p>这个时候已经连接网络了，如果还不能正常上网，比如我是 QQ可以连接，但网页打不开，说明 DNS 有问题</p>
+<ol start="3">
+<li>设置DNS</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/12/02/mac虚拟机设置ip/" data-id="ckbdc9uuy00b024u2ool8scck" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MAC/">MAC</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Mac安装任何来源" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/02/Mac安装任何来源/" class="article-date">
+  <time datetime="2019-12-02T15:42:35.000Z" itemprop="datePublished">2019-12-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/SYSTEM/">SYSTEM</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/02/Mac安装任何来源/">Mac 安装任何来源</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Mac安装来源：若没有“任何来源”这个选项<br>打开终端（Terminal.app），拷贝粘贴<br><code>sudo spctl --master-disable</code>，按回车键</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="/blog/2019/12/02/Mac安装任何来源/" data-id="ckbdc9uqk003624u2betks6f2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MAC/">MAC</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GIT/">GIT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IT/">IT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVAEE/">JAVAEE</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVAEE/MYSQL/">MYSQL</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/OFFICE/">OFFICE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SYSTEM/">SYSTEM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VIM/">VIM</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/分类1/">分类1</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/电商/">电商</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ANNOTATION/">ANNOTATION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BAZEL/">BAZEL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BEANUTILS/">BEANUTILS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CENTOS/">CENTOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI-CD/">CI/CD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CLASSLOADER/">CLASSLOADER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CRONTAB/">CRONTAB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DEBUG/">DEBUG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DESIGN-PATTERNS/">DESIGN PATTERNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DNS/">DNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOCKER/">DOCKER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DRUID/">DRUID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ENLINK/">ENLINK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES/">ES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EUREKA/">EUREKA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EXCEL/">EXCEL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Eureka/">Eureka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FASTJSON/">FASTJSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIT/">GIT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GITLAB/">GITLAB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GLOBALEXCEPTION/">GLOBALEXCEPTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO/">GO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HEXO/">HEXO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/INTERCEPTOR/">INTERCEPTOR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IT/">IT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVADOC/">JAVADOC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVAEE/">JAVAEE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASCRIPT/">JAVASCRIPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASE/">JAVASE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JETTY/">JETTY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPA/">JPA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSONUTILS/">JSONUTILS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KARAF/">KARAF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KEEPALIVED/">KEEPALIVED</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LINUX/">LINUX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LISTENER/">LISTENER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOADBALANCED/">LOADBALANCED</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOG/">LOG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOGBACK/">LOGBACK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOGIN/">LOGIN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOMBOK/">LOMBOK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MARKDOWN/">MARKDOWN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIME-TYPE/">MIME-TYPE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQ/">MQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYBATIS/">MYBATIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYCAT/">MYCAT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MYSQL/">MYSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NETWORK/">NETWORK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OAUTH2/">OAUTH2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ONOS/">ONOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSGI/">OSGI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSI/">OSI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAGEHELPER/">PAGEHELPER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POSTMAN/">POSTMAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PYTHON/">PYTHON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RABBITMQ/">RABBITMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REDIS/">REDIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REDISTEMPLATE/">REDISTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REFLECTION/">REFLECTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REGISTRY-CENTER/">REGISTRY CENTER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REPO/">REPO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTTEMPLATE/">RESTTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RIBBON/">RIBBON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPM/">RPM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SECURITY/">SECURITY</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SERIALVERSIONUID/">SERIALVERSIONUID</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SERVLET/">SERVLET</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SESSION/">SESSION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SHELL/">SHELL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPINTBOOT/">SPINTBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING/">SPRING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-MVC/">SPRING MVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-STREAM/">SPRING STREAM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGBBOT/">SPRINGBBOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGBOOT/">SPRINGBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGQUARTZ/">SPRINGQUARTZ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGTASK/">SPRINGTASK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRINGTBOOT/">SPRINGTBOOT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPTING/">SPTING</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLAlert/">SQLAlert</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSO/">SSO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STRINGREDISTEMPLATE/">STRINGREDISTEMPLATE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWAGGER/">SWAGGER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SYSTEM/">SYSTEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP-IP/">TCP/IP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TERMUX/">TERMUX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TK-MYBATIS/">TK.MYBATIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TRANSECTION/">TRANSECTION</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UBUNTU/">UBUNTU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UDP/">UDP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WEBClIENT/">WEBClIENT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YAML/">YAML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rabbitMq/">rabbitMq</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/抖音/">抖音</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件服务器/">文件服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间转化/">时间转化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标签1/">标签1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/淘宝/">淘宝</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高可用/">高可用</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ANNOTATION/" style="font-size: 14.62px;">ANNOTATION</a> <a href="/tags/AOP/" style="font-size: 10.77px;">AOP</a> <a href="/tags/BAZEL/" style="font-size: 10px;">BAZEL</a> <a href="/tags/BEANUTILS/" style="font-size: 10px;">BEANUTILS</a> <a href="/tags/CENTOS/" style="font-size: 10px;">CENTOS</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/CLASSLOADER/" style="font-size: 10px;">CLASSLOADER</a> <a href="/tags/CRONTAB/" style="font-size: 10.77px;">CRONTAB</a> <a href="/tags/DEBUG/" style="font-size: 10px;">DEBUG</a> <a href="/tags/DESIGN-PATTERNS/" style="font-size: 10px;">DESIGN PATTERNS</a> <a href="/tags/DNS/" style="font-size: 10px;">DNS</a> <a href="/tags/DOCKER/" style="font-size: 11.54px;">DOCKER</a> <a href="/tags/DRUID/" style="font-size: 10px;">DRUID</a> <a href="/tags/ENLINK/" style="font-size: 10px;">ENLINK</a> <a href="/tags/ES/" style="font-size: 16.15px;">ES</a> <a href="/tags/EUREKA/" style="font-size: 10px;">EUREKA</a> <a href="/tags/EXCEL/" style="font-size: 10px;">EXCEL</a> <a href="/tags/Eureka/" style="font-size: 10px;">Eureka</a> <a href="/tags/FASTJSON/" style="font-size: 10px;">FASTJSON</a> <a href="/tags/GIT/" style="font-size: 10px;">GIT</a> <a href="/tags/GITLAB/" style="font-size: 10px;">GITLAB</a> <a href="/tags/GLOBALEXCEPTION/" style="font-size: 10px;">GLOBALEXCEPTION</a> <a href="/tags/GO/" style="font-size: 10.77px;">GO</a> <a href="/tags/HEXO/" style="font-size: 12.31px;">HEXO</a> <a href="/tags/IDEA/" style="font-size: 12.31px;">IDEA</a> <a href="/tags/INTERCEPTOR/" style="font-size: 11.54px;">INTERCEPTOR</a> <a href="/tags/IT/" style="font-size: 11.54px;">IT</a> <a href="/tags/JAVADOC/" style="font-size: 10px;">JAVADOC</a> <a href="/tags/JAVAEE/" style="font-size: 20px;">JAVAEE</a> <a href="/tags/JAVASCRIPT/" style="font-size: 11.54px;">JAVASCRIPT</a> <a href="/tags/JAVASE/" style="font-size: 10.77px;">JAVASE</a> <a href="/tags/JETTY/" style="font-size: 10px;">JETTY</a> <a href="/tags/JPA/" style="font-size: 10.77px;">JPA</a> <a href="/tags/JSONUTILS/" style="font-size: 10px;">JSONUTILS</a> <a href="/tags/KARAF/" style="font-size: 11.54px;">KARAF</a> <a href="/tags/KEEPALIVED/" style="font-size: 10px;">KEEPALIVED</a> <a href="/tags/LINUX/" style="font-size: 16.92px;">LINUX</a> <a href="/tags/LISTENER/" style="font-size: 10px;">LISTENER</a> <a href="/tags/LOADBALANCED/" style="font-size: 10px;">LOADBALANCED</a> <a href="/tags/LOG/" style="font-size: 10px;">LOG</a> <a href="/tags/LOGBACK/" style="font-size: 10px;">LOGBACK</a> <a href="/tags/LOGIN/" style="font-size: 10px;">LOGIN</a> <a href="/tags/LOMBOK/" style="font-size: 11.54px;">LOMBOK</a> <a href="/tags/MAC/" style="font-size: 15.38px;">MAC</a> <a href="/tags/MARKDOWN/" style="font-size: 11.54px;">MARKDOWN</a> <a href="/tags/MIME-TYPE/" style="font-size: 10px;">MIME-TYPE</a> <a href="/tags/MQ/" style="font-size: 12.31px;">MQ</a> <a href="/tags/MYBATIS/" style="font-size: 17.69px;">MYBATIS</a> <a href="/tags/MYCAT/" style="font-size: 10.77px;">MYCAT</a> <a href="/tags/MYSQL/" style="font-size: 16.15px;">MYSQL</a> <a href="/tags/NETWORK/" style="font-size: 10px;">NETWORK</a> <a href="/tags/OAUTH2/" style="font-size: 10.77px;">OAUTH2</a> <a href="/tags/ONOS/" style="font-size: 14.62px;">ONOS</a> <a href="/tags/OSGI/" style="font-size: 13.85px;">OSGI</a> <a href="/tags/OSI/" style="font-size: 10px;">OSI</a> <a href="/tags/PAGEHELPER/" style="font-size: 10px;">PAGEHELPER</a> <a href="/tags/POSTMAN/" style="font-size: 10px;">POSTMAN</a> <a href="/tags/PYTHON/" style="font-size: 13.08px;">PYTHON</a> <a href="/tags/RABBITMQ/" style="font-size: 10.77px;">RABBITMQ</a> <a href="/tags/REDIS/" style="font-size: 11.54px;">REDIS</a> <a href="/tags/REDISTEMPLATE/" style="font-size: 10px;">REDISTEMPLATE</a> <a href="/tags/REFLECTION/" style="font-size: 11.54px;">REFLECTION</a> <a href="/tags/REGISTRY-CENTER/" style="font-size: 10px;">REGISTRY CENTER</a> <a href="/tags/REPO/" style="font-size: 10px;">REPO</a> <a href="/tags/RESTTEMPLATE/" style="font-size: 10px;">RESTTEMPLATE</a> <a href="/tags/RIBBON/" style="font-size: 10.77px;">RIBBON</a> <a href="/tags/RPM/" style="font-size: 10px;">RPM</a> <a href="/tags/SECURITY/" style="font-size: 12.31px;">SECURITY</a> <a href="/tags/SERIALVERSIONUID/" style="font-size: 10px;">SERIALVERSIONUID</a> <a href="/tags/SERVLET/" style="font-size: 10.77px;">SERVLET</a> <a href="/tags/SESSION/" style="font-size: 12.31px;">SESSION</a> <a href="/tags/SHELL/" style="font-size: 14.62px;">SHELL</a> <a href="/tags/SPINTBOOT/" style="font-size: 10px;">SPINTBOOT</a> <a href="/tags/SPRING/" style="font-size: 13.08px;">SPRING</a> <a href="/tags/SPRING-MVC/" style="font-size: 10px;">SPRING MVC</a> <a href="/tags/SPRING-STREAM/" style="font-size: 10px;">SPRING STREAM</a> <a href="/tags/SPRINGBBOT/" style="font-size: 10px;">SPRINGBBOT</a> <a href="/tags/SPRINGBOOT/" style="font-size: 19.23px;">SPRINGBOOT</a> <a href="/tags/SPRINGQUARTZ/" style="font-size: 10px;">SPRINGQUARTZ</a> <a href="/tags/SPRINGTASK/" style="font-size: 12.31px;">SPRINGTASK</a> <a href="/tags/SPRINGTBOOT/" style="font-size: 10px;">SPRINGTBOOT</a> <a href="/tags/SPTING/" style="font-size: 10px;">SPTING</a> <a href="/tags/SQL/" style="font-size: 12.31px;">SQL</a> <a href="/tags/SQLAlert/" style="font-size: 18.46px;">SQLAlert</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/STRINGREDISTEMPLATE/" style="font-size: 10px;">STRINGREDISTEMPLATE</a> <a href="/tags/SWAGGER/" style="font-size: 10px;">SWAGGER</a> <a href="/tags/SYSTEM/" style="font-size: 10px;">SYSTEM</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TCP-IP/" style="font-size: 11.54px;">TCP/IP</a> <a href="/tags/TERMUX/" style="font-size: 10.77px;">TERMUX</a> <a href="/tags/TK-MYBATIS/" style="font-size: 10px;">TK.MYBATIS</a> <a href="/tags/TRANSECTION/" style="font-size: 10px;">TRANSECTION</a> <a href="/tags/UBUNTU/" style="font-size: 10px;">UBUNTU</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/WEBClIENT/" style="font-size: 10px;">WEBClIENT</a> <a href="/tags/YAML/" style="font-size: 10.77px;">YAML</a> <a href="/tags/rabbitMq/" style="font-size: 10px;">rabbitMq</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/抖音/" style="font-size: 10px;">抖音</a> <a href="/tags/文件服务器/" style="font-size: 10.77px;">文件服务器</a> <a href="/tags/时间转化/" style="font-size: 10px;">时间转化</a> <a href="/tags/标签1/" style="font-size: 10px;">标签1</a> <a href="/tags/淘宝/" style="font-size: 10px;">淘宝</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/13/可视化面板/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/邮箱找回密码与二次认证/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/特权用户访问策略控制/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/md列表/">markdown任务列表语法checkbox</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/CS应用配置/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Joe Tong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
